@@ -39,6 +39,16 @@ class ProductTemplate(models.Model):
         related='product_variant_ids.used_pack_line_ids',
         readonly=True,
     )
+    allow_modify_pack = fields.Boolean(
+    )
+
+    @api.onchange('pack_price_type')
+    def onchange_allow_modify_pack(self):
+        products = self.filtered(
+            lambda x: x.allow_modify_pack and
+            x.pack_price_type and x.pack_price_type != 'components_price')
+        for rec in products:
+            rec.allow_modify_pack = False
 
     @api.constrains(
         'product_variant_ids', 'pack_price_type')
