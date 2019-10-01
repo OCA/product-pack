@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* product_pack
+# 	* product_pack
 #
 # Translators:
 # Juan José Scarafía <scarafia.juanjose@gmail.com>, 2019
@@ -21,6 +21,7 @@ msgstr ""
 "PO-Revision-Date: 2019-09-30 16:02+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -65,8 +66,12 @@ msgstr "ID (identificación)"
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_modifiable
 #: model:ir.model.fields,help:product_pack.field_product_template__pack_modifiable
-msgid "If you check this field yo will be able to edit sale/purchase order line relate to its component"
-msgstr "Si marca esta casilla serás capaz de editar las lineas de órdenes de venta/compra relativas a sus componentes"
+msgid ""
+"If you check this field yo will be able to edit sale/purchase order line "
+"relate to its component"
+msgstr ""
+"Si marca esta casilla serás capaz de editar las lineas de órdenes de venta/"
+"compra relativas a sus componentes"
 
 #. module: product_pack
 #: selection:product.template,pack_component_price:0
@@ -108,24 +113,33 @@ msgstr "No detallado"
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_component_price
 #: model:ir.model.fields,help:product_pack.field_product_template__pack_component_price
-msgid "On sale orders or purchase orders:\n"
+msgid ""
+"On sale orders or purchase orders:\n"
 "* Detailed per component: Detail lines with prices.\n"
-"* Totalized in main product: Detail lines merging lines prices on pack (don't show component prices).\n"
+"* Totalized in main product: Detail lines merging lines prices on pack "
+"(don't show component prices).\n"
 "* Ignored: Use product pack price (ignore detail line prices)."
-msgstr "En órdenes de venta u órdenes de compra:\n"
+msgstr ""
+"En órdenes de venta u órdenes de compra:\n"
 "* Detallado por componente: Detalla las lineas con precios.\n"
-"* Totalizado en el producto principal: Detalla las lineas mezclando sus precios en el Pack (No muestra los precios de los componentes).\n"
-"* Ignorado: Se usa el precio el Pack (los precios de las lineas son ignorados)."
+"* Totalizado en el producto principal: Detalla las lineas mezclando sus "
+"precios en el Pack (No muestra los precios de los componentes).\n"
+"* Ignorado: Se usa el precio el Pack (los precios de las lineas son "
+"ignorados)."
 
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_type
 #: model:ir.model.fields,help:product_pack.field_product_template__pack_type
-msgid "On sale orders or purchase orders:\n"
+msgid ""
+"On sale orders or purchase orders:\n"
 "* Detailed: Display components individually in the sale order.\n"
 "* Non Detailed: Do not display components individually in the sale order."
-msgstr "En órdenes de venta u órdenes de compra:\n"
-"* Detallado: Muestra los componentes individualmente en lineas de la Orden de Venta/Orden de Compra\n"
-"* No Detallado: No muestra los componentes individualmente en lineas de la Orden de Venta/Orden de Compra"
+msgstr ""
+"En órdenes de venta u órdenes de compra:\n"
+"* Detallado: Muestra los componentes individualmente en lineas de la Orden "
+"de Venta/Orden de Compra\n"
+"* No Detallado: No muestra los componentes individualmente en lineas de la "
+"Orden de Venta/Orden de Compra"
 
 #. module: product_pack
 #: model_terms:ir.ui.view,arch_db:product_pack.product_template_form_view
@@ -214,8 +228,11 @@ msgstr "Precio de los componentes"
 #: code:addons/product_pack/models/product_template.py:65
 #: code:addons/product_pack/models/product_template.py:71
 #, python-format
-msgid "Pack lines products company must be the same as the parent product company"
-msgstr "Las líneas de los Packs de productos de la compañía deben ser las mismas que el producto padre de la compañía."
+msgid ""
+"Pack lines products company must be the same as the parent product company"
+msgstr ""
+"Las líneas de los Packs de productos de la compañía deben ser las mismas que "
+"el producto padre de la compañía."
 
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__used_in_pack_line_ids
@@ -286,9 +303,11 @@ msgstr "Unidad(es)"
 #. module: product_pack
 #: code:addons/product_pack/models/product_pack_line.py:49
 #, python-format
-msgid "You cannot set recursive packs.\n"
+msgid ""
+"You cannot set recursive packs.\n"
 "Product id: %s"
-msgstr "No puede establecer packs recursivos.\n"
+msgstr ""
+"No puede establecer packs recursivos.\n"
 "ID del producto %"
 
 #. module: product_pack
@@ -313,4 +332,3 @@ msgstr "Debe guardar primero para agregar líneas de paquete"
 #: model:product.template,weight_uom_name:product_pack.product_pack_pc_detailed_totalized_product_template
 msgid "kg"
 msgstr "kg"
-
