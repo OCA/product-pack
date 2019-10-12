@@ -1,5 +1,9 @@
 [flake8]
+<<<<<<< HEAD
 max-line-length = 88
+=======
+max-line-length = 80
+>>>>>>> 36d2e96... pre-commit, black, isort [ci skip]
 max-complexity = 16
 # B = bugbear
 # B9 = bugbear opinionated (incl line length)
@@ -8,5 +12,8 @@ select = C,E,F,W,B,B9
 # E501: flake8 line length (covered by bugbear B950)
 # W503: line break before binary operator (black behaviour)
 ignore = E203,E501,W503
+<<<<<<< HEAD
 per-file-ignores=
     __init__.py:F401
+=======
+>>>>>>> 36d2e96... pre-commit, black, isort [ci skip]
