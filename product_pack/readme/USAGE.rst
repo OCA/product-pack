@@ -1,10 +1,10 @@
 To use this module, you need to:
 
 #. Go to *Sales > Products > Products*, create a product and set "Is Pack?".
-#. Then set the products has to include in the product pack of the product.
 #. Set *Pack Type* and *Pack component price*.
+#. Then choose the products to include in the pack.
 
-`Product pack` is a base module for `sale_product_pack` and others modules that
+`Product pack` is a base module for `sale_product_pack` and other modules that
 needs to use packs. `Pack type` and `Pack component price` are used to define
 the behavior that the packs will have when it is selected in the sales order
 lines (if `sale_product_pack` module is installed).
