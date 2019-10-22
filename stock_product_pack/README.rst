@@ -25,29 +25,22 @@ Stock product Pack
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-This module allows you to get the right available *On Hand* and *Forecasted*
-quantities of the packs.
+This module allows you to get *On Hand* and *Forecasted* values calculated from
+components of the pack.
 
 **Table of contents**
 
 .. contents::
    :local:
 
-Configuration
-=============
-
-To configure this module, you need to:
-
-#. Go to *Inventory -> Master Data -> Product*, create a product and check
-   "Is Pack?" field, then set the products has to include in the Pack.
-#. Set type of product pack.
-
-
 Usage
 =====
 
 To use this module, you need to:
 
+#. Go to *Inventory -> Master Data -> Product*, create a product and check
+   "Is Pack?" field then set Pack Type and Pack component price.
+#. Choose products to include in the pack.
 #. Go to *Inventory -> Operations -> Transfers* and create transfer related to
    components of a Pack 'X'.
 #. Then go to *Inventory -> Master Data -> Product*, find the Pack 'X' and you
