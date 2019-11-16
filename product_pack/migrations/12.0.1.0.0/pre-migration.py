@@ -69,6 +69,6 @@ def migrate(env, version):
                         ELSE
                             FALSE
                     END
-                ),
+                )
             """,
     )
