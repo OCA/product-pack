@@ -11,7 +11,6 @@ class ProductPack(models.Model):
         "Sale discount (%)", digits=dp.get_precision("sale_discount"),
     )
 
-    @api.multi
     def get_sale_order_line_vals(self, line, order):
         self.ensure_one()
         quantity = self.quantity * line.product_uom_qty
@@ -43,7 +42,6 @@ class ProductPack(models.Model):
         )
         return vals
 
-    @api.multi
     def get_price(self):
         self.ensure_one()
         return super().get_price() * (1 - self.sale_discount / 100.0)

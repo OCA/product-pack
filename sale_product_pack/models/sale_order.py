@@ -7,7 +7,6 @@ from odoo.exceptions import UserError
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    @api.multi
     def copy(self, default=None):
         sale_copy = super().copy(default)
         # we unlink pack lines that should not be copied

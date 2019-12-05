@@ -26,7 +26,6 @@ class SaleOrderLine(models.Model):
         "sale.order.line", "pack_parent_line_id", "Lines in pack"
     )
 
-    @api.multi
     def expand_pack_line(self, write=False):
         self.ensure_one()
         # if we are using update_pricelist or checking out on ecommerce we
@@ -66,7 +65,6 @@ class SaleOrderLine(models.Model):
         record.expand_pack_line()
         return record
 
-    @api.multi
     def write(self, vals):
         super().write(vals)
         if "product_id" in vals or "product_uom_qty" in vals:
@@ -121,7 +119,6 @@ class SaleOrderLine(models.Model):
                 )
             )
 
-    @api.multi
     def _get_display_price(self, product):
         # We do this to clean the price if the parent of the
         # component it's that type
