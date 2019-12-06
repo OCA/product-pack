@@ -73,7 +73,7 @@ class ProductProduct(models.Model):
             # it will be converted again by pp._compute_price_rule, so if
             # that is the case we convert the amounts to the pack currency
             if pricelist_id_or_name:
-                if isinstance(pricelist_id_or_name, pycompat.string_types):
+                if isinstance(pricelist_id_or_name, str):
                     pricelist_name_search = self.env[
                         "product.pricelist"
                     ].name_search(pricelist_id_or_name, operator="=", limit=1)
@@ -81,7 +81,7 @@ class ProductProduct(models.Model):
                         pricelist = self.env["product.pricelist"].browse(
                             [pricelist_name_search[0][0]]
                         )
-                elif isinstance(pricelist_id_or_name, pycompat.integer_types):
+                elif isinstance(pricelist_id_or_name, int):
                     pricelist = self.env["product.pricelist"].browse(
                         pricelist_id_or_name
                     )

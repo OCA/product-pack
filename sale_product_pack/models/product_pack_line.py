@@ -8,7 +8,7 @@ class ProductPack(models.Model):
     _inherit = "product.pack.line"
 
     sale_discount = fields.Float(
-        "Sale discount (%)", digits=dp.get_precision("sale_discount"),
+        "Sale discount (%)", digits="sale_discount",
     )
 
     def get_sale_order_line_vals(self, line, order):

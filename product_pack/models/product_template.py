@@ -18,9 +18,9 @@ class ProductTemplate(models.Model):
     )
     pack_component_price = fields.Selection(
         [
-            ("detailed", "Detailed per component"),
-            ("totalized", "Totalized in main product"),
-            ("ignored", "Ignored"),
+            ("detailed", _("Detailed per component")),
+            ("totalized", _("Totalized in main product")),
+            ("ignored", _("Ignored")),
         ],
         "Pack component price",
         help="On sale orders or purchase orders:\n"
