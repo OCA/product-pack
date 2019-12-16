@@ -70,5 +70,6 @@ def migrate(env, version):
                             FALSE
                     END
                 )
+            WHERE pack_ok
             """,
     )
