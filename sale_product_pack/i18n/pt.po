@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sale_product_pack
+# 	* sale_product_pack
 #
 msgid ""
 msgstr ""
@@ -33,9 +33,11 @@ msgstr "Linhas no pack"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_component_price
-msgid "On sale orders or purchase orders:\n"
+msgid ""
+"On sale orders or purchase orders:\n"
 "* Detailed per component: Detail lines with prices.\n"
-"* Totalized in main product: Detail lines merging lines prices on pack (don't show component prices).\n"
+"* Totalized in main product: Detail lines merging lines prices on pack "
+"(don't show component prices).\n"
 "* Ignored: Use product pack price (ignore detail line prices)."
 msgstr ""
 "Em encomendas de compra ou venda:\n"
@@ -47,7 +49,8 @@ msgstr ""
 
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_type
-msgid "On sale orders or purchase orders:\n"
+msgid ""
+"On sale orders or purchase orders:\n"
 "* Detailed: Display components individually in the sale order.\n"
 "* Non Detailed: Do not display components individually in the sale order."
 msgstr ""
@@ -96,9 +99,10 @@ msgid "The pack that contains this product."
 msgstr "O pack que contém este produto."
 
 #. module: sale_product_pack
-#: code:addons/sale_product_pack/models/sale_order_line.py:103
+#: code:addons/sale_product_pack/models/sale_order_line.py:92
 #, python-format
-msgid "You can not change this line because is part of a pack included in this order"
+msgid ""
+"You can not change this line because is part of a pack included in this order"
 msgstr ""
 "Não pode alterar esta linha porque é parte de um pack incluído nesta "
 "encomenda"
@@ -106,7 +110,9 @@ msgstr ""
 #. module: sale_product_pack
 #: code:addons/sale_product_pack/models/sale_order.py:28
 #, python-format
-msgid "You can not delete this line because is part of a pack in this sale order. In order to delete this line you need to delete the pack itself"
+msgid ""
+"You can not delete this line because is part of a pack in this sale order. "
+"In order to delete this line you need to delete the pack itself"
 msgstr ""
 "Não pode eliminar esta linha porque é parte de um pack incluído nesta "
 "encomenda. Para a eliminar, precisa de eliminar o próprio pack"
