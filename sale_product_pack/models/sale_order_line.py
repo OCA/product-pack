@@ -82,17 +82,6 @@ class SaleOrderLine(models.Model):
             children.unlink()
         return super().unlink()
 
-    def _get_real_price_currency(
-            self, product, rule_id, qty, uom, pricelist_id):
-        new_list_price, currency_id = super()._get_real_price_currency(
-            product, rule_id, qty, uom, pricelist_id)
-        pack_types = {'totalized', 'ignored'}
-        parent_line = self.pack_parent_line_id
-        if parent_line and parent_line.pack_type == 'details' \
-                and parent_line.pack_component_price in pack_types:
-            new_list_price = 0.0
-        return new_list_price, currency_id
-
     @api.onchange('product_id', 'product_uom_qty', 'product_uom', 'price_unit',
                   'discount', 'name', 'tax_id')
     def check_pack_line_modify(self):
@@ -103,14 +92,3 @@ class SaleOrderLine(models.Model):
             raise UserError(_(
                 'You can not change this line because is part of a pack'
                 ' included in this order'))
-
-    @api.multi
-    def _get_display_price(self, product):
-        # We do this to clean the price if the parent of the
-        # component it's that type
-        pack_types = {'totalized', 'ignored'}
-        parent_line = self.pack_parent_line_id
-        if parent_line.pack_type == 'detailed' \
-                and parent_line.pack_component_price in pack_types:
-            return 0.0
-        return super()._get_display_price(product)
