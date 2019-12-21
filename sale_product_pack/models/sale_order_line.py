@@ -75,9 +75,9 @@ class SaleOrderLine(models.Model):
         """Remove previously the pack children lines for avoiding issues in
         the cache.
         """
-        children = self.mapped("pack_child_line_ids")
-        if children:
-            children.unlink()
+        # children = self.mapped("pack_child_line_ids")
+        # if children:
+        #     children.unlink()
         return super().unlink()
 
     def _get_real_price_currency(
