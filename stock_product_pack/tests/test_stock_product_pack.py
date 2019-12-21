@@ -42,8 +42,8 @@ class TestSaleProductPack(SavepointCase):
         })
 
     def test_compute_quantities_dict(self):
-        location_id = self.env.ref('stock.stock_location_suppliers').id,
-        location_dest_id = self.env.ref('stock.stock_location_stock').id,
+        location_id = self.env.ref('stock.stock_location_suppliers').id
+        location_dest_id = self.env.ref('stock.stock_location_stock').id
         components = self.pack_dc.pack_line_ids.mapped('product_id')
         picking = self.env['stock.picking'].create({
             'partner_id': self.env.ref('base.res_partner_4').id,
