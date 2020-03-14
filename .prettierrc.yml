@@ -5,4 +5,8 @@ printWidth: 88
 proseWrap: always
 semi: true
 trailingComma: "es5"
+<<<<<<< HEAD
 xmlWhitespaceSensitivity: "strict"
+=======
+xmlWhitespaceSensitivity: "ignore"
+>>>>>>> ea4e737... pre-commit update [ci skip]
