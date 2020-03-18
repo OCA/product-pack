@@ -2,3 +2,7 @@
 
   * Ernesto Tejeda
   * Pedro M. Baeza
+
+* `Akretion <https://akretion.com>`_:
+
+  * Raphaël Reverdy
