@@ -87,7 +87,6 @@ class ProductProduct(models.Model):
     @api.depends('list_price', 'price_extra')
     def _compute_product_lst_price(self):
         packs, no_packs = self.split_pack_products()
-        super(ProductProduct, no_packs)._compute_product_lst_price()
         to_uom = None
         if 'uom' in self._context:
             to_uom = self.env['uom.uom'].browse([self._context['uom']])
@@ -97,3 +96,4 @@ class ProductProduct(models.Model):
                 list_price = product.uom_id._compute_price(
                     list_price, to_uom)
             product.lst_price = list_price + product.price_extra
+        super(ProductProduct, no_packs)._compute_product_lst_price()
