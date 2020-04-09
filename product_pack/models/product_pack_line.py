@@ -4,8 +4,6 @@
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
-import odoo.addons.decimal_precision as dp
-
 
 class ProductPackLine(models.Model):
     _name = "product.pack.line"
@@ -19,9 +17,7 @@ class ProductPackLine(models.Model):
         index=True,
         required=True,
     )
-    quantity = fields.Float(
-        required=True, default=1.0, digits=dp.get_precision("Product UoS"),
-    )
+    quantity = fields.Float(required=True, default=1.0, digits="Product UoS",)
     product_id = fields.Many2one(
         "product.product", "Product", ondelete="cascade", index=True, required=True,
     )
@@ -50,7 +46,6 @@ class ProductPackLine(models.Model):
                     )
                 pack_lines = pack_lines.mapped("product_id.pack_line_ids")
 
-    @api.multi
     def get_price(self):
         self.ensure_one()
         return self.product_id.price * self.quantity
