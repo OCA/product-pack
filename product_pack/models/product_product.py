@@ -50,7 +50,7 @@ class ProductProduct(models.Model):
                 and p.pack_component_price == "detailed"
             )
 
-        no_packs = (self | self.get_pack_lines().mapped("product_id")) - packs
+        no_packs = (self | self.sudo().get_pack_lines().mapped("product_id")) - packs
         return packs, no_packs
 
     def price_compute(self, price_type, uom=False, currency=False, company=False):
