@@ -47,7 +47,7 @@ class ProductProduct(models.Model):
                 lambda p: p.pack_ok and p.pack_type == 'detailed'
                 and p.pack_component_price == 'detailed')
 
-        no_packs = (self | self.get_pack_lines().mapped('product_id')) - packs
+        no_packs = (self | self.sudo().get_pack_lines().mapped('product_id')) - packs
         return packs, no_packs
 
     @api.multi
