@@ -17,7 +17,9 @@ class ProductProduct(models.Model):
         for product in packs.with_context(prefetch_fields=False):
             pack_qty_available = []
             pack_virtual_available = []
-            for subproduct in product.pack_line_ids:
+            subproducts = product.pack_line_ids.filtered(
+                lambda p: p.product_id.type == 'product')
+            for subproduct in subproducts:
                 subproduct_stock = subproduct.product_id
                 sub_qty = subproduct.quantity
                 if sub_qty:
