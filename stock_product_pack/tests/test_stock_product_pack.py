@@ -38,6 +38,22 @@ class TestSaleProductPack(SavepointCase):
                     }).id,
                     'quantity': 1,
                 }),
+                (0, 0, {
+                    'product_id': product_obj.create({
+                        'name': 'Component 3',
+                        'type': 'service',
+                        'categ_id': category_all_id,
+                    }).id,
+                    'quantity': 1,
+                }),
+                (0, 0, {
+                    'product_id': product_obj.create({
+                        'name': 'Component 4',
+                        'type': 'consu',
+                        'categ_id': category_all_id,
+                    }).id,
+                    'quantity': 1,
+                }),
             ]
         })
 
