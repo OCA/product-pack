@@ -104,7 +104,7 @@ msgid "The pack that contains this product."
 msgstr "El pack que contiene este producto."
 
 #. module: sale_product_pack
-#: code:addons/sale_product_pack/models/sale_order_line.py:92
+#: code:addons/sale_product_pack/models/sale_order_line.py:91
 #, python-format
 msgid ""
 "You can not change this line because is part of a pack included in this order"
