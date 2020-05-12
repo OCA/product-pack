@@ -39,7 +39,6 @@ class SaleOrderLine(models.Model):
         do_not_expand = self._context.get('update_prices') or \
             self._context.get('update_pricelist', False)
         if (
-                self.state == 'draft' and
                 self.product_id.pack_ok and
                 self.pack_type == 'detailed'):
             for subline in self.product_id.get_pack_lines():
