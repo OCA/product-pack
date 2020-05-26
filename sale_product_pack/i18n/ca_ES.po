@@ -53,6 +53,11 @@ msgid "Pack"
 msgstr ""
 
 #. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_modifiable
+msgid "Pack Modifiable"
+msgstr ""
+
+#. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_type
 msgid "Pack Type"
 msgstr ""
@@ -60,6 +65,17 @@ msgstr ""
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_component_price
 msgid "Pack component price"
+msgstr ""
+
+#. module: sale_product_pack
+#: model_terms:ir.ui.view,arch_db:sale_product_pack.view_order_form
+msgid "Parent Pack is not modifiable"
+msgstr ""
+
+#. module: sale_product_pack
+#: code:addons/sale_product_pack/models/sale_order_line.py:101
+#, python-format
+msgid "Parent Product"
 msgstr ""
 
 #. module: sale_product_pack
@@ -88,7 +104,12 @@ msgid "The pack that contains this product."
 msgstr ""
 
 #. module: sale_product_pack
-#: code:addons/sale_product_pack/models/sale_order_line.py:91
+#: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_modifiable
+msgid "The parent pack is modifiable"
+msgstr ""
+
+#. module: sale_product_pack
+#: code:addons/sale_product_pack/models/sale_order_line.py:93
 #, python-format
 msgid ""
 "You can not change this line because is part of a pack included in this order"
