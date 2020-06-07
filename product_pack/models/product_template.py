@@ -73,7 +73,6 @@ class ProductTemplate(models.Model):
                         )
                     )
 
-    @api.multi
     def write(self, vals):
         """We remove from product.product to avoid error."""
         _vals = vals.copy()

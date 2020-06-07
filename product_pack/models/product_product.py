@@ -21,14 +21,12 @@ class ProductProduct(models.Model):
         help="Packs where product is used.",
     )
 
-    @api.multi
     def get_pack_lines(self):
         """Returns the content (lines) of the packs.
         By default, return all the pack_line_ids, but that function
         can be overloaded to introduce filtering function by date, etc..."""
         return self.mapped("pack_line_ids")
 
-    @api.multi
     def split_pack_products(self):
         """Split products and the pack in 2 separate recordsets.
 
@@ -55,7 +53,6 @@ class ProductProduct(models.Model):
         no_packs = (self | self.sudo().get_pack_lines().mapped("product_id")) - packs
         return packs, no_packs
 
-    @api.multi
     def price_compute(self, price_type, uom=False, currency=False, company=False):
         packs, no_packs = self.split_pack_products()
         prices = super(ProductProduct, no_packs).price_compute(

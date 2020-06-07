@@ -50,7 +50,6 @@ class ProductPackLine(models.Model):
                     )
                 pack_lines = pack_lines.mapped("product_id.pack_line_ids")
 
-    @api.multi
     def get_price(self):
         self.ensure_one()
         return self.product_id.price * self.quantity
