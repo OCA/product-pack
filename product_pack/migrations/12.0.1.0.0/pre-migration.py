@@ -3,10 +3,9 @@
 
 from openupgradelib import openupgrade
 
-
 to_install = [
-    'sale_product_pack',
-    'stock_product_pack',
+    "sale_product_pack",
+    "stock_product_pack",
 ]
 
 
@@ -15,27 +14,54 @@ def install_new_modules(cr):
     UPDATE ir_module_module
     SET state='to install'
     WHERE name in %s AND state='uninstalled'
-    """ % (tuple(to_install),)
+    """ % (
+        tuple(to_install),
+    )
     openupgrade.logged_query(cr, sql)
 
 
 @openupgrade.migrate()
 def migrate(env, version):
     install_new_modules(env.cr)
-    openupgrade.rename_fields(env, [
-        ('product.template', 'product_template', 'pack', 'pack_ok'),
-        ('product.pack.line', 'product_pack_line', 'discount', 'sale_discount')
-    ])
-    openupgrade.add_fields(env, [
-        ('pack_type', 'product.template',
-         'product_template', 'selection', False, 'product_template'),
-        ('pack_component_price', 'product.template',
-         'product_template', 'selection', False, 'product_template'),
-        ('pack_modifiable', 'product.template',
-         'product_template', 'boolean', False, 'product_template'),
-    ])
+    openupgrade.rename_fields(
+        env,
+        [
+            ("product.template", "product_template", "pack", "pack_ok"),
+            ("product.pack.line", "product_pack_line", "discount", "sale_discount"),
+        ],
+    )
+    openupgrade.add_fields(
+        env,
+        [
+            (
+                "pack_type",
+                "product.template",
+                "product_template",
+                "selection",
+                False,
+                "product_template",
+            ),
+            (
+                "pack_component_price",
+                "product.template",
+                "product_template",
+                "selection",
+                False,
+                "product_template",
+            ),
+            (
+                "pack_modifiable",
+                "product.template",
+                "product_template",
+                "boolean",
+                False,
+                "product_template",
+            ),
+        ],
+    )
     openupgrade.logged_query(
-        env.cr, """
+        env.cr,
+        """
             UPDATE product_template
             SET pack_type = (
                     CASE
