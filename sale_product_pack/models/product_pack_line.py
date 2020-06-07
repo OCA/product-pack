@@ -1,18 +1,13 @@
 # Copyright 2019 Tecnativa - Ernesto Tejeda
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models
-
-import odoo.addons.decimal_precision as dp
+from odoo import fields, models
 
 
 class ProductPack(models.Model):
     _inherit = "product.pack.line"
 
-    sale_discount = fields.Float(
-        "Sale discount (%)", digits=dp.get_precision("sale_discount"),
-    )
+    sale_discount = fields.Float("Sale discount (%)", digits="Discount",)
 
-    @api.multi
     def get_sale_order_line_vals(self, line, order):
         self.ensure_one()
         quantity = self.quantity * line.product_uom_qty
@@ -49,7 +44,6 @@ class ProductPack(models.Model):
         )
         return vals
 
-    @api.multi
     def get_price(self):
         self.ensure_one()
         return super().get_price() * (1 - self.sale_discount / 100.0)
