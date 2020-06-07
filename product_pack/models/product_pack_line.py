@@ -41,7 +41,7 @@ class ProductPackLine(models.Model):
             while pack_lines:
                 if parent_product in pack_lines.mapped("product_id"):
                     raise ValidationError(
-                        _("You cannot set recursive packs.\n" "Product id: %s")
+                        _("You cannot set recursive packs.\nProduct id: %s")
                         % parent_product.id
                     )
                 pack_lines = pack_lines.mapped("product_id.pack_line_ids")
