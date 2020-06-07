@@ -25,7 +25,6 @@ class SaleOrderLine(models.Model):
     )
     pack_modifiable = fields.Boolean(help="The parent pack is modifiable")
 
-    @api.multi
     def expand_pack_line(self, write=False):
         self.ensure_one()
         # if we are using update_pricelist or checking out on ecommerce we
@@ -61,7 +60,6 @@ class SaleOrderLine(models.Model):
         record.expand_pack_line()
         return record
 
-    @api.multi
     def write(self, vals):
         super().write(vals)
         if "product_id" in vals or "product_uom_qty" in vals:
@@ -97,7 +95,6 @@ class SaleOrderLine(models.Model):
                 )
             )
 
-    @api.multi
     def action_open_parent_pack_product_view(self):
         domain = [
             ("id", "in", self.mapped("pack_parent_line_id").mapped("product_id").ids)
