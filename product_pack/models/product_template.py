@@ -9,7 +9,7 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     pack_type = fields.Selection(
-        [("detailed", "Detailed"), ("non_detailed", "Non Detailed"),],
+        [("detailed", "Detailed"), ("non_detailed", "Non Detailed")],
         "Pack Type",
         help="On sale orders or purchase orders:\n"
         "* Detailed: Display components individually in the sale order.\n"
@@ -73,7 +73,6 @@ class ProductTemplate(models.Model):
                         )
                     )
 
-    @api.multi
     def write(self, vals):
         """We remove from product.product to avoid error."""
         _vals = vals.copy()

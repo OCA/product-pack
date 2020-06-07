@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
-from odoo.tools import pycompat
 
 
 class ProductProduct(models.Model):
@@ -21,14 +20,12 @@ class ProductProduct(models.Model):
         help="Packs where product is used.",
     )
 
-    @api.multi
     def get_pack_lines(self):
         """Returns the content (lines) of the packs.
         By default, return all the pack_line_ids, but that function
         can be overloaded to introduce filtering function by date, etc..."""
         return self.mapped("pack_line_ids")
 
-    @api.multi
     def split_pack_products(self):
         """Split products and the pack in 2 separate recordsets.
 
@@ -55,7 +52,6 @@ class ProductProduct(models.Model):
         no_packs = (self | self.sudo().get_pack_lines().mapped("product_id")) - packs
         return packs, no_packs
 
-    @api.multi
     def price_compute(self, price_type, uom=False, currency=False, company=False):
         packs, no_packs = self.split_pack_products()
         prices = super(ProductProduct, no_packs).price_compute(
@@ -71,7 +67,9 @@ class ProductProduct(models.Model):
             # it will be converted again by pp._compute_price_rule, so if
             # that is the case we convert the amounts to the pack currency
             if pricelist_id_or_name:
-                if isinstance(pricelist_id_or_name, pycompat.string_types):
+                if isinstance(pricelist_id_or_name, list):
+                    pricelist_id_or_name = pricelist_id_or_name[0]
+                if isinstance(pricelist_id_or_name, str):
                     pricelist_name_search = self.env["product.pricelist"].name_search(
                         pricelist_id_or_name, operator="=", limit=1
                     )
@@ -79,7 +77,7 @@ class ProductProduct(models.Model):
                         pricelist = self.env["product.pricelist"].browse(
                             [pricelist_name_search[0][0]]
                         )
-                elif isinstance(pricelist_id_or_name, pycompat.integer_types):
+                elif isinstance(pricelist_id_or_name, int):
                     pricelist = self.env["product.pricelist"].browse(
                         pricelist_id_or_name
                     )
@@ -87,7 +85,7 @@ class ProductProduct(models.Model):
                     pack_price = pricelist.currency_id._convert(
                         pack_price,
                         product.currency_id,
-                        self.company_id or self.env.user.company_id,
+                        self.company_id or self.env.company,
                         fields.Date.today(),
                     )
             prices[product.id] = pack_price
