@@ -7,7 +7,6 @@ from odoo.exceptions import UserError
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    @api.multi
     def copy(self, default=None):
         sale_copy = super().copy(default)
         # we unlink pack lines that should not be copied
@@ -23,13 +22,17 @@ class SaleOrder(models.Model):
         _origin.order_line only when lines are unlinked and this is exactly
         what we need
         """
-        if self._origin.order_line.filtered(
+        origin_line_ids = self._origin.order_line.ids
+        line_ids = self.order_line.ids
+        removed_line_ids = list(set(origin_line_ids) - set(line_ids))
+        removed_line = self.env["sale.order.line"].browse(removed_line_ids)
+        if removed_line.filtered(
             lambda x: x.pack_parent_line_id
             and not x.pack_parent_line_id.product_id.pack_modifiable
         ):
             raise UserError(
                 _(
-                    "You can not delete this line because is part of a pack in"
+                    "You cannot delete this line because is part of a pack in"
                     " this sale order. In order to delete this line you need to"
                     " delete the pack itself"
                 )
