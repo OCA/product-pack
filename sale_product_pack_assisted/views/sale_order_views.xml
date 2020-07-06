@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_order_stock_form">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <!-- button to open line form -->
+            <xpath
+                expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
+                position="after"
+            >
+                <field name="pack_type" invisible="1" />
+                <button
+                    name="action_assisted_pack_detail"
+                    string="Detail"
+                    attrs="{'invisible':[('pack_type', '!=', 'non_detailed_assisted')]}"
+                    type="object"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
