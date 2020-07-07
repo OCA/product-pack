@@ -28,7 +28,7 @@ class SaleOrder(models.Model):
         ):
             raise UserError(
                 _(
-                    "You can not delete this line because is part of a pack in"
+                    "You cannot delete this line because is part of a pack in"
                     " this sale order. In order to delete this line you need to"
                     " delete the pack itself"
                 )
