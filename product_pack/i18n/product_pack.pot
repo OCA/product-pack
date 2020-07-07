@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* product_pack
+# 	* product_pack
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,12 +24,12 @@ msgid "Created on"
 msgstr ""
 
 #. module: product_pack
-#: selection:product.template,pack_type:0
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_type__detailed
 msgid "Detailed"
 msgstr ""
 
 #. module: product_pack
-#: selection:product.template,pack_component_price:0
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__detailed
 msgid "Detailed per component"
 msgstr ""
 
@@ -52,11 +52,13 @@ msgstr ""
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_modifiable
 #: model:ir.model.fields,help:product_pack.field_product_template__pack_modifiable
-msgid "If you check this field yo will be able to edit sale/purchase order line relate to its component"
+msgid ""
+"If you check this field yo will be able to edit sale/purchase order line "
+"relate to its component"
 msgstr ""
 
 #. module: product_pack
-#: selection:product.template,pack_component_price:0
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__ignored
 msgid "Ignored"
 msgstr ""
 
@@ -88,14 +90,15 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: product_pack
-#: selection:product.template,pack_type:0
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_type__non_detailed
 msgid "Non Detailed"
 msgstr ""
 
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_component_price
 #: model:ir.model.fields,help:product_pack.field_product_template__pack_component_price
-msgid "On sale orders or purchase orders:\n"
+msgid ""
+"On sale orders or purchase orders:\n"
 "* Detailed per component: Detail lines with prices.\n"
 "* Totalized in main product: Detail lines merging lines prices on pack (don't show component prices).\n"
 "* Ignored: Use product pack price (ignore detail line prices)."
@@ -104,7 +107,8 @@ msgstr ""
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_type
 #: model:ir.model.fields,help:product_pack.field_product_template__pack_type
-msgid "On sale orders or purchase orders:\n"
+msgid ""
+"On sale orders or purchase orders:\n"
 "* Detailed: Display components individually in the sale order.\n"
 "* Non Detailed: Do not display components individually in the sale order."
 msgstr ""
@@ -193,10 +197,11 @@ msgid "Pack component price"
 msgstr ""
 
 #. module: product_pack
-#: code:addons/product_pack/models/product_template.py:65
-#: code:addons/product_pack/models/product_template.py:71
+#: code:addons/product_pack/models/product_template.py:0
+#: code:addons/product_pack/models/product_template.py:0
 #, python-format
-msgid "Pack lines products company must be the same as the parent product company"
+msgid ""
+"Pack lines products company must be the same as the parent product company"
 msgstr ""
 
 #. module: product_pack
@@ -222,7 +227,7 @@ msgid "Product Template"
 msgstr ""
 
 #. module: product_pack
-#: sql_constraint:product.pack.line:0
+#: model:ir.model.constraint,message:product_pack.constraint_product_pack_line_product_uniq
 msgid "Product must be only once on a pack!"
 msgstr ""
 
@@ -243,7 +248,7 @@ msgid "Quantity"
 msgstr ""
 
 #. module: product_pack
-#: selection:product.template,pack_component_price:0
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__totalized
 msgid "Totalized in main product"
 msgstr ""
 
@@ -262,13 +267,14 @@ msgstr ""
 #: model:product.template,uom_name:product_pack.product_pack_pc_detailed_components_product_template
 #: model:product.template,uom_name:product_pack.product_pack_pc_detailed_ignored_product_template
 #: model:product.template,uom_name:product_pack.product_pack_pc_detailed_totalized_product_template
-msgid "Unit(s)"
+msgid "Units"
 msgstr ""
 
 #. module: product_pack
-#: code:addons/product_pack/models/product_pack_line.py:49
+#: code:addons/product_pack/models/product_pack_line.py:0
 #, python-format
-msgid "You cannot set recursive packs.\n"
+msgid ""
+"You cannot set recursive packs.\n"
 "Product id: %s"
 msgstr ""
 
@@ -276,22 +282,3 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
 msgid "You must save first to add pack lines"
 msgstr ""
-
-#. module: product_pack
-#: model:product.product,weight_uom_name:product_pack.product_pack_cpu_detailed_components
-#: model:product.product,weight_uom_name:product_pack.product_pack_cpu_detailed_ignored
-#: model:product.product,weight_uom_name:product_pack.product_pack_cpu_detailed_totalized
-#: model:product.product,weight_uom_name:product_pack.product_pack_cpu_non_detailed
-#: model:product.product,weight_uom_name:product_pack.product_pack_pc_detailed_components
-#: model:product.product,weight_uom_name:product_pack.product_pack_pc_detailed_ignored
-#: model:product.product,weight_uom_name:product_pack.product_pack_pc_detailed_totalized
-#: model:product.template,weight_uom_name:product_pack.product_pack_cpu_detailed_components_product_template
-#: model:product.template,weight_uom_name:product_pack.product_pack_cpu_detailed_ignored_product_template
-#: model:product.template,weight_uom_name:product_pack.product_pack_cpu_detailed_totalized_product_template
-#: model:product.template,weight_uom_name:product_pack.product_pack_cpu_non_detailed_product_template
-#: model:product.template,weight_uom_name:product_pack.product_pack_pc_detailed_components_product_template
-#: model:product.template,weight_uom_name:product_pack.product_pack_pc_detailed_ignored_product_template
-#: model:product.template,weight_uom_name:product_pack.product_pack_pc_detailed_totalized_product_template
-msgid "kg"
-msgstr ""
-
