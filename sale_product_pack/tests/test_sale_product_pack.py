@@ -9,7 +9,7 @@ class TestSaleProductPack(SavepointCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.sale_order = cls.env["sale.order"].create(
-            {"partner_id": cls.env.ref("base.res_partner_12").id,}
+            {"partner_id": cls.env.ref("base.res_partner_12").id}
         )
 
     def _get_component_prices_sum(self, product_pack):

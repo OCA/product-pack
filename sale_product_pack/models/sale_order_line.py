@@ -6,6 +6,7 @@ from odoo.exceptions import UserError
 
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
+    _parent_name = "pack_parent_line_id"
 
     pack_type = fields.Selection(related="product_id.pack_type",)
     pack_component_price = fields.Selection(related="product_id.pack_component_price",)
@@ -15,10 +16,7 @@ class SaleOrderLine(models.Model):
         "Depth", help="Depth of the product if it is part of a pack."
     )
     pack_parent_line_id = fields.Many2one(
-        "sale.order.line",
-        "Pack",
-        help="The pack that contains this product.",
-        ondelete="cascade",
+        "sale.order.line", "Pack", help="The pack that contains this product.",
     )
     pack_child_line_ids = fields.One2many(
         "sale.order.line", "pack_parent_line_id", "Lines in pack"
@@ -65,15 +63,6 @@ class SaleOrderLine(models.Model):
         if "product_id" in vals or "product_uom_qty" in vals:
             for record in self:
                 record.expand_pack_line(write=True)
-
-    def unlink(self):
-        """Remove previously the pack children lines for avoiding issues in
-        the cache.
-        """
-        children = self.mapped("pack_child_line_ids")
-        if children:
-            children.unlink()
-        return super().unlink()
 
     @api.onchange(
         "product_id",
