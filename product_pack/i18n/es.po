@@ -38,12 +38,12 @@ msgid "Created on"
 msgstr "Creado el"
 
 #. module: product_pack
-#: selection:product.template,pack_type:0
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_type__detailed
 msgid "Detailed"
 msgstr "Detallado"
 
 #. module: product_pack
-#: selection:product.template,pack_component_price:0
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__detailed
 msgid "Detailed per component"
 msgstr "Detallado por componente"
 
@@ -74,7 +74,7 @@ msgstr ""
 "compra relativas a sus componentes"
 
 #. module: product_pack
-#: selection:product.template,pack_component_price:0
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__ignored
 msgid "Ignored"
 msgstr "Ignorado"
 
@@ -106,7 +106,7 @@ msgid "Last Updated on"
 msgstr "Última actualización el"
 
 #. module: product_pack
-#: selection:product.template,pack_type:0
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_type__non_detailed
 msgid "Non Detailed"
 msgstr "No detallado"
 
@@ -225,8 +225,7 @@ msgid "Pack component price"
 msgstr "Precio de los componentes"
 
 #. module: product_pack
-#: code:addons/product_pack/models/product_template.py:65
-#: code:addons/product_pack/models/product_template.py:71
+#: code:addons/product_pack/models/product_template.py:0
 #, python-format
 msgid ""
 "Pack lines products company must be the same as the parent product company"
@@ -257,7 +256,7 @@ msgid "Product Template"
 msgstr "Plantilla de producto"
 
 #. module: product_pack
-#: sql_constraint:product.pack.line:0
+#: model:ir.model.constraint,message:product_pack.constraint_product_pack_line_product_uniq
 msgid "Product must be only once on a pack!"
 msgstr "¡El producto debe estar solo una vez en un pack!"
 
@@ -278,7 +277,7 @@ msgid "Quantity"
 msgstr "Cantidad"
 
 #. module: product_pack
-#: selection:product.template,pack_component_price:0
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__totalized
 msgid "Totalized in main product"
 msgstr "Totalizado en el producto principal"
 
@@ -297,11 +296,13 @@ msgstr "Totalizado en el producto principal"
 #: model:product.template,uom_name:product_pack.product_pack_pc_detailed_components_product_template
 #: model:product.template,uom_name:product_pack.product_pack_pc_detailed_ignored_product_template
 #: model:product.template,uom_name:product_pack.product_pack_pc_detailed_totalized_product_template
-msgid "Unit(s)"
+#, fuzzy
+#| msgid "Unit(s)"
+msgid "Units"
 msgstr "Unidad(es)"
 
 #. module: product_pack
-#: code:addons/product_pack/models/product_pack_line.py:49
+#: code:addons/product_pack/models/product_pack_line.py:0
 #, python-format
 msgid ""
 "You cannot set recursive packs.\n"
@@ -315,20 +316,5 @@ msgstr ""
 msgid "You must save first to add pack lines"
 msgstr "Debe guardar primero para agregar líneas de paquete"
 
-#. module: product_pack
-#: model:product.product,weight_uom_name:product_pack.product_pack_cpu_detailed_components
-#: model:product.product,weight_uom_name:product_pack.product_pack_cpu_detailed_ignored
-#: model:product.product,weight_uom_name:product_pack.product_pack_cpu_detailed_totalized
-#: model:product.product,weight_uom_name:product_pack.product_pack_cpu_non_detailed
-#: model:product.product,weight_uom_name:product_pack.product_pack_pc_detailed_components
-#: model:product.product,weight_uom_name:product_pack.product_pack_pc_detailed_ignored
-#: model:product.product,weight_uom_name:product_pack.product_pack_pc_detailed_totalized
-#: model:product.template,weight_uom_name:product_pack.product_pack_cpu_detailed_components_product_template
-#: model:product.template,weight_uom_name:product_pack.product_pack_cpu_detailed_ignored_product_template
-#: model:product.template,weight_uom_name:product_pack.product_pack_cpu_detailed_totalized_product_template
-#: model:product.template,weight_uom_name:product_pack.product_pack_cpu_non_detailed_product_template
-#: model:product.template,weight_uom_name:product_pack.product_pack_pc_detailed_components_product_template
-#: model:product.template,weight_uom_name:product_pack.product_pack_pc_detailed_ignored_product_template
-#: model:product.template,weight_uom_name:product_pack.product_pack_pc_detailed_totalized_product_template
-msgid "kg"
-msgstr "kg"
+#~ msgid "kg"
+#~ msgstr "kg"
