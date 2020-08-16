@@ -297,7 +297,6 @@ msgstr "Totalizado en el producto principal"
 #: model:product.template,uom_name:product_pack.product_pack_pc_detailed_ignored_product_template
 #: model:product.template,uom_name:product_pack.product_pack_pc_detailed_totalized_product_template
 #, fuzzy
-#| msgid "Unit(s)"
 msgid "Units"
 msgstr "Unidad(es)"
 
