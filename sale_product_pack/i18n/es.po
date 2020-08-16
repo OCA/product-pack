@@ -89,9 +89,8 @@ msgid "Parent Pack is not modifiable"
 msgstr ""
 
 #. module: sale_product_pack
-#: code:addons/sale_product_pack/models/sale_order_line.py:101
+#: code:addons/sale_product_pack/models/sale_order_line.py:0
 #, fuzzy, python-format
-#| msgid "Product"
 msgid "Parent Product"
 msgstr "Producto"
 
@@ -101,14 +100,14 @@ msgid "Product pack line"
 msgstr "Linea de pack"
 
 #. module: sale_product_pack
-#: model:ir.model,name:sale_product_pack.model_sale_order
-msgid "Sale Order"
-msgstr "Pedido de venta"
-
-#. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line__sale_discount
 msgid "Sale discount (%)"
 msgstr "Descuento para ventas"
+
+#. module: sale_product_pack
+#: model:ir.model,name:sale_product_pack.model_sale_order
+msgid "Sales Order"
+msgstr ""
 
 #. module: sale_product_pack
 #: model:ir.model,name:sale_product_pack.model_sale_order_line
@@ -126,7 +125,7 @@ msgid "The parent pack is modifiable"
 msgstr ""
 
 #. module: sale_product_pack
-#: code:addons/sale_product_pack/models/sale_order_line.py:93
+#: code:addons/sale_product_pack/models/sale_order_line.py:0
 #, python-format
 msgid ""
 "You can not change this line because is part of a pack included in this order"
@@ -135,11 +134,19 @@ msgstr ""
 "orden"
 
 #. module: sale_product_pack
-#: code:addons/sale_product_pack/models/sale_order.py:28
+#: code:addons/sale_product_pack/models/sale_order.py:0
 #, python-format
 msgid ""
-"You can not delete this line because is part of a pack in this sale order. "
-"In order to delete this line you need to delete the pack itself"
+"You cannot delete this line because is part of a pack in this sale order. In "
+"order to delete this line you need to delete the pack itself"
 msgstr ""
-"No puede eliminar esta línea porque forma parte de un pack en esta orden de "
-"venta. Para eliminar esta línea necesitas eliminar el pack"
+
+#~ msgid "Sale Order"
+#~ msgstr "Pedido de venta"
+
+#~ msgid ""
+#~ "You can not delete this line because is part of a pack in this sale "
+#~ "order. In order to delete this line you need to delete the pack itself"
+#~ msgstr ""
+#~ "No puede eliminar esta línea porque forma parte de un pack en esta orden "
+#~ "de venta. Para eliminar esta línea necesitas eliminar el pack"
