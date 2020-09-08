@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     'name': 'Sale product Pack',
-    'version': '12.0.1.1.0',
+    'version': '12.0.1.1.1',
     'category': 'Sales',
     'summary': 'This module allows you to sale product packs',
     'website': 'https://github.com/OCA/product-pack',
