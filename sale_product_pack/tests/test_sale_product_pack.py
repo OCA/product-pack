@@ -9,8 +9,21 @@ class TestSaleProductPack(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.pricelist = cls.env["product.pricelist"].create({
+            "name": "Test pricelist",
+            "currency_id": cls.env.user.company_id.currency_id.id,
+            "item_ids": [(0, 0, {
+                "applied_on": "3_global",
+                "compute_price": "formula",
+                "base": "list_price",
+            })]
+        })
+        cls.partner = cls.env["res.partner"].create({
+            "name": "Mr. Odoo",
+            "property_product_pricelist": cls.pricelist.id,
+        })
         cls.sale_order = cls.env['sale.order'].create({
-            'partner_id': cls.env.ref('base.res_partner_12').id,
+            'partner_id': cls.partner.id,
         })
 
     def _get_component_prices_sum(self, product_pack):
