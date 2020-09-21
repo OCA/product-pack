@@ -1,4 +1,5 @@
 # Copyright 2019 Tecnativa - Ernesto Tejeda
+# Copyright 2020 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import math
@@ -19,6 +20,7 @@ class ProductProduct(models.Model):
         for product in packs.with_context(prefetch_fields=False):
             pack_qty_available = []
             pack_virtual_available = []
+            pack_free_qty = []
             subproducts = product.pack_line_ids.filtered(
                 lambda p: p.product_id.type == "product"
             )
@@ -32,14 +34,16 @@ class ProductProduct(models.Model):
                     pack_virtual_available.append(
                         math.floor(subproduct_stock.virtual_available / sub_qty)
                     )
+                    pack_free_qty.append(
+                        math.floor(subproduct_stock.free_qty / sub_qty)
+                    )
             res[product.id] = {
-                "qty_available": (
-                    pack_qty_available and min(pack_qty_available) or False
-                ),
+                "qty_available": (pack_qty_available and min(pack_qty_available) or 0),
+                "free_qty": (pack_free_qty and min(pack_free_qty) or 0),
                 "incoming_qty": 0,
                 "outgoing_qty": 0,
                 "virtual_available": (
-                    pack_virtual_available and min(pack_virtual_available) or False
+                    pack_virtual_available and min(pack_virtual_available) or 0
                 ),
             }
         return res
