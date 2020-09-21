@@ -1,4 +1,5 @@
 # Copyright 2019 Tecnativa - Ernesto Tejeda
+# Copyright 2020 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
@@ -13,8 +14,18 @@ class TestSaleProductPack(SavepointCase):
     def setUpClass(cls):
         super().setUpClass()
         category_all_id = cls.env.ref("product.product_category_all").id
-        product_obj = cls.env["product.product"]
-        cls.pack_dc = cls.env["product.product"].create(
+        cls.product_obj = cls.env["product.product"]
+        component_1 = cls.product_obj.create(
+            {"name": "Component 1", "type": "product", "categ_id": category_all_id}
+        )
+        component_2 = component_1.with_context({}).copy({"name": "Component 2"})
+        component_3 = component_1.with_context({}).copy(
+            {"name": "Component 3", "type": "service"}
+        )
+        component_4 = component_1.with_context({}).copy(
+            {"name": "Component 4", "type": "consu"}
+        )
+        cls.pack_dc = cls.product_obj.create(
             {
                 "name": "Pack",
                 "type": "product",
@@ -23,62 +34,10 @@ class TestSaleProductPack(SavepointCase):
                 "pack_component_price": "detailed",
                 "categ_id": category_all_id,
                 "pack_line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": product_obj.create(
-                                {
-                                    "name": "Component 1",
-                                    "type": "product",
-                                    "categ_id": category_all_id,
-                                }
-                            ).id,
-                            "quantity": 1,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": product_obj.create(
-                                {
-                                    "name": "Component 2",
-                                    "type": "product",
-                                    "categ_id": category_all_id,
-                                }
-                            ).id,
-                            "quantity": 1,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": product_obj.create(
-                                {
-                                    "name": "Component 3",
-                                    "type": "service",
-                                    "categ_id": category_all_id,
-                                }
-                            ).id,
-                            "quantity": 1,
-                        },
-                    ),
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": product_obj.create(
-                                {
-                                    "name": "Component 4",
-                                    "type": "consu",
-                                    "categ_id": category_all_id,
-                                }
-                            ).id,
-                            "quantity": 1,
-                        },
-                    ),
+                    (0, 0, {"product_id": component_1.id, "quantity": 1},),
+                    (0, 0, {"product_id": component_2.id, "quantity": 1},),
+                    (0, 0, {"product_id": component_3.id, "quantity": 1},),
+                    (0, 0, {"product_id": component_4.id, "quantity": 1},),
                 ],
             }
         )
@@ -127,5 +86,6 @@ class TestSaleProductPack(SavepointCase):
         wizard_dict = picking.button_validate()
         wizard = self.env[wizard_dict["res_model"]].browse(wizard_dict["res_id"])
         wizard.process()
+        self.product_obj.invalidate_cache()
         self.assertEqual(self.pack_dc.virtual_available, 5)
         self.assertEqual(self.pack_dc.qty_available, 5)
