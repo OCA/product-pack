@@ -69,10 +69,11 @@ class SaleOrderLine(models.Model):
 
     @api.multi
     def write(self, vals):
-        super().write(vals)
+        res = super().write(vals)
         if 'product_id' in vals or 'product_uom_qty' in vals:
             for record in self:
                 record.expand_pack_line(write=True)
+        return res
 
     def unlink(self):
         """Remove previously the pack children lines for avoiding issues in
