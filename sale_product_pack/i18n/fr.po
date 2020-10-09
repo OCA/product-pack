@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* sale_product_pack
+# 	* sale_product_pack
 #
 msgid ""
 msgstr ""
@@ -33,9 +33,11 @@ msgstr "Lignes rattachées à un pack"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_component_price
-msgid "On sale orders or purchase orders:\n"
+msgid ""
+"On sale orders or purchase orders:\n"
 "* Detailed per component: Detail lines with prices.\n"
-"* Totalized in main product: Detail lines merging lines prices on pack (don't show component prices).\n"
+"* Totalized in main product: Detail lines merging lines prices on pack "
+"(don't show component prices).\n"
 "* Ignored: Use product pack price (ignore detail line prices)."
 msgstr ""
 "Sur les commandes clients ou fournisseurs :\n"
@@ -47,7 +49,8 @@ msgstr ""
 
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_type
-msgid "On sale orders or purchase orders:\n"
+msgid ""
+"On sale orders or purchase orders:\n"
 "* Detailed: Display components individually in the sale order.\n"
 "* Non Detailed: Do not display components individually in the sale order."
 msgstr ""
@@ -81,7 +84,7 @@ msgid "Parent Pack is not modifiable"
 msgstr "Le pack parent n'est pas modifiable"
 
 #. module: sale_product_pack
-#: code:addons/sale_product_pack/models/sale_order_line.py:101
+#: code:addons/sale_product_pack/models/sale_order_line.py:102
 #, python-format
 msgid "Parent Product"
 msgstr "Article parent"
@@ -117,9 +120,10 @@ msgid "The parent pack is modifiable"
 msgstr "Le pack parent est modifiable"
 
 #. module: sale_product_pack
-#: code:addons/sale_product_pack/models/sale_order_line.py:93
+#: code:addons/sale_product_pack/models/sale_order_line.py:94
 #, python-format
-msgid "You can not change this line because is part of a pack included in this order"
+msgid ""
+"You can not change this line because is part of a pack included in this order"
 msgstr ""
 "Vous ne pouvez pas modifier cette ligne car elle fait partie d'un pack "
 "inclus dans cette commande"
@@ -127,7 +131,9 @@ msgstr ""
 #. module: sale_product_pack
 #: code:addons/sale_product_pack/models/sale_order.py:28
 #, python-format
-msgid "You can not delete this line because is part of a pack in this sale order. In order to delete this line you need to delete the pack itself"
+msgid ""
+"You can not delete this line because is part of a pack in this sale order. "
+"In order to delete this line you need to delete the pack itself"
 msgstr ""
 "Vous ne pouvez pas supprimer cette ligne car elle fait partie d'un pack dans "
 "ce bon de commande. Pour supprimer cette ligne, vous devez supprimer le pack "
