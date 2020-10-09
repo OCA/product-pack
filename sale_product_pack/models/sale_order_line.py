@@ -59,10 +59,11 @@ class SaleOrderLine(models.Model):
         return record
 
     def write(self, vals):
-        super().write(vals)
+        res = super().write(vals)
         if "product_id" in vals or "product_uom_qty" in vals:
             for record in self:
                 record.expand_pack_line(write=True)
+        return res
 
     @api.onchange(
         "product_id",
