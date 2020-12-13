@@ -6,38 +6,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2020-12-14 00:28+0000\n"
+"Last-Translator: Bosd <c5e2fd43-d292-4c90-9d1f-74ff3436329a@anonaddy.me>\n"
 "Language-Team: none\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: product_pack
 #: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_type__detailed
 msgid "Detailed"
-msgstr ""
+msgstr "Gedetailleerd"
 
 #. module: product_pack
 #: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__detailed
 msgid "Detailed per component"
-msgstr ""
+msgstr "Gedetailleerd per component"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Weergavenaam"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_product__used_in_pack_line_ids
@@ -48,7 +50,7 @@ msgstr ""
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_modifiable
@@ -67,7 +69,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:product_pack.field_product_product__pack_ok
 #: model:ir.model.fields,field_description:product_pack.field_product_template__pack_ok
 msgid "Is Pack?"
-msgstr ""
+msgstr "Is verpakking?"
 
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_ok
@@ -78,7 +80,7 @@ msgstr ""
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Laatst gewijzigt op"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__write_uid
