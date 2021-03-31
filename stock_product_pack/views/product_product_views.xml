@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="product_form_view_procurement_button" model="ir.ui.view">
+        <field name="name">product.product.pack.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.product_form_view_procurement_button" />
+        <field name="arch" type="xml">
+            <button name="action_open_quants" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible':[('pack_ok', '=', False),('type', '!=', 'product')]}</attribute>
+            </button>
+            <button name="action_product_forecast_report" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible':[('pack_ok', '=', False),('type', '!=', 'product')]}</attribute>
+            </button>
+        </field>
+    </record>
+    <record id="view_stock_product_tree" model="ir.ui.view">
+        <field name="name">product.product.pack.tree</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="stock.view_stock_product_tree" />
+        <field name="arch" type="xml">
+            <field name="qty_available" position="after">
+                <field name="pack_ok" invisible="1" />
+            </field>
+            <field name="qty_available" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible':[('pack_ok', '=', False),('type', '!=', 'product')]}</attribute>
+            </field>
+            <field name="virtual_available" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible':[('pack_ok', '=', False),('type', '!=', 'product')]}</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
