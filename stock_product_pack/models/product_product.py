@@ -47,3 +47,26 @@ class ProductProduct(models.Model):
                 ),
             }
         return res
+
+    def _compute_quantities(self):
+        """ In v13 Odoo introduces a filter for products not services.
+        To keep how it was working on v12 we try to get stock for
+        service products if they are pack.
+        """
+        service_pack_products = self.filtered(
+            lambda p: p.type == "service" and p.pack_ok
+        )
+        super(ProductProduct, self - service_pack_products)._compute_quantities()
+        res = service_pack_products._compute_quantities_dict(
+            self._context.get("lot_id"),
+            self._context.get("owner_id"),
+            self._context.get("package_id"),
+            self._context.get("from_date"),
+            self._context.get("to_date"),
+        )
+        for product in service_pack_products:
+            product.qty_available = res[product.id]["qty_available"]
+            product.incoming_qty = res[product.id]["incoming_qty"]
+            product.outgoing_qty = res[product.id]["outgoing_qty"]
+            product.virtual_available = res[product.id]["virtual_available"]
+            product.free_qty = res[product.id]["free_qty"]
