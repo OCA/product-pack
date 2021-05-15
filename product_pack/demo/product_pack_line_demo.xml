@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 Tecnativa - Ernesto Tejeda
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="pack_cpu_detailed_components_1" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_cpu_detailed_components" />
+        <field name="product_id" ref="product.product_product_20" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_cpu_detailed_components_3" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_cpu_detailed_components" />
+        <field name="product_id" ref="product.product_product_16" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_cpu_detailed_components_4" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_cpu_detailed_components" />
+        <field name="product_id" ref="product.product_product_24" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_cpu_detailed_totalized_1" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_cpu_detailed_totalized" />
+        <field name="product_id" ref="product.product_product_20" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_cpu_detailed_totalized_3" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_cpu_detailed_totalized" />
+        <field name="product_id" ref="product.product_product_16" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_cpu_detailed_totalized_4" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_cpu_detailed_totalized" />
+        <field name="product_id" ref="product.product_product_24" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_cpu_detailed_ignored_1" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_cpu_detailed_ignored" />
+        <field name="product_id" ref="product.product_product_20" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_cpu_detailed_ignored_3" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_cpu_detailed_ignored" />
+        <field name="product_id" ref="product.product_product_16" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_cpu_detailed_ignored_4" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_cpu_detailed_ignored" />
+        <field name="product_id" ref="product.product_product_24" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_cpu_non_detailed_1" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_cpu_non_detailed" />
+        <field name="product_id" ref="product.product_product_20" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_cpu_non_detailed_3" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_cpu_non_detailed" />
+        <field name="product_id" ref="product.product_product_16" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_cpu_non_detailed_4" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_cpu_non_detailed" />
+        <field name="product_id" ref="product.product_product_24" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_pc_detailed_components_1" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_pc_detailed_components" />
+        <field name="product_id" ref="product.product_product_12" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_pc_detailed_components_3" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_pc_detailed_components" />
+        <field name="product_id" ref="product_pack_cpu_detailed_components" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_pc_detailed_totalized_1" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_pc_detailed_totalized" />
+        <field name="product_id" ref="product.product_product_12" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_pc_detailed_totalized_3" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_pc_detailed_totalized" />
+        <field name="product_id" ref="product_pack_cpu_detailed_totalized" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_pc_detailed_ignored_1" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_pc_detailed_ignored" />
+        <field name="product_id" ref="product.product_product_12" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_pc_detailed_ignored_3" model="product.pack.line">
+        <field name="parent_product_id" ref="product_pack_pc_detailed_ignored" />
+        <field name="product_id" ref="product_pack_cpu_detailed_ignored" />
+        <field name="quantity" eval="1.0" />
+    </record>
+</odoo>
