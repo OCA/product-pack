@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 Tecnativa - Ernesto Tejeda
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="product_pack_line_form" model="ir.ui.view">
+        <field name="name">product.pack.line.sale.form</field>
+        <field name="model">product.pack.line</field>
+        <field name="inherit_id" ref="product_pack.product_pack_line_form" />
+        <field name="arch" type="xml">
+            <field name="quantity" position="after">
+                <field
+                    name="sale_discount"
+                    groups="product.group_discount_per_so_line"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="product_pack_line_tree" model="ir.ui.view">
+        <field name="name">product.pack.line.sale.tree</field>
+        <field name="model">product.pack.line</field>
+        <field name="inherit_id" ref="product_pack.product_pack_line_tree" />
+        <field name="arch" type="xml">
+            <field name="quantity" position="after">
+                <field
+                    name="sale_discount"
+                    groups="product.group_discount_per_so_line"
+                />
+            </field>
+        </field>
+    </record>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
+                position="after"
+            >
+                <field name="pack_modifiable" invisible="True" />
+                <field name="pack_parent_line_id" invisible="True" />
+                <button
+                    string="Parent Pack is not modifiable"
+                    name="action_open_parent_pack_product_view"
+                    type="object"
+                    attrs="{'invisible': ['|', ('pack_parent_line_id', '=', False), ('pack_modifiable', '=', True)]}"
+                    icon="fa-lock"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
