@@ -45,7 +45,8 @@ class SaleOrderLine(models.Model):
                     # if subline already exists we update, if not we create
                     if existing_subline:
                         if do_not_expand:
-                            vals.pop("product_uom_qty")
+                            vals.pop("product_uom_qty", None)
+                            vals.pop("discount", None)
                         existing_subline.write(vals)
                     elif not do_not_expand:
                         self.create(vals)
