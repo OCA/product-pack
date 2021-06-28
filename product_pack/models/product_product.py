@@ -38,17 +38,13 @@ class ProductProduct(models.Model):
                 or p.pack_type == "non_detailed"
             )
         )
-        # TODO: Check why this is needed
-        # for compatibility with website_sale
-        if self._context.get("website_id", False) and not self._context.get(
-            "from_cart", False
-        ):
+        # We could need to check the price of the whole pack (e.g.: e-commerce)
+        if self.env.context.get("whole_pack_price"):
             packs |= self.filtered(
                 lambda p: p.pack_ok
                 and p.pack_type == "detailed"
                 and p.pack_component_price == "detailed"
             )
-
         return packs, (self - packs)
 
     def price_compute(self, price_type, uom=False, currency=False, company=False):

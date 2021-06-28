@@ -48,4 +48,4 @@ class ProductPackLine(models.Model):
 
     def get_price(self):
         self.ensure_one()
-        return self.product_id.price * self.quantity
+        return self.sudo().product_id.price * self.quantity
