@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="assets_frontend" inherit_id="website_sale.assets_frontend">
-        <xpath expr=".">
+    <template id="assets_tests" inherit_id="web.assets_tests">
+        <xpath expr="." position="inside">
             <script
                 type="text/javascript"
                 src="/website_sale_product_pack/static/src/js/website_sale_product_pack_tour.js"
