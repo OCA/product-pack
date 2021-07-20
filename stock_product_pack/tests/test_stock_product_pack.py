@@ -41,6 +41,23 @@ class TestSaleProductPack(SavepointCase):
                 ],
             }
         )
+        cls.pack_dc_with_dm = cls.product_obj.create(
+            {
+                "name": "Pack With storeable and not move product",
+                "type": "product",
+                "pack_ok": True,
+                "dont_create_move": True,
+                "pack_type": "detailed",
+                "pack_component_price": "detailed",
+                "categ_id": category_all_id,
+                "pack_line_ids": [
+                    (0, 0, {"product_id": component_1.id, "quantity": 1},),
+                    (0, 0, {"product_id": component_2.id, "quantity": 1},),
+                    (0, 0, {"product_id": component_3.id, "quantity": 1},),
+                    (0, 0, {"product_id": component_4.id, "quantity": 1},),
+                ],
+            }
+        )
 
     def test_compute_quantities_dict(self):
         location_id = (self.env.ref("stock.stock_location_suppliers").id,)
@@ -89,3 +106,40 @@ class TestSaleProductPack(SavepointCase):
         self.product_obj.invalidate_cache()
         self.assertEqual(self.pack_dc.virtual_available, 5)
         self.assertEqual(self.pack_dc.qty_available, 5)
+
+    def test_pack_with_dont_move_the_parent(self):
+        """ Run a procurement for prod pack products when there are only 5 in stock then
+        check that MTO is applied on the moves when the rule is set to 'mts_else_mto'
+        """
+        warehouse = self.env["stock.warehouse"].search(
+            [("company_id", "=", self.env.user.id)], limit=1
+        )
+
+        # We alter one rule and we set it to 'mts_else_mto'
+        values = {"warehouse_id": warehouse}
+        rule = self.env["procurement.group"]._get_rule(
+            self.pack_dc_with_dm, self.env.ref("stock.stock_location_stock"), values
+        )
+        rule.procure_method = "mts_else_mto"
+
+        pg = self.env["procurement.group"].create({"name": "Test-product Pack"})
+
+        # we run to force create a picking withouth the product pack in the moves
+        for prod in self.pack_dc_with_dm | self.pack_dc_with_dm.pack_line_ids.mapped(
+            "product_id"
+        ):
+            Procurement += pg.Procurement(
+                prod,
+                1.0,
+                prod.uom_id,
+                self.env.ref("stock.stock_location_stock").id,
+                "test-product pack detalled",
+                "test-product pack detalled",
+                warehouse.company_id,
+                {"warehouse_id": warehouse, "group_id": pg},
+            )
+        self.env["procurement.group"].run(Procurement)
+
+        picking_ids = self.env["stock.picking"].search([("group_id", "=", pg.id)])
+        # we need to ensure that only the compents of the packs are in the moves.
+        self.assertFalse(self.pack_dc_with_dm in picking_ids.move_lines.product_id)

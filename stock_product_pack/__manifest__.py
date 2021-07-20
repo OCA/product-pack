@@ -13,7 +13,7 @@
     "maintainers": ["ernestotejeda"],
     "license": "AGPL-3",
     "depends": ["product_pack", "stock"],
-    "data": ["security/ir.model.access.csv"],
+    "data": ["security/ir.model.access.csv", "views/product_template_views.xml"],
     "installable": True,
     "auto_install": True,
     "application": False,
