@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo13-addon-product_pack',
         'odoo13-addon-sale_product_pack',
+        'odoo13-addon-sale_stock_product_pack',
         'odoo13-addon-stock_product_pack',
     ],
     classifiers=[
