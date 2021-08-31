@@ -17,9 +17,17 @@ class ProductPackLine(models.Model):
         index=True,
         required=True,
     )
-    quantity = fields.Float(required=True, default=1.0, digits="Product UoS",)
+    quantity = fields.Float(
+        required=True,
+        default=1.0,
+        digits="Product UoS",
+    )
     product_id = fields.Many2one(
-        "product.product", "Product", ondelete="cascade", index=True, required=True,
+        "product.product",
+        "Product",
+        ondelete="cascade",
+        index=True,
+        required=True,
     )
 
     # because on expand_pack_line we are searching for existing product, we

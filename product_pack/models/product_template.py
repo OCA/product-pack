@@ -29,10 +29,16 @@ class ProductTemplate(models.Model):
         "lines prices on pack (don't show component prices).\n"
         "* Ignored: Use product pack price (ignore detail line prices).",
     )
-    pack_ok = fields.Boolean("Is Pack?", help="Is a Product Pack?",)
-    pack_line_ids = fields.One2many(related="product_variant_ids.pack_line_ids",)
+    pack_ok = fields.Boolean(
+        "Is Pack?",
+        help="Is a Product Pack?",
+    )
+    pack_line_ids = fields.One2many(
+        related="product_variant_ids.pack_line_ids",
+    )
     used_in_pack_line_ids = fields.One2many(
-        related="product_variant_ids.used_in_pack_line_ids", readonly=True,
+        related="product_variant_ids.used_in_pack_line_ids",
+        readonly=True,
     )
     pack_modifiable = fields.Boolean(
         help="If you check this field yo will be able to edit "
