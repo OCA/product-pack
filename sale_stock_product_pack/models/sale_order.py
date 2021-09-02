@@ -27,4 +27,4 @@ class SaleOrderLine(models.Model):
                     break
                 qty_per_pack = pack_line.product_uom_qty / line.product_uom_qty
                 delivered_packs.append(pack_line.qty_delivered / qty_per_pack)
-            line.qty_delivered = min(delivered_packs)
+            line.qty_delivered = delivered_packs and min(delivered_packs) or 0.0
