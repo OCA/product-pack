@@ -4,7 +4,7 @@
 
 import logging
 
-from odoo.tests import SavepointCase
+from odoo.tests import Form, SavepointCase
 
 _logger = logging.getLogger(__name__)
 
@@ -35,10 +35,26 @@ class TestSaleProductPack(SavepointCase):
                 "pack_component_price": "detailed",
                 "categ_id": category_all_id,
                 "pack_line_ids": [
-                    (0, 0, {"product_id": component_1.id, "quantity": 1},),
-                    (0, 0, {"product_id": component_2.id, "quantity": 1},),
-                    (0, 0, {"product_id": component_3.id, "quantity": 1},),
-                    (0, 0, {"product_id": component_4.id, "quantity": 1},),
+                    (
+                        0,
+                        0,
+                        {"product_id": component_1.id, "quantity": 1},
+                    ),
+                    (
+                        0,
+                        0,
+                        {"product_id": component_2.id, "quantity": 1},
+                    ),
+                    (
+                        0,
+                        0,
+                        {"product_id": component_3.id, "quantity": 1},
+                    ),
+                    (
+                        0,
+                        0,
+                        {"product_id": component_4.id, "quantity": 1},
+                    ),
                 ],
             }
         )
@@ -66,10 +82,26 @@ class TestSaleProductPack(SavepointCase):
                 "pack_component_price": "detailed",
                 "categ_id": category_all_id,
                 "pack_line_ids": [
-                    (0, 0, {"product_id": component_1.id, "quantity": 1},),
-                    (0, 0, {"product_id": component_2.id, "quantity": 1},),
-                    (0, 0, {"product_id": component_3.id, "quantity": 1},),
-                    (0, 0, {"product_id": component_4.id, "quantity": 1},),
+                    (
+                        0,
+                        0,
+                        {"product_id": component_1.id, "quantity": 1},
+                    ),
+                    (
+                        0,
+                        0,
+                        {"product_id": component_2.id, "quantity": 1},
+                    ),
+                    (
+                        0,
+                        0,
+                        {"product_id": component_3.id, "quantity": 1},
+                    ),
+                    (
+                        0,
+                        0,
+                        {"product_id": component_4.id, "quantity": 1},
+                    ),
                 ],
             }
         )
@@ -78,6 +110,7 @@ class TestSaleProductPack(SavepointCase):
         location_id = (self.env.ref("stock.stock_location_suppliers").id,)
         location_dest_id = (self.env.ref("stock.stock_location_stock").id,)
         components = self.pack_dc.pack_line_ids.mapped("product_id")
+
         picking = self.env["stock.picking"].create(
             {
                 "partner_id": self.env.ref("base.res_partner_4").id,
@@ -116,14 +149,18 @@ class TestSaleProductPack(SavepointCase):
         self.assertEqual(self.pack_dc.virtual_available, 5)
         self.assertEqual(self.pack_dc.qty_available, 0)
         wizard_dict = picking.button_validate()
-        wizard = self.env[wizard_dict["res_model"]].browse(wizard_dict["res_id"])
+        wizard = Form(
+            self.env[(wizard_dict.get("res_model"))].with_context(
+                wizard_dict["context"]
+            )
+        ).save()
         wizard.process()
         self.product_obj.invalidate_cache()
         self.assertEqual(self.pack_dc.virtual_available, 5)
         self.assertEqual(self.pack_dc.qty_available, 5)
 
     def test_pack_with_dont_move_the_parent(self):
-        """ Run a procurement for prod pack products when there are only 5 in stock then
+        """Run a procurement for prod pack products when there are only 5 in stock then
         check that MTO is applied on the moves when the rule is set to 'mts_else_mto'
         """
 

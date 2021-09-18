@@ -7,9 +7,9 @@ class ProcurementGroup(models.Model):
     _inherit = "procurement.group"
 
     @api.model
-    def run(self, procurements):
-        """ If 'run' is called on a pack product storable.
-         we remove the procurement with this product pack.
+    def run(self, procurements, raise_user_error=True):
+        """If 'run' is called on a pack product storable.
+        we remove the procurement with this product pack.
         """
         for procurement in procurements:
             if (
@@ -20,4 +20,4 @@ class ProcurementGroup(models.Model):
             ):
                 procurements.remove(procurement)
 
-        return super().run(procurements)
+        return super().run(procurements, raise_user_error=raise_user_error)

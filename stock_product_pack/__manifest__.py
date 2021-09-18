@@ -1,10 +1,11 @@
+# Copyright 2021 Julio Cesar Bravo Rodriguez
 # Copyright 2019 NaN (http://www.nan-tic.com) - Àngel Àlvarez
 # Copyright 2019 Tecnativa - Ernesto Tejeda
 # Copyright 2020 Tecnativa - João Marques
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Stock product Pack",
-    "version": "13.0.1.2.0",
+    "version": "14.0.1.0.0",
     "category": "Warehouse",
     "summary": "This module allows you to get the right available quantities "
     "of the packs",
