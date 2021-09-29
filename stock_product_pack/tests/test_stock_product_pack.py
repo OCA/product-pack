@@ -147,7 +147,6 @@ class TestSaleProductPack(SavepointCase):
             self.env.ref("stock.stock_location_stock"),
             pg,
         )
-        self.env["stock.scheduler.compute"].create({}).procure_calculation()
         picking_ids = self.env["stock.picking"].search([("group_id", "=", pg.id)])
         # we need to ensure that only the compents of the packs are in the moves.
         self.assertFalse(self.pack_dc_with_dm in picking_ids.move_lines.product_id)
