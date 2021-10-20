@@ -8,8 +8,29 @@ class TestSaleProductPack(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        pricelist = cls.env["product.pricelist"].create(
+            {
+                "name": "Test",
+                "company_id": cls.env.company.id,
+                "item_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "applied_on": "3_global",
+                            "compute_price": "formula",
+                            "base": "list_price",
+                        },
+                    )
+                ],
+            }
+        )
         cls.sale_order = cls.env["sale.order"].create(
-            {"partner_id": cls.env.ref("base.res_partner_12").id}
+            {
+                "company_id": cls.env.company.id,
+                "partner_id": cls.env.ref("base.res_partner_12").id,
+                "pricelist_id": pricelist.id,
+            }
         )
 
     def _get_component_prices_sum(self, product_pack):
