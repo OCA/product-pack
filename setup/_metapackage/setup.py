@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo13-addon-sale_product_pack',
         'odoo13-addon-sale_stock_product_pack',
         'odoo13-addon-stock_product_pack',
+        'odoo13-addon-website_sale_product_pack',
     ],
     classifiers=[
         'Programming Language :: Python',
