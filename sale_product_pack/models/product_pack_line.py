@@ -6,7 +6,10 @@ from odoo import fields, models
 class ProductPack(models.Model):
     _inherit = "product.pack.line"
 
-    sale_discount = fields.Float("Sale discount (%)", digits="Discount",)
+    sale_discount = fields.Float(
+        "Sale discount (%)",
+        digits="Discount",
+    )
 
     def get_sale_order_line_vals(self, line, order):
         self.ensure_one()
