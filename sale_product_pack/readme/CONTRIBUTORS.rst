@@ -6,3 +6,7 @@
 * `Akretion <https://akretion.com>`_:
 
   * Raphaël Reverdy
+
+* `Open Source Integrators <https://opensourceintegrators.eu>`_:
+
+  * Daniel Reis <dreis@opensourceintegrators.com>
