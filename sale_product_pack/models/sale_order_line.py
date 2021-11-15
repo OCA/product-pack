@@ -8,15 +8,21 @@ class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
     _parent_name = "pack_parent_line_id"
 
-    pack_type = fields.Selection(related="product_id.pack_type",)
-    pack_component_price = fields.Selection(related="product_id.pack_component_price",)
+    pack_type = fields.Selection(
+        related="product_id.pack_type",
+    )
+    pack_component_price = fields.Selection(
+        related="product_id.pack_component_price",
+    )
 
     # Fields for common packs
     pack_depth = fields.Integer(
         "Depth", help="Depth of the product if it is part of a pack."
     )
     pack_parent_line_id = fields.Many2one(
-        "sale.order.line", "Pack", help="The pack that contains this product.",
+        "sale.order.line",
+        "Pack",
+        help="The pack that contains this product.",
     )
     pack_child_line_ids = fields.One2many(
         "sale.order.line", "pack_parent_line_id", "Lines in pack"
@@ -76,8 +82,7 @@ class SaleOrderLine(models.Model):
         "tax_id",
     )
     def check_pack_line_modify(self):
-        """ Do not let to edit a sale order line if this one belongs to pack
-        """
+        """Do not let to edit a sale order line if this one belongs to pack"""
         if self._origin.pack_parent_line_id and not self._origin.pack_modifiable:
             raise UserError(
                 _(
