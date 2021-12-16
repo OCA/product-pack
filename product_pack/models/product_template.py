@@ -10,7 +10,7 @@ class ProductTemplate(models.Model):
 
     pack_type = fields.Selection(
         [("detailed", "Detailed"), ("non_detailed", "Non Detailed")],
-        "Pack Type",
+        string="Pack Display Type",
         help="On sale orders or purchase orders:\n"
         "* Detailed: Display components individually in the sale order.\n"
         "* Non Detailed: Do not display components individually in the"
