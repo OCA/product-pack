@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="product_pack_type_form_view">
+        <field name="name">product.pack.type.form (in product_pack_type)</field>
+        <field name="model">product.pack.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="active" invisible="1" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_product_pack_view"
+                            type="object"
+                            icon="fa-sitemap"
+                            class="oe_stat_button"
+                        >
+                            <field
+                                string="Pack Products"
+                                name="product_pack_count"
+                                widget="statinfo"
+                            />
+                        </button>
+                    </div>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="bg-danger"
+                        attrs="{'invisible': [('active', '=', True)]}"
+                    />
+                    <group>
+                        <group name="group_name">
+                            <field name="name" />
+                            <field name="color" widget="color_picker" />
+                        </group>
+                        <group name="group_description">
+                            <field name="description" />
+                        </group>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_pack_type_search_view">
+        <field name="name">product.pack.type.search (in product_pack_type)</field>
+        <field name="model">product.pack.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_pack_type_tree_view">
+        <field name="name">product.pack.type.tree (in product_pack_type)</field>
+        <field name="model">product.pack.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_pack_type_kanban_view">
+        <field name="name">product.pack.type.kanban (in product_pack_type)</field>
+        <field name="model">product.pack.type</field>
+        <field name="arch" type="xml">
+            <kanban sample="1">
+                <field name="product_pack_count" />
+                <field name="name" />
+                <field name="color" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <t
+                            t-set="color"
+                            t-value="kanban_color(record.color.raw_value)"
+                        />
+                        <div
+                            t-att-class="kanban_color(record.color.raw_value) + ' oe_kanban_global_click'"
+                        >
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name" />
+                                </strong>
+                                <div>
+                                    <strong>
+                                        <t
+                                            t-esc="record.product_pack_count.value"
+                                        /> Packs
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="product_pack_type_act_window">
+        <field name="name">Product Pack Type</field>
+        <field name="res_model">product.pack.type</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <!-- Menus -->
+    <record model="ir.ui.menu" id="menu_product_pack_type">
+        <field name="name">Product Pack Types</field>
+        <field name="action" ref="product_pack_type_act_window" />
+        <field name="parent_id" ref="product_pack.menu_product_pack_root" />
+        <field name="sequence">11</field>
+    </record>
+</odoo>
