@@ -9,7 +9,7 @@
         <field name="inherit_id" ref="product.product_template_form_view" />
         <field name="arch" type="xml">
             <div name="options" position="inside">
-                <div>
+                <div groups="product_pack.group_product_pack_user">
                     <field name="pack_ok" />
                     <label for="pack_ok" />
                 </div>
@@ -19,6 +19,7 @@
                     name="page_pack"
                     string="Pack"
                     attrs="{'invisible': [('pack_ok', '=', False)]}"
+                    groups="product_pack.group_product_pack_user"
                 >
                     <group name="group_pack">
                         <group colspan="4" col="4">
