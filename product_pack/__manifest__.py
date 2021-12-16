@@ -11,7 +11,8 @@
     "license": "AGPL-3",
     "depends": ["product"],
     "data": [
-        "security/security.xml",
+        "security/security_groups.xml",
+        "security/security_rules.xml",
         "security/ir.model.access.csv",
         "views/menus.xml",
         "views/product_pack_line_views.xml",
