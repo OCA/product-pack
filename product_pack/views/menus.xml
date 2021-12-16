@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <menuitem
+        id="menu_product_pack_root"
+        name="Product Packs"
+        groups="product_pack.group_product_pack_user,product_pack.group_product_pack_manager"
+        web_icon="product_pack,static/description/icon.png"
+        sequence="100"
+    />
+
+</odoo>

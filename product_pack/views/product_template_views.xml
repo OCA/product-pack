@@ -68,4 +68,23 @@
             </group>
         </field>
     </record>
+    <!-- Actions -->
+    <record model="ir.actions.act_window" id="action_product_pack">
+        <field name="name">Product Packs</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">kanban,form,tree</field>
+        <field name="domain">[('pack_ok', '=', True)]</field>
+        <field name="context">{'default_pack_ok': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+              Create a new product pack
+            </p>
+        </field>
+    </record>
+    <!-- Menus -->
+    <record model="ir.ui.menu" id="menu_product_pack">
+        <field name="name">Product Packs</field>
+        <field name="action" ref="action_product_pack" />
+        <field name="parent_id" ref="product_pack.menu_product_pack_root" />
+    </record>
 </odoo>
