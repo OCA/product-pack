@@ -32,6 +32,7 @@ class ProductTemplate(models.Model):
     pack_ok = fields.Boolean(
         "Is Pack?",
         help="Is a Product Pack?",
+        index=True,
     )
     pack_line_ids = fields.One2many(
         related="product_variant_ids.pack_line_ids",
