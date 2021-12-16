@@ -23,4 +23,5 @@
             eval="[(4, ref('product_pack.group_product_pack_user'))]"
         />
     </record>
+
 </odoo>
