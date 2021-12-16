@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <!-- Rules -->
+    <record id="product_pack_rule_global" model="ir.rule">
+        <field name="name">product.template.pack.user</field>
+        <field name="model_id" ref="product.model_product_template" />
+        <field name="domain_force">[('pack_ok', '=', False)]</field>
+        <field name="groups" eval="[(4, ref('base.group_user'))]" />
+    </record>
+
+    <record id="product_pack_rule_user" model="ir.rule">
+        <field name="name">product.template.pack.user</field>
+        <field name="model_id" ref="product.model_product_template" />
+        <field name="domain_force">[('pack_ok', '=', True)]</field>
+        <field
+            name="groups"
+            eval="[(4, ref('product_pack.group_product_pack_user'))]"
+        />
+    </record>
+
+</odoo>
