@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="product_template_form_view">
+        <field name="name">product.template.form (in product_pack_type)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product_pack.product_template_form_view" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//group[@name='group_pack']//field[@name='pack_type']"
+                position="before"
+            >
+                <field name="pack_type_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="product_pack_search_view">
+        <field name="name">product.template.search (in product_pack_type)</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_search_view" />
+        <field name="arch" type="xml">
+            <field name="categ_id" position="after">
+                <field name="pack_type_id" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
