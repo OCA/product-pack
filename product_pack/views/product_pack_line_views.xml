@@ -24,4 +24,37 @@
             </tree>
         </field>
     </record>
+
+    <!-- Simple Form -->
+    <record id="product_pack_line_tree_only" model="ir.ui.view">
+        <field name="name">product.pack.line.tree.only</field>
+        <field name="model">product.pack.line</field>
+        <field name="arch" type="xml">
+            <tree string="Pack Product Lines" editable="bottom">
+                <field name="parent_product_id" />
+                <field name="product_id" />
+                <field name="quantity" />
+            </tree>
+        </field>
+    </record>
+    <!-- Actions -->
+    <record model="ir.actions.act_window" id="action_product_pack_line">
+        <field name="name">Product Pack Lines</field>
+        <field name="res_model">product.pack.line</field>
+        <field name="view_mode">tree</field>
+        <field
+            name="view_ids"
+            eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('product_pack_line_tree_only')})]"
+        />
+        <field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
+    </record>
+    <!-- Menus -->
+    <!-- Useful for imports -->
+    <record model="ir.ui.menu" id="menu_product_pack_line">
+        <field name="name">Product Pack Lines</field>
+        <field name="action" ref="action_product_pack_line" />
+        <field name="parent_id" ref="product_pack.menu_product_pack_root" />
+        <field name="sequence">11</field>
+    </record>
 </odoo>
