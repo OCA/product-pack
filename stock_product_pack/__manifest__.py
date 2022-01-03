@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Stock product Pack",
-    "version": "13.0.1.2.1",
+    "version": "13.0.1.2.2",
     "category": "Warehouse",
     "summary": "This module allows you to get the right available quantities "
     "of the packs",
