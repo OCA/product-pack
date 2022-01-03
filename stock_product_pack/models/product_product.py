@@ -49,7 +49,7 @@ class ProductProduct(models.Model):
         return res
 
     def _compute_quantities(self):
-        """ In v13 Odoo introduces a filter for products not services.
+        """In v13 Odoo introduces a filter for products not services.
         To keep how it was working on v12 we try to get stock for
         service products if they are pack.
         """
