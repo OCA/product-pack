@@ -1,0 +1,147 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* sale_product_pack
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2019-12-12 22:05+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
+"Language-Team: none\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.9.1\n"
+
+#. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_depth
+msgid "Depth"
+msgstr "Profundidade"
+
+#. module: sale_product_pack
+#: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_depth
+msgid "Depth of the product if it is part of a pack."
+msgstr "Profundidade do produto se é parte de um pack."
+
+#. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_child_line_ids
+msgid "Lines in pack"
+msgstr "Linhas no pack"
+
+#. module: sale_product_pack
+#: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_component_price
+msgid ""
+"On sale orders or purchase orders:\n"
+"* Detailed per component: Detail lines with prices.\n"
+"* Totalized in main product: Detail lines merging lines prices on pack "
+"(don't show component prices).\n"
+"* Ignored: Use product pack price (ignore detail line prices)."
+msgstr ""
+"Em encomendas de compra ou venda:\n"
+"* Detalhado por componente: Linha de detalhes com preços.\n"
+"* Totalizado no produto principal: Linhas de detalhes fundindo os preços das "
+"linhas no pack (não mostrar preços dos componentes).\n"
+"* Ignorado: Usar o preço do pack de produtos (ignorar preços das linhas de "
+"detalhes)."
+
+#. module: sale_product_pack
+#: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_type
+msgid ""
+"On sale orders or purchase orders:\n"
+"* Detailed: Display components individually in the sale order.\n"
+"* Non Detailed: Do not display components individually in the sale order."
+msgstr ""
+"Em encomendas de compra ou venda:\n"
+"* Detalhado: Exibir os componentes individualmente na encomenda.\n"
+"*Não Detalhado: Não exibir os componentes individualmente na encomenda."
+
+#. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_parent_line_id
+msgid "Pack"
+msgstr ""
+
+#. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_modifiable
+msgid "Pack Modifiable"
+msgstr ""
+
+#. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_type
+msgid "Pack Type"
+msgstr "Tipo de Pack"
+
+#. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_component_price
+msgid "Pack component price"
+msgstr "Preço do componente do pack"
+
+#. module: sale_product_pack
+#: model_terms:ir.ui.view,arch_db:sale_product_pack.view_order_form
+msgid "Parent Pack is not modifiable"
+msgstr ""
+
+#. module: sale_product_pack
+#: code:addons/sale_product_pack/models/sale_order_line.py:0
+#, python-format
+msgid "Parent Product"
+msgstr ""
+
+#. module: sale_product_pack
+#: model:ir.model,name:sale_product_pack.model_product_pack_line
+msgid "Product pack line"
+msgstr "Linha de pack de produto"
+
+#. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line__sale_discount
+msgid "Sale discount (%)"
+msgstr "Desconto de venda (%)"
+
+#. module: sale_product_pack
+#: model:ir.model,name:sale_product_pack.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: sale_product_pack
+#: model:ir.model,name:sale_product_pack.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Linha de Encomenda de Venda"
+
+#. module: sale_product_pack
+#: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_parent_line_id
+msgid "The pack that contains this product."
+msgstr "O pack que contém este produto."
+
+#. module: sale_product_pack
+#: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_modifiable
+msgid "The parent pack is modifiable"
+msgstr ""
+
+#. module: sale_product_pack
+#: code:addons/sale_product_pack/models/sale_order_line.py:0
+#, python-format
+msgid ""
+"You can not change this line because is part of a pack included in this order"
+msgstr ""
+"Não pode alterar esta linha porque é parte de um pack incluído nesta "
+"encomenda"
+
+#. module: sale_product_pack
+#: code:addons/sale_product_pack/models/sale_order.py:0
+#, python-format
+msgid ""
+"You cannot delete this line because is part of a pack in this sale order. In "
+"order to delete this line you need to delete the pack itself"
+msgstr ""
+
+#~ msgid "Sale Order"
+#~ msgstr "Encomenda de Venda"
+
+#~ msgid ""
+#~ "You can not delete this line because is part of a pack in this sale "
+#~ "order. In order to delete this line you need to delete the pack itself"
+#~ msgstr ""
+#~ "Não pode eliminar esta linha porque é parte de um pack incluído nesta "
+#~ "encomenda. Para a eliminar, precisa de eliminar o próprio pack"
