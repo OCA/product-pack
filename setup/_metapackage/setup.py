@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-product_pack',
+        'odoo14-addon-sale_product_pack',
         'odoo14-addon-stock_product_pack',
     ],
     classifiers=[
