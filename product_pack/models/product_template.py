@@ -10,7 +10,7 @@ class ProductTemplate(models.Model):
 
     pack_type = fields.Selection(
         [("detailed", "Detailed"), ("non_detailed", "Non Detailed")],
-        "Pack Type",
+        string="Pack Type",
         help="On sale orders or purchase orders:\n"
         "* Detailed: Display components individually in the sale order.\n"
         "* Non Detailed: Do not display components individually in the"
@@ -22,7 +22,7 @@ class ProductTemplate(models.Model):
             ("totalized", "Totalized in main product"),
             ("ignored", "Ignored"),
         ],
-        "Pack component price",
+        string="Pack component price",
         help="On sale orders or purchase orders:\n"
         "* Detailed per component: Detail lines with prices.\n"
         "* Totalized in main product: Detail lines merging "
@@ -30,7 +30,7 @@ class ProductTemplate(models.Model):
         "* Ignored: Use product pack price (ignore detail line prices).",
     )
     pack_ok = fields.Boolean(
-        "Is Pack?",
+        string="Is Pack?",
         help="Is a Product Pack?",
     )
     pack_line_ids = fields.One2many(
