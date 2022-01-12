@@ -64,7 +64,12 @@ odoo.define("pos_product_pack.models", function (require) {
                         (child) => child.id === line.id
                     )
                 ) {
-                    options.pack_parent_line_id.pack_child_line_ids.push(line.id);
+                    var parent_line = this.get_orderline(
+                        options.pack_parent_line_id.id
+                    );
+                    parent_line.pack_child_line_ids.push(line.id);
+                    // Force a save as pack child lines are just ids
+                    parent_line.order.save_to_db();
                 }
             }
         },
