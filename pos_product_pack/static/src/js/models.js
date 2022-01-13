@@ -146,6 +146,13 @@ odoo.define("pos_product_pack.models", function (require) {
             _super_order_line.set_quantity.apply(this, arguments);
             this.set_pack_lines_quantity(quantity);
         },
+        get_full_product_name: function () {
+            var name = _super_order_line.get_full_product_name.apply(this, arguments);
+            if (this.pack_line_id) {
+                name = "> " + name;
+            }
+            return name;
+        },
         // @Override
         init_from_JSON: function (json) {
             _super_order_line.init_from_JSON.apply(this, arguments);
