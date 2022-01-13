@@ -64,7 +64,7 @@ odoo.define("pos_product_pack.models", function (require) {
                 }
                 if (
                     !options.pack_parent_line_id.pack_child_line_ids.some(
-                        (child) => child.id === line.id
+                        (child) => child === line.id
                     )
                 ) {
                     var parent_line = this.get_orderline(
@@ -77,6 +77,7 @@ odoo.define("pos_product_pack.models", function (require) {
             }
             if ("pack_line_id" in options) {
                 line.pack_line_id = options.pack_line_id;
+                line.order.save_to_db();
             }
         },
         // @Override
@@ -124,7 +125,7 @@ odoo.define("pos_product_pack.models", function (require) {
         },
         set_pack_lines_quantity: function (quantity) {
             var self = this;
-            if (this.product.pack_ok && this.pack_child_line_ids) {
+            if (this.product.pack_ok && this.pack_child_line_ids.length) {
                 this.pack_child_line_ids.forEach(function (child_line_id) {
                     var child_line = self.order.get_orderline(child_line_id);
                     if (child_line) {
@@ -133,19 +134,17 @@ odoo.define("pos_product_pack.models", function (require) {
                 });
             }
         },
+        merge: function () {
+            if (this.pack_line_id) {
+                // This would avoid to call set_quantity twice
+                return;
+            }
+            return _super_order_line.merge.apply(this, arguments);
+        },
         // @Override
         set_quantity: function (quantity) {
             _super_order_line.set_quantity.apply(this, arguments);
             this.set_pack_lines_quantity(quantity);
-        },
-        // @Override
-        can_be_merged_with: function (orderline) {
-            var parent_line = orderline.pack_parent_line_id;
-            if (parent_line.child_ids) {
-                // Orderline is the new one that is currently created
-                // A hook should be necessary
-            }
-            return _super_order_line.initialize.apply(this, arguments);
         },
         // @Override
         init_from_JSON: function (json) {
