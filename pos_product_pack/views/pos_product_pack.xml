@@ -8,6 +8,10 @@
                 type="text/javascript"
                 src="/pos_product_pack/static/src/js/models.js"
             />
+            <script
+                type="text/javascript"
+                src="/pos_product_pack/static/src/js/OrderManagementScreen/OrderlineDetails.js"
+            />
         </xpath>
     </template>
 </odoo>
