@@ -14,3 +14,6 @@ class PosOrderLine(models.Model):
     pack_child_line_ids = fields.One2many(
         "pos.order.line", "pack_parent_line_id", "Lines in pack"
     )
+    pack_line_id = fields.Many2one(
+        comodel_name="product.pack.line",
+    )

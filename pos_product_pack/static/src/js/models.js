@@ -39,7 +39,10 @@ odoo.define("pos_product_pack.models", function (require) {
             _.forEach(pack_lines, function (pack_line) {
                 var product = self.pos.db.get_product_by_id(pack_line.product_id[0]);
                 if (product) {
-                    self.add_product(product, {pack_parent_line_id: line});
+                    self.add_product(product, {
+                        pack_parent_line_id: line,
+                        pack_line_id: pack_line,
+                    });
                 }
             });
         },
@@ -72,6 +75,9 @@ odoo.define("pos_product_pack.models", function (require) {
                     parent_line.order.save_to_db();
                 }
             }
+            if ("pack_line_id" in options) {
+                line.pack_line_id = options.pack_line_id;
+            }
         },
         // @Override
         remove_orderline: function (line) {
@@ -85,6 +91,7 @@ odoo.define("pos_product_pack.models", function (require) {
         initialize() {
             // Define pack parent and children values
             this.pack_parent_line_id = null;
+            this.pack_line_id = null;
             this.pack_child_line_ids = [];
             _super_order_line.initialize.apply(this, arguments);
         },
@@ -132,6 +139,15 @@ odoo.define("pos_product_pack.models", function (require) {
             this.set_pack_lines_quantity(quantity);
         },
         // @Override
+        can_be_merged_with: function (orderline) {
+            var parent_line = orderline.pack_parent_line_id;
+            if (parent_line.child_ids) {
+                // Orderline is the new one that is currently created
+                // A hook should be necessary
+            }
+            return _super_order_line.initialize.apply(this, arguments);
+        },
+        // @Override
         init_from_JSON: function (json) {
             _super_order_line.init_from_JSON.apply(this, arguments);
             if (json.pack_parent_line_id) {
@@ -159,6 +175,9 @@ odoo.define("pos_product_pack.models", function (require) {
             // Export parent
             if (this.pack_parent_line_id) {
                 json.pack_parent_line_id = this.pack_parent_line_id.id;
+            }
+            if (this.pack_line_id) {
+                json.pack_line_id = this.pack_line_id.id;
             }
             json.pack_child_line_ids = pack_child_ids;
             return json;
