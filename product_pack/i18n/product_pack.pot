@@ -149,6 +149,12 @@ msgid "Pack CPU (Non Detailed - Totalized Components Price)"
 msgstr ""
 
 #. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_type
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_type
+msgid "Pack Display Type"
+msgstr ""
+
+#. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_product__pack_modifiable
 #: model:ir.model.fields,field_description:product_pack.field_product_template__pack_modifiable
 msgid "Pack Modifiable"
@@ -188,12 +194,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:product_pack.nan_product_pack_form
 #: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
 msgid "Pack Products"
-msgstr ""
-
-#. module: product_pack
-#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_type
-#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_type
-msgid "Pack Type"
 msgstr ""
 
 #. module: product_pack
