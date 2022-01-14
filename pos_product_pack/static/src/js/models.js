@@ -38,17 +38,25 @@ odoo.define("pos_product_pack.models", function (require) {
             var pack_lines = line.get_pack_lines();
             _.forEach(pack_lines, function (pack_line) {
                 var product = self.pos.db.get_product_by_id(pack_line.product_id[0]);
-                if (product && line.pack_can_be_merged_with(pack_line)) {
-                    self.add_product(product, {
-                        pack_parent_line_id: line,
-                        pack_line_id: pack_line,
-                    });
-                } else {
-                    self.add_product(product, {
-                        pack_parent_line_id: line,
-                        pack_line_id: pack_line,
-                        merge: false,
-                    });
+                if (product) {
+                    var new_line = new models.Orderline(
+                        {},
+                        {pos: line.order.pos, order: line.order, product: product}
+                    );
+                    // Get an existing pack line with same id
+                    var to_merge_line = line.get_pack_line_can_be_merged_with(
+                        pack_line
+                    );
+                    if (to_merge_line) {
+                        to_merge_line.merge(new_line);
+                    } else {
+                        // We cannot merge with another existing line
+                        self.add_product(product, {
+                            pack_parent_line_id: line,
+                            pack_line_id: pack_line,
+                            merge: false,
+                        });
+                    }
                 }
             });
         },
@@ -113,23 +121,16 @@ odoo.define("pos_product_pack.models", function (require) {
             }
             return lines;
         },
-        pack_can_be_merged_with: function (pack_line) {
+        get_pack_line_can_be_merged_with: function (pack_line) {
             // Use first the same method as in point_of_sale to get the product
             // to merge with.
             // If found, check if pack_line is the same or not. If not,
             // return false. The add_product method would be called with
             // options.merge === false.
-            var product_id = pack_line.product_id[0];
-            var product = this.order.pos.db.get_product_by_id(product_id);
-            var line = new models.Orderline(
-                {},
-                {pos: this.order.pos, order: this.order, product: product}
-            );
             var to_merge_orderline = null;
             for (var i = 0; i < this.order.orderlines.length; i++) {
                 var current_line = this.order.orderlines.at(i);
                 if (
-                    current_line.can_be_merged_with(line) &&
                     current_line.pack_line_id &&
                     current_line.pack_line_id.id === pack_line.id
                 ) {
@@ -137,10 +138,7 @@ odoo.define("pos_product_pack.models", function (require) {
                     break;
                 }
             }
-            if (to_merge_orderline) {
-                return true;
-            }
-            return false;
+            return to_merge_orderline;
         },
         remove_pack_line: function () {
             var self = this;
