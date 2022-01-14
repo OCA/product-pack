@@ -27,6 +27,27 @@ msgid "Depth of the product if it is part of a pack."
 msgstr ""
 
 #. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line__display_name
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order__display_name
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line__id
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order__id
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__id
+msgid "ID"
+msgstr ""
+
+#. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line____last_update
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order____last_update
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_child_line_ids
 msgid "Lines in pack"
 msgstr "regels in verpakking"
@@ -36,7 +57,8 @@ msgstr "regels in verpakking"
 msgid ""
 "On sale orders or purchase orders:\n"
 "* Detailed per component: Detail lines with prices.\n"
-"* Totalized in main product: Detail lines merging lines prices on pack (don't show component prices).\n"
+"* Totalized in main product: Detail lines merging lines prices on pack "
+"(don't show component prices).\n"
 "* Ignored: Use product pack price (ignore detail line prices)."
 msgstr ""
 
@@ -54,14 +76,14 @@ msgid "Pack"
 msgstr "Verpakking"
 
 #. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_type
+msgid "Pack Display Type"
+msgstr ""
+
+#. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_modifiable
 msgid "Pack Modifiable"
 msgstr "Aanpasbare verpakking"
-
-#. module: sale_product_pack
-#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_type
-msgid "Pack Type"
-msgstr "Verpakkingstype"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_component_price
@@ -113,8 +135,7 @@ msgstr "De hoofdverpakking is aanpasbaar"
 #: code:addons/sale_product_pack/models/sale_order_line.py:0
 #, python-format
 msgid ""
-"You can not change this line because is part of a pack included in this "
-"order"
+"You can not change this line because is part of a pack included in this order"
 msgstr ""
 "Deze regel kan niet worden aangepast omdat een verpakking is gebruikt in "
 "deze verkoop order"
@@ -123,6 +144,9 @@ msgstr ""
 #: code:addons/sale_product_pack/models/sale_order.py:0
 #, python-format
 msgid ""
-"You cannot delete this line because is part of a pack in this sale order. In"
-" order to delete this line you need to delete the pack itself"
+"You cannot delete this line because is part of a pack in this sale order. In "
+"order to delete this line you need to delete the pack itself"
 msgstr ""
+
+#~ msgid "Pack Type"
+#~ msgstr "Verpakkingstype"
