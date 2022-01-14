@@ -27,6 +27,27 @@ msgid "Depth of the product if it is part of a pack."
 msgstr "Niveau de l'article s'il fait partie d'un pack."
 
 #. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line__display_name
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order__display_name
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line__id
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order__id
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__id
+msgid "ID"
+msgstr ""
+
+#. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line____last_update
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order____last_update
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_child_line_ids
 msgid "Lines in pack"
 msgstr "Lignes rattachées à un pack"
@@ -64,14 +85,14 @@ msgid "Pack"
 msgstr "Pack"
 
 #. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_type
+msgid "Pack Display Type"
+msgstr ""
+
+#. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_modifiable
 msgid "Pack Modifiable"
 msgstr "Pack modifiable"
-
-#. module: sale_product_pack
-#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_type
-msgid "Pack Type"
-msgstr "Type de pack"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_component_price
@@ -135,6 +156,9 @@ msgid ""
 "You cannot delete this line because is part of a pack in this sale order. In "
 "order to delete this line you need to delete the pack itself"
 msgstr ""
+
+#~ msgid "Pack Type"
+#~ msgstr "Type de pack"
 
 #~ msgid "Sale Order"
 #~ msgstr "Bon de commande"
