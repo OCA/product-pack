@@ -72,13 +72,13 @@ msgid "Pack"
 msgstr ""
 
 #. module: sale_product_pack
-#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_modifiable
-msgid "Pack Modifiable"
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_type
+msgid "Pack Display Type"
 msgstr ""
 
 #. module: sale_product_pack
-#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_type
-msgid "Pack Type"
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_modifiable
+msgid "Pack Modifiable"
 msgstr ""
 
 #. module: sale_product_pack
