@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="cart_summary" inherit_id="website_sale.cart_summary">
+        <xpath
+            expr="//span[@t-field='line.product_id.image_128']"
+            position="attributes"
+        >
+            <attribute name="t-if">not line.pack_parent_line_id and not line.is_reward_line or not line.sudo().product_id.image_128</attribute>
+        </xpath>
+    </template>
+</odoo>
