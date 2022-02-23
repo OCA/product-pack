@@ -41,7 +41,7 @@
                             <field name="description" />
                         </group>
                     </group>
-
+                    <notebook />
                 </sheet>
             </form>
         </field>
