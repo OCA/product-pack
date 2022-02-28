@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2019-12-27 14:13+0000\n"
-"Last-Translator: Carles Antoli <carlesantoli@hotmail.com>\n"
+"PO-Revision-Date: 2022-02-28 13:17+0000\n"
+"Last-Translator: Noel estudillo <noelestudilloviera@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_depth
@@ -31,21 +31,21 @@ msgstr "Profunditat del producte si forma part d’un pack."
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order__display_name
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom de visualització"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line__id
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order__id
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line____last_update
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order____last_update
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificació el"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_child_line_ids
@@ -89,12 +89,12 @@ msgstr "Pack"
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_type
 msgid "Pack Display Type"
-msgstr ""
+msgstr "Tipus de pantalla de paquet"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_modifiable
 msgid "Pack Modifiable"
-msgstr ""
+msgstr "Paquet modificable"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_component_price
@@ -104,13 +104,13 @@ msgstr "Preu dels components"
 #. module: sale_product_pack
 #: model_terms:ir.ui.view,arch_db:sale_product_pack.view_order_form
 msgid "Parent Pack is not modifiable"
-msgstr ""
+msgstr "El paquet de pares no es pot modificar"
 
 #. module: sale_product_pack
 #: code:addons/sale_product_pack/models/sale_order_line.py:0
 #, python-format
 msgid "Parent Product"
-msgstr ""
+msgstr "Producte principal"
 
 #. module: sale_product_pack
 #: model:ir.model,name:sale_product_pack.model_product_pack_line
@@ -125,7 +125,7 @@ msgstr "Descompte per vendes"
 #. module: sale_product_pack
 #: model:ir.model,name:sale_product_pack.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Comanda de venda"
 
 #. module: sale_product_pack
 #: model:ir.model,name:sale_product_pack.model_sale_order_line
@@ -140,7 +140,7 @@ msgstr "El pack que conté aquest producte."
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_modifiable
 msgid "The parent pack is modifiable"
-msgstr ""
+msgstr "El paquet principal és modificable"
 
 #. module: sale_product_pack
 #: code:addons/sale_product_pack/models/sale_order_line.py:0
@@ -158,6 +158,8 @@ msgid ""
 "You cannot delete this line because is part of a pack in this sale order. In "
 "order to delete this line you need to delete the pack itself"
 msgstr ""
+"No podeu suprimir aquesta línia perquè forma part d'un paquet d'aquesta "
+"comanda de venda. Per eliminar aquesta línia, heu d'esborrar el paquet en si"
 
 #~ msgid "Pack Type"
 #~ msgstr "Tipus de pack"
