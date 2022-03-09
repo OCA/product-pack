@@ -70,3 +70,4 @@ class ProductProduct(models.Model):
             product.outgoing_qty = res[product.id]["outgoing_qty"]
             product.virtual_available = res[product.id]["virtual_available"]
             product.free_qty = res[product.id]["free_qty"]
+        return True
