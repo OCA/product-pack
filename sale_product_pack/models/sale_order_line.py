@@ -36,6 +36,7 @@ class SaleOrderLine(models.Model):
         do_not_expand = self._context.get("update_prices") or self._context.get(
             "update_pricelist", False
         )
+        vals_list = []
         if self.product_id.pack_ok and self.pack_type == "detailed":
             for subline in self.product_id.get_pack_lines():
                 vals = subline.get_sale_order_line_vals(self, self.order_id)
@@ -55,9 +56,11 @@ class SaleOrderLine(models.Model):
                             vals.pop("discount", None)
                         existing_subline.write(vals)
                     elif not do_not_expand:
-                        self.create(vals)
+                        vals_list.append(vals)
                 else:
-                    self.create(vals)
+                    vals_list.append(vals)
+            if vals_list:
+                self.create(vals_list)
 
     @api.model
     def create(self, vals):
