@@ -22,6 +22,7 @@
                 >
                     <group name="group_pack">
                         <group colspan="4" col="4">
+                            <field name="pack_modifiable_invisible" invisible="1" />
                             <field
                                 name="pack_type"
                                 attrs="{'required':[('pack_ok','=',True)]}"
@@ -32,7 +33,7 @@
                             />
                             <field
                                 name="pack_modifiable"
-                                attrs="{'invisible':['|', ('pack_type', '!=', 'detailed'), ('pack_component_price', '!=', 'detailed')]}"
+                                attrs="{'invisible':[('pack_modifiable_invisible','=', True)]}"
                             />
                         </group>
                     </group>

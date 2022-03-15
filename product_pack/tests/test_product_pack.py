@@ -98,3 +98,20 @@ class TestProductPack(ProductPackCommon, SavepointCase):
         with Form(pack) as pack_form:
             pack_form.pack_type = "non_detailed"
         self.assertFalse(pack_form.pack_modifiable)
+
+    def test_pack_modifiable(self):
+        # Pack is detailed with component price as detailed
+        # Pack modifiable invisible should be False
+        # Set the Pack as non detailed
+        # Pack modifiable invisible should be True
+        # Set the Pack as detailed with component price as totalized
+        # Pack modifiable invisible should be True
+        pack = self.env.ref(
+            "product_pack.product_pack_cpu_detailed_components"
+        ).product_tmpl_id
+        self.assertFalse(pack.pack_modifiable_invisible)
+        pack.pack_type = "non_detailed"
+        self.assertTrue(pack.pack_modifiable_invisible)
+        pack.pack_type = "detailed"
+        pack.pack_component_price = "totalized"
+        self.assertTrue(pack.pack_modifiable_invisible)
