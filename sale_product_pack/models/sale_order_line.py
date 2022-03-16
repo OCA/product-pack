@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.fields import first
 
 
 class SaleOrderLine(models.Model):
@@ -55,20 +56,18 @@ class SaleOrderLine(models.Model):
                 vals = subline.get_sale_order_line_vals(self, self.order_id)
                 vals["sequence"] = self.sequence
                 if write:
-                    existing_subline = self.search(
-                        [
-                            ("product_id", "=", subline.product_id.id),
-                            ("pack_parent_line_id", "=", self.id),
-                        ],
-                        limit=1,
+                    existing_subline = first(
+                        self.pack_child_line_ids.filtered(
+                            lambda child: child.product_id == subline.product_id
+                        )
                     )
                     # if subline already exists we update, if not we create
                     if existing_subline:
-                        if self.do_not_expand:
+                        if self.do_no_expand_pack_lines:
                             vals.pop("product_uom_qty", None)
                             vals.pop("discount", None)
                         existing_subline.write(vals)
-                    elif not self.do_not_expand:
+                    elif not self.do_no_expand_pack_lines:
                         vals_list.append(vals)
                 else:
                     vals_list.append(vals)
