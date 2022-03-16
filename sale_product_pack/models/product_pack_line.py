@@ -16,6 +16,7 @@ class ProductPack(models.Model):
         quantity = self.quantity * line.product_uom_qty
         line_vals = {
             "order_id": order.id,
+            "sequence": line.sequence,
             "product_id": self.product_id.id or False,
             "pack_parent_line_id": line.id,
             "pack_depth": line.pack_depth + 1,
