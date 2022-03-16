@@ -159,3 +159,20 @@ class TestSaleProductPack(SavepointCase):
         main_sol.product_uom_qty = 2 * main_sol.product_uom_qty
         total_qty_confirmed = qty_in_order()
         self.assertEqual(total_qty_updated * 2, total_qty_confirmed)
+
+    def test_do_not_expand(self):
+        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        pack_line = self.env["sale.order.line"].create(
+            {
+                "order_id": self.sale_order.id,
+                "name": product_cp.name,
+                "product_id": product_cp.id,
+                "product_uom_qty": 1,
+            }
+        )
+        # After create, there will be four lines
+        self.assertEqual(len(self.sale_order.order_line), 4)
+        pack_line_update = pack_line.with_context(update_prices=True)
+        self.assertTrue(pack_line_update.do_no_expand_pack_lines)
+        pack_line_update = pack_line.with_context(update_pricelist=True)
+        self.assertTrue(pack_line_update.do_no_expand_pack_lines)

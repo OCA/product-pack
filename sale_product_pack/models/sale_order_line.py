@@ -29,13 +29,26 @@ class SaleOrderLine(models.Model):
     )
     pack_modifiable = fields.Boolean(help="The parent pack is modifiable")
 
+    do_no_expand_pack_lines = fields.Boolean(
+        compute="_compute_do_no_expand_pack_lines",
+        help="This is a technical field in order to check if pack lines has to be expanded",
+    )
+
+    @api.depends_context("update_prices", "update_pricelist")
+    def _compute_do_no_expand_pack_lines(self):
+        do_not_expand = self.env.context.get("update_prices") or self.env.context.get(
+            "update_pricelist", False
+        )
+        self.update(
+            {
+                "do_no_expand_pack_lines": do_not_expand,
+            }
+        )
+
     def expand_pack_line(self, write=False):
         self.ensure_one()
         # if we are using update_pricelist or checking out on ecommerce we
         # only want to update prices
-        do_not_expand = self._context.get("update_prices") or self._context.get(
-            "update_pricelist", False
-        )
         vals_list = []
         if self.product_id.pack_ok and self.pack_type == "detailed":
             for subline in self.product_id.get_pack_lines():
@@ -51,11 +64,11 @@ class SaleOrderLine(models.Model):
                     )
                     # if subline already exists we update, if not we create
                     if existing_subline:
-                        if do_not_expand:
+                        if self.do_not_expand:
                             vals.pop("product_uom_qty", None)
                             vals.pop("discount", None)
                         existing_subline.write(vals)
-                    elif not do_not_expand:
+                    elif not self.do_not_expand:
                         vals_list.append(vals)
                 else:
                     vals_list.append(vals)
