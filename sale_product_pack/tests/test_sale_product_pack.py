@@ -54,6 +54,15 @@ class TestSaleProductPack(SavepointCase):
         )
         # After create, there will be four lines
         self.assertEqual(len(self.sale_order.order_line), 4)
+        pack_line = self.sale_order.order_line.filtered(
+            lambda line: line.product_id == product_cp
+        )
+        # Check if sequence is the same as pack product one
+        sequence = pack_line.sequence
+        self.assertEqual(
+            [sequence, sequence, sequence, sequence],
+            self.sale_order.order_line.mapped("sequence"),
+        )
         # The products of those four lines are the main product pack and its
         # product components
         self.assertEqual(
