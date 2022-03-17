@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_product_pack.view_order_form" />
+        <field name="arch" type="xml">
+            <button name="action_open_parent_pack_product_view" position="before">
+                <field name="pack_modified_line" invisible="1" />
+                <button
+                    name="action_sale_product_pack_modified"
+                    type="object"
+                    help="The product has been modified for this line that belongs to a pack."
+                    attrs="{'invisible': [('pack_modified_line', '=', False)]}"
+                    icon="fa-retweet"
+                />
+                <button
+                    string="Modify"
+                    name="action_sale_product_pack_modification"
+                    type="object"
+                    attrs="{'invisible': ['|', ('pack_parent_line_id', '=', False), ('pack_modifiable', '=', True)]}"
+                    groups="sale_product_pack_line_modification.group_sale_product_pack_modification"
+                    icon="fa-edit"
+                />
+            </button>
+        </field>
+    </record>
+</odoo>
