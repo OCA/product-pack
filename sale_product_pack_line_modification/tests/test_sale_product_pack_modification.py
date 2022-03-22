@@ -58,14 +58,11 @@ class TestSaleProductPack(SavepointCase):
 
         wizard = self.modif_wizard_obj.with_context(
             active_ids=self.sale_order.order_line[1].ids, active_model="sale.order.line"
-        ).create(
-            {
-                "product_id": self.product_1.id,
-            }
-        )
+        ).create({"product_id": self.product_1.id, "product_quantity": 3.0})
         self.assertEqual(wizard.sale_order_line_ids, line_to_change)
         wizard.doit()
         self.assertEqual(line_to_change.product_id, self.product_1)
+        self.assertEqual(line_to_change.product_uom_qty, 3.0)
         self.assertTrue(line_to_change.pack_modified_line)
         messages_after = self.sale_order.message_ids - messages_before
         self.assertEqual(1, len(messages_after))

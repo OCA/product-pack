@@ -15,6 +15,7 @@
                 </div>
                 <group>
                     <field name="product_id" />
+                    <field name="product_quantity" />
                 </group>
                 <group>
                     <field name="sale_order_line_ids" readonly="1" />

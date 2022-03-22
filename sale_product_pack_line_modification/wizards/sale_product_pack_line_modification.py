@@ -13,6 +13,9 @@ class SaleProductPackLineModification(models.TransientModel):
         comodel_name="product.product",
         required=True,
     )
+    product_quantity = fields.Float(
+        digits="Product Unit of Measure",
+    )
     sale_order_line_ids = fields.Many2many(
         comodel_name="sale.order.line",
         required=True,
@@ -47,6 +50,7 @@ class SaleProductPackLineModification(models.TransientModel):
             {
                 "parent_product_id": line.pack_parent_line_id.product_id.id,
                 "product_id": self.product_id,
+                "quantity": self.product_quantity,
             }
         )
         vals = new_pack_line.get_sale_order_line_vals(
