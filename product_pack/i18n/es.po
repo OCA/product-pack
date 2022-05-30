@@ -189,6 +189,12 @@ msgid "Pack Modifiable"
 msgstr "Pack modificable"
 
 #. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_modifiable_invisible
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_modifiable_invisible
+msgid "Pack Modifiable Invisible"
+msgstr ""
+
+#. module: product_pack
 #: model:product.product,name:product_pack.product_pack_pc_detailed_components
 #: model:product.template,name:product_pack.product_pack_pc_detailed_components_product_template
 msgid "Pack PC (Detailed - Displayed Components Price)"
@@ -281,6 +287,14 @@ msgstr "Productos que forman parte del pack"
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__quantity
 msgid "Quantity"
 msgstr "Cantidad"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_modifiable_invisible
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_modifiable_invisible
+msgid ""
+"Technical field in order to compute the availability of the Pack Modifiable "
+"field"
+msgstr ""
 
 #. module: product_pack
 #: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__totalized
