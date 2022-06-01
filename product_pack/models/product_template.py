@@ -22,7 +22,6 @@ class ProductTemplate(models.Model):
             ("totalized", "Totalized in main product"),
             ("ignored", "Ignored"),
         ],
-        "Pack component price",
         help="On sale orders or purchase orders:\n"
         "* Detailed per component: Detail lines with prices.\n"
         "* Totalized in main product: Detail lines merging "
