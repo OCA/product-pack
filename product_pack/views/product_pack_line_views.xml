@@ -18,7 +18,7 @@
         <field name="name">product.pack.line.tree</field>
         <field name="model">product.pack.line</field>
         <field name="arch" type="xml">
-            <tree string="Pack Product Lines" editable="bottom">
+            <tree editable="bottom">
                 <field name="product_id" />
                 <field name="quantity" />
             </tree>

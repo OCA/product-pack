@@ -328,7 +328,7 @@ msgid ""
 "Product id: %s"
 msgstr ""
 "No puede establecer packs recursivos.\n"
-"ID del producto %"
+"ID del producto: %s"
 
 #. module: product_pack
 #: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view

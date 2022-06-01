@@ -10,3 +10,6 @@
   * Pedro M. Baeza
   * Jairo Llopis
   * Sergio Teruel
+* `Sygel <https://www.sygel.es>`_:
+
+  * Manuel Regidor

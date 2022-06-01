@@ -4,13 +4,13 @@ from psycopg2 import IntegrityError
 
 from odoo.exceptions import ValidationError
 from odoo.tests import Form
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
 from .common import ProductPackCommon
 
 
-class TestProductPack(ProductPackCommon, SavepointCase):
+class TestProductPack(ProductPackCommon, TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
