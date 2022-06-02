@@ -17,7 +17,8 @@ class SaleOrderLine(models.Model):
             line.price_unit = line.assisted_pack_total
 
     @api.depends(
-        "assisted_pack_line_ids", "assisted_pack_line_ids.price_subtotal",
+        "assisted_pack_line_ids",
+        "assisted_pack_line_ids.price_subtotal",
     )
     def _compute_assisted_pack_total(self):
         for line in self:
