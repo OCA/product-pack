@@ -14,7 +14,10 @@ class SaleOrderLinePackLine(models.Model):
     )
     product_id = fields.Many2one("product.product", "Product", required=True)
     price_unit = fields.Float("Unit Price", required=True, digits="Product Price")
-    discount = fields.Float("Discount (%)", digits="Discount",)
+    discount = fields.Float(
+        "Discount (%)",
+        digits="Discount",
+    )
     price_subtotal = fields.Float(
         compute="_compute_price_subtotal", string="Subtotal", digits="Account"
     )
