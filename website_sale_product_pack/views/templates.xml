@@ -54,7 +54,7 @@
             <t
                 t-set="list_price_converted"
                 t-if="line.pack_child_line_ids"
-                t-value="website.currency_id._convert(combination_info['price'], website_sale_order.currency_id, website_sale_order.company_id, date)"
+                t-value="website.currency_id._convert(combination_info['list_price'], website_sale_order.currency_id, website_sale_order.company_id, date)"
             />
         </xpath>
         <xpath expr="//strong[@t-field='line.name_short']" position="attributes">
