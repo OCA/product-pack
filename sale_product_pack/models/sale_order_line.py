@@ -52,6 +52,15 @@ class SaleOrderLine(models.Model):
                         self.create(vals)
                 else:
                     self.create(vals)
+        else:
+            if (
+                not self.product_id.pack_ok
+                and self.pack_parent_line_id
+                and self.pack_parent_line_id.pack_type == "detailed"
+                and self.pack_parent_line_id.product_id.pack_component_price
+                in {"totalized", "ignored"}
+            ):
+                self.write({"price_unit": 0.0})
 
     @api.model
     def create(self, vals):
