@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 Tecnativa - Ernesto Tejeda
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="product_pack_cpu_detailed_components" model="product.product">
+        <field name="name">Pack CPU (Detailed - Displayed Components Price)</field>
+        <field name="categ_id" ref="product.product_category_4" />
+        <field name="pack_ok" eval="True" />
+        <field name="pack_type">detailed</field>
+        <field name="pack_component_price">detailed</field>
+        <field name="standard_price">20.5</field>
+        <field name="list_price">30.75</field>
+        <field name="type">service</field>
+    </record>
+    <record id="product_pack_cpu_detailed_totalized" model="product.product">
+        <field name="name">Pack CPU (Detailed - Totalized Components Price)</field>
+        <field name="categ_id" ref="product.product_category_4" />
+        <field name="pack_ok" eval="True" />
+        <field name="pack_type">detailed</field>
+        <field name="pack_component_price">totalized</field>
+        <field name="standard_price">20.5</field>
+        <field name="list_price">30.75</field>
+        <field name="type">service</field>
+    </record>
+    <record id="product_pack_cpu_detailed_ignored" model="product.product">
+        <field name="name">Pack CPU (Detailed - Ignored Components Price)</field>
+        <field name="categ_id" ref="product.product_category_4" />
+        <field name="pack_ok" eval="True" />
+        <field name="pack_type">detailed</field>
+        <field name="pack_component_price">ignored</field>
+        <field name="standard_price">20.5</field>
+        <field name="list_price">30.75</field>
+        <field name="type">service</field>
+    </record>
+    <record id="product_pack_cpu_non_detailed" model="product.product">
+        <field name="name">Pack CPU (Non Detailed - Totalized Components Price)</field>
+        <field name="categ_id" ref="product.product_category_4" />
+        <field name="pack_ok" eval="True" />
+        <field name="pack_type">non_detailed</field>
+        <field name="standard_price">20.5</field>
+        <field name="list_price">30.75</field>
+        <field name="type">service</field>
+    </record>
+    <record id="product_pack_pc_detailed_components" model="product.product">
+        <field name="name">Pack PC (Detailed - Displayed Components Price)</field>
+        <field name="categ_id" ref="product.product_category_4" />
+        <field name="pack_ok" eval="True" />
+        <field name="pack_type">detailed</field>
+        <field name="pack_component_price">detailed</field>
+        <field name="standard_price">20.5</field>
+        <field name="list_price">30.75</field>
+        <field name="type">service</field>
+    </record>
+    <record id="product_pack_pc_detailed_totalized" model="product.product">
+        <field name="name">Pack PC (Detailed - Totalized Components Price)</field>
+        <field name="categ_id" ref="product.product_category_4" />
+        <field name="pack_ok" eval="True" />
+        <field name="pack_type">detailed</field>
+        <field name="pack_component_price">totalized</field>
+        <field name="standard_price">20.5</field>
+        <field name="list_price">30.75</field>
+        <field name="type">service</field>
+    </record>
+    <record id="product_pack_pc_detailed_ignored" model="product.product">
+        <field name="name">Pack PC (Detailed - Ignored Components Price)</field>
+        <field name="categ_id" ref="product.product_category_4" />
+        <field name="pack_ok" eval="True" />
+        <field name="pack_type">detailed</field>
+        <field name="pack_component_price">ignored</field>
+        <field name="standard_price">20.5</field>
+        <field name="list_price">30.75</field>
+        <field name="type">service</field>
+    </record>
+</odoo>
