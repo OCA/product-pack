@@ -1,6 +1,7 @@
 
 [![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/product-pack&target_branch=14.0)
-[![Build Status](https://travis-ci.com/OCA/product-pack.svg?branch=14.0)](https://travis-ci.com/OCA/product-pack)
+[![Pre-commit Status](https://github.com/OCA/product-pack/actions/workflows/pre-commit.yml/badge.svg?branch=14.0)](https://github.com/OCA/product-pack/actions/workflows/pre-commit.yml?query=branch%3A14.0)
+[![Build Status](https://github.com/OCA/product-pack/actions/workflows/test.yml/badge.svg?branch=14.0)](https://github.com/OCA/product-pack/actions/workflows/test.yml?query=branch%3A14.0)
 [![codecov](https://codecov.io/gh/OCA/product-pack/branch/14.0/graph/badge.svg)](https://codecov.io/gh/OCA/product-pack)
 [![Translation Status](https://translation.odoo-community.org/widgets/product-pack-14-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/product-pack-14-0/?utm_source=widget)
 
