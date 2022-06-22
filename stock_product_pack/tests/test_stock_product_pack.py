@@ -4,7 +4,8 @@
 
 import logging
 
-from odoo.tests import Form, SavepointCase
+from odoo.tests import Form
+from odoo.tests.common import SavepointCase
 
 _logger = logging.getLogger(__name__)
 
@@ -17,19 +18,23 @@ class TestSaleProductPack(SavepointCase):
         cls.product_obj = cls.env["product.product"]
         cls.stock_rule_obj = cls.env["stock.rule"]
         component_1 = cls.product_obj.create(
-            {"name": "Component 1", "type": "product", "categ_id": category_all_id}
+            {
+                "name": "Component 1",
+                "detailed_type": "product",
+                "categ_id": category_all_id,
+            }
         )
-        component_2 = component_1.with_context({}).copy({"name": "Component 2"})
-        component_3 = component_1.with_context({}).copy(
-            {"name": "Component 3", "type": "service"}
+        component_2 = component_1.with_context(**{}).copy({"name": "Component 2"})
+        component_3 = component_1.with_context(**{}).copy(
+            {"name": "Component 3", "type": "service", "detailed_type": "service"}
         )
-        component_4 = component_1.with_context({}).copy(
-            {"name": "Component 4", "type": "consu"}
+        component_4 = component_1.with_context(**{}).copy(
+            {"name": "Component 4", "type": "consu", "detailed_type": "consu"}
         )
         cls.pack_dc = cls.product_obj.create(
             {
                 "name": "Pack",
-                "type": "product",
+                "detailed_type": "product",
                 "pack_ok": True,
                 "pack_type": "detailed",
                 "pack_component_price": "detailed",
@@ -75,7 +80,7 @@ class TestSaleProductPack(SavepointCase):
         cls.pack_dc_with_dm = cls.product_obj.create(
             {
                 "name": "Pack With storeable and not move product",
-                "type": "product",
+                "detailed_type": "product",
                 "pack_ok": True,
                 "dont_create_move": True,
                 "pack_type": "detailed",
@@ -151,7 +156,7 @@ class TestSaleProductPack(SavepointCase):
         wizard_dict = picking.button_validate()
         wizard = Form(
             self.env[(wizard_dict.get("res_model"))].with_context(
-                wizard_dict["context"]
+                **wizard_dict["context"]
             )
         ).save()
         wizard.process()
