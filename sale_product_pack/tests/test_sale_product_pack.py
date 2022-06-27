@@ -63,6 +63,8 @@ class TestSaleProductPack(SavepointCase):
             [sequence, sequence, sequence, sequence],
             self.sale_order.order_line.mapped("sequence"),
         )
+        # The price of the product pack line is zero
+        self.assertAlmostEqual(pack_line.price_subtotal, 0.0)
         # The products of those four lines are the main product pack and its
         # product components
         self.assertEqual(
