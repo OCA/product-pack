@@ -54,6 +54,15 @@ class TestSaleProductPack(SavepointCase):
         )
         # After create, there will be four lines
         self.assertEqual(len(self.sale_order.order_line), 4)
+        pack_line = self.sale_order.order_line.filtered(
+            lambda line: line.product_id == product_cp
+        )
+        # Check if sequence is the same as pack product one
+        sequence = pack_line.sequence
+        self.assertEqual(
+            [sequence, sequence, sequence, sequence],
+            self.sale_order.order_line.mapped("sequence"),
+        )
         # The products of those four lines are the main product pack and its
         # product components
         self.assertEqual(
@@ -159,3 +168,56 @@ class TestSaleProductPack(SavepointCase):
         main_sol.product_uom_qty = 2 * main_sol.product_uom_qty
         total_qty_confirmed = qty_in_order()
         self.assertEqual(total_qty_updated * 2, total_qty_confirmed)
+
+    def test_do_not_expand(self):
+        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        pack_line = self.env["sale.order.line"].create(
+            {
+                "order_id": self.sale_order.id,
+                "name": product_cp.name,
+                "product_id": product_cp.id,
+                "product_uom_qty": 1,
+            }
+        )
+        # After create, there will be four lines
+        self.assertEqual(len(self.sale_order.order_line), 4)
+        pack_line_update = pack_line.with_context(update_prices=True)
+        self.assertTrue(pack_line_update.do_no_expand_pack_lines)
+        pack_line_update = pack_line.with_context(update_pricelist=True)
+        self.assertTrue(pack_line_update.do_no_expand_pack_lines)
+
+    def test_create_several_lines(self):
+        # Create two sale order lines with two pack products
+        # Check 8 lines are created
+        # Check lines sequences and order are respected
+        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        product_tp = self.env.ref("product_pack.product_pack_cpu_detailed_ignored")
+        vals = [
+            {
+                "order_id": self.sale_order.id,
+                "name": product_cp.name,
+                "product_id": product_cp.id,
+                "product_uom_qty": 1,
+            },
+            {
+                "order_id": self.sale_order.id,
+                "name": product_tp.name,
+                "product_id": product_tp.id,
+                "product_uom_qty": 1,
+            },
+        ]
+        self.env["sale.order.line"].create(vals)
+        # After create, there will be eight lines (4 + 4)
+        self.assertEqual(len(self.sale_order.order_line), 8)
+        # Check if lines are well ordered
+        self.assertEqual(self.sale_order.order_line[0].product_id, product_cp)
+        sequence_cp = self.sale_order.order_line[0].sequence
+        self.assertEqual(sequence_cp, self.sale_order.order_line[1].sequence)
+        self.assertEqual(sequence_cp, self.sale_order.order_line[2].sequence)
+        self.assertEqual(sequence_cp, self.sale_order.order_line[3].sequence)
+
+        self.assertEqual(self.sale_order.order_line[4].product_id, product_tp)
+        sequence_tp = self.sale_order.order_line[4].sequence
+        self.assertEqual(sequence_tp, self.sale_order.order_line[5].sequence)
+        self.assertEqual(sequence_tp, self.sale_order.order_line[6].sequence)
+        self.assertEqual(sequence_tp, self.sale_order.order_line[7].sequence)
