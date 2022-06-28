@@ -34,6 +34,11 @@ msgid "Display Name"
 msgstr "Nom de visualització"
 
 #. module: sale_product_pack
+#: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__do_no_expand_pack_lines
+msgid "Do No Expand Pack Lines"
+msgstr ""
+
+#. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line__id
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order__id
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__id
@@ -141,6 +146,12 @@ msgstr "El pack que conté aquest producte."
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_modifiable
 msgid "The parent pack is modifiable"
 msgstr "El paquet principal és modificable"
+
+#. module: sale_product_pack
+#: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__do_no_expand_pack_lines
+msgid ""
+"This is a technical field in order to check if pack lines has to be expanded"
+msgstr ""
 
 #. module: sale_product_pack
 #: code:addons/sale_product_pack/models/sale_order_line.py:0
