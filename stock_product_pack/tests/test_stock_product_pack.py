@@ -4,12 +4,12 @@
 
 import logging
 
-from odoo.tests import Form, SavepointCase
+from odoo.tests import Form, TransactionCase
 
 _logger = logging.getLogger(__name__)
 
 
-class TestSaleProductPack(SavepointCase):
+class TestSaleProductPack(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -17,13 +17,17 @@ class TestSaleProductPack(SavepointCase):
         cls.product_obj = cls.env["product.product"]
         cls.stock_rule_obj = cls.env["stock.rule"]
         component_1 = cls.product_obj.create(
-            {"name": "Component 1", "type": "product", "categ_id": category_all_id}
+            {"name": "component_1", "type": "product", "categ_id": category_all_id}
         )
-        component_2 = component_1.with_context(name="Component 2").copy()
-        component_3 = component_1.with_context(
-            name="Component 3", type="service"
-        ).copy()
-        component_4 = component_1.with_context(name="Component 4", type="consu").copy()
+        component_2 = cls.product_obj.create(
+            {"name": "Component 2", "type": "product", "categ_id": category_all_id}
+        )
+        component_3 = cls.product_obj.create(
+            {"name": "Component 3", "type": "service", "categ_id": category_all_id}
+        )
+        component_4 = cls.product_obj.create(
+            {"name": "Component 4", "type": "consu", "categ_id": category_all_id}
+        )
         cls.pack_dc = cls.product_obj.create(
             {
                 "name": "Pack",
