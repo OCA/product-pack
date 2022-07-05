@@ -93,7 +93,7 @@ class TestSaleProductPack(SavepointCase):
             (self.sale_order.order_line - line).mapped("price_subtotal"), [0, 0, 0]
         )
         # Pack price is different from the sum of component prices
-        self.assertEqual(line.price_subtotal, 30.75)
+        self.assertAlmostEqual(line.price_subtotal, 30.75)
         self.assertNotEqual(self._get_component_prices_sum(product_tp), 30.75)
 
     def test_create_totalized_price_order_line(self):
@@ -115,12 +115,12 @@ class TestSaleProductPack(SavepointCase):
             product_tp | product_tp.get_pack_lines().mapped("product_id"),
         )
         # All component lines have zero as subtotal
-        self.assertEqual(
+        self.assertAlmostEqual(
             (self.sale_order.order_line - line).mapped("price_subtotal"), [0, 0, 0]
         )
         # Pack price is equal to the sum of component prices
-        self.assertEqual(line.price_subtotal, 2662.5)
-        self.assertEqual(self._get_component_prices_sum(product_tp), 2662.5)
+        self.assertAlmostEqual(line.price_subtotal, 2662.5)
+        self.assertAlmostEqual(self._get_component_prices_sum(product_tp), 2662.5)
 
     def test_create_non_detailed_price_order_line(self):
         product_ndtp = self.env.ref("product_pack.product_pack_cpu_non_detailed")
@@ -136,8 +136,8 @@ class TestSaleProductPack(SavepointCase):
         # not a detailed one
         self.assertEqual(self.sale_order.order_line, line)
         # Pack price is equal to the sum of component prices
-        self.assertEqual(line.price_subtotal, 2662.5)
-        self.assertEqual(self._get_component_prices_sum(product_ndtp), 2662.5)
+        self.assertAlmostEqual(line.price_subtotal, 2662.5)
+        self.assertAlmostEqual(self._get_component_prices_sum(product_ndtp), 2662.5)
 
     def test_update_qty(self):
         # Ensure the quantities are always updated
@@ -159,7 +159,7 @@ class TestSaleProductPack(SavepointCase):
         main_sol.product_uom_qty = 2 * main_sol.product_uom_qty
         total_qty_updated = qty_in_order()
         # Ensure all quantities have doubled
-        self.assertEqual(total_qty_init * 2, total_qty_updated)
+        self.assertAlmostEqual(total_qty_init * 2, total_qty_updated)
 
         # Confirm the sale
         self.sale_order.action_confirm()
@@ -167,7 +167,7 @@ class TestSaleProductPack(SavepointCase):
         # Ensure we can still update the quantity
         main_sol.product_uom_qty = 2 * main_sol.product_uom_qty
         total_qty_confirmed = qty_in_order()
-        self.assertEqual(total_qty_updated * 2, total_qty_confirmed)
+        self.assertAlmostEqual(total_qty_updated * 2, total_qty_confirmed)
 
     def test_do_not_expand(self):
         product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
