@@ -27,28 +27,7 @@ class ProductProduct(models.Model):
         return self.mapped("pack_line_ids")
 
     def split_pack_products(self):
-        """Split products and the pack in 2 separate recordsets.
-
-        :return: [packs, no_packs]
-        """
-        packs = self.filtered(
-            lambda p: p.pack_ok
-            and (
-                (p.pack_type == "detailed" and p.pack_component_price == "totalized")
-                or p.pack_type == "non_detailed"
-            )
-        )
-        # TODO: Check why this is needed
-        # for compatibility with website_sale
-        if self._context.get("website_id", False) and not self._context.get(
-            "from_cart", False
-        ):
-            packs |= self.filtered(
-                lambda p: p.pack_ok
-                and p.pack_type == "detailed"
-                and p.pack_component_price == "detailed"
-            )
-
+        packs = self.filtered(lambda p: p.product_tmpl_id._is_pack_to_be_handled())
         return packs, (self - packs)
 
     def price_compute(self, price_type, uom=False, currency=False, company=False):
