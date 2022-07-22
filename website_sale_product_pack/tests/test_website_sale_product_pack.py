@@ -33,6 +33,7 @@ class WebsiteSaleHttpCase(HttpCase):
                 "selectable": True,
             }
         )
+        self.user_portal.property_product_pricelist = pricelist
         website.user_id.property_product_pricelist = pricelist
         admin = self.env.ref("base.user_admin")
         admin.property_product_pricelist = pricelist
