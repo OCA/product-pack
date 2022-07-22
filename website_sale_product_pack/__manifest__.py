@@ -4,7 +4,7 @@
     "name": "Website Sale Product Pack",
     "category": "E-Commerce",
     "summary": "Compatibility module of product pack with e-commerce",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.0.1",
     "license": "AGPL-3",
     "depends": ["website_sale", "sale_product_pack"],
     "data": ["views/assets.xml", "views/templates.xml"],
