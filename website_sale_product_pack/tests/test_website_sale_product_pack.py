@@ -1,5 +1,6 @@
 # Copyright 2021 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from odoo.exceptions import ValidationError
 from odoo.tests.common import HttpCase, tagged
 
 
@@ -21,8 +22,10 @@ class WebsiteSaleHttpCase(HttpCase):
         self.packs = (
             self.product_pdc + self.product_pdi + self.product_pdt + self.product_pnd
         )
+        # Publish the products components
+        self.packs.mapped("pack_line_ids.product_id").write({"is_published": True})
         # Publish the products and put them in the first results
-        self.packs.write({"website_published": True, "website_sequence": 0})
+        self.packs.write({"is_published": True, "website_sequence": 0})
         # Create and select a specific pricelist for avoiding problems in integrated
         # environments where the default pricelist currency has been changed
         website = self.env["website"].get_current_website()
@@ -113,3 +116,16 @@ class WebsiteSaleHttpCase(HttpCase):
         # Pack price is equal to the sum of component prices
         self.assertEqual(line.price_subtotal, 2662.5)
         self.assertEqual(self._get_component_prices_sum(self.product_pnd), 2662.5)
+
+    def test__check_to_add_pack_component_pusblished(self):
+        """Test when create a product pack with only published products as components.
+        """
+        with self.assertRaises(ValidationError):
+            product_component = self.env.ref("product.product_product_25")
+            product_component.write({"is_published": False})
+            vals = {
+                "product_id": product_component.id,
+                "parent_product_id": self.product_pdc.id,
+            }
+            pack_line = self.env["product.pack.line"].create(vals)
+            self.product_pdc.write({"pack_line_ids": [(4, pack_line.id)]})
