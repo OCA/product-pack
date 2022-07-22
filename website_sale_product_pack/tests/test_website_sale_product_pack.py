@@ -23,6 +23,20 @@ class WebsiteSaleHttpCase(HttpCase):
         )
         # Publish the products and put them in the first results
         self.packs.write({"website_published": True, "website_sequence": 0})
+        # Create and select a specific pricelist for avoiding problems in integrated
+        # environments where the default pricelist currency has been changed
+        website = self.env["website"].get_current_website()
+        pricelist = self.env["product.pricelist"].create(
+            {
+                "name": "website_sale_product_pack public",
+                "currency_id": website.user_id.company_id.currency_id.id,
+                "selectable": True,
+            }
+        )
+        self.user_portal.property_product_pricelist = pricelist
+        website.user_id.property_product_pricelist = pricelist
+        admin = self.env.ref("base.user_admin")
+        admin.property_product_pricelist = pricelist
 
     def _get_component_prices_sum(self, product_pack):
         component_prices = 0.0
