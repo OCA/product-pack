@@ -97,3 +97,7 @@ class ProductProduct(models.Model):
                 list_price = product.uom_id._compute_price(
                     list_price, to_uom)
             product.lst_price = list_price + product.price_extra
+
+    @api.onchange('pack_type', 'pack_component_price')
+    def onchange_pack_type(self):
+        self.mapped('product_tmpl_id').onchange_pack_type()
