@@ -110,9 +110,6 @@ Contributors
   * Pedro M. Baeza
   * Jairo Llopis
   * Sergio Teruel
-* `Trey <https://www.trey.es>`_:
-
-  * Miguel Poyatos <miguel@trey.es>
 
 Maintainers
 ~~~~~~~~~~~
