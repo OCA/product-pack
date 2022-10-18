@@ -21,7 +21,7 @@
                     attrs="{'invisible': [('pack_ok', '=', False)]}"
                 >
                     <group name="group_pack">
-                        <group colspan="4" col="4">
+                        <group>
                             <field name="pack_modifiable_invisible" invisible="1" />
                             <field
                                 name="pack_type"
@@ -52,21 +52,22 @@
                     name="attrs"
                 >{'invisible': ['|', ('product_variant_count', '>', 1), ('pack_ok', '=', False)]}</attribute>
             </page>
-            <group name="group_pack">
-                <group string="Pack Products" colspan="4">
-                    <field name="id" invisible="1" />
+            <page name="page_pack" position="inside">
+                <group name="pack_products" string="Pack Products">
                     <p
                         attrs="{'invisible': [('id', '!=', False)]}"
                     >You must save first to add pack lines</p>
-                    <group colspan="4">
-                        <field
-                            name="pack_line_ids"
-                            nolabel="1"
-                            attrs="{'readonly': [('id', '=', False)]}"
-                        />
+                    <group>
+                        <field name="id" invisible="1" />
                     </group>
+                    <field
+                        name="pack_line_ids"
+                        nolabel="1"
+                        attrs="{'readonly': [('id', '=', False)]}"
+                    />
+
                 </group>
-            </group>
+            </page>
         </field>
     </record>
 </odoo>
