@@ -19,11 +19,11 @@ class TestSaleProductPack(SavepointCase):
         component_1 = cls.product_obj.create(
             {"name": "Component 1", "type": "product", "categ_id": category_all_id}
         )
-        component_2 = component_1.with_context({}).copy({"name": "Component 2"})
-        component_3 = component_1.with_context({}).copy(
+        component_2 = component_1.with_context(**{}).copy({"name": "Component 2"})
+        component_3 = component_1.with_context(**{}).copy(
             {"name": "Component 3", "type": "service"}
         )
-        component_4 = component_1.with_context({}).copy(
+        component_4 = component_1.with_context(**{}).copy(
             {"name": "Component 4", "type": "consu"}
         )
         cls.pack_dc = cls.product_obj.create(
@@ -151,7 +151,7 @@ class TestSaleProductPack(SavepointCase):
         wizard_dict = picking.button_validate()
         wizard = Form(
             self.env[(wizard_dict.get("res_model"))].with_context(
-                wizard_dict["context"]
+                **wizard_dict["context"]
             )
         ).save()
         wizard.process()
