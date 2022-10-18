@@ -23,7 +23,7 @@ Product Pack
     :target: https://runbot.odoo-community.org/runbot/286/15.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module allows you to define a product as a *Product Pack*. Each
 *Product Pack* has a list of products that are part of this pack.
@@ -94,6 +94,7 @@ Authors
 * NaN·tic
 * ADHOC SA
 * Tecnativa
+* bloopark systems GmbH & Co. KG
 
 Contributors
 ~~~~~~~~~~~~
@@ -113,6 +114,9 @@ Contributors
 * `Sygel <https://www.sygel.es>`_:
 
   * Manuel Regidor
+* `bloopark systems GmbH & Co. KG <https://www.bloopark.de/>`_:
+
+  * July Chacko
 
 Maintainers
 ~~~~~~~~~~~
@@ -133,7 +137,7 @@ promote its widespread use.
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-ernestotejeda| 
+|maintainer-ernestotejeda|
 
 This module is part of the `OCA/product-pack <https://github.com/OCA/product-pack/tree/15.0/product_pack>`_ project on GitHub.
 

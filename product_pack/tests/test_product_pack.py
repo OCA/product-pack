@@ -58,7 +58,7 @@ class TestProductPack(ProductPackCommon, TransactionCase):
     def test_get_pack_line_price(self):
         # Check pack line price from product one
         component = self.env.ref("product_pack.pack_cpu_detailed_components_1")
-        component.product_id.price = 30.0
+        component.product_id.lst_price = 30.0
         self.assertEqual(
             30.0,
             self.cpu_detailed.pack_line_ids.filtered(
@@ -70,10 +70,12 @@ class TestProductPack(ProductPackCommon, TransactionCase):
         # Check pack lst_price if totalized from components
         pack = self.env.ref("product_pack.product_pack_cpu_detailed_totalized")
         component_1 = self.env.ref("product_pack.pack_cpu_detailed_totalized_1")
-        component_1.product_id.price = 30.0
+        component_1.product_id.lst_price = 30.0
         component_2 = self.env.ref("product_pack.pack_cpu_detailed_totalized_3")
-        component_2.product_id.price = 15.0
-        self.assertEqual(45.0, pack.lst_price)
+        component_2.product_id.lst_price = 15.0
+        component_3 = self.env.ref("product_pack.pack_cpu_detailed_totalized_4")
+        component_3.product_id.lst_price = 5.0
+        self.assertEqual(50.0, pack.lst_price)
 
     def test_pack_company(self):
         # Try to assign pack lines with product that do not belong to pack
