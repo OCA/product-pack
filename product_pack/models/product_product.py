@@ -51,10 +51,17 @@ class ProductProduct(models.Model):
 
         return packs, (self - packs)
 
-    def price_compute(self, price_type, uom=False, currency=False, company=False):
+    def price_compute(
+        self, price_type, uom=False, currency=False, company=False, date=False
+    ):
+        company = company or self.env.company
+        date = date or fields.Date.context_today(self)
+
+        self = self.with_company(company)
+
         packs, no_packs = self.split_pack_products()
         prices = super(ProductProduct, no_packs).price_compute(
-            price_type, uom, currency, company
+            price_type, uom, currency, company, date
         )
         for product in packs.with_context(prefetch_fields=False):
             pack_price = 0.0
@@ -66,6 +73,7 @@ class ProductProduct(models.Model):
             # it will be converted again by pp._compute_price_rule, so if
             # that is the case we convert the amounts to the pack currency
             if pricelist_id_or_name:
+                pricelist = False
                 if isinstance(pricelist_id_or_name, list):
                     pricelist_id_or_name = pricelist_id_or_name[0]
                 if isinstance(pricelist_id_or_name, str):
