@@ -65,9 +65,5 @@ class ProductProduct(models.Model):
             self._context.get("to_date"),
         )
         for product in service_pack_products:
-            product.qty_available = res[product.id]["qty_available"]
-            product.incoming_qty = res[product.id]["incoming_qty"]
-            product.outgoing_qty = res[product.id]["outgoing_qty"]
-            product.virtual_available = res[product.id]["virtual_available"]
-            product.free_qty = res[product.id]["free_qty"]
+            product.update(res[product.id])
         return

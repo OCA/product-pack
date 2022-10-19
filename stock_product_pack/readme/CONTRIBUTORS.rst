@@ -4,3 +4,7 @@
   * Pedro M. Baeza
   * Sergio Teruel
   * João Marques
+
+* `Bloopark <https://www.bloopark.de>`_:
+
+  * July Chacko
