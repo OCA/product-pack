@@ -23,7 +23,7 @@ Sale Product Pack
     :target: https://runbot.odoo-community.org/runbot/286/14.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module adds *Product Pack* functionality to sales orders. You can choose
 a *Pack* in *sales order lines* and see different behaviors depending on
@@ -78,6 +78,7 @@ Authors
 * NaN·tic
 * ADHOC SA
 * Tecnativa
+* bloopark systems GmbH & Co. KG
 
 Contributors
 ~~~~~~~~~~~~
@@ -94,6 +95,10 @@ Contributors
 * `Open Source Integrators <https://opensourceintegrators.eu>`_:
 
   * Daniel Reis <dreis@opensourceintegrators.com>
+
+* `bloopark systems GmbH & Co. KG <https://www.bloopark.de/>`_:
+
+  * July Chacko
 
 Maintainers
 ~~~~~~~~~~~
@@ -114,7 +119,7 @@ promote its widespread use.
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-ernestotejeda| 
+|maintainer-ernestotejeda|
 
 This module is part of the `OCA/product-pack <https://github.com/OCA/product-pack/tree/14.0/sale_product_pack>`_ project on GitHub.
 

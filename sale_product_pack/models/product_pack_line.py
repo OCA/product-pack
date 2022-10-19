@@ -24,10 +24,11 @@ class ProductPack(models.Model):
             "pack_modifiable": line.product_id.pack_modifiable,
         }
         sol = line.new(line_vals)
-        sol.product_id_change()
+        sol._onchange_product_id_warning()
         sol.product_uom_qty = quantity
-        sol.product_uom_change()
-        sol._onchange_discount()
+        sol._compute_product_uom_qty()
+        sol._compute_product_uom()
+        sol._compute_discount()
         vals = sol._convert_to_write(sol._cache)
         pack_price_types = {"totalized", "ignored"}
         sale_discount = 0.0

@@ -10,3 +10,7 @@
 * `Open Source Integrators <https://opensourceintegrators.eu>`_:
 
   * Daniel Reis <dreis@opensourceintegrators.com>
+
+* `bloopark systems GmbH & Co. KG <https://www.bloopark.de/>`_:
+
+  * July Chacko
