@@ -80,3 +80,31 @@ class ProductTemplate(models.Model):
             self.product_variant_ids.write({"pack_line_ids": vals.get("pack_line_ids")})
             _vals.pop("pack_line_ids")
         return super().write(_vals)
+
+    def _is_pack_to_be_handled(self):
+        """Method for getting if a template is a computable pack.
+
+        :return: True or False.
+        """
+        self.ensure_one()
+        is_pack = False
+        if self.env.context.get("whole_pack_price"):
+            # We could need to check the price of the whole pack (e.g.: e-commerce)
+            is_pack = (
+                self.pack_ok
+                and self.pack_type == "detailed"
+                and self.pack_component_price == "detailed"
+            )
+        is_pack |= self.pack_ok and (
+            (self.pack_type == "detailed" and self.pack_component_price == "totalized")
+            or self.pack_type == "non_detailed"
+        )
+        return is_pack
+
+    def split_pack_products(self):
+        """Split products and the pack in 2 separate recordsets.
+
+        :return: [packs, no_packs]
+        """
+        packs = self.filtered(lambda p: p._is_pack_to_be_handled())
+        return packs, (self - packs)
