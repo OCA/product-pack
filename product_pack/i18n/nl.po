@@ -103,7 +103,8 @@ msgstr ""
 msgid ""
 "On sale orders or purchase orders:\n"
 "* Detailed per component: Detail lines with prices.\n"
-"* Totalized in main product: Detail lines merging lines prices on pack (don't show component prices).\n"
+"* Totalized in main product: Detail lines merging lines prices on pack "
+"(don't show component prices).\n"
 "* Ignored: Use product pack price (ignore detail line prices)."
 msgstr ""
 
@@ -201,7 +202,6 @@ msgstr ""
 
 #. module: product_pack
 #: code:addons/product_pack/models/product_template.py:0
-#: code:addons/product_pack/models/product_template.py:0
 #, python-format
 msgid ""
 "Pack lines products company must be the same as the parent product company"
@@ -216,6 +216,11 @@ msgstr ""
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__parent_product_id
 msgid "Parent Product"
+msgstr ""
+
+#. module: product_pack
+#: model:ir.model,name:product_pack.model_product_pricelist
+msgid "Pricelist"
 msgstr ""
 
 #. module: product_pack
