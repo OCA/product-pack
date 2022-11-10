@@ -27,7 +27,24 @@ class ProductProduct(models.Model):
         return self.mapped("pack_line_ids")
 
     def split_pack_products(self):
-        packs = self.filtered(lambda p: p.product_tmpl_id._is_pack_to_be_handled())
+        """Split products and the pack in 2 separate recordsets.
+
+        :return: [packs, no_packs]
+        """
+        packs = self.filtered(
+            lambda p: p.pack_ok
+            and (
+                (p.pack_type == "detailed" and p.pack_component_price == "totalized")
+                or p.pack_type == "non_detailed"
+            )
+        )
+        # We could need to check the price of the whole pack (e.g.: e-commerce)
+        if self.env.context.get("whole_pack_price"):
+            packs |= self.filtered(
+                lambda p: p.pack_ok
+                and p.pack_type == "detailed"
+                and p.pack_component_price == "detailed"
+            )
         return packs, (self - packs)
 
     def price_compute(self, price_type, uom=False, currency=False, company=False):
