@@ -38,6 +38,7 @@ msgstr "Détaillé par composant"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__display_name
+#: model:ir.model.fields,field_description:product_pack.field_product_pricelist__display_name
 #: model:ir.model.fields,field_description:product_pack.field_product_product__display_name
 #: model:ir.model.fields,field_description:product_pack.field_product_template__display_name
 msgid "Display Name"
@@ -51,6 +52,7 @@ msgstr "Trouvé dans des packs"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__id
+#: model:ir.model.fields,field_description:product_pack.field_product_pricelist__id
 #: model:ir.model.fields,field_description:product_pack.field_product_product__id
 #: model:ir.model.fields,field_description:product_pack.field_product_template__id
 msgid "ID"
@@ -85,6 +87,7 @@ msgstr "Est un pack d'article ?"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line____last_update
+#: model:ir.model.fields,field_description:product_pack.field_product_pricelist____last_update
 #: model:ir.model.fields,field_description:product_pack.field_product_product____last_update
 #: model:ir.model.fields,field_description:product_pack.field_product_template____last_update
 msgid "Last Modified on"
@@ -242,6 +245,11 @@ msgstr "Packs où le produit est utilisé."
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__parent_product_id
 msgid "Parent Product"
 msgstr "Article parent"
+
+#. module: product_pack
+#: model:ir.model,name:product_pack.model_product_pricelist
+msgid "Pricelist"
+msgstr ""
 
 #. module: product_pack
 #: model:ir.model,name:product_pack.model_product_product
