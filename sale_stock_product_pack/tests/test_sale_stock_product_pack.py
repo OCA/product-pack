@@ -27,11 +27,11 @@ class TestSaleStockProductPack(common.SavepointCase):
         )
         self.assertEqual(0, pack_line.qty_delivered)
         # Process the picking
-        for line in self.sale.picking_ids.move_lines.filtered(
+        for line in self.sale.picking_ids.move_ids.filtered(
             lambda x: x.product_id != self.product_pack
         ):
             line.quantity_done = line.product_uom_qty
-        self.sale.picking_ids.action_done()
+        self.sale.picking_ids._action_done()
         # All components delivered, all the pack quantities should be so
         # TODO: it needs to compute twice. In view it does it fine.
         self.sale.order_line.mapped("qty_delivered")
