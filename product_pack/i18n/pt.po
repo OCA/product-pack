@@ -38,8 +38,6 @@ msgstr "Detalhado por componente"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__display_name
-#: model:ir.model.fields,field_description:product_pack.field_product_product__display_name
-#: model:ir.model.fields,field_description:product_pack.field_product_template__display_name
 msgid "Display Name"
 msgstr "Nome a Exibir"
 
@@ -51,8 +49,6 @@ msgstr "Pertencente a packs"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__id
-#: model:ir.model.fields,field_description:product_pack.field_product_product__id
-#: model:ir.model.fields,field_description:product_pack.field_product_template__id
 msgid "ID"
 msgstr "ID"
 
@@ -85,8 +81,6 @@ msgstr "É um Pack de Produtos?"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line____last_update
-#: model:ir.model.fields,field_description:product_pack.field_product_product____last_update
-#: model:ir.model.fields,field_description:product_pack.field_product_template____last_update
 msgid "Last Modified on"
 msgstr "Modif. pela Última Vez em"
 
@@ -164,6 +158,12 @@ msgid "Pack CPU (Non Detailed - Totalized Components Price)"
 msgstr "Pack CPU (Não Detalhado - Preço dos Componentes Totalizado)"
 
 #. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_component_price
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_component_price
+msgid "Pack Component Price"
+msgstr ""
+
+#. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_product__pack_type
 #: model:ir.model.fields,field_description:product_pack.field_product_template__pack_type
 msgid "Pack Display Type"
@@ -205,23 +205,12 @@ msgid "Pack Product Line"
 msgstr "Linha de Pack de Produtos"
 
 #. module: product_pack
-#: model_terms:ir.ui.view,arch_db:product_pack.product_pack_line_tree
-msgid "Pack Product Lines"
-msgstr "Linhas de Pack de Produtos"
-
-#. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_product__pack_line_ids
 #: model:ir.model.fields,field_description:product_pack.field_product_template__pack_line_ids
 #: model_terms:ir.ui.view,arch_db:product_pack.nan_product_pack_form
 #: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
 msgid "Pack Products"
 msgstr "Packs de Produtos"
-
-#. module: product_pack
-#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_component_price
-#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_component_price
-msgid "Pack component price"
-msgstr "Preço do componente do pack"
 
 #. module: product_pack
 #: code:addons/product_pack/models/product_template.py:0
@@ -242,6 +231,11 @@ msgstr "Packs em que o produto é usado."
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__parent_product_id
 msgid "Parent Product"
 msgstr "Produto Ascendente"
+
+#. module: product_pack
+#: model:ir.model,name:product_pack.model_product_pricelist
+msgid "Pricelist"
+msgstr ""
 
 #. module: product_pack
 #: model:ir.model,name:product_pack.model_product_product
@@ -321,6 +315,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
 msgid "You must save first to add pack lines"
 msgstr "Para adicionar linhas de packs, deve primeiro guardar"
+
+#~ msgid "Pack Product Lines"
+#~ msgstr "Linhas de Pack de Produtos"
+
+#~ msgid "Pack component price"
+#~ msgstr "Preço do componente do pack"
 
 #~ msgid "Pack Type"
 #~ msgstr "Tipo de Pack"
