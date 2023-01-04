@@ -22,11 +22,16 @@ class SaleOrderLinePackLine(models.Model):
         compute="_compute_price_subtotal", string="Subtotal", digits="Account"
     )
     product_uom_qty = fields.Float("Quantity", digits="Product UoS", required=True)
+    currency_id = fields.Many2one(
+        string="Currency", related="order_line_id.currency_id"
+    )
 
     @api.onchange("product_id")
     def onchange_product_id(self):
         for line in self:
-            line.price_unit = line.product_id.price
+            line.price_unit = (
+                line.product_id._get_contextual_price() if line.product_id else 0.0
+            )
 
     @api.depends("price_unit", "product_uom_qty")
     def _compute_price_subtotal(self):

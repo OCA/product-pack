@@ -41,7 +41,7 @@ class SaleOrderLine(models.Model):
             for pack_line in self.product_id.pack_line_ids.with_context(
                 pricelist=self.order_id.pricelist_id.id
             ):
-                price_unit = pack_line.product_id.price
+                price_unit = pack_line.product_id._get_contextual_price()
                 quantity = pack_line.quantity
                 vals = {
                     "order_line_id": self.id,
@@ -52,7 +52,7 @@ class SaleOrderLine(models.Model):
                     "price_subtotal": price_unit * quantity,
                 }
                 self.assisted_pack_line_ids.create(vals)
-        return super().expand_pack_line()
+        return super().expand_pack_line(write)
 
     def action_assisted_pack_detail(self):
         view = self.env.ref("sale_product_pack_assisted.view_order_line_form2")
