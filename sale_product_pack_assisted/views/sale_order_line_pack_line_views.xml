@@ -5,12 +5,21 @@
         <field name="name">sale.line.pack.line.tree</field>
         <field name="model">sale.order.line.pack.line</field>
         <field name="arch" type="xml">
-            <tree string="Sales Order Line Pack Lines" editable="bottom">
+            <tree editable="bottom">
+                <field name="currency_id" invisible="True" />
                 <field name="product_id" groups="base.group_user" />
-                <field name="price_unit" />
+                <field
+                    name="price_unit"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id'}"
+                />
                 <field name="product_uom_qty" />
-                <field name="discount" groups="sale.group_discount_per_so_line" />
-                <field name="price_subtotal" />
+                <field name="discount" groups="product.group_discount_per_so_line" />
+                <field
+                    name="price_subtotal"
+                    widget="monetary"
+                    options="{'currency_field': 'currency_id'}"
+                />
             </tree>
         </field>
     </record>

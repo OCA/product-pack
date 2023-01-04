@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Assisted Sale product Pack",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Sales",
     "website": "https://github.com/OCA/product-pack",
     "author": "NaN·tic, ADHOC SA, Tecnativa, Odoo Community Association (OCA)",
