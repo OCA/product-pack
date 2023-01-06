@@ -155,6 +155,16 @@ odoo.define("pos_product_pack.models", function (require) {
                     });
                 }
             }
+            // Check if line is a pack child, then, remove itself from
+            // parent pack lines
+            if (this.pack_parent_line_id) {
+                if (this.pack_parent_line_id.pack_child_line_ids.includes(this.id)) {
+                    const index = this.pack_parent_line_id.pack_child_line_ids.indexOf(
+                        this.id
+                    );
+                    delete this.pack_parent_line_id.pack_child_line_ids[index];
+                }
+            }
         },
         set_pack_lines_quantity: function (quantity) {
             var self = this;
