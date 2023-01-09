@@ -19,7 +19,7 @@ class TestSaleProductPack(TransactionCase):
         component_1 = cls.product_obj.create(
             {"name": "Component 1", "type": "product", "categ_id": category_all_id}
         )
-        component_2 = component_1.with_context({}).copy({"name": "Component 2"})
+        component_2 = component_1.with_context(**{}).copy({"name": "Component 2"})
         component_3 = cls.product_obj.create(
             {"name": "Component 3", "type": "service", "categ_id": category_all_id}
         )
