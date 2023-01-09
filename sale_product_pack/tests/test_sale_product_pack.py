@@ -4,7 +4,7 @@
 from odoo.tests import SavepointCase
 
 
-class TestSaleProductPack(SavepointCase):
+class TestSaleProductPack(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
