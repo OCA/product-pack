@@ -1,0 +1,3 @@
+odoo-addon-product_pack @ git+https://github.com/OCA/product-pack.git@refs/pull/104/head#subdirectory=setup/product_pack
+odoo-addon-sale_product_pack @ git+https://github.com/OCA/product-pack.git@refs/pull/104/head#subdirectory=setup/sale_product_pack
+odoo-addon-stock_product_pack @ git+https://github.com/OCA/product-pack.git@refs/pull/104/head#subdirectory=setup/stock_product_pack
