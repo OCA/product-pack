@@ -14,6 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: website_sale_product_pack
+#: model:ir.model,name:website_sale_product_pack.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: website_sale_product_pack
+#: model:ir.model,name:website_sale_product_pack.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: website_sale_product_pack
 #: model:ir.model,name:website_sale_product_pack.model_sale_order
 msgid "Sales Order"
 msgstr ""
@@ -26,4 +36,22 @@ msgstr ""
 #. module: website_sale_product_pack
 #: model:ir.model,name:website_sale_product_pack.model_website
 msgid "Website"
+msgstr ""
+
+#. module: website_sale_product_pack
+#: code:addons/website_sale_product_pack/models/product_product.py:0
+#, python-format
+msgid "You can't add unpublished products (%s) to a published pack (%s)"
+msgstr ""
+
+#. module: website_sale_product_pack
+#: code:addons/website_sale_product_pack/models/product_template.py:0
+#, python-format
+msgid "You can't unpublished product (%s) for a published pack parents (%s)"
+msgstr ""
+
+#. module: website_sale_product_pack
+#: code:addons/website_sale_product_pack/models/product_template.py:0
+#, python-format
+msgid "You can't unpublished products (%s) to a published pack (%s)"
 msgstr ""
