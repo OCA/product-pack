@@ -204,6 +204,9 @@ odoo.define("pos_product_pack.models", function (require) {
                     json.pack_parent_line_id
                 );
             }
+            if (json.pack_line_id) {
+                this.pack_line_id = this.pos.product_pack_line_by_id[json.pack_line_id];
+            }
             if (json.pack_child_line_ids) {
                 var pack_child_line_ids = json.pack_child_line_ids;
                 this.pack_child_line_ids = [];
