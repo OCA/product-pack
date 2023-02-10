@@ -99,6 +99,15 @@ odoo.define("pos_product_pack.models", function (require) {
             line.remove_pack_line();
             _super_order.remove_orderline.apply(this, arguments);
         },
+        // @Override
+        add_orderline: function (line) {
+            _super_order.add_orderline.apply(this, arguments);
+            if (line.order == this) {
+                if (line.pack_parent_line_id) {
+                    line.pack_parent_line_id.pack_child_line_ids.push(line.id);
+                }
+            }
+        },
     });
 
     var _super_order_line = models.Orderline.prototype;
@@ -162,7 +171,7 @@ odoo.define("pos_product_pack.models", function (require) {
                     const index = this.pack_parent_line_id.pack_child_line_ids.indexOf(
                         this.id
                     );
-                    delete this.pack_parent_line_id.pack_child_line_ids[index];
+                    this.pack_parent_line_id.pack_child_line_ids.splice(index, 1);
                 }
             }
         },
@@ -200,30 +209,21 @@ odoo.define("pos_product_pack.models", function (require) {
         init_from_JSON: function (json) {
             _super_order_line.init_from_JSON.apply(this, arguments);
             if (json.pack_parent_line_id) {
-                this.pack_parent_line_id = this.order_id.get_orderline(
+                this.pack_parent_line_id = this.order.get_orderline(
                     json.pack_parent_line_id
                 );
             }
             if (json.pack_line_id) {
                 this.pack_line_id = this.pos.product_pack_line_by_id[json.pack_line_id];
             }
-            if (json.pack_child_line_ids) {
-                var pack_child_line_ids = json.pack_child_line_ids;
-                this.pack_child_line_ids = [];
-                for (var i = 0; i < pack_child_line_ids.length; i++) {
-                    var pack_child = pack_child_line_ids[i][2];
-                    this.pack_child_line_ids.push(pack_child);
-                }
+            if (json.pack_child_line_ids && json.pack_child_line_ids.length !== 0) {
+                this.pack_child_line_ids = json.pack_child_line_ids;
             }
         },
         // @Override
         export_as_JSON: function () {
             const json = _super_order_line.export_as_JSON.apply(this, arguments);
-            var pack_child_ids = [];
-            // Export children
-            this.pack_child_line_ids.forEach(function (child) {
-                return pack_child_ids.push([4, 0, child]);
-            });
+            json.pack_child_line_ids = this.pack_child_line_ids;
             // Export parent
             if (this.pack_parent_line_id) {
                 json.pack_parent_line_id = this.pack_parent_line_id.id;
@@ -231,7 +231,6 @@ odoo.define("pos_product_pack.models", function (require) {
             if (this.pack_line_id) {
                 json.pack_line_id = this.pack_line_id.id;
             }
-            json.pack_child_line_ids = pack_child_ids;
             return json;
         },
     });
