@@ -13,3 +13,7 @@
 * `Sygel <https://www.sygel.es>`_:
 
   * Manuel Regidor
+
+* `Acsone <https://www.acsone.eu/>`_:
+
+  * Maxime Franco
