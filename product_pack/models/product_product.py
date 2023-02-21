@@ -30,10 +30,12 @@ class ProductProduct(models.Model):
         packs = self.filtered(lambda p: p.product_tmpl_id._is_pack_to_be_handled())
         return packs, (self - packs)
 
-    def price_compute(self, price_type, uom=False, currency=False, company=False):
+    def price_compute(
+        self, price_type, uom=False, currency=False, company=False, date=False
+    ):
         packs, no_packs = self.split_pack_products()
         prices = super(ProductProduct, no_packs).price_compute(
-            price_type, uom, currency, company
+            price_type, uom, currency, company, date
         )
         for product in packs.with_context(prefetch_fields=False):
             pack_price = 0.0
