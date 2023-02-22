@@ -73,11 +73,20 @@ class SaleOrderLine(models.Model):
             if vals_list:
                 self.create(vals_list)
 
-    @api.model
-    def create(self, vals):
-        record = super().create(vals)
-        record.expand_pack_line()
-        return record
+    @api.model_create_multi
+    def create(self, vals_list):
+        new_vals = []
+        res = self.browse()
+        for elem in vals_list:
+            product = self.env["product.product"].browse(elem["product_id"])
+            if product.pack_ok and product.pack_type == "detailed":
+                line = super().create([elem])
+                line.expand_pack_line()
+                res |= line
+            else:
+                new_vals.append(elem)
+        res |= super().create(new_vals)
+        return res
 
     def write(self, vals):
         res = super().write(vals)
