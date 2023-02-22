@@ -10,3 +10,7 @@
 * `Open Source Integrators <https://opensourceintegrators.eu>`_:
 
   * Daniel Reis <dreis@opensourceintegrators.com>
+
+* `Acsone <https://www.acsone.eu/>`_:
+
+  * Maxime Franco
