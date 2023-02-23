@@ -5,12 +5,12 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Stock product Pack",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Warehouse",
     "summary": "This module allows you to get the right available quantities "
     "of the packs",
     "website": "https://github.com/OCA/product-pack",
-    "author": "NaN·tic, " "ADHOC SA, " "Tecnativa, " "Odoo Community Association (OCA)",
+    "author": "NaN·tic, ADHOC SA, Tecnativa, Odoo Community Association (OCA)",
     "maintainers": ["ernestotejeda"],
     "license": "AGPL-3",
     "depends": ["product_pack", "stock"],

@@ -87,7 +87,7 @@ class TestSaleProductPack(TransactionCase):
                 "route_id": cls.env.ref("stock.route_warehouse0_mto").id,
                 "procure_method": "make_to_stock",
                 "warehouse_id": warehouse.id,
-                "location_id": cls.env.ref("stock.stock_location_stock").id,
+                "location_dest_id": cls.env.ref("stock.stock_location_stock").id,
             }
         )
         cls.pack_dc_with_dm = cls.product_obj.create(
@@ -135,7 +135,7 @@ class TestSaleProductPack(TransactionCase):
                 "picking_type_id": self.env.ref("stock.picking_type_in").id,
                 "location_id": location_id,
                 "location_dest_id": location_dest_id,
-                "move_lines": [
+                "move_ids": [
                     (
                         0,
                         0,
@@ -173,7 +173,6 @@ class TestSaleProductPack(TransactionCase):
             )
         ).save()
         wizard.process()
-        self.product_obj.invalidate_cache()
         self.assertEqual(self.pack_dc.virtual_available, 5)
         self.assertEqual(self.pack_dc.qty_available, 5)
 
@@ -205,4 +204,4 @@ class TestSaleProductPack(TransactionCase):
         self.env["stock.scheduler.compute"].create({}).procure_calculation()
         picking_ids = self.env["stock.picking"].search([("group_id", "=", pg.id)])
         # we need to ensure that only the compents of the packs are in the moves.
-        self.assertFalse(self.pack_dc_with_dm in picking_ids.move_lines.product_id)
+        self.assertFalse(self.pack_dc_with_dm in picking_ids.move_ids.product_id)
