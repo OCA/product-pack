@@ -134,25 +134,21 @@ msgid "Pack"
 msgstr ""
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_cpu_detailed_components
 #: model:product.template,name:product_pack.product_pack_cpu_detailed_components_product_template
 msgid "Pack CPU (Detailed - Displayed Components Price)"
 msgstr "Pack CPU (Detalhado - Preço dos Componentes Exibido)"
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_cpu_detailed_ignored
 #: model:product.template,name:product_pack.product_pack_cpu_detailed_ignored_product_template
 msgid "Pack CPU (Detailed - Ignored Components Price)"
 msgstr "Pack CPU (Detalhado - Preço dos Componentes Ignorado)"
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_cpu_detailed_totalized
 #: model:product.template,name:product_pack.product_pack_cpu_detailed_totalized_product_template
 msgid "Pack CPU (Detailed - Totalized Components Price)"
 msgstr "Pack CPU (Detalhado - Preço dos Componentes Totalizado)"
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_cpu_non_detailed
 #: model:product.template,name:product_pack.product_pack_cpu_non_detailed_product_template
 msgid "Pack CPU (Non Detailed - Totalized Components Price)"
 msgstr "Pack CPU (Não Detalhado - Preço dos Componentes Totalizado)"
@@ -182,19 +178,16 @@ msgid "Pack Modifiable Invisible"
 msgstr ""
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_pc_detailed_components
 #: model:product.template,name:product_pack.product_pack_pc_detailed_components_product_template
 msgid "Pack PC (Detailed - Displayed Components Price)"
 msgstr "Pack PC (Detalhado - Preço dos Componentes Exibido)"
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_pc_detailed_ignored
 #: model:product.template,name:product_pack.product_pack_pc_detailed_ignored_product_template
 msgid "Pack PC (Detailed - Ignored Components Price)"
 msgstr "Pack PC (Detalhado - Preço dos Componentes Ignorado)"
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_pc_detailed_totalized
 #: model:product.template,name:product_pack.product_pack_pc_detailed_totalized_product_template
 msgid "Pack PC (Detailed - Totalized Components Price)"
 msgstr "Pack PC (Detalhado - Preço dos Componentes Totalizado)"
@@ -213,6 +206,7 @@ msgid "Pack Products"
 msgstr "Packs de Produtos"
 
 #. module: product_pack
+#. odoo-python
 #: code:addons/product_pack/models/product_template.py:0
 #, python-format
 msgid ""
@@ -238,15 +232,15 @@ msgid "Pricelist"
 msgstr ""
 
 #. module: product_pack
-#: model:ir.model,name:product_pack.model_product_product
+#: model:ir.model,name:product_pack.model_product_template
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__product_id
 msgid "Product"
 msgstr "Produto"
 
 #. module: product_pack
-#: model:ir.model,name:product_pack.model_product_template
-msgid "Product Template"
-msgstr "Modelo de Produto"
+#: model:ir.model,name:product_pack.model_product_product
+msgid "Product Variant"
+msgstr ""
 
 #. module: product_pack
 #: model:ir.model.constraint,message:product_pack.constraint_product_pack_line_product_uniq
@@ -283,25 +277,7 @@ msgid "Totalized in main product"
 msgstr "Totalizado no produto principal"
 
 #. module: product_pack
-#: model:product.product,uom_name:product_pack.product_pack_cpu_detailed_components
-#: model:product.product,uom_name:product_pack.product_pack_cpu_detailed_ignored
-#: model:product.product,uom_name:product_pack.product_pack_cpu_detailed_totalized
-#: model:product.product,uom_name:product_pack.product_pack_cpu_non_detailed
-#: model:product.product,uom_name:product_pack.product_pack_pc_detailed_components
-#: model:product.product,uom_name:product_pack.product_pack_pc_detailed_ignored
-#: model:product.product,uom_name:product_pack.product_pack_pc_detailed_totalized
-#: model:product.template,uom_name:product_pack.product_pack_cpu_detailed_components_product_template
-#: model:product.template,uom_name:product_pack.product_pack_cpu_detailed_ignored_product_template
-#: model:product.template,uom_name:product_pack.product_pack_cpu_detailed_totalized_product_template
-#: model:product.template,uom_name:product_pack.product_pack_cpu_non_detailed_product_template
-#: model:product.template,uom_name:product_pack.product_pack_pc_detailed_components_product_template
-#: model:product.template,uom_name:product_pack.product_pack_pc_detailed_ignored_product_template
-#: model:product.template,uom_name:product_pack.product_pack_pc_detailed_totalized_product_template
-#, fuzzy
-msgid "Units"
-msgstr "Unidade(s)"
-
-#. module: product_pack
+#. odoo-python
 #: code:addons/product_pack/models/product_pack_line.py:0
 #, python-format
 msgid ""
@@ -315,6 +291,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
 msgid "You must save first to add pack lines"
 msgstr "Para adicionar linhas de packs, deve primeiro guardar"
+
+#~ msgid "Product Template"
+#~ msgstr "Modelo de Produto"
+
+#, fuzzy
+#~ msgid "Units"
+#~ msgstr "Unidade(s)"
 
 #~ msgid "Pack Product Lines"
 #~ msgstr "Linhas de Pack de Produtos"
