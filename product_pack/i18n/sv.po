@@ -133,25 +133,21 @@ msgid "Pack"
 msgstr "Pack"
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_cpu_detailed_components
 #: model:product.template,name:product_pack.product_pack_cpu_detailed_components_product_template
 msgid "Pack CPU (Detailed - Displayed Components Price)"
 msgstr "Pack CPU (Detaljerad - Visa pris för beståndsdelar)"
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_cpu_detailed_ignored
 #: model:product.template,name:product_pack.product_pack_cpu_detailed_ignored_product_template
 msgid "Pack CPU (Detailed - Ignored Components Price)"
 msgstr "Pack CPU (Detaljerad - Ignorera priser för beståndsdelar)"
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_cpu_detailed_totalized
 #: model:product.template,name:product_pack.product_pack_cpu_detailed_totalized_product_template
 msgid "Pack CPU (Detailed - Totalized Components Price)"
 msgstr "Pack CPU (Detaljerad - Summerade priser för beståndsdelar)"
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_cpu_non_detailed
 #: model:product.template,name:product_pack.product_pack_cpu_non_detailed_product_template
 msgid "Pack CPU (Non Detailed - Totalized Components Price)"
 msgstr "Pack CPU (Icke detaljerad - Summerade priser för beståndsdelar)"
@@ -181,19 +177,16 @@ msgid "Pack Modifiable Invisible"
 msgstr ""
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_pc_detailed_components
 #: model:product.template,name:product_pack.product_pack_pc_detailed_components_product_template
 msgid "Pack PC (Detailed - Displayed Components Price)"
 msgstr "Pack PC (Detaljerad - Visa pris för beståndsdelar)"
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_pc_detailed_ignored
 #: model:product.template,name:product_pack.product_pack_pc_detailed_ignored_product_template
 msgid "Pack PC (Detailed - Ignored Components Price)"
 msgstr "Pack PC (Detaljerad - Ignorera priser för beståndsdelar)"
 
 #. module: product_pack
-#: model:product.product,name:product_pack.product_pack_pc_detailed_totalized
 #: model:product.template,name:product_pack.product_pack_pc_detailed_totalized_product_template
 msgid "Pack PC (Detailed - Totalized Components Price)"
 msgstr "Pack PC (Icke detaljerad - Summerade priser för beståndsdelar)"
@@ -212,6 +205,7 @@ msgid "Pack Products"
 msgstr "Pack produkter"
 
 #. module: product_pack
+#. odoo-python
 #: code:addons/product_pack/models/product_template.py:0
 #, python-format
 msgid ""
@@ -235,15 +229,15 @@ msgid "Pricelist"
 msgstr ""
 
 #. module: product_pack
-#: model:ir.model,name:product_pack.model_product_product
+#: model:ir.model,name:product_pack.model_product_template
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__product_id
 msgid "Product"
 msgstr "Produkt"
 
 #. module: product_pack
-#: model:ir.model,name:product_pack.model_product_template
-msgid "Product Template"
-msgstr "Produktmall"
+#: model:ir.model,name:product_pack.model_product_product
+msgid "Product Variant"
+msgstr ""
 
 #. module: product_pack
 #: model:ir.model.constraint,message:product_pack.constraint_product_pack_line_product_uniq
@@ -280,24 +274,7 @@ msgid "Totalized in main product"
 msgstr "Summerade i huvudprodukten"
 
 #. module: product_pack
-#: model:product.product,uom_name:product_pack.product_pack_cpu_detailed_components
-#: model:product.product,uom_name:product_pack.product_pack_cpu_detailed_ignored
-#: model:product.product,uom_name:product_pack.product_pack_cpu_detailed_totalized
-#: model:product.product,uom_name:product_pack.product_pack_cpu_non_detailed
-#: model:product.product,uom_name:product_pack.product_pack_pc_detailed_components
-#: model:product.product,uom_name:product_pack.product_pack_pc_detailed_ignored
-#: model:product.product,uom_name:product_pack.product_pack_pc_detailed_totalized
-#: model:product.template,uom_name:product_pack.product_pack_cpu_detailed_components_product_template
-#: model:product.template,uom_name:product_pack.product_pack_cpu_detailed_ignored_product_template
-#: model:product.template,uom_name:product_pack.product_pack_cpu_detailed_totalized_product_template
-#: model:product.template,uom_name:product_pack.product_pack_cpu_non_detailed_product_template
-#: model:product.template,uom_name:product_pack.product_pack_pc_detailed_components_product_template
-#: model:product.template,uom_name:product_pack.product_pack_pc_detailed_ignored_product_template
-#: model:product.template,uom_name:product_pack.product_pack_pc_detailed_totalized_product_template
-msgid "Units"
-msgstr "Enheter"
-
-#. module: product_pack
+#. odoo-python
 #: code:addons/product_pack/models/product_pack_line.py:0
 #, python-format
 msgid ""
@@ -311,6 +288,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
 msgid "You must save first to add pack lines"
 msgstr "Du måste spara innan du kan addera packrader"
+
+#~ msgid "Product Template"
+#~ msgstr "Produktmall"
+
+#~ msgid "Units"
+#~ msgstr "Enheter"
 
 #~ msgid "Pack Product Lines"
 #~ msgstr "Pack produktrader"
