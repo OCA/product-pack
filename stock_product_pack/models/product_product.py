@@ -22,7 +22,7 @@ class ProductProduct(models.Model):
             pack_virtual_available = []
             pack_free_qty = []
             subproducts = product.pack_line_ids.filtered(
-                lambda p: p.product_id.type == "product"
+                lambda p: p.product_id.detailed_type == "product"
             )
             for subproduct in subproducts:
                 subproduct_stock = subproduct.product_id
@@ -54,9 +54,11 @@ class ProductProduct(models.Model):
         service products if they are pack.
         """
         service_pack_products = self.filtered(
-            lambda p: p.type == "service" and p.pack_ok
+            lambda p: p.detailed_type == "service" and p.pack_ok
         )
-        super(ProductProduct, self - service_pack_products)._compute_quantities()
+        result = super(
+            ProductProduct, self - service_pack_products
+        )._compute_quantities()
         res = service_pack_products._compute_quantities_dict(
             self._context.get("lot_id"),
             self._context.get("owner_id"),
@@ -70,3 +72,4 @@ class ProductProduct(models.Model):
             product.outgoing_qty = res[product.id]["outgoing_qty"]
             product.virtual_available = res[product.id]["virtual_available"]
             product.free_qty = res[product.id]["free_qty"]
+        return result
