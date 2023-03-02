@@ -57,3 +57,15 @@ class SaleOrder(models.Model):
                 for to_delete_id in subpacks_to_delete_ids:
                     vals["order_line"].append([2, to_delete_id, False])
         return super().write(vals)
+
+    def _get_update_prices_lines(self):
+        res = super()._get_update_prices_lines()
+        result = self.order_line.browse()
+        index = 0
+        while index < len(res):
+            line = res[index]
+            result |= line
+            index += 1
+            if line.product_id.pack_ok and line.pack_type == "detailed":
+                index += len(line.product_id.pack_line_ids)
+        return result
