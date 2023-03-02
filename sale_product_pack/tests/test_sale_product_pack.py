@@ -25,6 +25,23 @@ class TestSaleProductPack(TransactionCase):
                 ],
             }
         )
+        cls.discount_pricelist = cls.env["product.pricelist"].create(
+            {
+                "name": "Discount",
+                "company_id": cls.env.company.id,
+                "item_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "applied_on": "3_global",
+                            "compute_price": "percentage",
+                            "percent_price": 10,
+                        },
+                    )
+                ],
+            }
+        )
         cls.sale_order = cls.env["sale.order"].create(
             {
                 "company_id": cls.env.company.id,
@@ -44,7 +61,7 @@ class TestSaleProductPack(TransactionCase):
 
     def test_create_components_price_order_line(self):
         product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
-        self.env["sale.order.line"].create(
+        line = self.env["sale.order.line"].create(
             {
                 "order_id": self.sale_order.id,
                 "name": product_cp.name,
@@ -55,7 +72,7 @@ class TestSaleProductPack(TransactionCase):
         # After create, there will be four lines
         self.assertEqual(len(self.sale_order.order_line), 4)
         pack_line = self.sale_order.order_line.filtered(
-            lambda line: line.product_id == product_cp
+            lambda pline: pline.product_id == product_cp
         )
         # Check if sequence is the same as pack product one
         sequence = pack_line.sequence
@@ -68,6 +85,20 @@ class TestSaleProductPack(TransactionCase):
         self.assertEqual(
             self.sale_order.order_line.mapped("product_id"),
             product_cp | product_cp.get_pack_lines().mapped("product_id"),
+        )
+        # Price before update pricelist
+        self.assertAlmostEqual(line.price_subtotal, 30.75)
+        self.assertEqual(
+            (self.sale_order.order_line - line).mapped("price_subtotal"),
+            [1755.0, 22.5, 885.0],
+        )
+        # Update pricelist with a discount
+        self.sale_order.pricelist_id = self.discount_pricelist
+        self.sale_order.action_update_prices()
+        self.assertAlmostEqual(line.price_subtotal, 27.68)
+        self.assertEqual(
+            (self.sale_order.order_line - line).mapped("price_subtotal"),
+            [1755.0, 22.5, 885.0],
         )
 
     def test_create_ignored_price_order_line(self):
@@ -96,6 +127,14 @@ class TestSaleProductPack(TransactionCase):
         self.assertAlmostEqual(line.price_subtotal, 30.75)
         self.assertNotEqual(self._get_component_prices_sum(product_tp), 30.75)
 
+        # Update pricelist with a discount
+        self.sale_order.pricelist_id = self.discount_pricelist
+        self.sale_order.action_update_prices()
+        self.assertAlmostEqual(line.price_subtotal, 27.68)
+        self.assertEqual(
+            (self.sale_order.order_line - line).mapped("price_subtotal"), [0, 0, 0]
+        )
+
     def test_create_totalized_price_order_line(self):
         product_tp = self.env.ref("product_pack.product_pack_cpu_detailed_totalized")
         line = self.env["sale.order.line"].create(
@@ -122,6 +161,14 @@ class TestSaleProductPack(TransactionCase):
         self.assertAlmostEqual(line.price_subtotal, 2662.5)
         self.assertAlmostEqual(self._get_component_prices_sum(product_tp), 2662.5)
 
+        # Update pricelist with a discount
+        self.sale_order.pricelist_id = self.discount_pricelist
+        self.sale_order.action_update_prices()
+        self.assertAlmostEqual(line.price_subtotal, 2396.25)
+        self.assertEqual(
+            (self.sale_order.order_line - line).mapped("price_subtotal"), [0, 0, 0]
+        )
+
     def test_create_non_detailed_price_order_line(self):
         product_ndtp = self.env.ref("product_pack.product_pack_cpu_non_detailed")
         line = self.env["sale.order.line"].create(
@@ -138,6 +185,11 @@ class TestSaleProductPack(TransactionCase):
         # Pack price is equal to the sum of component prices
         self.assertAlmostEqual(line.price_subtotal, 2662.5)
         self.assertAlmostEqual(self._get_component_prices_sum(product_ndtp), 2662.5)
+
+        # Update pricelist with a discount
+        self.sale_order.pricelist_id = self.discount_pricelist
+        self.sale_order.action_update_prices()
+        self.assertAlmostEqual(line.price_subtotal, 2396.25)
 
     def test_update_qty(self):
         # Ensure the quantities are always updated
