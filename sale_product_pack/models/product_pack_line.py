@@ -10,6 +10,25 @@ class ProductPack(models.Model):
         "Sale discount (%)",
         digits="Discount",
     )
+    total_lst_price = fields.Float(
+        "Total Public Price",
+        digits="Product Price",
+        compute="_compute_total_price",
+    )
+    total_standard_price = fields.Float(
+        "Total Cost Price",
+        digits="Product Price",
+        compute="_compute_total_price",
+    )
+
+    def _compute_total_price(self):
+        for line in self:
+            line.total_lst_price = (
+                line.product_id.lst_price
+                * line.quantity
+                * (1 - line.sale_discount / 100.0)
+            )
+            line.total_standard_price = line.product_id.standard_price * line.quantity
 
     def get_sale_order_line_vals(self, line, order):
         self.ensure_one()

@@ -12,6 +12,8 @@
                     name="sale_discount"
                     groups="product.group_discount_per_so_line"
                 />
+                <field name="total_standard_price" />
+                <field name="total_lst_price" />
             </field>
         </field>
     </record>
@@ -24,6 +26,16 @@
                 <field
                     name="sale_discount"
                     groups="product.group_discount_per_so_line"
+                />
+                <field
+                    name="total_standard_price"
+                    sum="Total Cost Price"
+                    optional="hide"
+                />
+                <field
+                    name="total_lst_price"
+                    sum="Total Public Price"
+                    optional="hide"
                 />
             </field>
         </field>

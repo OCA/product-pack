@@ -221,3 +221,9 @@ class TestSaleProductPack(SavepointCase):
         self.assertEqual(sequence_tp, self.sale_order.order_line[5].sequence)
         self.assertEqual(sequence_tp, self.sale_order.order_line[6].sequence)
         self.assertEqual(sequence_tp, self.sale_order.order_line[7].sequence)
+
+    def test_get_pack_line_total_price(self):
+        # Check pack line total prices if equal to product prices
+        pack_line = self.env.ref("product_pack.pack_cpu_detailed_totalized_1")
+        self.assertEqual(1700.0, pack_line.total_standard_price)
+        self.assertEqual(1755.0, pack_line.total_lst_price)
