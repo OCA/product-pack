@@ -9,16 +9,12 @@ class Website(models.Model):
     def sale_get_order(
         self,
         force_create=False,
-        code=None,
         update_pricelist=False,
-        force_pricelist=False,
     ):
         """Communicate with product pack expansion method to check if it's necessary
         to expand the product pack lines or not via context"""
         if update_pricelist:
             return super(
                 Website, self.with_context(update_pricelist=True)
-            ).sale_get_order(force_create, code, update_pricelist, force_pricelist)
-        return super().sale_get_order(
-            force_create, code, update_pricelist, force_pricelist
-        )
+            ).sale_get_order(force_create, update_pricelist)
+        return super().sale_get_order(force_create, update_pricelist)
