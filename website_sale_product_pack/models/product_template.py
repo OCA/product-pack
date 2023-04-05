@@ -10,11 +10,11 @@ class ProductTemplate(models.Model):
 
     @api.constrains("is_published")
     def check_website_published(self):
-        """ For keep the consistent and prevent bugs within the e-commerce,
-         we force that all childs of a parent pack
-         stay publish when the parent is published.
-         Also if any of the childs of the parent pack became unpublish,
-         we unpublish the parent."""
+        """For keep the consistent and prevent bugs within the e-commerce,
+        we force that all childs of a parent pack
+        stay publish when the parent is published.
+        Also if any of the childs of the parent pack became unpublish,
+        we unpublish the parent."""
         for rec in self.filtered(lambda x: x.pack_ok and x.is_published):
             unpublished = rec.pack_line_ids.mapped("product_id").filtered(
                 lambda p: not p.is_published
