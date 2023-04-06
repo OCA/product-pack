@@ -79,7 +79,7 @@ class SaleOrderLine(models.Model):
         res = self.browse()
         for elem in vals_list:
             product = self.env["product.product"].browse(elem.get("product_id"))
-            if product and product.pack_ok and product.pack_type == "detailed":
+            if product and product.pack_ok and product.pack_type != "non_detailed":
                 line = super().create([elem])
                 line.expand_pack_line()
                 res |= line
