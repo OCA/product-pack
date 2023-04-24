@@ -51,7 +51,7 @@ class SaleOrderLine(models.Model):
                     "price_subtotal": price_unit * quantity,
                 }
                 self.assisted_pack_line_ids.create(vals)
-        return super().expand_pack_line()
+        return super().expand_pack_line(write)
 
     def action_assisted_pack_detail(self):
         view = self.env.ref("sale_product_pack_assisted.view_order_line_form2")
