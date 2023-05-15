@@ -54,6 +54,14 @@ class ProductPackLine(models.Model):
                     )
                 pack_lines = pack_lines.mapped("product_id.pack_line_ids")
 
-    def get_price(self):
+    def get_price(self, price_type=None, currency=False, company=False, date=False):
         self.ensure_one()
+        if price_type and price_type == "standard_price":
+            price_currency = self.product_id.cost_currency_id
+            company = company or self.env.company
+            date = date or fields.Date.context_today(self)
+            price = self.product_id["standard_price"]
+            if price_currency != currency:
+                price = price_currency._convert(price, currency, company, date)
+            return price * self.quantity
         return self.product_id.lst_price * self.quantity

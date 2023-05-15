@@ -42,6 +42,23 @@ class TestSaleProductPack(TransactionCase):
                 ],
             }
         )
+        cls.based_on_cost_pricelist = cls.env["product.pricelist"].create(
+            {
+                "name": "Based on Cost",
+                "company_id": cls.env.company.id,
+                "item_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "applied_on": "3_global",
+                            "compute_price": "formula",
+                            "base": "standard_price",
+                        },
+                    )
+                ],
+            }
+        )
         cls.sale_order = cls.env["sale.order"].create(
             {
                 "company_id": cls.env.company.id,
@@ -160,11 +177,17 @@ class TestSaleProductPack(TransactionCase):
         # Pack price is equal to the sum of component prices
         self.assertAlmostEqual(line.price_subtotal, 2662.5)
         self.assertAlmostEqual(self._get_component_prices_sum(product_tp), 2662.5)
-
         # Update pricelist with a discount
         self.sale_order.pricelist_id = self.discount_pricelist
         self.sale_order.action_update_prices()
         self.assertAlmostEqual(line.price_subtotal, 2396.25)
+        self.assertEqual(
+            (self.sale_order.order_line - line).mapped("price_subtotal"), [0, 0, 0]
+        )
+        # Update pricelist to based on cost pricelist
+        self.sale_order.pricelist_id = self.based_on_cost_pricelist
+        self.sale_order.action_update_prices()
+        self.assertAlmostEqual(line.price_subtotal, 2424.00)
         self.assertEqual(
             (self.sale_order.order_line - line).mapped("price_subtotal"), [0, 0, 0]
         )
