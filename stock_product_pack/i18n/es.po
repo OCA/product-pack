@@ -28,13 +28,13 @@ msgid "Procurement Group"
 msgstr ""
 
 #. module: stock_product_pack
-#: model:ir.model,name:stock_product_pack.model_product_product
+#: model:ir.model,name:stock_product_pack.model_product_template
 msgid "Product"
 msgstr "Producto"
 
 #. module: stock_product_pack
-#: model:ir.model,name:stock_product_pack.model_product_template
-msgid "Product Template"
+#: model:ir.model,name:stock_product_pack.model_product_product
+msgid "Product Variant"
 msgstr ""
 
 #. module: stock_product_pack
