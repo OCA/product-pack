@@ -227,11 +227,6 @@ msgid "Parent Product"
 msgstr "Article parent"
 
 #. module: product_pack
-#: model:ir.model,name:product_pack.model_product_pricelist
-msgid "Pricelist"
-msgstr ""
-
-#. module: product_pack
 #: model:ir.model,name:product_pack.model_product_template
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__product_id
 msgid "Product"
