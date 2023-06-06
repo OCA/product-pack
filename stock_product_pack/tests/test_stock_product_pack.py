@@ -175,6 +175,10 @@ class TestSaleProductPack(TransactionCase):
         wizard.process()
         self.assertEqual(self.pack_dc.virtual_available, 5)
         self.assertEqual(self.pack_dc.qty_available, 5)
+        all_product_ids = self.env["product.product"]
+        all_product_ids |= self.pack_dc
+        all_product_ids |= components
+        all_product_ids._compute_quantities()
 
     def test_pack_with_dont_move_the_parent(self):
         """Run a procurement for prod pack products when there are only 5 in stock then

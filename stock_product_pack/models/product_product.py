@@ -28,15 +28,26 @@ class ProductProduct(models.Model):
                 subproduct_stock = subproduct.product_id
                 sub_qty = subproduct.quantity
                 if sub_qty:
-                    pack_qty_available.append(
-                        math.floor(subproduct_stock.qty_available / sub_qty)
-                    )
-                    pack_virtual_available.append(
-                        math.floor(subproduct_stock.virtual_available / sub_qty)
-                    )
-                    pack_free_qty.append(
-                        math.floor(subproduct_stock.free_qty / sub_qty)
-                    )
+                    if subproduct_stock.id in res:
+                        pack_qty_available.append(
+                            res[subproduct_stock.id]["qty_available"] / sub_qty
+                        )
+                        pack_virtual_available.append(
+                            res[subproduct_stock.id]["virtual_available"] / sub_qty
+                        )
+                        pack_free_qty.append(
+                            res[subproduct_stock.id]["free_qty"] / sub_qty
+                        )
+                    else:
+                        pack_qty_available.append(
+                            math.floor(subproduct_stock.qty_available / sub_qty)
+                        )
+                        pack_virtual_available.append(
+                            math.floor(subproduct_stock.virtual_available / sub_qty)
+                        )
+                        pack_free_qty.append(
+                            math.floor(subproduct_stock.free_qty / sub_qty)
+                        )
             res[product.id] = {
                 "qty_available": (pack_qty_available and min(pack_qty_available) or 0),
                 "free_qty": (pack_free_qty and min(pack_free_qty) or 0),
