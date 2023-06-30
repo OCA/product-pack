@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo13-addon-product_pack',
+        'odoo13-addon-product_pack_category_restriction',
         'odoo13-addon-sale_product_pack',
         'odoo13-addon-sale_stock_product_pack',
         'odoo13-addon-stock_product_pack',
