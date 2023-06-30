@@ -1,0 +1,46 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_pack_category_restriction
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: product_pack_category_restriction
+#: model:ir.model.fields,field_description:product_pack_category_restriction.field_product_category__pack_ok
+msgid "Is Pack Category?"
+msgstr ""
+
+#. module: product_pack_category_restriction
+#: code:addons/product_pack_category_restriction/models/product_category.py:0
+#, python-format
+msgid "Non-pack Category can't contain pack products."
+msgstr ""
+
+#. module: product_pack_category_restriction
+#: code:addons/product_pack_category_restriction/models/product_template.py:0
+#, python-format
+msgid "Pack Products must be part of a Pack Category."
+msgstr ""
+
+#. module: product_pack_category_restriction
+#: model:ir.model,name:product_pack_category_restriction.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: product_pack_category_restriction
+#: model:ir.model,name:product_pack_category_restriction.model_product_category
+msgid "Product Category"
+msgstr ""
+
+#. module: product_pack_category_restriction
+#: model:ir.model,name:product_pack_category_restriction.model_product_template
+msgid "Product Template"
+msgstr ""
