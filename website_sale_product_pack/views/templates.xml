@@ -19,43 +19,29 @@
             <attribute name="t-if">not line.pack_parent_line_id</attribute>
         </xpath>
         <!-- We don't show the image of the components to have a clean summary -->
+        <xpath expr="//td[hasclass('td-img', 'text-center')]" position="attributes">
+            <attribute
+                name="t-if"
+            >line.product_id.product_tmpl_id and not line.pack_parent_line_id</attribute>
+        </xpath>
         <xpath
-            expr="//td[@t-if='line.product_id.product_tmpl_id']"
+            expr="//span[@t-if='line._is_not_sellable_line() and line.product_id.image_128']"
             position="attributes"
         >
-            <attribute name="t-if">not line.pack_parent_line_id</attribute>
+            <attribute
+                name="t-if"
+            >line._is_not_sellable_line() and line.product_id.image_128 and not
+                line.pack_parent_line_id
+            </attribute>
         </xpath>
-        <!-- We add an extra td in exchange for the one of the image -->
-        <xpath expr="//td[@name='price']/../td[1]" position="before">
-            <td t-if="line.pack_parent_line_id" />
+        <xpath expr="//span[@t-else='']" position="attributes">
+            <attribute
+                name="t-if"
+            >line.product_id.image_128 and not line.pack_parent_line_id</attribute>
         </xpath>
         <!-- We won't show discount price either -->
-        <xpath
-            expr="//t[@groups='account.group_show_line_subtotals_tax_excluded']/del"
-            position="attributes"
-        >
+        <xpath expr="//t[@t-if='line.discount']/del" position="attributes">
             <attribute name="t-if">not line.pack_parent_line_id</attribute>
-        </xpath>
-        <!-- Price -->
-        <xpath expr="//t[@t-set='combination_info']" position="attributes">
-            <attribute name="t-if">not line.product_id.pack_ok</attribute>
-        </xpath>
-        <xpath expr="//t[@t-set='combination_info']" position="after">
-            <t
-                t-if="line.product_id.pack_ok"
-                t-set="combination_info"
-                t-value="line.product_id.product_tmpl_id._get_combination_info(combination, pricelist=website_sale_order.pricelist_id, only_template=True)"
-            />
-        </xpath>
-        <xpath expr="//t[@t-set='list_price_converted']" position="attributes">
-            <attribute name="t-if">not line.pack_child_line_ids</attribute>
-        </xpath>
-        <xpath expr="//t[@t-set='list_price_converted']" position="after">
-            <t
-                t-set="list_price_converted"
-                t-if="line.pack_child_line_ids"
-                t-value="website.currency_id._convert(combination_info['price'], website_sale_order.currency_id, website_sale_order.company_id, date)"
-            />
         </xpath>
         <xpath expr="//strong[@t-field='line.name_short']" position="attributes">
             <attribute name="t-if">not line.pack_parent_line_id</attribute>
@@ -102,19 +88,6 @@
             <t t-else="">
                 <td class="text-center td-price" />
             </t>
-        </xpath>
-    </template>
-    <template id="products_item" inherit_id="website_sale.products_item">
-        <!-- We want the whole pack price in the products listing -->
-        <xpath expr="//t[@t-set='combination_info']" position="attributes">
-            <attribute name="t-if">not product.pack_ok</attribute>
-        </xpath>
-        <xpath expr="//t[@t-set='combination_info']" position="after">
-            <t
-                t-if="product.pack_ok"
-                t-set="combination_info"
-                t-value="product.with_context(whole_pack_price=True)._get_combination_info(only_template=False, add_qty=add_qty or 1, pricelist=pricelist)"
-            />
         </xpath>
     </template>
     <template id="product_price" inherit_id="website_sale.product">

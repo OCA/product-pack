@@ -6,19 +6,14 @@ from odoo import models
 class Website(models.Model):
     _inherit = "website"
 
-    def sale_get_order(
-        self,
-        force_create=False,
-        code=None,
-        update_pricelist=False,
-        force_pricelist=False,
-    ):
+    def sale_get_order(self, force_create=False, update_pricelist=False):
         """Communicate with product pack expansion method to check if it's necessary
         to expand the product pack lines or not via context"""
         if update_pricelist:
             return super(
                 Website, self.with_context(update_pricelist=True)
-            ).sale_get_order(force_create, code, update_pricelist, force_pricelist)
+            ).sale_get_order(force_create, update_pricelist)
         return super().sale_get_order(
-            force_create, code, update_pricelist, force_pricelist
+            force_create,
+            update_pricelist,
         )

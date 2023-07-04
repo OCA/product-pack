@@ -4,10 +4,15 @@
     "name": "Website Sale Product Pack",
     "category": "E-Commerce",
     "summary": "Compatibility module of product pack with e-commerce",
-    "version": "13.0.1.0.2",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "depends": ["website_sale", "sale_product_pack"],
-    "data": ["views/assets.xml", "views/templates.xml"],
+    "data": ["views/templates.xml"],
+    "assets": {
+        "web.assets_tests": [
+            "website_sale_product_pack/static/src/js/website_sale_product_pack_tour.js",
+        ],
+    },
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/product-pack",
     "installable": True,
