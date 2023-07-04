@@ -17,8 +17,11 @@ class ProductProduct(models.Model):
             if unpublished:
                 raise ValidationError(
                     _(
-                        "You can't add unpublished products (%s) to a published "
-                        "pack (%s)"
+                        "You can't add unpublished products (%(unpublished_products)s) to"
+                        "a published pack (%(pack_name)s)"
                     )
-                    % (", ".join(unpublished.mapped("name")), rec.name)
+                    % {
+                        "unpublished_products": ", ".join(unpublished.mapped("name")),
+                        "pack_name": rec.name,
+                    }
                 )

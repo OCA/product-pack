@@ -31,7 +31,7 @@ class SaleOrder(models.Model):
     @api.depends("order_line.product_uom_qty", "order_line.product_id")
     def _compute_cart_info(self):
         """We only want to count the main pack line, not the component lines"""
-        super()._compute_cart_info()
+        res = super()._compute_cart_info()
         for order in self:
             order.cart_quantity = int(
                 sum(
@@ -40,17 +40,6 @@ class SaleOrder(models.Model):
                     ).mapped("product_uom_qty")
                 )
             )
-
-    def _website_product_id_change(self, order_id, product_id, qty=0):
-        """In the final checkout step, we could miss the component discount as the
-        product prices are recomputed. We should also consider a forced price
-        recomputation that would set a price on our detailed totalized pack lines
-        duplicating the total price"""
-        res = super()._website_product_id_change(order_id, product_id, qty=qty)
-        if self.env.context.get("pack_discount"):
-            res["discount"] = self.env.context.get("pack_discount")
-        if self.env.context.get("detailed_totalized_pack"):
-            res["price_unit"] = 0
         return res
 
 
