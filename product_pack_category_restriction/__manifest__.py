@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Product Pack Category Restriction",
-    "version": "13.0.1.0.0",
+    "version": "15.0.1.0.0",
     "category": "Product",
     "summary": """
         This module allows you to restrict pack products to specific Product

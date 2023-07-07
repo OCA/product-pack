@@ -16,10 +16,8 @@ class ProductTemplate(models.Model):
 
     @api.onchange("categ_id")
     def _onchange_categ_id(self):
-        res = super()._onchange_categ_id()
         if self.categ_id:
             self.pack_ok = self.categ_id.pack_ok
-        return res
 
     @api.onchange("pack_ok")
     def _onchange_pack_ok(self):

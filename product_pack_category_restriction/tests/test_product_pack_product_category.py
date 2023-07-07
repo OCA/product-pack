@@ -6,28 +6,29 @@ from odoo.tests import TransactionCase
 
 
 class TestProductPackCategoryRestriction(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.product_product = self.env["product.product"]
-        self.product_category = self.env["product.category"]
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.product_product = cls.env["product.product"]
+        cls.product_category = cls.env["product.category"]
 
-        self.categ_test = self.product_category.create(
+        cls.categ_test = cls.product_category.create(
             {"name": "Test Category 1", "pack_ok": True}
         )
-        self.categ_test2 = self.product_category.create(
+        cls.categ_test2 = cls.product_category.create(
             {"name": "Test Category 2", "pack_ok": False}
         )
-        self.product_pack = self.product_product.create(
+        cls.product_pack = cls.product_product.create(
             {
                 "name": "Test Product 1",
-                "categ_id": self.categ_test.id,
+                "categ_id": cls.categ_test.id,
                 "pack_ok": True,
                 "pack_type": "detailed",
                 "pack_component_price": "detailed",
             }
         )
-        self.product_no_pack = self.product_product.create(
-            {"name": "Test Product 2", "categ_id": self.categ_test2.id}
+        cls.product_no_pack = cls.product_product.create(
+            {"name": "Test Product 2", "categ_id": cls.categ_test2.id}
         )
 
     def test_product_pack_ok(self):
