@@ -3,7 +3,7 @@
 from odoo.tests import Form, common
 
 
-class TestSaleStockProductPack(common.SavepointCase):
+class TestSaleStockProductPack(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -31,7 +31,7 @@ class TestSaleStockProductPack(common.SavepointCase):
             lambda x: x.product_id != self.product_pack
         ):
             line.quantity_done = line.product_uom_qty
-        self.sale.picking_ids.action_done()
+        self.sale.picking_ids._action_done()
         # All components delivered, all the pack quantities should be so
         # TODO: it needs to compute twice. In view it does it fine.
         self.sale.order_line.mapped("qty_delivered")
