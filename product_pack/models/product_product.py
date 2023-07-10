@@ -40,7 +40,7 @@ class ProductProduct(models.Model):
         for product in packs.with_context(prefetch_fields=False):
             pack_price = 0.0
             for pack_line in product.sudo().pack_line_ids:
-                pack_price += pack_line.get_price(price_type, currency, company, date)
+                pack_price += pack_line.get_price()
             pricelist_id_or_name = self._context.get("pricelist")
             # if there is a pricelist on the context the returned prices are on
             # that currency but, if the pack product has a different currency

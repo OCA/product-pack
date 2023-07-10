@@ -46,8 +46,6 @@ class ProductPack(models.Model):
         )
         return vals
 
-    def get_price(self, price_type=None, currency=False, company=False, date=False):
+    def get_price(self):
         self.ensure_one()
-        return super().get_price(price_type, currency, company, date) * (
-            1 - self.sale_discount / 100.0
-        )
+        return super().get_price() * (1 - self.sale_discount / 100.0)
