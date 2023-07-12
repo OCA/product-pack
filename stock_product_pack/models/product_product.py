@@ -26,16 +26,19 @@ class ProductProduct(models.Model):
             )
             for subproduct in subproducts:
                 subproduct_stock = subproduct.product_id
+                subproduct_stock_qties = subproduct_stock._compute_quantities_dict(
+                    lot_id, owner_id, package_id, from_date=from_date, to_date=to_date
+                )
                 sub_qty = subproduct.quantity
                 if sub_qty:
                     pack_qty_available.append(
-                        math.floor(subproduct_stock.qty_available / sub_qty)
+                        math.floor(subproduct_stock_qties[subproduct_stock.id].get('qty_available') / sub_qty)
                     )
                     pack_virtual_available.append(
-                        math.floor(subproduct_stock.virtual_available / sub_qty)
+                        math.floor(subproduct_stock_qties[subproduct_stock.id].get('virtual_available') / sub_qty)
                     )
                     pack_free_qty.append(
-                        math.floor(subproduct_stock.free_qty / sub_qty)
+                        math.floor(subproduct_stock_qties[subproduct_stock.id].get('free_qty') / sub_qty)
                     )
             res[product.id] = {
                 "qty_available": (pack_qty_available and min(pack_qty_available) or 0),
