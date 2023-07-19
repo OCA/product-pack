@@ -131,7 +131,7 @@ class SaleOrderLine(models.Model):
         self.ensure_one()
         self.product_id.ensure_one()
 
-        if not self.product_id.product_tmpl_id.pack_ok:
+        if not self.product_id.product_tmpl_id.pack_ok or not self.product_id.pack_component_price == "totalized":
             return super()._get_pricelist_price()
         else:
             pack_price = 0.0
