@@ -9,7 +9,7 @@
         <field name="arch" type="xml">
             <group name="group_pack">
                 <group string="Pack Products" colspan="4">
-                    <field name="pack_line_ids" nolabel="1" />
+                    <field name="pack_line_ids" nolabel="1" colspan="2" />
                 </group>
             </group>
         </field>
