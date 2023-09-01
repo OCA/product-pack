@@ -39,7 +39,7 @@
                 <field name="pack_modifiable" invisible="True" />
                 <field name="pack_parent_line_id" invisible="True" />
                 <button
-                    string="Parent Pack is not modifiable"
+                    title="Parent Pack is not modifiable"
                     name="action_open_parent_pack_product_view"
                     type="object"
                     attrs="{'invisible': ['|', ('pack_parent_line_id', '=', False), ('pack_modifiable', '=', True)]}"
