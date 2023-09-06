@@ -4,7 +4,7 @@
 
 import math
 
-from odoo import models
+from odoo import api, models
 
 
 class ProductProduct(models.Model):
@@ -48,6 +48,16 @@ class ProductProduct(models.Model):
             }
         return res
 
+    @api.depends("stock_move_ids.product_qty", "stock_move_ids.state")
+    @api.depends_context(
+        "lot_id",
+        "owner_id",
+        "package_id",
+        "from_date",
+        "to_date",
+        "location",
+        "warehouse",
+    )
     def _compute_quantities(self):
         """In v13 Odoo introduces a filter for products not services.
         To keep how it was working on v12 we try to get stock for
