@@ -63,7 +63,7 @@ class TestProductPack(ProductPackCommon, TransactionCase):
             30.0,
             self.cpu_detailed.pack_line_ids.filtered(
                 lambda l: l.product_id == component.product_id
-            ).get_price(),
+            ).price_compute("list_price")[component.product_id.id],
         )
 
     def test_get_pack_lst_price(self):
