@@ -54,6 +54,35 @@ class ProductPackLine(models.Model):
                     )
                 pack_lines = pack_lines.mapped("product_id.pack_line_ids")
 
-    def get_price(self):
+    def _get_pack_line_price(self, pricelist, quantity, uom=None, date=False, **kwargs):
         self.ensure_one()
-        return self.product_id.lst_price * self.quantity
+        if self.product_id._is_pack_to_be_handled():
+            price = pricelist._get_product_price(
+                self.product_id, quantity, uom=uom, date=date, **kwargs
+            )
+        else:
+            price = pricelist._compute_price_rule(
+                self.product_id, quantity, uom=uom, date=date, **kwargs
+            )[self.product_id.id][0]
+        return price * self.quantity
+
+    def _pack_line_price_compute(
+        self, price_type, uom=False, currency=False, company=False, date=False
+    ):
+        packs, no_packs = self.product_id.split_pack_products()
+
+        pack_prices = {}
+        # If the component is a pack
+        for pack in packs:
+            pack_prices[pack.id] = pack.lst_price
+
+        # else
+        no_pack_prices = no_packs._price_compute(
+            price_type, uom, currency, company, date
+        )
+
+        prices = {**pack_prices, **no_pack_prices}
+        for line in self:
+            prices[line.product_id.id] *= line.quantity
+
+        return prices
