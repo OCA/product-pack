@@ -63,7 +63,7 @@ class TestProductPack(ProductPackCommon, TransactionCase):
             30.0,
             self.cpu_detailed.pack_line_ids.filtered(
                 lambda l: l.product_id == component.product_id
-            ).get_price(),
+            )._pack_line_price_compute("list_price")[component.product_id.id],
         )
 
     def test_get_pack_lst_price(self):
@@ -118,19 +118,33 @@ class TestProductPack(ProductPackCommon, TransactionCase):
         pack.pack_component_price = "totalized"
         self.assertTrue(pack.pack_modifiable_invisible)
 
-    def test_price_compute_with_pricelist_context(self):
-        # Ensure that the price_compute method correctly handles the
-        # price list context when the price list is missing.
-        product_pack = self.env.ref("product_pack.product_pack_cpu_detailed_totalized")
-        component_1 = self.env.ref("product_pack.pack_cpu_detailed_totalized_1")
-        component_1.product_id.list_price = 30.0
-        component_2 = self.env.ref("product_pack.pack_cpu_detailed_totalized_3")
-        component_2.product_id.list_price = 15.0
-        component_3 = self.env.ref("product_pack.pack_cpu_detailed_components_4")
-        component_3.product_id.list_price = 5.0
-        price = (
-            product_pack.with_context(pricelist="pricelist test")
-            .price_compute("list_price")
-            .get(product_pack.id)
-        )
-        self.assertEqual(price, 50.0)
+    def test_pack_price_with_pricelist_context(self):
+        # Apply pricelist by context only for product packs (no components)
+
+        # Pack Detailed
+        pack = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        price = pack.with_context(
+            whole_pack_price=True, pricelist=self.discount_pricelist.id
+        )._get_contextual_price()
+        self.assertEqual(price, 2601.675)
+
+        # Pack Totalized
+        pack = self.env.ref("product_pack.product_pack_cpu_detailed_totalized")
+        price = pack.with_context(
+            pricelist=self.discount_pricelist.id
+        )._get_contextual_price()
+        self.assertEqual(price, 2574.0)
+
+        # Pack Ignored
+        pack = self.env.ref("product_pack.product_pack_cpu_detailed_ignored")
+        price = pack.with_context(
+            pricelist=self.discount_pricelist.id
+        )._get_contextual_price()
+        self.assertEqual(price, 27.675)
+
+        # Pack Non detailed
+        pack = self.env.ref("product_pack.product_pack_cpu_non_detailed")
+        price = pack.with_context(
+            pricelist=self.discount_pricelist.id
+        )._get_contextual_price()
+        self.assertEqual(price, 2574.0)
