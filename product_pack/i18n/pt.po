@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* product_pack
+# 	* product_pack
 #
 msgid ""
 msgstr ""
@@ -55,7 +55,9 @@ msgstr "ID"
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_modifiable
 #: model:ir.model.fields,help:product_pack.field_product_template__pack_modifiable
-msgid "If you check this field yo will be able to edit sale/purchase order line relate to its component"
+msgid ""
+"If you check this field yo will be able to edit sale/purchase order line "
+"relate to its component"
 msgstr ""
 "Se assinalar este campo, poderá editar linhas de encomendas de compra/venda "
 "relacionadas com o seu componente"
@@ -100,9 +102,11 @@ msgstr "Não Detalhado"
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_component_price
 #: model:ir.model.fields,help:product_pack.field_product_template__pack_component_price
-msgid "On sale orders or purchase orders:\n"
+msgid ""
+"On sale orders or purchase orders:\n"
 "* Detailed per component: Detail lines with prices.\n"
-"* Totalized in main product: Detail lines merging lines prices on pack (don't show component prices).\n"
+"* Totalized in main product: Detail lines merging lines prices on pack "
+"(don't show component prices).\n"
 "* Ignored: Use product pack price (ignore detail line prices)."
 msgstr ""
 "Em encomendas de compra ou venda:\n"
@@ -115,7 +119,8 @@ msgstr ""
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_type
 #: model:ir.model.fields,help:product_pack.field_product_template__pack_type
-msgid "On sale orders or purchase orders:\n"
+msgid ""
+"On sale orders or purchase orders:\n"
 "* Detailed: Display components individually in the sale order.\n"
 "* Non Detailed: Do not display components individually in the sale order."
 msgstr ""
@@ -210,7 +215,8 @@ msgstr "Preço do componente do pack"
 #: code:addons/product_pack/models/product_template.py:65
 #: code:addons/product_pack/models/product_template.py:71
 #, python-format
-msgid "Pack lines products company must be the same as the parent product company"
+msgid ""
+"Pack lines products company must be the same as the parent product company"
 msgstr ""
 "A empresa das linhas de produtos dos packs tem que ser a mesma que a do "
 "produto ascendente"
@@ -284,7 +290,8 @@ msgstr "Unidade(s)"
 #. module: product_pack
 #: code:addons/product_pack/models/product_pack_line.py:49
 #, python-format
-msgid "You cannot set recursive packs.\n"
+msgid ""
+"You cannot set recursive packs.\n"
 "Product id: %s"
 msgstr ""
 "Não pode atribuir pack recursivos.\n"
