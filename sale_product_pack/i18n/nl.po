@@ -36,7 +36,8 @@ msgstr "regels in verpakking"
 msgid ""
 "On sale orders or purchase orders:\n"
 "* Detailed per component: Detail lines with prices.\n"
-"* Totalized in main product: Detail lines merging lines prices on pack (don't show component prices).\n"
+"* Totalized in main product: Detail lines merging lines prices on pack "
+"(don't show component prices).\n"
 "* Ignored: Use product pack price (ignore detail line prices)."
 msgstr ""
 
@@ -113,8 +114,7 @@ msgstr "De hoofdverpakking is aanpasbaar"
 #: code:addons/sale_product_pack/models/sale_order_line.py:0
 #, python-format
 msgid ""
-"You can not change this line because is part of a pack included in this "
-"order"
+"You can not change this line because is part of a pack included in this order"
 msgstr ""
 "Deze regel kan niet worden aangepast omdat een verpakking is gebruikt in "
 "deze verkoop order"
@@ -123,6 +123,6 @@ msgstr ""
 #: code:addons/sale_product_pack/models/sale_order.py:0
 #, python-format
 msgid ""
-"You cannot delete this line because is part of a pack in this sale order. In"
-" order to delete this line you need to delete the pack itself"
+"You cannot delete this line because is part of a pack in this sale order. In "
+"order to delete this line you need to delete the pack itself"
 msgstr ""
