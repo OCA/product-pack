@@ -114,7 +114,8 @@ msgstr "No detallado"
 msgid ""
 "On sale orders or purchase orders:\n"
 "* Detailed per component: Detail lines with prices.\n"
-"* Totalized in main product: Detail lines merging lines prices on pack (don't show component prices).\n"
+"* Totalized in main product: Detail lines merging lines prices on pack "
+"(don't show component prices).\n"
 "* Ignored: Use product pack price (ignore detail line prices)."
 msgstr ""
 "En órdenes de venta u órdenes de compra:\n"
@@ -228,7 +229,6 @@ msgid "Pack component price"
 msgstr "Precio de los componentes"
 
 #. module: product_pack
-#: code:addons/product_pack/models/product_template.py:0
 #: code:addons/product_pack/models/product_template.py:0
 #, python-format
 msgid ""
