@@ -98,7 +98,7 @@ class TestSaleProductPack(TransactionCase):
         self.assertAlmostEqual(line.price_subtotal, 27.68)
         self.assertEqual(
             (self.sale_order.order_line - line).mapped("price_subtotal"),
-            [1755.0, 22.5, 885.0],
+            [1579.5, 20.25, 796.5],
         )
 
     def test_create_ignored_price_order_line(self):

@@ -140,3 +140,21 @@ class SaleOrderLine(models.Model):
                 product=self.product_id.product_tmpl_id, quantity=1.0
             )
         return price
+
+    def _get_pack_line_discount(self):
+        """returns the discount settled in the parent pack lines"""
+        self.ensure_one()
+        discount = 0.0
+        if self.pack_parent_line_id.pack_component_price == "detailed":
+            for pack_line in self.pack_parent_line_id.product_id.pack_line_ids:
+                if pack_line.product_id == self.product_id:
+                    discount = pack_line.sale_discount
+                    break
+        return discount
+
+    @api.depends("product_id", "product_uom", "product_uom_qty")
+    def _compute_discount(self):
+        res = super()._compute_discount()
+        for pack_line in self.filtered("pack_parent_line_id"):
+            pack_line.discount = pack_line._get_pack_line_discount()
+        return res
