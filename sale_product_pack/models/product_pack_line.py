@@ -28,22 +28,14 @@ class ProductPack(models.Model):
         sol._onchange_product_id_warning()
         vals = sol._convert_to_write(sol._cache)
         pack_price_types = {"totalized", "ignored"}
-        sale_discount = 0.0
-        if line.product_id.pack_component_price == "detailed":
-            sale_discount = 100.0 - (
-                (100.0 - sol.discount) * (100.0 - self.sale_discount) / 100.0
-            )
-        elif (
+        if (
             line.product_id.pack_type == "detailed"
             and line.product_id.pack_component_price in pack_price_types
         ):
             vals["price_unit"] = 0.0
-        vals.update(
-            {
-                "discount": sale_discount,
-                "name": "{}{}".format("> " * (line.pack_depth + 1), sol.name),
-            }
-        )
+
+        vals["name"] = "{}{}".format("> " * (line.pack_depth + 1), sol.name)
+
         return vals
 
     def _get_pack_line_price(self, pricelist, quantity, uom=None, date=False, **kwargs):
