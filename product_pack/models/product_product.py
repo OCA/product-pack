@@ -39,6 +39,8 @@ class ProductProduct(models.Model):
         )
         for product in packs.with_context(prefetch_fields=False):
             pack_price = 0.0
+            if product.product_tmpl_id.pack_component_price == "detailed":
+                pack_price = product.list_price
             for pack_line in product.sudo().pack_line_ids:
                 pack_price += pack_line.get_price()
             pricelist_id_or_name = self._context.get("pricelist")
