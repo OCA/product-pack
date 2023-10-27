@@ -126,3 +126,32 @@ class SaleOrderLine(models.Model):
             "view_mode": "tree,form",
             "domain": domain,
         }
+
+    # def _get_pricelist_price(self):
+    #     self.ensure_one()
+    #     self.product_id.ensure_one()
+
+    #     if not self.product_id.product_tmpl_id.pack_ok \
+    #             or not self.product_id.pack_component_price == "totalized":
+    #         return super()._get_pricelist_price()
+    #     else:
+    #         pack_price = 0.0
+    #         pricelist_rule = self.pricelist_item_id
+    #         pricelist_rule_obj = self.env["product.pricelist.item"]
+    #         order_date = self.order_id.date_order or fields.Date.today()
+    #         qty = self.product_uom_qty or 1.0
+    #         uom = self.product_uom or self.product_id.uom_id
+    #         for pack_line in self.product_id.pack_line_ids:
+    #             product = pack_line.product_id.with_context(
+    #                 **self._get_product_price_context()
+    #             )
+    #             pricelist_rule = self.order_id.pricelist_id._get_product_rule(
+    #                 product, pack_line.quantity or 1.0, uom, order_date
+    #             )
+    #             pack_price += (
+    #                 pricelist_rule_obj.browse(pricelist_rule)._compute_price(
+    #                     product, qty, uom, order_date, currency=self.currency_id
+    #                 )
+    #                 * pack_line.quantity
+    #             )
+    #     return pack_price

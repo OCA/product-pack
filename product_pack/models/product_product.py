@@ -41,36 +41,11 @@ class ProductProduct(models.Model):
             pack_price = 0.0
             if product.product_tmpl_id.pack_component_price == "detailed":
                 pack_price = product.list_price
-            for pack_line in product.sudo().pack_line_ids:
-                pack_price += pack_line.get_price()
-            pricelist_id_or_name = self._context.get("pricelist")
-            # if there is a pricelist on the context the returned prices are on
-            # that currency but, if the pack product has a different currency
-            # it will be converted again by pp._compute_price_rule, so if
-            # that is the case we convert the amounts to the pack currency
-            if pricelist_id_or_name:
-                if isinstance(pricelist_id_or_name, list):
-                    pricelist_id_or_name = pricelist_id_or_name[0]
-                if isinstance(pricelist_id_or_name, str):
-                    pricelist_name_search = self.env["product.pricelist"].name_search(
-                        pricelist_id_or_name, operator="=", limit=1
-                    )
-                    if pricelist_name_search:
-                        pricelist = self.env["product.pricelist"].browse(
-                            [pricelist_name_search[0][0]]
-                        )
-                elif isinstance(pricelist_id_or_name, int):
-                    pricelist = self.env["product.pricelist"].browse(
-                        pricelist_id_or_name
-                    )
-                if pricelist and pricelist.currency_id != product.currency_id:
-                    pack_price = pricelist.currency_id._convert(
-                        pack_price,
-                        product.currency_id,
-                        self.company_id or self.env.company,
-                        fields.Date.today(),
-                    )
-            prices[product.id] = pack_price
+            pack_line_prices = product.sudo().pack_line_ids.price_compute(
+                price_type, uom, currency, company, date
+            )
+            prices[product.id] = pack_price + sum(pack_line_prices.values())
+
         return prices
 
     @api.depends("list_price", "price_extra")
@@ -86,3 +61,27 @@ class ProductProduct(models.Model):
                 list_price = product.uom_id._compute_price(list_price, to_uom)
             product.lst_price = list_price + product.price_extra
         return ret_val
+
+
+class Pricelist(models.Model):
+    _inherit = "product.pricelist"
+
+    def _compute_price_rule(self, products, qty, uom=None, date=False, **kwargs):
+        self.ensure_one()
+
+        packs, no_packs = products.split_pack_products()
+        res = super()._compute_price_rule(no_packs, qty, uom=uom, date=date, **kwargs)
+
+        for pack in packs:
+            pack_price = 0.0
+            if pack.pack_component_price == "detailed":
+                pack_price = pack.list_price
+            pack_lines = pack.sudo().pack_line_ids
+            tmp_products = pack_lines.mapped("product_id")
+            tmp_res = super()._compute_price_rule(
+                tmp_products, qty, uom=uom, date=date, **kwargs
+            )
+            for line in pack_lines:
+                pack_price += tmp_res[line.product_id.id][0] * line.quantity
+            res |= dict({pack.id: (pack_price, 0)})
+        return res

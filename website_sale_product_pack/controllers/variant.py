@@ -1,16 +1,7 @@
-from odoo import http
-
 from odoo.addons.website_sale.controllers.variant import WebsiteSaleVariantController
 
 
 class WebsiteSaleVariantController(WebsiteSaleVariantController):
-    @http.route(
-        ["/sale/get_combination_info_website"],
-        type="json",
-        auth="public",
-        methods=["POST"],
-        website=True,
-    )
     def get_combination_info_website(
         self, product_template_id, product_id, combination, add_qty, **kw
     ):
