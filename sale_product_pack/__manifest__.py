@@ -11,6 +11,9 @@
     "license": "AGPL-3",
     "depends": ["product_pack", "sale"],
     "data": ["security/ir.model.access.csv", "views/product_pack_line_views.xml"],
-    "demo": ["demo/product_pack_line_demo.xml"],
+    "demo": [
+        "demo/product_pack_line_demo.xml",
+        "demo/sale_pack_demo.xml",
+    ],
     "installable": True,
 }
