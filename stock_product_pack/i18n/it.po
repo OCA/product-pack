@@ -1,0 +1,67 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_product_pack
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: stock_product_pack
+#: model:ir.model.fields,field_description:stock_product_pack.field_procurement_group__display_name
+#: model:ir.model.fields,field_description:stock_product_pack.field_product_product__display_name
+#: model:ir.model.fields,field_description:stock_product_pack.field_product_template__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: stock_product_pack
+#: model:ir.model.fields,field_description:stock_product_pack.field_product_product__dont_create_move
+#: model:ir.model.fields,field_description:stock_product_pack.field_product_template__dont_create_move
+msgid "Don't create move"
+msgstr ""
+
+#. module: stock_product_pack
+#: model:ir.model.fields,field_description:stock_product_pack.field_procurement_group__id
+#: model:ir.model.fields,field_description:stock_product_pack.field_product_product__id
+#: model:ir.model.fields,field_description:stock_product_pack.field_product_template__id
+msgid "ID"
+msgstr ""
+
+#. module: stock_product_pack
+#: model:ir.model.fields,field_description:stock_product_pack.field_procurement_group____last_update
+#: model:ir.model.fields,field_description:stock_product_pack.field_product_product____last_update
+#: model:ir.model.fields,field_description:stock_product_pack.field_product_template____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: stock_product_pack
+#: model:ir.model,name:stock_product_pack.model_procurement_group
+msgid "Procurement Group"
+msgstr ""
+
+#. module: stock_product_pack
+#: model:ir.model,name:stock_product_pack.model_product_product
+msgid "Product"
+msgstr ""
+
+#. module: stock_product_pack
+#: model:ir.model,name:stock_product_pack.model_product_template
+msgid "Product Template"
+msgstr ""
+
+#. module: stock_product_pack
+#: model:ir.model.fields,help:stock_product_pack.field_product_product__dont_create_move
+#: model:ir.model.fields,help:stock_product_pack.field_product_template__dont_create_move
+msgid ""
+"With this option, the pack won't create an stock.move and will be set as "
+"delivered upon sale confirmation. This is useful to use get pack stock "
+"availability (type = 'product') but without actually having stock and moves "
+"of it."
+msgstr ""
