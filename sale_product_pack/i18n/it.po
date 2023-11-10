@@ -6,28 +6,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-11-10 11:36+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_depth
 msgid "Depth"
-msgstr ""
+msgstr "Profondità"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_depth
 msgid "Depth of the product if it is part of a pack."
-msgstr ""
+msgstr "Profondità di un prodotto se fa parte di un collo."
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_child_line_ids
 msgid "Lines in pack"
-msgstr ""
+msgstr "Righe nel collo"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_component_price
@@ -36,6 +38,12 @@ msgid "On sale orders or purchase orders:\n"
 "* Totalized in main product: Detail lines merging lines prices on pack (don't show component prices).\n"
 "* Ignored: Use product pack price (ignore detail line prices)."
 msgstr ""
+"Negli ordini di vendita o di acquisto:\n"
+"* Dettagliato per componente: dettaglio righe con prezzi.\n"
+"* Totalizzate nel prodotto principale: dettaglio righe unendo i prezzi delle "
+"righe nel collo (non mostra i prezzi dei componenti).\n"
+"* Ignorate: usa il prezzo prodotto del collo (ignora il dettaglio prezzi "
+"riga)."
 
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_type
@@ -43,76 +51,84 @@ msgid "On sale orders or purchase orders:\n"
 "* Detailed: Display components individually in the sale order.\n"
 "* Non Detailed: Do not display components individually in the sale order."
 msgstr ""
+"Negli ordini di ventita o di acquisto:\n"
+"* Dettagliati: visualizza i singoli componenti nell'ordine di vendita.\n"
+"* Non detagliati: non visualizza i singoli componenti nell'ordine di vendita."
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_parent_line_id
 msgid "Pack"
-msgstr ""
+msgstr "Collo"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_modifiable
 msgid "Pack Modifiable"
-msgstr ""
+msgstr "Collo modificabile"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_type
 msgid "Pack Type"
-msgstr ""
+msgstr "Tipo collo"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_component_price
 msgid "Pack component price"
-msgstr ""
+msgstr "Prezzo componente collo"
 
 #. module: sale_product_pack
 #: model_terms:ir.ui.view,arch_db:sale_product_pack.view_order_form
 msgid "Parent Pack is not modifiable"
-msgstr ""
+msgstr "Il collo padre non è modificabIle"
 
 #. module: sale_product_pack
 #: code:addons/sale_product_pack/models/sale_order_line.py:102
 #, python-format
 msgid "Parent Product"
-msgstr ""
+msgstr "Prodotto padre"
 
 #. module: sale_product_pack
 #: model:ir.model,name:sale_product_pack.model_product_pack_line
 msgid "Product pack line"
-msgstr ""
+msgstr "Riga collo prodotto"
 
 #. module: sale_product_pack
 #: model:ir.model,name:sale_product_pack.model_sale_order
 msgid "Sale Order"
-msgstr ""
+msgstr "Ordine di vendita"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line__sale_discount
 msgid "Sale discount (%)"
-msgstr ""
+msgstr "Sconto vendita (%)"
 
 #. module: sale_product_pack
 #: model:ir.model,name:sale_product_pack.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Riga ordine di vendita"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_parent_line_id
 msgid "The pack that contains this product."
-msgstr ""
+msgstr "Il collo che contiene questo prodotto."
 
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_modifiable
 msgid "The parent pack is modifiable"
-msgstr ""
+msgstr "Il collo padre è modificabile"
 
 #. module: sale_product_pack
 #: code:addons/sale_product_pack/models/sale_order_line.py:94
 #, python-format
 msgid "You can not change this line because is part of a pack included in this order"
 msgstr ""
+"Non si può modificare questa riga perché è parte di un collo incluso in "
+"questo ordine"
 
 #. module: sale_product_pack
 #: code:addons/sale_product_pack/models/sale_order.py:28
 #, python-format
 msgid "You can not delete this line because is part of a pack in this sale order. In order to delete this line you need to delete the pack itself"
 msgstr ""
+"Non si può cancellare questa riga perché è parte di un collo dello stesso "
+"ordine di vendita. Per poter cancellare questa riga bisogna cancellare il "
+"collo stesso"
