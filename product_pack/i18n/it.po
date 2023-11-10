@@ -6,92 +6,96 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-11-10 11:36+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: product_pack
 #: selection:product.template,pack_type:0
 msgid "Detailed"
-msgstr ""
+msgstr "Dettagliato"
 
 #. module: product_pack
 #: selection:product.template,pack_component_price:0
 msgid "Detailed per component"
-msgstr ""
+msgstr "Detagliato per componente"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_product__used_in_pack_line_ids
 #: model:ir.model.fields,field_description:product_pack.field_product_template__used_in_pack_line_ids
 msgid "Found in packs"
-msgstr ""
+msgstr "Si trova nei colli"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_modifiable
 #: model:ir.model.fields,help:product_pack.field_product_template__pack_modifiable
 msgid "If you check this field yo will be able to edit sale/purchase order line relate to its component"
 msgstr ""
+"Se si seleziona questo campo si potrà modificare la riga ordine vendita/"
+"acquisto relativa a questo componente"
 
 #. module: product_pack
 #: selection:product.template,pack_component_price:0
 msgid "Ignored"
-msgstr ""
+msgstr "Ignorato"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_product__pack_ok
 #: model:ir.model.fields,field_description:product_pack.field_product_template__pack_ok
 msgid "Is Pack?"
-msgstr ""
+msgstr "È collo?"
 
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_ok
 #: model:ir.model.fields,help:product_pack.field_product_template__pack_ok
 msgid "Is a Product Pack?"
-msgstr ""
+msgstr "È un collo prodotto?"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: product_pack
 #: selection:product.template,pack_type:0
 msgid "Non Detailed"
-msgstr ""
+msgstr "Non dettagliato"
 
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_component_price
@@ -101,6 +105,12 @@ msgid "On sale orders or purchase orders:\n"
 "* Totalized in main product: Detail lines merging lines prices on pack (don't show component prices).\n"
 "* Ignored: Use product pack price (ignore detail line prices)."
 msgstr ""
+"Negli ordini di vendita o di acquisto:\n"
+"* Dettagliato per componente: dettaglio righe con prezzi.\n"
+"* Totalizzate nel prodotto principale: dettaglio righe unendo i prezzi delle "
+"righe nel collo (non mostra i prezzi dei componenti).\n"
+"* Ignorate: usa il prezzo prodotto del collo (ignora il dettaglio prezzi "
+"riga)."
 
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_type
@@ -109,69 +119,72 @@ msgid "On sale orders or purchase orders:\n"
 "* Detailed: Display components individually in the sale order.\n"
 "* Non Detailed: Do not display components individually in the sale order."
 msgstr ""
+"Negli ordini di ventita o di acquisto:\n"
+"* Dettagliati: visualizza i singoli componenti nell'ordine di vendita.\n"
+"* Non detagliati: non visualizza i singoli componenti nell'ordine di vendita."
 
 #. module: product_pack
 #: model_terms:ir.ui.view,arch_db:product_pack.product_template_form_view
 msgid "Pack"
-msgstr ""
+msgstr "Collo"
 
 #. module: product_pack
 #: model:product.product,name:product_pack.product_pack_cpu_detailed_components
 #: model:product.template,name:product_pack.product_pack_cpu_detailed_components_product_template
 msgid "Pack CPU (Detailed - Displayed Components Price)"
-msgstr ""
+msgstr "CPU collo (Dettagliato - prezzo componenti visualizzati)"
 
 #. module: product_pack
 #: model:product.product,name:product_pack.product_pack_cpu_detailed_ignored
 #: model:product.template,name:product_pack.product_pack_cpu_detailed_ignored_product_template
 msgid "Pack CPU (Detailed - Ignored Components Price)"
-msgstr ""
+msgstr "CPU collo (Dettagliato - prezzo componenti ignorati)"
 
 #. module: product_pack
 #: model:product.product,name:product_pack.product_pack_cpu_detailed_totalized
 #: model:product.template,name:product_pack.product_pack_cpu_detailed_totalized_product_template
 msgid "Pack CPU (Detailed - Totalized Components Price)"
-msgstr ""
+msgstr "CPU collo (Dettagliato - prezzo componenti totali)"
 
 #. module: product_pack
 #: model:product.product,name:product_pack.product_pack_cpu_non_detailed
 #: model:product.template,name:product_pack.product_pack_cpu_non_detailed_product_template
 msgid "Pack CPU (Non Detailed - Totalized Components Price)"
-msgstr ""
+msgstr "CPU collo (Non dettagliato - prezzo componenti totali)"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_product__pack_modifiable
 #: model:ir.model.fields,field_description:product_pack.field_product_template__pack_modifiable
 msgid "Pack Modifiable"
-msgstr ""
+msgstr "Collo modificabile"
 
 #. module: product_pack
 #: model:product.product,name:product_pack.product_pack_pc_detailed_components
 #: model:product.template,name:product_pack.product_pack_pc_detailed_components_product_template
 msgid "Pack PC (Detailed - Displayed Components Price)"
-msgstr ""
+msgstr "PC collo (Dettagliato - prezzo componenti visualizzati)"
 
 #. module: product_pack
 #: model:product.product,name:product_pack.product_pack_pc_detailed_ignored
 #: model:product.template,name:product_pack.product_pack_pc_detailed_ignored_product_template
 msgid "Pack PC (Detailed - Ignored Components Price)"
-msgstr ""
+msgstr "PC collo (Dettagliato - prezzo componenti ignorati)"
 
 #. module: product_pack
 #: model:product.product,name:product_pack.product_pack_pc_detailed_totalized
 #: model:product.template,name:product_pack.product_pack_pc_detailed_totalized_product_template
 msgid "Pack PC (Detailed - Totalized Components Price)"
-msgstr ""
+msgstr "PC collo (Dettagliato - prezzo componenti totali)"
 
 #. module: product_pack
 #: model_terms:ir.ui.view,arch_db:product_pack.product_pack_line_form
 msgid "Pack Product Line"
-msgstr ""
+msgstr "Riga prdotto collo"
 
 #. module: product_pack
 #: model_terms:ir.ui.view,arch_db:product_pack.product_pack_line_tree
 msgid "Pack Product Lines"
-msgstr ""
+msgstr "RIghe prodotto collo"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_product__pack_line_ids
@@ -179,19 +192,19 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:product_pack.nan_product_pack_form
 #: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
 msgid "Pack Products"
-msgstr ""
+msgstr "Prodotti collo"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_product__pack_type
 #: model:ir.model.fields,field_description:product_pack.field_product_template__pack_type
 msgid "Pack Type"
-msgstr ""
+msgstr "Tipo collo"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_product__pack_component_price
 #: model:ir.model.fields,field_description:product_pack.field_product_template__pack_component_price
 msgid "Pack component price"
-msgstr ""
+msgstr "Prezzo componente collo"
 
 #. module: product_pack
 #: code:addons/product_pack/models/product_template.py:65
@@ -199,54 +212,56 @@ msgstr ""
 #, python-format
 msgid "Pack lines products company must be the same as the parent product company"
 msgstr ""
+"L'azienda dei prodotti delle righe collo deve essere la stessa del prodotto "
+"padre"
 
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__used_in_pack_line_ids
 #: model:ir.model.fields,help:product_pack.field_product_template__used_in_pack_line_ids
 msgid "Packs where product is used."
-msgstr ""
+msgstr "Colli dove è usato il prdotto."
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__parent_product_id
 msgid "Parent Product"
-msgstr ""
+msgstr "Prodotto padre"
 
 #. module: product_pack
 #: model:ir.model,name:product_pack.model_product_product
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__product_id
 msgid "Product"
-msgstr ""
+msgstr "Prodotto"
 
 #. module: product_pack
 #: model:ir.model,name:product_pack.model_product_template
 msgid "Product Template"
-msgstr ""
+msgstr "Modello prodotto"
 
 #. module: product_pack
 #: sql_constraint:product.pack.line:0
 msgid "Product must be only once on a pack!"
-msgstr ""
+msgstr "Il prdotto deve essere unico per collo!"
 
 #. module: product_pack
 #: model:ir.model,name:product_pack.model_product_pack_line
 msgid "Product pack line"
-msgstr ""
+msgstr "Riga collo prodotto"
 
 #. module: product_pack
 #: model:ir.model.fields,help:product_pack.field_product_product__pack_line_ids
 #: model:ir.model.fields,help:product_pack.field_product_template__pack_line_ids
 msgid "Products that are part of this pack."
-msgstr ""
+msgstr "Prodotti che sono presenti in questo collo."
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__quantity
 msgid "Quantity"
-msgstr ""
+msgstr "Quantità"
 
 #. module: product_pack
 #: selection:product.template,pack_component_price:0
 msgid "Totalized in main product"
-msgstr ""
+msgstr "Totali nel prodotto padre"
 
 #. module: product_pack
 #: model:product.product,uom_name:product_pack.product_pack_cpu_detailed_components
@@ -264,7 +279,7 @@ msgstr ""
 #: model:product.template,uom_name:product_pack.product_pack_pc_detailed_ignored_product_template
 #: model:product.template,uom_name:product_pack.product_pack_pc_detailed_totalized_product_template
 msgid "Unit(s)"
-msgstr ""
+msgstr "Unità"
 
 #. module: product_pack
 #: code:addons/product_pack/models/product_pack_line.py:49
@@ -272,11 +287,13 @@ msgstr ""
 msgid "You cannot set recursive packs.\n"
 "Product id: %s"
 msgstr ""
+"Non si possono impostare colli ricorsivi.\n"
+"ID prodottO: %s"
 
 #. module: product_pack
 #: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
 msgid "You must save first to add pack lines"
-msgstr ""
+msgstr "Bisogna salvare prima di aggiungere righe collo"
 
 #. module: product_pack
 #: model:product.product,weight_uom_name:product_pack.product_pack_cpu_detailed_components
@@ -294,4 +311,4 @@ msgstr ""
 #: model:product.template,weight_uom_name:product_pack.product_pack_pc_detailed_ignored_product_template
 #: model:product.template,weight_uom_name:product_pack.product_pack_pc_detailed_totalized_product_template
 msgid "kg"
-msgstr ""
+msgstr "kg"
