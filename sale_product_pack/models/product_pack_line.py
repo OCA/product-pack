@@ -49,3 +49,13 @@ class ProductPack(models.Model):
     def get_price(self):
         self.ensure_one()
         return super().get_price() * (1 - self.sale_discount / 100.0)
+
+    def price_compute(
+        self, price_type, uom=False, currency=False, company=False, date=False
+    ):
+        pack_line_prices = super().price_compute(
+            price_type, uom, currency, company, date
+        )
+        for line in self:
+            pack_line_prices[line.product_id.id] *= 1 - line.sale_discount / 100.0
+        return pack_line_prices

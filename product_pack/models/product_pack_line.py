@@ -57,3 +57,14 @@ class ProductPackLine(models.Model):
     def get_price(self):
         self.ensure_one()
         return self.product_id.lst_price * self.quantity
+
+    def price_compute(
+        self, price_type, uom=False, currency=False, company=False, date=False
+    ):
+        pack_line_prices = self.product_id.price_compute(
+            price_type, uom, currency, company, date
+        )
+        for line in self:
+            pack_line_prices[line.product_id.id] *= line.quantity
+
+        return pack_line_prices
