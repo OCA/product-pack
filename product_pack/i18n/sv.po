@@ -1,0 +1,297 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_pack
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-02-17 12:16+0000\n"
+"Last-Translator: Simon S <simon.stromberg@vertel.se>\n"
+"Language-Team: none\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__create_uid
+msgid "Created by"
+msgstr "Skapad av"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__create_date
+msgid "Created on"
+msgstr "Skapad den"
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_type__detailed
+msgid "Detailed"
+msgstr "Detaljerad"
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__detailed
+msgid "Detailed per component"
+msgstr "Detaljerad per beståndsdel"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__display_name
+msgid "Display Name"
+msgstr "Visningsnamn"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__used_in_pack_line_ids
+#: model:ir.model.fields,field_description:product_pack.field_product_template__used_in_pack_line_ids
+msgid "Found in packs"
+msgstr "Finns i pack"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__id
+msgid "ID"
+msgstr "ID"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_modifiable
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_modifiable
+msgid ""
+"If you check this field yo will be able to edit sale/purchase order line "
+"relate to its component"
+msgstr ""
+"Om du kryssar i det här fältet så kommer du att kunna redigera den "
+"relaterade orderraden för försäljning/köpordern"
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__ignored
+msgid "Ignored"
+msgstr "Ignorerad"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_ok
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_ok
+msgid "Is Pack?"
+msgstr "Är ett pack?"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_ok
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_ok
+msgid "Is a Product Pack?"
+msgstr "Är ett produkt pack?"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line____last_update
+msgid "Last Modified on"
+msgstr "Senast ändrad"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__write_uid
+msgid "Last Updated by"
+msgstr "Senast uppdaterad av"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__write_date
+msgid "Last Updated on"
+msgstr "Senast uppdaterad den"
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_type__non_detailed
+msgid "Non Detailed"
+msgstr "Icke detaljerad"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_component_price
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_component_price
+msgid ""
+"On sale orders or purchase orders:\n"
+"* Detailed per component: Detail lines with prices.\n"
+"* Totalized in main product: Detail lines merging lines prices on pack "
+"(don't show component prices).\n"
+"* Ignored: Use product pack price (ignore detail line prices)."
+msgstr ""
+"För sälj eller köpordrar:\n"
+"* Detaljerade per beståndsdel: Detaljrader med priser.\n"
+"* Summerade i huvudprodukten: Detaljrader med sammanslagna packpriser (visar "
+"ej beståndsdelarnas priser).\n"
+"* Ignorerade: Använd produkt-packpriser (ignorera detaljradernas priser)."
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_type
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_type
+msgid ""
+"On sale orders or purchase orders:\n"
+"* Detailed: Display components individually in the sale order.\n"
+"* Non Detailed: Do not display components individually in the sale order."
+msgstr ""
+"För sälj eller köpordrar:\n"
+"* Detaljerad: Visa individuella beståndsdelar i säljordern.\n"
+"* Icke detaljerad: Visa inte individuella beståndsdelar i säljordern."
+
+#. module: product_pack
+#: model_terms:ir.ui.view,arch_db:product_pack.product_template_form_view
+msgid "Pack"
+msgstr "Pack"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_cpu_detailed_components_product_template
+msgid "Pack CPU (Detailed - Displayed Components Price)"
+msgstr "Pack CPU (Detaljerad - Visa pris för beståndsdelar)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_cpu_detailed_ignored_product_template
+msgid "Pack CPU (Detailed - Ignored Components Price)"
+msgstr "Pack CPU (Detaljerad - Ignorera priser för beståndsdelar)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_cpu_detailed_totalized_product_template
+msgid "Pack CPU (Detailed - Totalized Components Price)"
+msgstr "Pack CPU (Detaljerad - Summerade priser för beståndsdelar)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_cpu_non_detailed_product_template
+msgid "Pack CPU (Non Detailed - Totalized Components Price)"
+msgstr "Pack CPU (Icke detaljerad - Summerade priser för beståndsdelar)"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_component_price
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_component_price
+msgid "Pack Component Price"
+msgstr ""
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_type
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_type
+msgid "Pack Display Type"
+msgstr "Pack visningstyp"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_modifiable
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_modifiable
+msgid "Pack Modifiable"
+msgstr "Pack modifierbart"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_modifiable_invisible
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_modifiable_invisible
+msgid "Pack Modifiable Invisible"
+msgstr ""
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_pc_detailed_components_product_template
+msgid "Pack PC (Detailed - Displayed Components Price)"
+msgstr "Pack PC (Detaljerad - Visa pris för beståndsdelar)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_pc_detailed_ignored_product_template
+msgid "Pack PC (Detailed - Ignored Components Price)"
+msgstr "Pack PC (Detaljerad - Ignorera priser för beståndsdelar)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_pc_detailed_totalized_product_template
+msgid "Pack PC (Detailed - Totalized Components Price)"
+msgstr "Pack PC (Icke detaljerad - Summerade priser för beståndsdelar)"
+
+#. module: product_pack
+#: model_terms:ir.ui.view,arch_db:product_pack.product_pack_line_form
+msgid "Pack Product Line"
+msgstr "Pack produktrad"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_line_ids
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_line_ids
+#: model_terms:ir.ui.view,arch_db:product_pack.nan_product_pack_form
+#: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
+msgid "Pack Products"
+msgstr "Pack produkter"
+
+#. module: product_pack
+#. odoo-python
+#: code:addons/product_pack/models/product_template.py:0
+#, python-format
+msgid ""
+"Pack lines products company must be the same as the parent product company"
+msgstr "Produktbolaget för packraderna måste vara samma som moderbolaget"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__used_in_pack_line_ids
+#: model:ir.model.fields,help:product_pack.field_product_template__used_in_pack_line_ids
+msgid "Packs where product is used."
+msgstr "Pack där produkt används."
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__parent_product_id
+msgid "Parent Product"
+msgstr "Moderprodukt"
+
+#. module: product_pack
+#: model:ir.model,name:product_pack.model_product_template
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__product_id
+msgid "Product"
+msgstr "Produkt"
+
+#. module: product_pack
+#: model:ir.model,name:product_pack.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: product_pack
+#: model:ir.model.constraint,message:product_pack.constraint_product_pack_line_product_uniq
+msgid "Product must be only once on a pack!"
+msgstr "Produkten får endast förekomma en gång per pack!"
+
+#. module: product_pack
+#: model:ir.model,name:product_pack.model_product_pack_line
+msgid "Product pack line"
+msgstr "Produkt packrad"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_line_ids
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_line_ids
+msgid "Products that are part of this pack."
+msgstr "Produkter som tillhör detta pack."
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__quantity
+msgid "Quantity"
+msgstr "Kvantitet"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_modifiable_invisible
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_modifiable_invisible
+msgid ""
+"Technical field in order to compute the availability of the Pack Modifiable "
+"field"
+msgstr ""
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__totalized
+msgid "Totalized in main product"
+msgstr "Summerade i huvudprodukten"
+
+#. module: product_pack
+#. odoo-python
+#: code:addons/product_pack/models/product_pack_line.py:0
+#, python-format
+msgid ""
+"You cannot set recursive packs.\n"
+"Product id: %s"
+msgstr ""
+"Du kan inte sätta rekursiva pack.\n"
+"Produkt id: %s"
+
+#. module: product_pack
+#: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
+msgid "You must save first to add pack lines"
+msgstr "Du måste spara innan du kan addera packrader"
+
+#~ msgid "Product Template"
+#~ msgstr "Produktmall"
+
+#~ msgid "Units"
+#~ msgstr "Enheter"
+
+#~ msgid "Pack Product Lines"
+#~ msgstr "Pack produktrader"
+
+#~ msgid "Pack component price"
+#~ msgstr "Packpris för beståndsdel"
