@@ -105,6 +105,10 @@ Contributors
 
    -  Maxime Franco
 
+-  `ADHOC SA <https://www.adhoc.com.ar>`__:
+
+   -  Bruno Zanotti
+
 Maintainers
 -----------
 
