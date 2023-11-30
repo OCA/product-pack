@@ -1,0 +1,9 @@
+- [Tecnativa](https://www.tecnativa.com):
+  - Ernesto Tejeda
+  - Pedro M. Baeza
+- [Akretion](https://akretion.com):
+  - Raphaël Reverdy
+- [Open Source Integrators](https://opensourceintegrators.eu):
+  - Daniel Reis \<<dreis@opensourceintegrators.com>\>
+- [Acsone](https://www.acsone.eu/):
+  - Maxime Franco
