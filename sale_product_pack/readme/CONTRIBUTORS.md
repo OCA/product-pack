@@ -7,3 +7,5 @@
   - Daniel Reis \<<dreis@opensourceintegrators.com>\>
 - [Acsone](https://www.acsone.eu/):
   - Maxime Franco
+- [ADHOC SA](https://www.adhoc.com.ar):
+  - Bruno Zanotti
