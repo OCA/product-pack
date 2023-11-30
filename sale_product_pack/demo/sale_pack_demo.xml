@@ -7,7 +7,6 @@
         <field name="partner_shipping_id" ref="base.partner_demo_portal" />
         <field name="user_id" ref="base.user_admin" />
         <field name="payment_term_id" ref="account.account_payment_term_30days" />
-        <field name="pricelist_id" ref="product.list0" />
         <field name="team_id" ref="sales_team.team_sales_department" />
         <field
             name="date_order"
