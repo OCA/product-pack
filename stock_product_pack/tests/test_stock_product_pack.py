@@ -166,13 +166,16 @@ class TestSaleProductPack(TransactionCase):
         picking.action_confirm()
         self.assertEqual(self.pack_dc.virtual_available, 5)
         self.assertEqual(self.pack_dc.qty_available, 0)
+        # self.cr.commit()
         wizard_dict = picking.button_validate()
-        wizard = Form(
-            self.env[(wizard_dict.get("res_model"))].with_context(
-                **wizard_dict["context"]
-            )
-        ).save()
-        wizard.process()
+        # import pdb;pdb.set_trace()
+        if wizard_dict is not True:
+            wizard = Form(
+                self.env[(wizard_dict.get("res_model"))].with_context(
+                    **wizard_dict["context"]
+                )
+            ).save()
+            wizard.process()
         self.assertEqual(self.pack_dc.virtual_available, 5)
         self.assertEqual(self.pack_dc.qty_available, 5)
 

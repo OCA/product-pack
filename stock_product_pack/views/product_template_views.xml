@@ -11,7 +11,7 @@
             <field name="pack_modifiable" position="after">
                 <field
                     name="dont_create_move"
-                    attrs="{'invisible':['|', ('pack_ok', '=', False), ('detailed_type', '=', 'service')]}"
+                    invisible="not pack_ok or detailed_type == 'service'"
                 />
             </field>
         </field>

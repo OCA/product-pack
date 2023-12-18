@@ -4,7 +4,7 @@
 
 import math
 
-from odoo import models
+from odoo import api, models
 
 
 class ProductProduct(models.Model):
@@ -13,10 +13,10 @@ class ProductProduct(models.Model):
     def _compute_quantities_dict(
         self, lot_id, owner_id, package_id, from_date=False, to_date=False
     ):
-        res = super()._compute_quantities_dict(
+        packs = self.filtered("pack_ok")
+        res = super(ProductProduct, self - packs)._compute_quantities_dict(
             lot_id, owner_id, package_id, from_date=from_date, to_date=to_date
         )
-        packs = self.filtered("pack_ok")
         for product in packs.with_context(prefetch_fields=False):
             pack_qty_available = []
             pack_virtual_available = []
@@ -27,6 +27,7 @@ class ProductProduct(models.Model):
             for subproduct in subproducts:
                 subproduct_stock = subproduct.product_id
                 sub_qty = subproduct.quantity
+                # import pdb;pdb.set_trace()
                 if sub_qty:
                     pack_qty_available.append(
                         math.floor(subproduct_stock.qty_available / sub_qty)
@@ -48,6 +49,23 @@ class ProductProduct(models.Model):
             }
         return res
 
+    @api.depends(
+        "stock_move_ids.product_qty",
+        "pack_line_ids.product_id.stock_move_ids.product_qty",
+        "stock_move_ids.state",
+        "pack_line_ids.product_id.stock_move_ids.state",
+        "stock_move_ids.quantity",
+        "pack_line_ids.product_id.stock_move_ids.quantity",
+    )
+    @api.depends_context(
+        "lot_id",
+        "owner_id",
+        "package_id",
+        "from_date",
+        "to_date",
+        "location",
+        "warehouse",
+    )
     def _compute_quantities(self):
         """In v13 Odoo introduces a filter for products not services.
         To keep how it was working on v12 we try to get stock for
