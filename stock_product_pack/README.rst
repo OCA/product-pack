@@ -82,6 +82,10 @@ Contributors
    -  Sergio Teruel
    -  João Marques
 
+-  `ADHOC SA <https://www.adhoc.com.ar>`__:
+
+   -  Bruno Zanotti
+
 Maintainers
 -----------
 
