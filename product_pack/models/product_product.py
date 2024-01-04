@@ -37,38 +37,12 @@ class ProductProduct(models.Model):
         prices = super(ProductProduct, no_packs).price_compute(
             price_type, uom, currency, company, date
         )
+        # TODO:@bruno-zanotti prefetch_fields=False still necessary?
         for product in packs.with_context(prefetch_fields=False):
-            pack_price = 0.0
-            for pack_line in product.sudo().pack_line_ids:
-                pack_price += pack_line.get_price()
-            pricelist_id_or_name = self._context.get("pricelist")
-            # if there is a pricelist on the context the returned prices are on
-            # that currency but, if the pack product has a different currency
-            # it will be converted again by pp._compute_price_rule, so if
-            # that is the case we convert the amounts to the pack currency
-            if pricelist_id_or_name:
-                if isinstance(pricelist_id_or_name, list):
-                    pricelist_id_or_name = pricelist_id_or_name[0]
-                if isinstance(pricelist_id_or_name, str):
-                    pricelist_name_search = self.env["product.pricelist"].name_search(
-                        pricelist_id_or_name, operator="=", limit=1
-                    )
-                    if pricelist_name_search:
-                        pricelist = self.env["product.pricelist"].browse(
-                            [pricelist_name_search[0][0]]
-                        )
-                elif isinstance(pricelist_id_or_name, int):
-                    pricelist = self.env["product.pricelist"].browse(
-                        pricelist_id_or_name
-                    )
-                if pricelist and pricelist.currency_id != product.currency_id:
-                    pack_price = pricelist.currency_id._convert(
-                        pack_price,
-                        product.currency_id,
-                        self.company_id or self.env.company,
-                        fields.Date.today(),
-                    )
-            prices[product.id] = pack_price
+            pack_line_prices = product.sudo().pack_line_ids.price_compute(
+                price_type, uom, currency, company, date
+            )
+            prices[product.id] = sum(pack_line_prices.values())
         return prices
 
     @api.depends("list_price", "price_extra")
