@@ -1,0 +1,1 @@
+odoo-addon-product_pack @ git+https://github.com/OCA/product-pack.git@refs/pull/154/head#subdirectory=product_pack
