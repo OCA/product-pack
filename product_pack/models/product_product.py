@@ -42,7 +42,7 @@ class ProductProduct(models.Model):
             price_type, uom, currency, company, date
         )
         for product in packs.with_context(prefetch_fields=False):
-            pack_line_prices = product.sudo().pack_line_ids.price_compute(
+            pack_line_prices = product.sudo().pack_line_ids._pack_line_price_compute(
                 price_type, uom, currency, company, date
             )
             prices[product.id] = sum(pack_line_prices.values())

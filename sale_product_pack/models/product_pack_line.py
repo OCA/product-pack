@@ -38,10 +38,10 @@ class ProductPack(models.Model):
 
         return vals
 
-    def price_compute(
+    def _pack_line_price_compute(
         self, price_type, uom=False, currency=False, company=False, date=False
     ):
-        pack_line_prices = super().price_compute(
+        pack_line_prices = super()._pack_line_price_compute(
             price_type, uom, currency, company, date
         )
         for line in self:

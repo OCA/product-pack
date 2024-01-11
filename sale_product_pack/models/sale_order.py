@@ -64,3 +64,8 @@ class SaleOrder(models.Model):
             lambda line: not line.pack_parent_line_id
             or line.pack_parent_line_id.pack_component_price == "detailed"
         )
+
+    def action_update_prices(self):
+        return super(
+            SaleOrder, self.with_context(pricelist=self.pricelist_id.id)
+        ).action_update_prices()
