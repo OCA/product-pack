@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-20 22:46+0000\n"
-"PO-Revision-Date: 2019-12-27 14:13+0000\n"
-"Last-Translator: Carles Antoli <carlesantoli@hotmail.com>\n"
+"PO-Revision-Date: 2024-01-15 15:35+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_depth
@@ -32,26 +32,26 @@ msgstr "Profundidad del producto si forma parte de un pack."
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order__display_name
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__do_no_expand_pack_lines
 msgid "Do No Expand Pack Lines"
-msgstr ""
+msgstr "No Ampliar las Líneas de Embalaje"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line__id
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order__id
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_product_pack_line____last_update
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order____last_update
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_child_line_ids
@@ -60,7 +60,6 @@ msgstr "Líneas en el pack"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_component_price
-#, fuzzy
 msgid ""
 "On sale orders or purchase orders:\n"
 "* Detailed per component: Detail lines with prices.\n"
@@ -68,16 +67,15 @@ msgid ""
 "(don't show component prices).\n"
 "* Ignored: Use product pack price (ignore detail line prices)."
 msgstr ""
-"En órdenes de venta u órdenes de compra:\n"
-"* Detallado por componente: Detalla las lineas con precios.\n"
-"* Totalizado en el producto principal: Detalla las lineas mezclando sus "
-"precios en el Pack (No muestra los precios de los componentes).\n"
-"* Ignorado: Se usa el precio el Pack (los precios de las lineas son "
-"ignorados)."
+"En los pedidos de venta o de compra:\n"
+"* Detalle por componente: Detalle líneas con precios.\n"
+"* Totalizado en producto principal: Líneas de detalle fusionando líneas "
+"precios en pack (no muestran precios de componentes).\n"
+"* Ignorado: Utiliza el precio del pack de productos (ignora los precios de "
+"las líneas de detalle)."
 
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_type
-#, fuzzy
 msgid ""
 "On sale orders or purchase orders:\n"
 "* Detailed: Display components individually in the sale order.\n"
@@ -87,22 +85,22 @@ msgstr ""
 "* Detallado: Muestra los componentes individualmente en lineas de la Orden "
 "de Venta/Orden de Compra\n"
 "* No Detallado: No muestra los componentes individualmente en lineas de la "
-"Orden de Venta/Orden de Compra"
+"Orden de Venta/Orden de Compra."
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_parent_line_id
 msgid "Pack"
-msgstr "Pack"
+msgstr "Paquete"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_type
 msgid "Pack Display Type"
-msgstr ""
+msgstr "Tipo de Visualización del Paquete"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_modifiable
 msgid "Pack Modifiable"
-msgstr ""
+msgstr "Paquete Modificable"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_component_price
@@ -112,13 +110,13 @@ msgstr "Precio de los componentes"
 #. module: sale_product_pack
 #: model_terms:ir.ui.view,arch_db:sale_product_pack.view_order_form
 msgid "Parent Pack is not modifiable"
-msgstr ""
+msgstr "El paquete Parental no es modificable"
 
 #. module: sale_product_pack
 #: code:addons/sale_product_pack/models/sale_order_line.py:0
-#, fuzzy, python-format
+#, python-format
 msgid "Parent Product"
-msgstr "Producto"
+msgstr "Producto Parental"
 
 #. module: sale_product_pack
 #: model:ir.model,name:sale_product_pack.model_product_pack_line
@@ -133,7 +131,7 @@ msgstr "Descuento para ventas"
 #. module: sale_product_pack
 #: model:ir.model,name:sale_product_pack.model_sale_order
 msgid "Sales Order"
-msgstr ""
+msgstr "Órdenes de Venta"
 
 #. module: sale_product_pack
 #: model:ir.model,name:sale_product_pack.model_sale_order_line
@@ -148,13 +146,15 @@ msgstr "El pack que contiene este producto."
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_modifiable
 msgid "The parent pack is modifiable"
-msgstr ""
+msgstr "El paquete parental es modificable"
 
 #. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__do_no_expand_pack_lines
 msgid ""
 "This is a technical field in order to check if pack lines has to be expanded"
 msgstr ""
+"Se trata de un campo técnico para comprobar si es necesario ampliar las "
+"líneas de envasado"
 
 #. module: sale_product_pack
 #: code:addons/sale_product_pack/models/sale_order_line.py:0
@@ -172,6 +172,8 @@ msgid ""
 "You cannot delete this line because is part of a pack in this sale order. In "
 "order to delete this line you need to delete the pack itself"
 msgstr ""
+"No puede eliminar esta línea porque forma parte de un paquete en este pedido "
+"de venta. Para eliminar esta línea debe eliminar el propio paquete"
 
 #~ msgid "Pack Type"
 #~ msgstr "Tipo de Pack"
