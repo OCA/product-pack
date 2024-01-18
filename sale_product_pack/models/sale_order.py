@@ -11,7 +11,7 @@ class SaleOrder(models.Model):
         sale_copy = super().copy(default)
         # we unlink pack lines that should not be copied
         pack_copied_lines = sale_copy.order_line.filtered(
-            lambda l: l.pack_parent_line_id.order_id == self
+            lambda order_line: order_line.pack_parent_line_id.order_id == self
         )
         pack_copied_lines.unlink()
         return sale_copy
