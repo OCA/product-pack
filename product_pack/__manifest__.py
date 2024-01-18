@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Product Pack",
-    "version": "14.0.1.1.1",
+    "version": "14.0.1.1.2",
     "category": "Product",
     "summary": "This module allows you to set a product as a Pack",
     "website": "https://github.com/OCA/product-pack",
