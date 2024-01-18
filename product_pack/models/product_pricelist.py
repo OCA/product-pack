@@ -15,7 +15,7 @@ class ProductPricelist(models.Model):
         products_qty_partner_super = [
             (s[0], s[1], s[2])
             for s in products_qty_partner
-            if not s[0] in s[0].split_pack_products()[0]
+            if s[0] not in s[0].split_pack_products()[0]
         ]
         res = super()._compute_price_rule(
             products_qty_partner_super, date=date, uom_id=uom_id

@@ -32,7 +32,10 @@ class SaleOrderLine(models.Model):
 
     do_no_expand_pack_lines = fields.Boolean(
         compute="_compute_do_no_expand_pack_lines",
-        help="This is a technical field in order to check if pack lines has to be expanded",
+        help=(
+            "This is a technical field in order to check if pack lines has "
+            "to be expanded"
+        ),
     )
 
     @api.depends_context("update_prices", "update_pricelist")
@@ -57,7 +60,8 @@ class SaleOrderLine(models.Model):
                 if write:
                     existing_subline = first(
                         self.pack_child_line_ids.filtered(
-                            lambda child: child.product_id == subline.product_id
+                            lambda child, pack_line=subline: child.product_id
+                            == pack_line.product_id
                         )
                     )
                     # if subline already exists we update, if not we create
