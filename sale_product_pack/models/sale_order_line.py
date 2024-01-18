@@ -1,5 +1,6 @@
 # Copyright 2019 Tecnativa - Ernesto Tejeda
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.fields import first
@@ -83,9 +84,23 @@ class SaleOrderLine(models.Model):
         record.expand_pack_line()
         return record
 
+    @api.model
+    def _pack_fields_trigger_expand_pack_line_on_write(self):
+        """A set of fields that will trigger expand pack line
+
+        To propagate information over sale order line add your
+        field in this list and overload the following method:
+        `ProductPack.get_sale_order_line_vals`
+
+        Be aware if pack line are "modifiable" user input can
+        be overwrite once save if one of this field as been
+        changed on the pack line...
+        """
+        return {"product_id", "product_uom_qty"}
+
     def write(self, vals):
         res = super().write(vals)
-        if "product_id" in vals or "product_uom_qty" in vals:
+        if self._pack_fields_trigger_expand_pack_line_on_write() & set(vals.keys()):
             for record in self:
                 record.expand_pack_line(write=True)
         return res
@@ -121,3 +136,15 @@ class SaleOrderLine(models.Model):
             "view_mode": "tree,form",
             "domain": domain,
         }
+
+    def unlink(self):
+        for order, lines in self.group_recordset_by(lambda sol: sol.order_id):
+            pack_component_to_delete = self.env["sale.order.line"].search(
+                [
+                    ("id", "child_of", lines.ids),
+                    ("id", "not in", lines.ids),
+                    ("order_id", "=", order.id),
+                ]
+            )
+            pack_component_to_delete.unlink()
+        return super().unlink()

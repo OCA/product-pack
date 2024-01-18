@@ -1,7 +1,8 @@
 # Copyright 2019 Tecnativa - Ernesto Tejeda
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests import SavepointCase
+from odoo.exceptions import UserError
+from odoo.tests import Form, SavepointCase
 
 
 class TestSaleProductPack(SavepointCase):
@@ -155,6 +156,7 @@ class TestSaleProductPack(SavepointCase):
             }
         )
         total_qty_init = qty_in_order()
+
         # change qty of main sol
         main_sol.product_uom_qty = 2 * main_sol.product_uom_qty
         total_qty_updated = qty_in_order()
@@ -168,6 +170,105 @@ class TestSaleProductPack(SavepointCase):
         main_sol.product_uom_qty = 2 * main_sol.product_uom_qty
         total_qty_confirmed = qty_in_order()
         self.assertAlmostEqual(total_qty_updated * 2, total_qty_confirmed)
+
+    def test_update_qty_do_not_expand(self):
+        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        main_sol = self.env["sale.order.line"].create(
+            {
+                "order_id": self.sale_order.id,
+                "name": product_cp.name,
+                "product_id": product_cp.id,
+                "product_uom_qty": 1,
+            }
+        )
+        main_sol.with_context(update_prices=True).product_uom_qty = 2
+        self.assertTrue(
+            all(
+                self.sale_order.order_line.filtered(
+                    lambda sol: sol.pack_parent_line_id == main_sol
+                ).mapped(lambda sol: sol.product_uom_qty == 1)
+            ),
+        )
+
+    def test_update_pack_qty_with_new_component(self):
+        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        main_sol = self.env["sale.order.line"].create(
+            {
+                "order_id": self.sale_order.id,
+                "name": product_cp.name,
+                "product_id": product_cp.id,
+                "product_uom_qty": 1,
+            }
+        )
+
+        self.assertEqual(
+            sum(
+                self.sale_order.order_line.filtered(
+                    lambda sol: sol.pack_parent_line_id == main_sol
+                ).mapped("product_uom_qty")
+            ),
+            3,
+            "Expected 3 lines with quantity 1 while setup this test",
+        )
+
+        product_cp.pack_line_ids |= self.env["product.pack.line"].create(
+            {
+                "parent_product_id": product_cp.id,
+                "product_id": self.env.ref("product.product_product_12").id,
+                "quantity": 2,
+            }
+        )
+
+        main_sol.product_uom_qty = 2
+        self.assertEqual(
+            sum(
+                self.sale_order.order_line.filtered(
+                    lambda sol: sol.pack_parent_line_id == main_sol
+                ).mapped("product_uom_qty")
+            ),
+            10,
+            "Expected 3 lines with quantity 2 and new component line with quantity 4",
+        )
+
+    def test_update_pack_qty_with_new_component_do_not_expand(self):
+        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        main_sol = self.env["sale.order.line"].create(
+            {
+                "order_id": self.sale_order.id,
+                "name": product_cp.name,
+                "product_id": product_cp.id,
+                "product_uom_qty": 1,
+            }
+        )
+
+        self.assertEqual(
+            sum(
+                self.sale_order.order_line.filtered(
+                    lambda sol: sol.pack_parent_line_id == main_sol
+                ).mapped("product_uom_qty")
+            ),
+            3,
+            "Expected 3 lines with quantity 1 while setup this test",
+        )
+
+        product_cp.pack_line_ids |= self.env["product.pack.line"].create(
+            {
+                "parent_product_id": product_cp.id,
+                "product_id": self.env.ref("product.product_product_12").id,
+                "quantity": 2,
+            }
+        )
+
+        main_sol.with_context(update_prices=True).product_uom_qty = 2
+        self.assertEqual(
+            sum(
+                self.sale_order.order_line.filtered(
+                    lambda sol: sol.pack_parent_line_id == main_sol
+                ).mapped("product_uom_qty")
+            ),
+            3,
+            "Expected 3 lines with quantity 2 and no new component line",
+        )
 
     def test_do_not_expand(self):
         product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
@@ -221,3 +322,91 @@ class TestSaleProductPack(SavepointCase):
         self.assertEqual(sequence_tp, self.sale_order.order_line[5].sequence)
         self.assertEqual(sequence_tp, self.sale_order.order_line[6].sequence)
         self.assertEqual(sequence_tp, self.sale_order.order_line[7].sequence)
+
+    def test_copy_sale_order_with_detailed_product_pack(self):
+        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        self.env["sale.order.line"].create(
+            {
+                "order_id": self.sale_order.id,
+                "name": product_cp.name,
+                "product_id": product_cp.id,
+                "product_uom_qty": 1,
+            }
+        )
+        copied_order = self.sale_order.copy()
+        copied_order_component_lines_pack_line = copied_order.order_line.filtered(
+            lambda line: line.product_id.pack_ok
+        )
+        copied_order_component_lines = copied_order.order_line.filtered(
+            lambda line: line.pack_parent_line_id
+        )
+        self.assertEqual(
+            copied_order_component_lines.pack_parent_line_id,
+            copied_order_component_lines_pack_line,
+        )
+
+    def test_check_pack_line_unlink(self):
+        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        self.env["sale.order.line"].create(
+            {
+                "order_id": self.sale_order.id,
+                "name": product_cp.name,
+                "product_id": product_cp.id,
+                "product_uom_qty": 1,
+            }
+        )
+        with Form(self.sale_order) as so_form:
+            with self.assertRaisesRegex(
+                UserError,
+                "You cannot delete this line because is part of a pack in this "
+                "sale order. In order to delete this line you need to delete the "
+                "pack itself",
+            ):
+                so_form.order_line.remove(len(self.sale_order.order_line) - 1)
+
+    def test_unlink_pack_form_proxy(self):
+        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        self.env["sale.order.line"].create(
+            {
+                "order_id": self.sale_order.id,
+                "name": product_cp.name,
+                "product_id": product_cp.id,
+                "product_uom_qty": 1,
+            }
+        )
+        with Form(self.sale_order) as so_form:
+            so_form.order_line.remove(0)
+            so_form.save()
+        self.assertEqual(len(self.sale_order.order_line), 0)
+
+    def test_unlink_pack_record_unlink(self):
+        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        self.env["sale.order.line"].create(
+            {
+                "order_id": self.sale_order.id,
+                "name": product_cp.name,
+                "product_id": product_cp.id,
+                "product_uom_qty": 1,
+            }
+        )
+        pack_line = self.sale_order.order_line.filtered(
+            lambda line: line.product_id.pack_ok
+        )
+        pack_line.unlink()
+        self.assertEqual(len(self.sale_order.order_line), 0)
+
+    def test_unlink_pack_old_style_like_ui(self):
+        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        self.env["sale.order.line"].create(
+            {
+                "order_id": self.sale_order.id,
+                "name": product_cp.name,
+                "product_id": product_cp.id,
+                "product_uom_qty": 1,
+            }
+        )
+        pack_line = self.sale_order.order_line.filtered(
+            lambda line: line.product_id.pack_ok
+        )
+        self.sale_order.write({"order_line": [(2, pack_line.id)]})
+        self.assertEqual(len(self.sale_order.order_line), 0)
