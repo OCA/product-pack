@@ -7,9 +7,9 @@
 
 <!-- /!\ do not modify above this line -->
 
-# product-pack
+# Product pack
 
-TODO: add repo description.
+Sale and manage product pack (it's closed to kit nomenclature concept with more options)
 
 <!-- /!\ do not modify below this line -->
 
