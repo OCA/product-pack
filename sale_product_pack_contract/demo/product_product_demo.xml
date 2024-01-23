@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Foodles (http://www.foodles.co).
+     @author Pierre Verkest <pierreverkest84@gmail.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record id="demo_template" model="contract.template">
+        <field name="name">Maintenance CPU compenent contract template</field>
+    </record>
+    <record id="product_pack_cpu_maintenance_component" model="product.product">
+        <field name="name">Maintenance CPU compenent</field>
+        <field name="categ_id" ref="product.product_category_4" />
+        <field name="standard_price">22.5</field>
+        <field name="list_price">32.75</field>
+        <field name="type">service</field>
+        <field name="is_contract" eval="True" />
+        <field
+            name="property_contract_template_id"
+            ref="sale_product_pack_contract.demo_template"
+        />
+    </record>
+</odoo>
