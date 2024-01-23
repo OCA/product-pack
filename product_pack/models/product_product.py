@@ -47,6 +47,7 @@ class ProductProduct(models.Model):
             # it will be converted again by pp._compute_price_rule, so if
             # that is the case we convert the amounts to the pack currency
             if pricelist_id_or_name:
+                pricelist = None
                 if isinstance(pricelist_id_or_name, list):
                     pricelist_id_or_name = pricelist_id_or_name[0]
                 if isinstance(pricelist_id_or_name, str):
