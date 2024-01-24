@@ -139,7 +139,7 @@ class SaleOrderLine(models.Model):
 
     def unlink(self):
         for order, lines in self.group_recordset_by(lambda sol: sol.order_id):
-            pack_component_to_delete = self.env["sale.order.line"].search(
+            pack_component_to_delete = self.search(
                 [
                     ("id", "child_of", lines.ids),
                     ("id", "not in", lines.ids),
