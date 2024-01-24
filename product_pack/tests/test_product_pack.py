@@ -117,3 +117,20 @@ class TestProductPack(ProductPackCommon, TransactionCase):
         pack.pack_type = "detailed"
         pack.pack_component_price = "totalized"
         self.assertTrue(pack.pack_modifiable_invisible)
+
+    def test_price_compute_with_pricelist_context(self):
+        # Ensure that the price_compute method correctly handles the
+        # price list context when the price list is missing.
+        product_pack = self.env.ref("product_pack.product_pack_cpu_detailed_totalized")
+        component_1 = self.env.ref("product_pack.pack_cpu_detailed_totalized_1")
+        component_1.product_id.list_price = 30.0
+        component_2 = self.env.ref("product_pack.pack_cpu_detailed_totalized_3")
+        component_2.product_id.list_price = 15.0
+        component_3 = self.env.ref("product_pack.pack_cpu_detailed_components_4")
+        component_3.product_id.list_price = 5.0
+        price = (
+            product_pack.with_context(pricelist="pricelist test")
+            .price_compute("list_price")
+            .get(product_pack.id)
+        )
+        self.assertEqual(price, 50.0)
