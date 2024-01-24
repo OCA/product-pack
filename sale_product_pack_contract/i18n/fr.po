@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* mail_activity_board
+# 	* sale_product_pack_contract
 #
 msgid ""
 msgstr ""
@@ -55,8 +55,8 @@ msgid ""
 "products. At the moment contract component support only on detailed pack "
 "type and detailed component price pack."
 msgstr ""
-"Ce pack : '%s' contient des composants : %r qui sont marqué comme étant "
-"des articles de contrat. Pour le moment les linge de composante de pack "
+"Ce pack : '%s' contient des composants : %r qui sont marqués comme étant "
+"des articles de contrat. Pour le moment, les lignes de composante de pack "
 "sont supportées uniquement sur les pack de type détaillé dont le prix est "
 "détaillé sur les lignes de composants."
 
