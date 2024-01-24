@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2019 Tecnativa - Ernesto Tejeda
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='product_id']"
+                position="after"
+            >
+                <field name="pack_ok" invisible="True" />
+                <field name="pack_parent_line_id" invisible="True" />
+                <field name="pack_modifiable" invisible="True" />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/tree//field[@name='product_id']"
+                position="after"
+            >
+                <field name="pack_ok" invisible="True" />
+                <field name="pack_parent_line_id" invisible="True" />
+                <field name="pack_modifiable" invisible="True" />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_order_form_discount" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_fixed_discount.view_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='discount_fixed']"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'invisible': ["|", ("pack_ok", "=", True), ("pack_parent_line_id",
+                    "!=", False), ("pack_modifiable","=", False)]}</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/tree//field[@name='discount_fixed']"
+                position="attributes"
+            >
+                <attribute name="attrs">{'readonly': ["|", ("pack_ok", "=", True),
+                    ("pack_parent_line_id", "!=", False), ("pack_modifiable","=", False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
