@@ -124,7 +124,11 @@ class ProductTemplate(models.Model):
             )
         is_pack |= self.pack_ok and (
             (self.pack_type == "detailed" and self.pack_component_price == "totalized")
-            or self.pack_type == "non_detailed"
+            or (
+                self.pack_type == "non_detailed"
+                and
+                self.pack_component_price != "ignored"
+            )
         )
         return is_pack
 

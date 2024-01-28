@@ -29,7 +29,7 @@
                             />
                             <field
                                 name="pack_component_price"
-                                attrs="{'required':[('pack_type', '=', 'detailed')], 'invisible':[('pack_type', '!=', 'detailed')]}"
+                                attrs="{'required':[('pack_type', '=', 'detailed')]}"
                             />
                             <field
                                 name="pack_modifiable"
