@@ -45,7 +45,7 @@ class ProductProduct(models.Model):
             pack_line_prices = product.sudo().pack_line_ids._pack_line_price_compute(
                 price_type, uom, currency, company, date
             )
-            prices[product.id] = sum(pack_line_prices.values())
+            prices[product.id] += sum(pack_line_prices.values())
         return prices
 
     @api.depends("list_price", "price_extra")
