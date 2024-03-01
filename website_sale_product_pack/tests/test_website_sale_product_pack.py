@@ -100,8 +100,8 @@ class WebsiteSaleHttpCase(HttpCase):
         )
         # All component lines have zero as subtotal
         self.assertEqual((sale.order_line - line).mapped("price_subtotal"), [0, 0, 0])
-        # Pack price is equal to the sum of component prices
-        self.assertEqual(line.price_subtotal, 2662.5)
+        # Pack price is equal to the sum of component prices + product price
+        self.assertEqual(line.price_subtotal, 2693.25)
         self.assertEqual(self._get_component_prices_sum(self.product_pdt), 2662.5)
 
     def test_create_non_detailed_price_order_line(self):
@@ -113,8 +113,8 @@ class WebsiteSaleHttpCase(HttpCase):
         # After create, there will be only one line, because product_type is
         # not a detailed one
         self.assertEqual(len(line), 1)
-        # Pack price is equal to the sum of component prices
-        self.assertEqual(line.price_subtotal, 2662.5)
+        # Pack price is equal to the sum of component prices + product price
+        self.assertEqual(line.price_subtotal, 2693.25)
         self.assertEqual(self._get_component_prices_sum(self.product_pnd), 2662.5)
 
     def test__check_to_add_pack_component_pusblished(self):

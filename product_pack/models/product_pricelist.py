@@ -11,17 +11,9 @@ class Pricelist(models.Model):
         """
         self.ensure_one()
         if product._is_pack_to_be_handled():
-            # NOTE: This exception is to avoid adding the list price of the packs
-            # "totalized" and "non detailed". Should be removed to solve the issue #169.
-            if (
-                product.pack_type == "non_detailed"
-                or product.pack_component_price == "totalized"
-            ):
-                pack_price = 0
-            else:
-                pack_price = self._compute_price_rule(
-                    product, quantity, uom=uom, date=date, **kwargs
-                )[product.id][0]
+            pack_price = self._compute_price_rule(
+                product, quantity, uom=uom, date=date, **kwargs
+            )[product.id][0]
 
             for line in product.sudo().pack_line_ids:
                 pack_price += line._get_pack_line_price(

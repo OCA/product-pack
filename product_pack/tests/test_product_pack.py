@@ -75,7 +75,7 @@ class TestProductPack(ProductPackCommon, TransactionCase):
         component_2.product_id.list_price = 15.0
         component_3 = self.env.ref("product_pack.pack_cpu_detailed_components_4")
         component_3.product_id.list_price = 5.0
-        self.assertEqual(50.0, pack.lst_price)
+        self.assertEqual(80.75, pack.lst_price)
 
     def test_pack_company(self):
         # Try to assign pack lines with product that do not belong to pack
@@ -133,7 +133,7 @@ class TestProductPack(ProductPackCommon, TransactionCase):
         price = pack.with_context(
             pricelist=self.discount_pricelist.id
         )._get_contextual_price()
-        self.assertEqual(price, 2574.0)
+        self.assertEqual(price, 2601.675)
 
         # Pack Ignored
         pack = self.env.ref("product_pack.product_pack_cpu_detailed_ignored")
@@ -147,4 +147,4 @@ class TestProductPack(ProductPackCommon, TransactionCase):
         price = pack.with_context(
             pricelist=self.discount_pricelist.id
         )._get_contextual_price()
-        self.assertEqual(price, 2574.0)
+        self.assertEqual(price, 2601.675)

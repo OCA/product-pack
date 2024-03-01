@@ -157,14 +157,17 @@ class TestSaleProductPack(TransactionCase):
         self.assertAlmostEqual(
             (self.sale_order.order_line - line).mapped("price_subtotal"), [0, 0, 0]
         )
-        # Pack price is equal to the sum of component prices
-        self.assertAlmostEqual(line.price_subtotal, 2662.5)
-        self.assertAlmostEqual(self._get_component_prices_sum(product_tp), 2662.5)
+        # Pack price is equal to the sum of component prices + product price
+        self.assertAlmostEqual(line.price_subtotal, 2693.25)
+        pack_price = (
+            self._get_component_prices_sum(product_tp) + line.product_id.list_price
+        )
+        self.assertAlmostEqual(pack_price, 2693.25)
 
         # Update pricelist with a discount
         self.sale_order.pricelist_id = self.discount_pricelist
         self.sale_order.action_update_prices()
-        self.assertAlmostEqual(line.price_subtotal, 2396.25)
+        self.assertAlmostEqual(line.price_subtotal, 2423.93)
         self.assertEqual(
             (self.sale_order.order_line - line).mapped("price_subtotal"), [0, 0, 0]
         )
@@ -182,14 +185,17 @@ class TestSaleProductPack(TransactionCase):
         # After create, there will be only one line, because product_type is
         # not a detailed one
         self.assertEqual(self.sale_order.order_line, line)
-        # Pack price is equal to the sum of component prices
-        self.assertAlmostEqual(line.price_subtotal, 2662.5)
-        self.assertAlmostEqual(self._get_component_prices_sum(product_ndtp), 2662.5)
+        # Pack price is equal to the sum of component prices + product price
+        self.assertAlmostEqual(line.price_subtotal, 2693.25)
+        pack_price = (
+            self._get_component_prices_sum(product_ndtp) + line.product_id.list_price
+        )
+        self.assertAlmostEqual(pack_price, 2693.25)
 
         # Update pricelist with a discount
         self.sale_order.pricelist_id = self.discount_pricelist
         self.sale_order.action_update_prices()
-        self.assertAlmostEqual(line.price_subtotal, 2396.25)
+        self.assertAlmostEqual(line.price_subtotal, 2423.93)
 
     def test_update_qty(self):
         # Ensure the quantities are always updated
