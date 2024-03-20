@@ -6,27 +6,27 @@ from odoo import api, models
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    def _cart_update(
-        self, product_id=None, line_id=None, add_qty=0, set_qty=0, **kwargs
-    ):
+    def _cart_update(self, *args, **kwargs):
         """We need to keep the discount defined on the components when checking out.
         Also when a line comes from a totalized pack, we should flag it to avoid
         changing it's price in a cart step."""
-        line = self.env["sale.order.line"].browse(line_id)
-        if line and line.pack_parent_line_id:
-            pack = line.pack_parent_line_id.product_id
-            detailed_totalized_pack = (
-                pack.pack_type == "detailed"
-                and pack.pack_component_price in {"totalized", "ignored"}
-            )
-            return super(
-                SaleOrder,
-                self.with_context(
-                    pack_discount=line.discount,
-                    detailed_totalized_pack=detailed_totalized_pack,
-                ),
-            )._cart_update(product_id, line_id, add_qty, set_qty, **kwargs)
-        return super()._cart_update(product_id, line_id, add_qty, set_qty, **kwargs)
+        line_id = kwargs.get("line_id")
+        if line_id:
+            line = self.env["sale.order.line"].browse(line_id)
+            if line and line.pack_parent_line_id:
+                pack = line.pack_parent_line_id.product_id
+                detailed_totalized_pack = (
+                    pack.pack_type == "detailed"
+                    and pack.pack_component_price in {"totalized", "ignored"}
+                )
+                return super(
+                    SaleOrder,
+                    self.with_context(
+                        pack_discount=line.discount,
+                        detailed_totalized_pack=detailed_totalized_pack,
+                    ),
+                )._cart_update(*args, **kwargs)
+        return super()._cart_update(*args, **kwargs)
 
     @api.depends("order_line.product_uom_qty", "order_line.product_id")
     def _compute_cart_info(self):
