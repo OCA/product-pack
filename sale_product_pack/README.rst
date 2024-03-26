@@ -89,6 +89,7 @@ Contributors
 
   * Ernesto Tejeda
   * Pedro M. Baeza
+  * Bruno Zanotti
 
 * `Akretion <https://akretion.com>`_:
 
