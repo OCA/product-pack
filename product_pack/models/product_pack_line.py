@@ -54,6 +54,20 @@ class ProductPackLine(models.Model):
                     )
                 pack_lines = pack_lines.mapped("product_id.pack_line_ids")
 
-    def get_price(self):
-        self.ensure_one()
-        return self.product_id.lst_price * self.quantity
+    def _pack_line_price_compute(
+        self, price_type, uom=False, currency=False, company=False, date=False
+    ):
+        pack_line_prices = {}
+        if self._context.get("pricelist"):
+            for line in self:
+                pack_line_prices[line.product_id.id] = (
+                    line.product_id._get_contextual_price() * line.quantity
+                )
+        else:
+            pack_line_prices = self.product_id.price_compute(
+                price_type, uom, currency, company, date
+            )
+            for line in self:
+                pack_line_prices[line.product_id.id] *= line.quantity
+
+        return pack_line_prices
