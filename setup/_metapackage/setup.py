@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo-addon-purchase_product_pack>=16.0dev,<16.1dev',
         'odoo-addon-sale_product_pack>=16.0dev,<16.1dev',
         'odoo-addon-stock_product_pack>=16.0dev,<16.1dev',
+        'odoo-addon-website_sale_product_pack>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
