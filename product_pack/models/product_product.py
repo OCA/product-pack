@@ -30,11 +30,11 @@ class ProductProduct(models.Model):
         packs = self.filtered(lambda p: p.product_tmpl_id._is_pack_to_be_handled())
         return packs, (self - packs)
 
-    def price_compute(
+    def _price_compute(
         self, price_type, uom=False, currency=False, company=False, date=False
     ):
         packs, no_packs = self.split_pack_products()
-        prices = super(ProductProduct, no_packs).price_compute(
+        prices = super(ProductProduct, no_packs)._price_compute(
             price_type, uom, currency, company, date
         )
         for product in packs.with_context(prefetch_fields=False):
@@ -79,7 +79,7 @@ class ProductProduct(models.Model):
         if "uom" in self._context:
             to_uom = self.env["uom.uom"].browse([self._context["uom"]])
         for product in packs:
-            list_price = product.price_compute("list_price").get(product.id)
+            list_price = product._price_compute("list_price").get(product.id)
             if to_uom:
                 list_price = product.uom_id._compute_price(list_price, to_uom)
             product.lst_price = list_price + product.price_extra

@@ -62,7 +62,7 @@ class TestProductPack(ProductPackCommon, TransactionCase):
         self.assertEqual(
             30.0,
             self.cpu_detailed.pack_line_ids.filtered(
-                lambda l: l.product_id == component.product_id
+                lambda cmp: cmp.product_id == component.product_id
             ).get_price(),
         )
 
