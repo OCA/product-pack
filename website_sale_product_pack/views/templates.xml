@@ -19,7 +19,7 @@
             <attribute name="t-if">not line.pack_parent_line_id</attribute>
         </xpath>
         <!-- We don't show the image of the components to have a clean summary -->
-        <xpath expr="//td[hasclass('td-img', 'text-center')]" position="attributes">
+        <xpath expr="//td[hasclass('td-img')]" position="attributes">
             <attribute
                 name="t-if"
             >line.product_id.product_tmpl_id and not line.pack_parent_line_id</attribute>
