@@ -80,11 +80,6 @@ msgid "Is a Product Pack?"
 msgstr "¿Es un Pack de Producte?"
 
 #. module: product_pack
-#: model:ir.model.fields,field_description:product_pack.field_product_pack_line____last_update
-msgid "Last Modified on"
-msgstr "Última modificació el"
-
-#. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__write_uid
 msgid "Last Updated by"
 msgstr "Darrera actualització de"
@@ -288,6 +283,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
 msgid "You must save first to add pack lines"
 msgstr "Ha de guardar primer per afegir línies de pack"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificació el"
 
 #~ msgid "Product Template"
 #~ msgstr "Plantilla de producte"
