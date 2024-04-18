@@ -1,0 +1,15 @@
+- [ADHOC SA](https://www.adhoc.com.ar):
+  - Juan José Scarafía
+  - Nicolas Mac Rouillon
+  - Katherine Zaoral
+  - Bruno Zanotti
+- [NaN·TIC](http://www.nan-tic.com)
+- [Tecnativa](https://www.tecnativa.com):
+  - Ernesto Tejeda
+  - Pedro M. Baeza
+  - Jairo Llopis
+  - Sergio Teruel
+- [Sygel](https://www.sygel.es):
+  - Manuel Regidor
+- [Acsone](https://www.acsone.eu/):
+  - Maxime Franco

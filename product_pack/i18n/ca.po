@@ -1,0 +1,308 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_pack
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-02-28 13:17+0000\n"
+"Last-Translator: Noel estudillo <noelestudilloviera@gmail.com>\n"
+"Language-Team: none\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__create_uid
+msgid "Created by"
+msgstr "Creat per"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__create_date
+msgid "Created on"
+msgstr "Creat el"
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_type__detailed
+msgid "Detailed"
+msgstr "Detallat"
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__detailed
+msgid "Detailed per component"
+msgstr "Detallat per component"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__display_name
+msgid "Display Name"
+msgstr "Nom visualitzat"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__used_in_pack_line_ids
+#: model:ir.model.fields,field_description:product_pack.field_product_template__used_in_pack_line_ids
+msgid "Found in packs"
+msgstr "Es troba en packs"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__id
+msgid "ID"
+msgstr "ID (identificació)"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_modifiable
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_modifiable
+msgid ""
+"If you check this field yo will be able to edit sale/purchase order line "
+"relate to its component"
+msgstr ""
+"Si marqueu aquest camp, podreu editar la línia de comanda / compra "
+"relacionada amb el seu component"
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__ignored
+msgid "Ignored"
+msgstr "Ignorat"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_ok
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_ok
+msgid "Is Pack?"
+msgstr "Es un Pack?"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_ok
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_ok
+msgid "Is a Product Pack?"
+msgstr "¿Es un Pack de Producte?"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line____last_update
+msgid "Last Modified on"
+msgstr "Última modificació el"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__write_uid
+msgid "Last Updated by"
+msgstr "Darrera actualització de"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__write_date
+msgid "Last Updated on"
+msgstr "Darrera actualització el"
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_type__non_detailed
+msgid "Non Detailed"
+msgstr "No detallat"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_component_price
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_component_price
+msgid ""
+"On sale orders or purchase orders:\n"
+"* Detailed per component: Detail lines with prices.\n"
+"* Totalized in main product: Detail lines merging lines prices on pack "
+"(don't show component prices).\n"
+"* Ignored: Use product pack price (ignore detail line prices)."
+msgstr ""
+"A les comandes de venda o comandes de compra:\n"
+"* Detallat per component: Línies de detall amb preus.\n"
+"* Totalitzat en el producte principal: Detalla les línies fusionant els "
+"preus de les línies en el Pack (no mostren els preus dels components).\n"
+"* Ignorat: utilitza el preu del Pack de producte (ignora els preus de la "
+"línia de detalls)."
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_type
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_type
+msgid ""
+"On sale orders or purchase orders:\n"
+"* Detailed: Display components individually in the sale order.\n"
+"* Non Detailed: Do not display components individually in the sale order."
+msgstr ""
+"En ordres de venda o ordres de compra:\n"
+"* Detallat: Mostra els components individualment en línies de la comanda de "
+"venda / Comanda de compra.\n"
+"* No Detallat: No mostra els components individualment en línies de la "
+"comanda de Venda / Comanda de Compra."
+
+#. module: product_pack
+#: model_terms:ir.ui.view,arch_db:product_pack.product_template_form_view
+msgid "Pack"
+msgstr "Pack"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_cpu_detailed_components_product_template
+msgid "Pack CPU (Detailed - Displayed Components Price)"
+msgstr "Pack CPU (Detallat - Preu dels Components Mostrat)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_cpu_detailed_ignored_product_template
+msgid "Pack CPU (Detailed - Ignored Components Price)"
+msgstr "Pack CPU (Detallat - Preu dels Components Ignorat)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_cpu_detailed_totalized_product_template
+msgid "Pack CPU (Detailed - Totalized Components Price)"
+msgstr "Pack CPU (Detallat - Preu dels Components Totalitzat)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_cpu_non_detailed_product_template
+msgid "Pack CPU (Non Detailed - Totalized Components Price)"
+msgstr "Pack CPU (No Detallat - Preu dels Components Totalitzat)"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_component_price
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_component_price
+msgid "Pack Component Price"
+msgstr ""
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_type
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_type
+msgid "Pack Display Type"
+msgstr "Tipus de pantalla de paquet"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_modifiable
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_modifiable
+msgid "Pack Modifiable"
+msgstr "Pack modificable"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_modifiable_invisible
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_modifiable_invisible
+msgid "Pack Modifiable Invisible"
+msgstr ""
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_pc_detailed_components_product_template
+msgid "Pack PC (Detailed - Displayed Components Price)"
+msgstr "Pack PC (Detallat - Preu dels Components Mostrat)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_pc_detailed_ignored_product_template
+msgid "Pack PC (Detailed - Ignored Components Price)"
+msgstr "Pack PC (Detallat - Preu dels Components Ignorat)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_pc_detailed_totalized_product_template
+msgid "Pack PC (Detailed - Totalized Components Price)"
+msgstr "Pack PC (Detallat - Preu dels Components Totalitzat)"
+
+#. module: product_pack
+#: model_terms:ir.ui.view,arch_db:product_pack.product_pack_line_form
+msgid "Pack Product Line"
+msgstr "Línia de producte pack"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_line_ids
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_line_ids
+#: model_terms:ir.ui.view,arch_db:product_pack.nan_product_pack_form
+#: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
+msgid "Pack Products"
+msgstr "Productes del pack"
+
+#. module: product_pack
+#. odoo-python
+#: code:addons/product_pack/models/product_template.py:0
+#, python-format
+msgid ""
+"Pack lines products company must be the same as the parent product company"
+msgstr ""
+"Les línies dels Packs de productes de la companyia han de ser les mateixes "
+"que el producte pare de la companyia"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__used_in_pack_line_ids
+#: model:ir.model.fields,help:product_pack.field_product_template__used_in_pack_line_ids
+msgid "Packs where product is used."
+msgstr "Packs on el producte és utilitzat."
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__parent_product_id
+msgid "Parent Product"
+msgstr "Producte pare"
+
+#. module: product_pack
+#: model:ir.model,name:product_pack.model_product_template
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__product_id
+msgid "Product"
+msgstr "Producte"
+
+#. module: product_pack
+#: model:ir.model,name:product_pack.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: product_pack
+#: model:ir.model.constraint,message:product_pack.constraint_product_pack_line_product_uniq
+msgid "Product must be only once on a pack!"
+msgstr "¡El producte ha d'estar només una vegada en un pack!"
+
+#. module: product_pack
+#: model:ir.model,name:product_pack.model_product_pack_line
+msgid "Product pack line"
+msgstr "Línia de pack"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_line_ids
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_line_ids
+msgid "Products that are part of this pack."
+msgstr "Productes que formen part del pack."
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__quantity
+msgid "Quantity"
+msgstr "Quantitat"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_modifiable_invisible
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_modifiable_invisible
+msgid ""
+"Technical field in order to compute the availability of the Pack Modifiable "
+"field"
+msgstr ""
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__totalized
+msgid "Totalized in main product"
+msgstr "Totalitzat en el producte principal"
+
+#. module: product_pack
+#. odoo-python
+#: code:addons/product_pack/models/product_pack_line.py:0
+#, python-format
+msgid ""
+"You cannot set recursive packs.\n"
+"Product id: %s"
+msgstr ""
+"No pot establir packs recursius.\n"
+"ID del producte:%s"
+
+#. module: product_pack
+#: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
+msgid "You must save first to add pack lines"
+msgstr "Ha de guardar primer per afegir línies de pack"
+
+#~ msgid "Product Template"
+#~ msgstr "Plantilla de producte"
+
+#~ msgid "Units"
+#~ msgstr "Unitats"
+
+#~ msgid "Pack Product Lines"
+#~ msgstr "Línies del producte pack"
+
+#~ msgid "Pack component price"
+#~ msgstr "Preu dels components"
+
+#~ msgid "Pack Type"
+#~ msgstr "Tipus de Pack"
+
+#~ msgid "kg"
+#~ msgstr "kg"
