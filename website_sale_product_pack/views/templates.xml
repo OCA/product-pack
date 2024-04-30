@@ -22,7 +22,7 @@
         <xpath expr="//td[hasclass('td-img', 'text-center')]" position="attributes">
             <attribute
                 name="t-if"
-            >line.product_id.product_tmpl_id and not line.pack_parent_line_id</attribute>
+            >not line.product_id and not line.pack_parent_line_id</attribute>
         </xpath>
         <xpath
             expr="//span[@t-if='line._is_not_sellable_line() and line.product_id.image_128']"
