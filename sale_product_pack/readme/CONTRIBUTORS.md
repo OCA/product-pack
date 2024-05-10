@@ -9,3 +9,5 @@
   - Maxime Franco
 - [ADHOC SA](https://www.adhoc.com.ar):
   - Bruno Zanotti
+  - Augusto Weiss
+  - Nicolas Col

@@ -108,6 +108,8 @@ Contributors
 -  `ADHOC SA <https://www.adhoc.com.ar>`__:
 
    -  Bruno Zanotti
+   -  Augusto Weiss
+   -  Nicolas Col
 
 Maintainers
 -----------
