@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<odoo>
+    <!-- Sale order -->
+    <record id="portal_sale_order_3" model="sale.order">
+        <field name="partner_id" ref="base.partner_demo_portal" />
+        <field name="partner_invoice_id" ref="base.partner_demo_portal" />
+        <field name="partner_shipping_id" ref="base.partner_demo_portal" />
+        <field name="user_id" ref="base.user_admin" />
+        <field name="payment_term_id" ref="account.account_payment_term_30days" />
+        <field name="team_id" ref="sales_team.team_sales_department" />
+        <field
+            name="date_order"
+            eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d %H:%M')"
+        />
+        <field
+            name="message_partner_ids"
+            eval="[(4, ref('base.partner_demo_portal'))]"
+        />
+    </record>
+
+    <!-- Sale order lines -->
+        <!-- Product pack: DETAILED - COMPONENTS -->
+    <record id="portal_sale_order_line_section_1" model="sale.order.line">
+        <field name="order_id" ref="portal_sale_order_3" />
+        <field name="name">Detailed Displayed Components Price</field>
+        <field name="display_type">line_section</field>
+        <field name="sequence">1</field>
+    </record>
+    <record id="portal_sale_order_line_6" model="sale.order.line">
+        <field name="order_id" ref="portal_sale_order_3" />
+        <field
+            name="product_id"
+            ref="product_pack.product_pack_cpu_detailed_components"
+        />
+        <field name="sequence">2</field>
+    </record>
+        <!-- Product pack: DETAILED - TOTALIZED -->
+    <record id="portal_sale_order_line_section_2" model="sale.order.line">
+        <field name="order_id" ref="portal_sale_order_3" />
+        <field name="name">Detailed Totalized Components Price</field>
+        <field name="display_type">line_section</field>
+        <field name="sequence">3</field>
+    </record>
+    <record id="portal_sale_order_line_7" model="sale.order.line">
+        <field name="order_id" ref="portal_sale_order_3" />
+        <field
+            name="product_id"
+            ref="product_pack.product_pack_cpu_detailed_totalized"
+        />
+        <field name="sequence">4</field>
+    </record>
+        <!-- Product pack: DETAILED - IGNORED -->
+    <record id="portal_sale_order_line_section_3" model="sale.order.line">
+        <field name="order_id" ref="portal_sale_order_3" />
+        <field name="name">Detailed Ignored Components Price</field>
+        <field name="display_type">line_section</field>
+        <field name="sequence">5</field>
+    </record>
+    <record id="portal_sale_order_line_8" model="sale.order.line">
+        <field name="order_id" ref="portal_sale_order_3" />
+        <field name="product_id" ref="product_pack.product_pack_cpu_detailed_ignored" />
+        <field name="sequence">6</field>
+    </record>
+        <!-- Product pack: NON DETAILED -->
+    <record id="portal_sale_order_line_section_4" model="sale.order.line">
+        <field name="order_id" ref="portal_sale_order_3" />
+        <field name="name">Not Detailed - Totalized Components Price</field>
+        <field name="display_type">line_section</field>
+        <field name="sequence">7</field>
+    </record>
+    <record id="portal_sale_order_line_9" model="sale.order.line">
+        <field name="order_id" ref="portal_sale_order_3" />
+        <field name="product_id" ref="product_pack.product_pack_cpu_non_detailed" />
+        <field name="sequence">8</field>
+    </record>
+        <!-- Components -->
+    <record id="portal_sale_order_line_section_5" model="sale.order.line">
+        <field name="order_id" ref="portal_sale_order_3" />
+        <field name="name">COMPONENTS</field>
+        <field name="display_type">line_section</field>
+        <field name="sequence">9</field>
+    </record>
+    <record id="portal_sale_order_line_components_1" model="sale.order.line">
+        <field name="order_id" ref="portal_sale_order_3" />
+        <field name="product_id" ref="product.product_product_20" />
+        <field name="sequence">10</field>
+    </record>
+
+    <record id="portal_sale_order_line_components_2" model="sale.order.line">
+        <field name="order_id" ref="portal_sale_order_3" />
+        <field name="product_id" ref="product.product_product_16" />
+        <field name="sequence">11</field>
+    </record>
+
+    <record id="portal_sale_order_components_3" model="sale.order.line">
+        <field name="order_id" ref="portal_sale_order_3" />
+        <field name="product_id" ref="product.product_product_24" />
+        <field name="sequence">12</field>
+    </record>
+
+    <function
+        model="sale.order"
+        name="action_confirm"
+        eval="[[
+        ref('portal_sale_order_3'),
+    ]]"
+    />
+</odoo>
