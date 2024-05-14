@@ -41,7 +41,17 @@ class ProductProduct(models.Model):
         if "uom" in self._context:
             uom = self.env["uom.uom"].browse([self._context["uom"]])
         for product in packs:
-            list_price = product.price_compute("list_price", uom=uom).get(product.id)
+            # NOTE: This exception is to avoid adding the list price of the packs
+            # "totalized" and "non detailed". Should be removed to solve the issue #169.
+            if (
+                product.pack_type == "non_detailed"
+                or product.pack_component_price == "totalized"
+            ):
+                list_price = 0
+            else:
+                list_price = product._price_compute("list_price", uom=uom).get(
+                    product.id
+                )
             list_price += sum(
                 product.pack_line_ids._pack_line_price_compute(
                     "list_price", uom=uom
