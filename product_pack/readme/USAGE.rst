@@ -28,3 +28,18 @@ The options of this field are the followings:
   * Ignored: will show each components but will not show
     components prices. The pack product will be the only one that has price
     and this one will be the price set in the pack product.
+
++-----------------------------+-----------------------------+---------------------------------+-----------------------------------------+----------------------+
+| **Pack type**               | **Show components on SO?**  | **Sale price**                  | **Discount**                            | **Can be modified?** |
++=============================+=============================+=================================+=========================================+======================+
+| **Detailed per components** | Yes, with their prices      | Components + Pack               | Applies to the price of the pack and    | Yes, configurable    |
+|                             |                             |                                 | the components                          |                      |
++-----------------------------+-----------------------------+---------------------------------+-----------------------------------------+----------------------+
+| **Detailed - Totalized**    | Yes, with their prices at 0 | Components                      | Applies to the total (pack + components)| No                   |
++-----------------------------+-----------------------------+---------------------------------+-----------------------------------------+----------------------+
+| **Detailed - Ignored**      | Yes, with their prices at 0 | Only Pack                       | Applies to the pack                     | No                   |
++-----------------------------+-----------------------------+---------------------------------+-----------------------------------------+----------------------+
+| **No detailed**             | No                          | Components                      | Applies to the total (pack + components)| No                   |
++-----------------------------+-----------------------------+---------------------------------+-----------------------------------------+----------------------+
+
+**Note:** If pricelist enabled, Odoo will display the price according to the corresponding pricelist. In the case of a pricelist with discount policy "Show public price & discount to the customer" keep in mind that the "Non Detailed" and "Detailed - Totalized in main product" packs do not display the discount.
