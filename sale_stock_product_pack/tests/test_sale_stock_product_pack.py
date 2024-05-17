@@ -1,9 +1,9 @@
 # Copyright 2021 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from odoo.tests import Form, common
+from odoo.tests import Form, TransactionCase
 
 
-class TestSaleStockProductPack(common.SavepointCase):
+class TestSaleStockProductPack(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -30,7 +30,8 @@ class TestSaleStockProductPack(common.SavepointCase):
         for line in self.sale.picking_ids.move_ids.filtered(
             lambda x: x.product_id != self.product_pack
         ):
-            line.quantity_done = line.product_uom_qty
+            line.quantity = line.product_uom_qty
+        self.sale.picking_ids.move_ids.picked = True
         self.sale.picking_ids._action_done()
         # All components delivered, all the pack quantities should be so
         # TODO: it needs to compute twice. In view it does it fine.
