@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Camptocamp SA
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl) -->
+<odoo>
+    <record id="purchase_order_form" model="ir.ui.view">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='order_line']/tree//field[@name='price_subtotal']"
+                position="after"
+            >
+                <field name="pack_modifiable" invisible="True" />
+                <field name="pack_parent_line_id" invisible="True" />
+                <button
+                    string="Parent Pack is not modifiable"
+                    name="action_open_parent_pack_product_view"
+                    type="object"
+                    invisible="not pack_parent_line_id or pack_modifiable"
+                    icon="fa-lock"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
