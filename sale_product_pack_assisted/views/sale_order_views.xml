@@ -14,7 +14,7 @@
                 <button
                     name="action_assisted_pack_detail"
                     string="Detail"
-                    attrs="{'invisible':[('pack_type', '!=', 'non_detailed_assisted')]}"
+                    invisible="pack_type != 'non_detailed_assisted'"
                     type="object"
                 />
             </xpath>

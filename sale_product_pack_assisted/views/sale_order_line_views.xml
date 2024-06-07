@@ -16,9 +16,7 @@
                 </header>
                 <sheet>
                     <field name="pack_type" invisible="1" />
-                    <div
-                        attrs="{'invisible':[('pack_type', '!=', 'non_detailed_assisted')]}"
-                    >
+                    <div invisible="pack_type != 'non_detailed_assisted'">
                         <div name="product_pack">
                             <label for="assisted_pack_line_ids" />
                             <field name="assisted_pack_line_ids" />
@@ -43,16 +41,6 @@
                         </group>
                     </div>
                 </sheet>
-                <footer>
-                    <button
-                        class="oe_highlight"
-                        name="button_save_data"
-                        string="Save"
-                        type="object"
-                    />
-                    or
-                    <button class="oe_link" special="cancel" string="Cancel" />
-                </footer>
             </form>
         </field>
     </record>

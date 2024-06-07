@@ -68,6 +68,3 @@ class SaleOrderLine(models.Model):
             "res_id": self.id,
             "context": dict(self.env.context, pricelist=self.order_id.pricelist_id.id),
         }
-
-    def button_save_data(self):
-        return True
