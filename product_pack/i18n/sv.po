@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-02-17 12:16+0000\n"
-"Last-Translator: Simon S <simon.stromberg@vertel.se>\n"
+"PO-Revision-Date: 2024-06-11 14:38+0000\n"
+"Last-Translator: jakobkrabbe <jakob@syscare.se>\n"
 "Language-Team: none\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_pack_line__create_uid
@@ -151,7 +151,7 @@ msgstr "Pack CPU (Icke detaljerad - Summerade priser för beståndsdelar)"
 #: model:ir.model.fields,field_description:product_pack.field_product_product__pack_component_price
 #: model:ir.model.fields,field_description:product_pack.field_product_template__pack_component_price
 msgid "Pack Component Price"
-msgstr ""
+msgstr "Förpackning Komponent Pris"
 
 #. module: product_pack
 #: model:ir.model.fields,field_description:product_pack.field_product_product__pack_type
@@ -169,7 +169,7 @@ msgstr "Pack modifierbart"
 #: model:ir.model.fields,field_description:product_pack.field_product_product__pack_modifiable_invisible
 #: model:ir.model.fields,field_description:product_pack.field_product_template__pack_modifiable_invisible
 msgid "Pack Modifiable Invisible"
-msgstr ""
+msgstr "Pack Modifierbar Osynlig"
 
 #. module: product_pack
 #: model:product.template,name:product_pack.product_pack_pc_detailed_components_product_template
@@ -227,7 +227,7 @@ msgstr "Produkt"
 #. module: product_pack
 #: model:ir.model,name:product_pack.model_product_product
 msgid "Product Variant"
-msgstr ""
+msgstr "Produktvariant"
 
 #. module: product_pack
 #: model:ir.model.constraint,message:product_pack.constraint_product_pack_line_product_uniq
@@ -257,6 +257,7 @@ msgid ""
 "Technical field in order to compute the availability of the Pack Modifiable "
 "field"
 msgstr ""
+"Tekniskt fält för att beräkna tillgängligheten för paketet Modifierbart fält"
 
 #. module: product_pack
 #: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__totalized
