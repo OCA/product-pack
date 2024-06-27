@@ -118,7 +118,9 @@ class WebsiteSaleHttpCase(HttpCase):
         self.assertEqual(self._get_component_prices_sum(self.product_pnd), 2662.5)
 
     def test__check_to_add_pack_component_pusblished(self):
-        """Test when create a product pack with only published products as components."""
+        """
+        Test when create a product pack with only published products as components.
+        """
         with self.assertRaises(ValidationError):
             product_component = self.env.ref("product.product_product_25")
             product_component.write({"is_published": False})

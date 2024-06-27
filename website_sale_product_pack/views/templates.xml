@@ -19,13 +19,8 @@
             <attribute name="t-if">not line.pack_parent_line_id</attribute>
         </xpath>
         <!-- We don't show the image of the components to have a clean summary -->
-        <xpath expr="//td[hasclass('td-img', 'text-center')]" position="attributes">
-            <attribute
-                name="t-if"
-            >line.product_id.product_tmpl_id and not line.pack_parent_line_id</attribute>
-        </xpath>
         <xpath
-            expr="//span[@t-if='line._is_not_sellable_line() and line.product_id.image_128']"
+            expr="//img[@t-if='line._is_not_sellable_line() and line.product_id.image_128']"
             position="attributes"
         >
             <attribute
@@ -34,7 +29,7 @@
                 line.pack_parent_line_id
             </attribute>
         </xpath>
-        <xpath expr="//span[@t-else='']" position="attributes">
+        <xpath expr="//div[@t-else='']" position="attributes">
             <attribute
                 name="t-if"
             >line.product_id.image_128 and not line.pack_parent_line_id</attribute>
@@ -43,51 +38,50 @@
         <xpath expr="//t[@t-if='line.discount']/del" position="attributes">
             <attribute name="t-if">not line.pack_parent_line_id</attribute>
         </xpath>
-        <xpath expr="//strong[@t-field='line.name_short']" position="attributes">
+        <xpath expr="//h6[@t-field='line.name_short']" position="attributes">
             <attribute name="t-if">not line.pack_parent_line_id</attribute>
         </xpath>
-        <xpath expr="//strong[@t-field='line.name_short']" position="after">
+        <xpath expr="//h6[@t-field='line.name_short']" position="after">
             <t t-if="line.pack_parent_line_id">
                 <span>&#8627; </span>
                 <em t-field="line.name_short" />
             </t>
         </xpath>
-        <xpath expr="//td[hasclass('td-price')]" position="attributes">
+        <xpath expr="//div[@name='website_sale_cart_line_price']" position="attributes">
             <attribute
                 name="t-if"
             >not line.pack_parent_line_id or line.pack_parent_line_id.product_id.product_tmpl_id.pack_component_price == 'detailed'</attribute>
         </xpath>
-        <xpath expr="//td[hasclass('td-price')]" position="after">
-            <t t-else="">
-                <td class="text-center td-price" />
-            </t>
-        </xpath>
     </template>
-    <template id="cart_summary" inherit_id="website_sale.cart_summary">
+    <template id="checkout_layout" inherit_id="website_sale.checkout_layout">
         <xpath
             expr="//span[@t-field='line.product_id.image_128']"
             position="attributes"
         >
             <attribute name="t-if">not line.pack_parent_line_id</attribute>
         </xpath>
-        <xpath expr="//strong[@t-field='line.name_short']" position="attributes">
-            <attribute name="t-if">not line.pack_parent_line_id</attribute>
-        </xpath>
-        <xpath expr="//strong[@t-field='line.name_short']" position="after">
+        <xpath expr="//t[@t-out='int(line.product_uom_qty)']" position="before">
             <t t-if="line.pack_parent_line_id">
                 <span>&#8627; </span>
-                <em t-field="line.name_short" />
             </t>
         </xpath>
-        <xpath expr="//td[hasclass('td-price')]" position="attributes">
+        <xpath
+            expr="//td[@name='website_sale_cart_summary_line_price']"
+            position="attributes"
+        >
             <attribute
                 name="t-if"
             >not line.pack_parent_line_id or line.pack_parent_line_id.product_id.product_tmpl_id.pack_component_price == 'detailed'</attribute>
         </xpath>
-        <xpath expr="//td[hasclass('td-price')]" position="after">
-            <t t-else="">
-                <td class="text-center td-price" />
-            </t>
+        <xpath
+            expr="//td[@name='website_sale_cart_summary_line_price']"
+            position="after"
+        >
+            <td
+                t-attf-class="#{o_cart_sum_padding_top} td-price pe-0 text-end"
+                name="website_sale_cart_summary_line_price"
+            >
+            </td>
         </xpath>
     </template>
     <template id="product_price" inherit_id="website_sale.product">
@@ -99,19 +93,8 @@
             <t
                 t-if="product.pack_ok"
                 t-set="combination_info"
-                t-value="product.with_context(whole_pack_price=True)._get_combination_info(combination, add_qty=add_qty or 1, pricelist=pricelist)"
+                t-value="product.with_context(whole_pack_price=True)._get_combination_info(combination, add_qty=add_qty or 1)"
             />
-        </xpath>
-    </template>
-    <template id="cart_popover" inherit_id="website_sale.cart_popover">
-        <!-- Exclude children lines from cart summary -->
-        <xpath
-            expr="//t[@t-foreach='website_sale_order.website_order_line']"
-            position="attributes"
-        >
-            <attribute
-                name="t-foreach"
-            >website_sale_order.website_order_line.filtered(lambda x: not x.pack_parent_line_id)</attribute>
         </xpath>
     </template>
 </odoo>
