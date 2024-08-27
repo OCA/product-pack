@@ -12,7 +12,7 @@
     "website": "https://github.com/OCA/product-pack",
     "assets": {
         "web.assets_tests": [
-            "test_website_modules/static/tests/**/*",
+            "test_website_modules/static/src/js/website_sale_product_pack_tour.js",
         ],
     },
     "installable": True,
