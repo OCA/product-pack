@@ -41,17 +41,21 @@ class SaleOrder(models.Model):
                 )
             )
 
-    def _website_product_id_change(self, order_id, product_id, qty=0):
+    def _website_product_id_change(self, order_id, product_id, qty=0, **kwargs):
         """In the final checkout step, we could miss the component discount as the
         product prices are recomputed. We should also consider a forced price
         recomputation that would set a price on our detailed totalized pack lines
         duplicating the total price"""
-        res = super()._website_product_id_change(order_id, product_id, qty=qty)
+        res = super(SaleOrder, self)._website_product_id_change(
+            order_id, product_id, qty=qty, **kwargs
+        )
         if self.env.context.get("pack_discount"):
             res["discount"] = self.env.context.get("pack_discount")
         if self.env.context.get("detailed_totalized_pack"):
             res["price_unit"] = 0
         return res
+
+    from odoo import models
 
 
 class SaleOrderLine(models.Model):
