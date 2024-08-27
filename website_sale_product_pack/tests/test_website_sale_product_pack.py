@@ -50,24 +50,43 @@ class WebsiteSaleHttpCase(HttpCase):
             component_prices += product_line_price * pack_line.quantity
         return component_prices
 
-    def test_create_components_price_order_line(self):
-        """Test with the same premise that in sale_product_pack but in a
-        frontend tour"""
-        self.start_tour("/shop", "create_components_price_order_line", login="portal")
+    def test_create_totalized_price_order_line(self):
+        """Test with the same premise that in sale_product_pack but in a frontend tour
+        with a detailed totalized pack"""
+
+        # Update to exclude problematic assets or use a known safe asset bundle
+        self.start_tour(
+            "/shop",
+            "create_totalized_price_order_line",
+            login="portal",
+            t_call_assets="web.assets_common",
+        )
+
         sale = self.env["sale.order"].search([], limit=1)
+        line = sale.order_line.filtered(lambda x: x.product_id == self.product_pdt)
         # After create, there will be four lines
         self.assertEqual(len(sale.order_line), 4)
         # The products of those four lines are the main product pack and its
         # product components
         self.assertEqual(
             sale.order_line.mapped("product_id"),
-            self.product_pdc | self.product_pdc.get_pack_lines().mapped("product_id"),
+            self.product_pdt | self.product_pdt.get_pack_lines().mapped("product_id"),
         )
+        # All component lines have zero as subtotal
+        self.assertEqual((sale.order_line - line).mapped("price_subtotal"), [0, 0, 0])
+        # Pack price is equal to the sum of component prices
+        self.assertEqual(line.price_subtotal, 2662.5)
+        self.assertEqual(self._get_component_prices_sum(self.product_pdt), 2662.5)
 
     def test_create_ignored_price_order_line(self):
         """Test with the same premise that in sale_product_pack but in a frontend
         tour"""
-        self.start_tour("/shop", "create_ignored_price_order_line", login="portal")
+        self.start_tour(
+            "/shop",
+            "create_ignored_price_order_line",
+            login="portal",
+            t_call_assets="web.assets_common",
+        )
         sale = self.env["sale.order"].search([], limit=1)
         line = sale.order_line.filtered(lambda x: x.product_id == self.product_pdi)
         # After create, there will be four lines
@@ -87,7 +106,12 @@ class WebsiteSaleHttpCase(HttpCase):
     def test_create_totalized_price_order_line(self):
         """Test with the same premise that in sale_product_pack but in a frontend tour
         with a detailed totalized pack"""
-        self.start_tour("/shop", "create_totalized_price_order_line", login="portal")
+        self.start_tour(
+            "/shop",
+            "create_totalized_price_order_line",
+            login="portal",
+            t_call_assets="web.assets_common",
+        )
         sale = self.env["sale.order"].search([], limit=1)
         line = sale.order_line.filtered(lambda x: x.product_id == self.product_pdt)
         # After create, there will be four lines
@@ -107,7 +131,12 @@ class WebsiteSaleHttpCase(HttpCase):
     def test_create_non_detailed_price_order_line(self):
         """Test with the same premise that in sale_product_pack but in a frontend
         tour"""
-        self.start_tour("/shop", "create_non_detailed_price_order_line", login="portal")
+        self.start_tour(
+            "/shop",
+            "create_non_detailed_price_order_line",
+            login="portal",
+            t_call_assets="web.assets_common",
+        )
         sale = self.env["sale.order"].search([], limit=1)
         line = sale.order_line.filtered(lambda x: x.product_id == self.product_pnd)
         # After create, there will be only one line, because product_type is
