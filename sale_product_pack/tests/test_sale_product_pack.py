@@ -71,13 +71,8 @@ class TestSaleProductPack(TransactionCase):
         )
         # After create, there will be four lines
         self.assertEqual(len(self.sale_order.order_line), 4)
-        pack_line = self.sale_order.order_line.filtered(
-            lambda pline: pline.product_id == product_cp
-        )
-        # Check if sequence is the same as pack product one
-        sequence = pack_line.sequence
         self.assertEqual(
-            [sequence, sequence, sequence, sequence],
+            [10, 11, 12, 13],
             self.sale_order.order_line.mapped("sequence"),
         )
         # The products of those four lines are the main product pack and its
@@ -250,26 +245,21 @@ class TestSaleProductPack(TransactionCase):
                 "name": product_cp.name,
                 "product_id": product_cp.id,
                 "product_uom_qty": 1,
+                "sequence": 10,
             },
             {
                 "order_id": self.sale_order.id,
                 "name": product_tp.name,
                 "product_id": product_tp.id,
                 "product_uom_qty": 1,
+                "sequence": 20,
             },
         ]
         self.env["sale.order.line"].create(vals)
         # After create, there will be eight lines (4 + 4)
         self.assertEqual(len(self.sale_order.order_line), 8)
         # Check if lines are well ordered
-        self.assertEqual(self.sale_order.order_line[0].product_id, product_cp)
-        sequence_cp = self.sale_order.order_line[0].sequence
-        self.assertEqual(sequence_cp, self.sale_order.order_line[1].sequence)
-        self.assertEqual(sequence_cp, self.sale_order.order_line[2].sequence)
-        self.assertEqual(sequence_cp, self.sale_order.order_line[3].sequence)
-
-        self.assertEqual(self.sale_order.order_line[4].product_id, product_tp)
-        sequence_tp = self.sale_order.order_line[4].sequence
-        self.assertEqual(sequence_tp, self.sale_order.order_line[5].sequence)
-        self.assertEqual(sequence_tp, self.sale_order.order_line[6].sequence)
-        self.assertEqual(sequence_tp, self.sale_order.order_line[7].sequence)
+        self.assertEqual(
+            [10, 11, 12, 13, 20, 21, 22, 23],
+            self.sale_order.order_line.mapped("sequence"),
+        )
