@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-product-pack Odoo addons",
     version=version,
     install_requires=[
+        'odoo14-addon-pos_product_pack',
         'odoo14-addon-product_pack',
         'odoo14-addon-sale_product_pack',
         'odoo14-addon-stock_product_pack',
