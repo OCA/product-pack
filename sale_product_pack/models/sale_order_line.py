@@ -52,8 +52,11 @@ class SaleOrderLine(models.Model):
         # only want to update prices
         vals_list = []
         if self.product_id.pack_ok and self.pack_type == "detailed":
+            new_sequence = self.sequence + 1
             for subline in self.product_id.get_pack_lines():
                 vals = subline.get_sale_order_line_vals(self, self.order_id)
+                vals["sequence"] = new_sequence
+                new_sequence += 1
                 if write:
                     existing_subline = first(
                         self.pack_child_line_ids.filtered(
