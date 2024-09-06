@@ -9,7 +9,7 @@ class SaleOrderLine(models.Model):
     def _compute_qty_delivered(self):
         """Compute pack delivered pack quantites according to its components
         deliveries"""
-        super()._compute_qty_delivered()
+        res = super()._compute_qty_delivered()
         main_pack_lines = self.filtered("pack_parent_line_id").mapped(
             "pack_parent_line_id"
         )
@@ -28,3 +28,4 @@ class SaleOrderLine(models.Model):
                 qty_per_pack = pack_line.product_uom_qty / line.product_uom_qty
                 delivered_packs.append(pack_line.qty_delivered / qty_per_pack)
             line.qty_delivered = delivered_packs and min(delivered_packs) or 0.0
+        return res

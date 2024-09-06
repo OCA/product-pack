@@ -3,7 +3,7 @@
 {
     "name": "Sale Stock Product Pack",
     "summary": "Compatibility module for packs that are storable products",
-    "version": "13.0.1.0.2",
+    "version": "16.0.1.0.0",
     "development_status": "Beta",
     "category": "Sale",
     "website": "https://github.com/OCA/product-pack",
@@ -11,5 +11,5 @@
     "maintainers": ["chienandalu"],
     "license": "AGPL-3",
     "depends": ["sale_product_pack", "stock_product_pack"],
-    "data": [],
+    "installable": True,
 }
