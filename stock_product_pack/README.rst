@@ -80,6 +80,7 @@ Contributors
   * Pedro M. Baeza
   * Sergio Teruel
   * João Marques
+  * Víctor Martínez
 
 Maintainers
 ~~~~~~~~~~~

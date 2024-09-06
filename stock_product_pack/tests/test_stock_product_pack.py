@@ -1,5 +1,6 @@
 # Copyright 2019 Tecnativa - Ernesto Tejeda
 # Copyright 2020 Tecnativa - João Marques
+# Copyright 2024 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
@@ -13,35 +14,35 @@ class TestSaleProductPack(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        category_all_id = cls.env.ref("product.product_category_all").id
+        cls.category_all_id = cls.env.ref("product.product_category_all").id
         cls.product_obj = cls.env["product.product"]
         cls.stock_rule_obj = cls.env["stock.rule"]
-        component_1 = cls.product_obj.create(
+        cls.component_1 = cls.product_obj.create(
             {
                 "name": "Component 1",
                 "detailed_type": "product",
-                "categ_id": category_all_id,
+                "categ_id": cls.category_all_id,
             }
         )
-        component_2 = cls.product_obj.create(
+        cls.component_2 = cls.product_obj.create(
             {
                 "name": "Component 2",
                 "detailed_type": "product",
-                "categ_id": category_all_id,
+                "categ_id": cls.category_all_id,
             }
         )
-        component_3 = cls.product_obj.create(
+        cls.component_3 = cls.product_obj.create(
             {
                 "name": "Component 3",
                 "detailed_type": "service",
-                "categ_id": category_all_id,
+                "categ_id": cls.category_all_id,
             }
         )
-        component_4 = cls.product_obj.create(
+        cls.component_4 = cls.product_obj.create(
             {
                 "name": "Component 4",
                 "detailed_type": "consu",
-                "categ_id": category_all_id,
+                "categ_id": cls.category_all_id,
             }
         )
         cls.pack_dc = cls.product_obj.create(
@@ -51,32 +52,32 @@ class TestSaleProductPack(TransactionCase):
                 "pack_ok": True,
                 "pack_type": "detailed",
                 "pack_component_price": "detailed",
-                "categ_id": category_all_id,
+                "categ_id": cls.category_all_id,
                 "pack_line_ids": [
                     (
                         0,
                         0,
-                        {"product_id": component_1.id, "quantity": 1},
+                        {"product_id": cls.component_1.id, "quantity": 1},
                     ),
                     (
                         0,
                         0,
-                        {"product_id": component_2.id, "quantity": 1},
+                        {"product_id": cls.component_2.id, "quantity": 1},
                     ),
                     (
                         0,
                         0,
-                        {"product_id": component_3.id, "quantity": 1},
+                        {"product_id": cls.component_3.id, "quantity": 1},
                     ),
                     (
                         0,
                         0,
-                        {"product_id": component_4.id, "quantity": 1},
+                        {"product_id": cls.component_4.id, "quantity": 1},
                     ),
                 ],
             }
         )
-        warehouse = cls.env["stock.warehouse"].search(
+        cls.warehouse = cls.env["stock.warehouse"].search(
             [("company_id", "=", cls.env.user.id)], limit=1
         )
         cls.stock_rule = cls.stock_rule_obj.create(
@@ -86,7 +87,7 @@ class TestSaleProductPack(TransactionCase):
                 "picking_type_id": cls.env.ref("stock.picking_type_internal").id,
                 "route_id": cls.env.ref("stock.route_warehouse0_mto").id,
                 "procure_method": "make_to_stock",
-                "warehouse_id": warehouse.id,
+                "warehouse_id": cls.warehouse.id,
                 "location_dest_id": cls.env.ref("stock.stock_location_stock").id,
             }
         )
@@ -98,27 +99,27 @@ class TestSaleProductPack(TransactionCase):
                 "dont_create_move": True,
                 "pack_type": "detailed",
                 "pack_component_price": "detailed",
-                "categ_id": category_all_id,
+                "categ_id": cls.category_all_id,
                 "pack_line_ids": [
                     (
                         0,
                         0,
-                        {"product_id": component_1.id, "quantity": 1},
+                        {"product_id": cls.component_1.id, "quantity": 1},
                     ),
                     (
                         0,
                         0,
-                        {"product_id": component_2.id, "quantity": 1},
+                        {"product_id": cls.component_2.id, "quantity": 1},
                     ),
                     (
                         0,
                         0,
-                        {"product_id": component_3.id, "quantity": 1},
+                        {"product_id": cls.component_3.id, "quantity": 1},
                     ),
                     (
                         0,
                         0,
-                        {"product_id": component_4.id, "quantity": 1},
+                        {"product_id": cls.component_4.id, "quantity": 1},
                     ),
                 ],
             }
@@ -205,3 +206,68 @@ class TestSaleProductPack(TransactionCase):
         picking_ids = self.env["stock.picking"].search([("group_id", "=", pg.id)])
         # we need to ensure that only the compents of the packs are in the moves.
         self.assertFalse(self.pack_dc_with_dm in picking_ids.move_ids.product_id)
+
+    def _create_stock_quant(self, product, qty):
+        self.env["stock.quant"].create(
+            {
+                "product_id": product.id,
+                "location_id": self.warehouse.lot_stock_id.id,
+                "quantity": qty,
+            }
+        )
+
+    def test_picking_pack_consu(self):
+        partner = self.env["res.partner"].create({"name": "Test partner"})
+        pack = self.product_obj.create(
+            {
+                "name": "Pack (consumable)",
+                "detailed_type": "consu",
+                "pack_ok": True,
+                "pack_type": "detailed",
+                "pack_component_price": "detailed",
+                "categ_id": self.category_all_id,
+                "pack_line_ids": [
+                    (
+                        0,
+                        0,
+                        {"product_id": self.component_1.id, "quantity": 1},
+                    ),
+                    (
+                        0,
+                        0,
+                        {"product_id": self.component_2.id, "quantity": 1},
+                    ),
+                ],
+            }
+        )
+        self._create_stock_quant(self.component_1, 1)
+        self._create_stock_quant(self.component_2, 1)
+        picking_form = Form(
+            self.env["stock.picking"].with_context(
+                default_picking_type_id=self.warehouse.out_type_id.id,
+                default_partner_id=partner.id,
+            )
+        )
+        for product in [pack, self.component_1, self.component_2]:
+            with picking_form.move_ids_without_package.new() as line_form:
+                line_form.product_id = product
+                line_form.product_uom_qty = 1
+        picking = picking_form.save()
+        # Order moves, when they are created from a sale order they already have
+        # the correct consecutive sequence
+        c1_move = picking.move_ids.filtered(lambda x: x.product_id == self.component_1)
+        c1_move.sequence = 11
+        c2_move = picking.move_ids.filtered(lambda x: x.product_id == self.component_2)
+        c2_move.sequence = 12
+        picking.action_confirm()
+        res = picking.button_validate()
+        wizard = self.env[res["res_model"]].with_context(**res["context"]).create({})
+        wizard.process()
+        self.assertEqual(picking.state, "done")
+        data_names = []
+        aggregated_lines = picking.move_line_ids._get_aggregated_product_quantities()
+        for line in aggregated_lines:
+            data_names.append(aggregated_lines[line]["name"])
+        self.assertEqual(
+            data_names, ["Pack (consumable)", "Component 1", "Component 2"]
+        )
