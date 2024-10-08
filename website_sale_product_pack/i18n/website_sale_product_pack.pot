@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -15,7 +15,7 @@ msgstr ""
 
 #. module: website_sale_product_pack
 #: model_terms:ir.ui.view,arch_db:website_sale_product_pack.cart_lines
-#: model_terms:ir.ui.view,arch_db:website_sale_product_pack.cart_summary
+#: model_terms:ir.ui.view,arch_db:website_sale_product_pack.checkout_layout
 msgid "<span>↳ </span>"
 msgstr ""
 
@@ -49,7 +49,7 @@ msgstr ""
 #: code:addons/website_sale_product_pack/models/product_product.py:0
 #, python-format
 msgid ""
-"You can't add unpublished products (%(unpublished_products)s) toa published "
+"You can't add unpublished products (%(unpublished_products)s)to a published "
 "pack (%(pack_name)s)"
 msgstr ""
 
