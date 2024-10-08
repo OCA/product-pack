@@ -18,7 +18,7 @@ msgstr ""
 
 #. module: website_sale_product_pack
 #: model_terms:ir.ui.view,arch_db:website_sale_product_pack.cart_lines
-#: model_terms:ir.ui.view,arch_db:website_sale_product_pack.cart_summary
+#: model_terms:ir.ui.view,arch_db:website_sale_product_pack.checkout_layout
 msgid "<span>↳ </span>"
 msgstr "<span>↳ </span>"
 
@@ -52,19 +52,17 @@ msgstr "Sito web"
 #: code:addons/website_sale_product_pack/models/product_product.py:0
 #, python-format
 msgid ""
-"You can't add unpublished products (%(unpublished_products)s) toa published "
+"You can't add unpublished products (%(unpublished_products)s)to a published "
 "pack (%(pack_name)s)"
 msgstr ""
-"Non si possono aggiungere prodotti non pubblicati (%(unpublished_products)s) "
-"ad un collo pubblicato (%(pack_name)s)"
 
 #. module: website_sale_product_pack
 #. odoo-python
 #: code:addons/website_sale_product_pack/models/product_template.py:0
 #, python-format
 msgid ""
-"You can't unpublished product (%(product_name)s) for apublished pack parents"
-" (%(pack_parents)s)"
+"You can't unpublished product (%(product_name)s) for apublished pack parents "
+"(%(pack_parents)s)"
 msgstr ""
 "Non si può non pubblicare un prodotto (%(product_name)s) per un collo padre "
 "pubblicato (%(pack_parents)s)"
@@ -74,8 +72,16 @@ msgstr ""
 #: code:addons/website_sale_product_pack/models/product_template.py:0
 #, python-format
 msgid ""
-"You can't unpublished products (%(unpublished_products)s) to apublished pack"
-" (%(pack_name)s)"
+"You can't unpublished products (%(unpublished_products)s) to apublished pack "
+"(%(pack_name)s)"
 msgstr ""
 "Non si può non pubblicare un prodotto (%(unpublished_products)s) di un collo "
 "pubblicato (%(pack_name)s)"
+
+#, python-format
+#~ msgid ""
+#~ "You can't add unpublished products (%(unpublished_products)s) toa "
+#~ "published pack (%(pack_name)s)"
+#~ msgstr ""
+#~ "Non si possono aggiungere prodotti non pubblicati "
+#~ "(%(unpublished_products)s) ad un collo pubblicato (%(pack_name)s)"
