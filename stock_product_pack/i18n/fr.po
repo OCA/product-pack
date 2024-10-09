@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* stock_product_pack
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2020-05-28 12:19+0000\n"
+"Last-Translator: Yann Papouin <y.papouin@dec-industrie.com>\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.10\n"
+
+#. module: stock_product_pack
+#: model:ir.model.fields,field_description:stock_product_pack.field_product_product__dont_create_move
+#: model:ir.model.fields,field_description:stock_product_pack.field_product_template__dont_create_move
+msgid "Don't create move"
+msgstr ""
+
+#. module: stock_product_pack
+#: model:ir.model,name:stock_product_pack.model_procurement_group
+msgid "Procurement Group"
+msgstr ""
+
+#. module: stock_product_pack
+#: model:ir.model,name:stock_product_pack.model_product_template
+msgid "Product"
+msgstr "Article"
+
+#. module: stock_product_pack
+#: model:ir.model,name:stock_product_pack.model_product_product
+msgid "Product Variant"
+msgstr ""
+
+#. module: stock_product_pack
+#: model:ir.model.fields,help:stock_product_pack.field_product_product__dont_create_move
+#: model:ir.model.fields,help:stock_product_pack.field_product_template__dont_create_move
+msgid ""
+"With this option, the pack won't create an stock.move and will be set as "
+"delivered upon sale confirmation. This is useful to use get pack stock "
+"availability (type = 'product') but without actually having stock and moves "
+"of it."
+msgstr ""
