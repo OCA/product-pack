@@ -4,6 +4,8 @@
   * Nicolas Mac Rouillon
   * Katherine Zaoral
   * Bruno Zanotti
+  * Augusto Weiss
+  * Nicolas Col
 * `NaN·TIC <http://www.nan-tic.com>`_
 * `Tecnativa <https://www.tecnativa.com>`_:
 

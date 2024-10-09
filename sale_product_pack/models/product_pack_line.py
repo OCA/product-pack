@@ -28,24 +28,27 @@ class ProductPack(models.Model):
         sol._onchange_product_id_warning()
         vals = sol._convert_to_write(sol._cache)
         pack_price_types = {"totalized", "ignored"}
-        sale_discount = 0.0
-        if line.product_id.pack_component_price == "detailed":
-            sale_discount = 100.0 - (
-                (100.0 - sol.discount) * (100.0 - self.sale_discount) / 100.0
-            )
-        elif (
+        if (
             line.product_id.pack_type == "detailed"
             and line.product_id.pack_component_price in pack_price_types
         ):
             vals["price_unit"] = 0.0
-        vals.update(
-            {
-                "discount": sale_discount,
-                "name": "{}{}".format("> " * (line.pack_depth + 1), sol.name),
-            }
-        )
+
+        vals["name"] = "{}{}".format("> " * (line.pack_depth + 1), sol.name)
+
         return vals
 
-    def get_price(self):
-        self.ensure_one()
-        return super().get_price() * (1 - self.sale_discount / 100.0)
+    def _get_pack_line_price(self, pricelist, quantity, uom=None, date=False, **kwargs):
+        return super()._get_pack_line_price(
+            pricelist, quantity, uom=uom, date=date, **kwargs
+        ) * (1 - self.sale_discount / 100.0)
+
+    def _pack_line_price_compute(
+        self, price_type, uom=False, currency=False, company=False, date=False
+    ):
+        pack_line_prices = super()._pack_line_price_compute(
+            price_type, uom, currency, company, date
+        )
+        for line in self:
+            pack_line_prices[line.product_id.id] *= 1 - line.sale_discount / 100.0
+        return pack_line_prices
