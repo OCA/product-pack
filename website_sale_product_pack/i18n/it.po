@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-04-19 11:39+0000\n"
+"PO-Revision-Date: 2024-10-09 09:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: website_sale_product_pack
 #: model_terms:ir.ui.view,arch_db:website_sale_product_pack.cart_lines
@@ -55,6 +55,8 @@ msgid ""
 "You can't add unpublished products (%(unpublished_products)s)to a published "
 "pack (%(pack_name)s)"
 msgstr ""
+"Non si possono aggiungere prodotti non pubblicati (%(unpublished_products)s) "
+"ad un pacco pubblicato (%(pack_name)s)"
 
 #. module: website_sale_product_pack
 #. odoo-python
