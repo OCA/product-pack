@@ -53,8 +53,11 @@ class SaleOrderLine(models.Model):
         # only want to update prices
         vals_list = []
         if self.product_id.pack_ok and self.pack_type == "detailed":
+            new_sequence = self.sequence + 1
             for subline in self.product_id.get_pack_lines():
                 vals = subline.get_sale_order_line_vals(self, self.order_id)
+                vals["sequence"] = new_sequence
+                new_sequence += 1
                 if write:
                     existing_subline = first(
                         self.pack_child_line_ids.filtered(
@@ -72,21 +75,27 @@ class SaleOrderLine(models.Model):
                 else:
                     vals_list.append(vals)
             if vals_list:
-                self.create(vals_list)
+                return self.create(vals_list)
 
     @api.model_create_multi
     def create(self, vals_list):
-        new_vals = []
-        res = self.browse()
-        for elem in vals_list:
-            product = self.env["product.product"].browse(elem.get("product_id"))
-            if product and product.pack_ok and product.pack_type != "non_detailed":
-                line = super().create([elem])
-                line.expand_pack_line()
-                res |= line
-            else:
-                new_vals.append(elem)
-        res |= super().create(new_vals)
+        """We need to create everything and then add the extra lines as appropriate"""
+        res = super().create(vals_list)
+        if any(
+            x.product_id.pack_ok and x.product_id.pack_type != "non_detailed"
+            for x in res
+        ):
+            for item in res.filtered(
+                lambda x: x.product_id.pack_ok
+                and x.product_id.pack_type != "non_detailed"
+            ):
+                total_pack_lines = len(item.product_id.get_pack_lines())
+                # Increase the sequence of the lines that are after to add the lines of
+                # the pack later
+                for after_line in res.filtered(lambda y: y.sequence > item.sequence):  # noqa B023
+                    after_line.sequence += total_pack_lines
+                res += item.expand_pack_line()
+            res = res.sorted()
         return res
 
     def write(self, vals):

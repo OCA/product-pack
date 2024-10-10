@@ -61,7 +61,7 @@ class TestSaleProductPack(TransactionCase):
 
     def test_create_components_price_order_line(self):
         product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
-        line = self.env["sale.order.line"].create(
+        so_lines = self.env["sale.order.line"].create(
             {
                 "order_id": self.sale_order.id,
                 "name": product_cp.name,
@@ -69,15 +69,11 @@ class TestSaleProductPack(TransactionCase):
                 "product_uom_qty": 1,
             }
         )
+        line = so_lines.filtered(lambda x: x.product_id == product_cp)
         # After create, there will be four lines
         self.assertEqual(len(self.sale_order.order_line), 4)
-        pack_line = self.sale_order.order_line.filtered(
-            lambda pline: pline.product_id == product_cp
-        )
-        # Check if sequence is the same as pack product one
-        sequence = pack_line.sequence
         self.assertEqual(
-            [sequence, sequence, sequence, sequence],
+            [10, 11, 12, 13],
             self.sale_order.order_line.mapped("sequence"),
         )
         # The products of those four lines are the main product pack and its
@@ -103,7 +99,7 @@ class TestSaleProductPack(TransactionCase):
 
     def test_create_ignored_price_order_line(self):
         product_tp = self.env.ref("product_pack.product_pack_cpu_detailed_ignored")
-        line = self.env["sale.order.line"].create(
+        so_lines = self.env["sale.order.line"].create(
             {
                 "order_id": self.sale_order.id,
                 "name": product_tp.name,
@@ -111,6 +107,7 @@ class TestSaleProductPack(TransactionCase):
                 "product_uom_qty": 1,
             }
         )
+        line = so_lines.filtered(lambda x: x.product_id == product_tp)
         # After create, there will be four lines
         self.assertEqual(len(self.sale_order.order_line), 4)
         # The products of those four lines are the main product pack and its
@@ -137,7 +134,7 @@ class TestSaleProductPack(TransactionCase):
 
     def test_create_totalized_price_order_line(self):
         product_tp = self.env.ref("product_pack.product_pack_cpu_detailed_totalized")
-        line = self.env["sale.order.line"].create(
+        so_lines = self.env["sale.order.line"].create(
             {
                 "order_id": self.sale_order.id,
                 "name": product_tp.name,
@@ -145,6 +142,7 @@ class TestSaleProductPack(TransactionCase):
                 "product_uom_qty": 1,
             }
         )
+        line = so_lines.filtered(lambda x: x.product_id == product_tp)
         # After create, there will be four lines
         self.assertEqual(len(self.sale_order.order_line), 4)
         # The products of those four lines are the main product pack and its
@@ -198,7 +196,7 @@ class TestSaleProductPack(TransactionCase):
             return sum(self.sale_order.order_line.mapped("product_uom_qty"))
 
         product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
-        main_sol = self.env["sale.order.line"].create(
+        so_lines = self.env["sale.order.line"].create(
             {
                 "order_id": self.sale_order.id,
                 "name": product_cp.name,
@@ -206,6 +204,7 @@ class TestSaleProductPack(TransactionCase):
                 "product_uom_qty": 1,
             }
         )
+        main_sol = so_lines.filtered(lambda x: x.product_id == product_cp)
         total_qty_init = qty_in_order()
         # change qty of main sol
         main_sol.product_uom_qty = 2 * main_sol.product_uom_qty
@@ -223,7 +222,7 @@ class TestSaleProductPack(TransactionCase):
 
     def test_do_not_expand(self):
         product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
-        pack_line = self.env["sale.order.line"].create(
+        so_lines = self.env["sale.order.line"].create(
             {
                 "order_id": self.sale_order.id,
                 "name": product_cp.name,
@@ -231,6 +230,7 @@ class TestSaleProductPack(TransactionCase):
                 "product_uom_qty": 1,
             }
         )
+        pack_line = so_lines.filtered(lambda x: x.product_id == product_cp)
         # After create, there will be four lines
         self.assertEqual(len(self.sale_order.order_line), 4)
         pack_line_update = pack_line.with_context(update_prices=True)
@@ -250,26 +250,27 @@ class TestSaleProductPack(TransactionCase):
                 "name": product_cp.name,
                 "product_id": product_cp.id,
                 "product_uom_qty": 1,
+                "sequence": 10,
             },
             {
                 "order_id": self.sale_order.id,
                 "name": product_tp.name,
                 "product_id": product_tp.id,
                 "product_uom_qty": 1,
+                "sequence": 11,
             },
         ]
-        self.env["sale.order.line"].create(vals)
+        lines = self.env["sale.order.line"].create(vals)
         # After create, there will be eight lines (4 + 4)
         self.assertEqual(len(self.sale_order.order_line), 8)
         # Check if lines are well ordered
-        self.assertEqual(self.sale_order.order_line[0].product_id, product_cp)
-        sequence_cp = self.sale_order.order_line[0].sequence
-        self.assertEqual(sequence_cp, self.sale_order.order_line[1].sequence)
-        self.assertEqual(sequence_cp, self.sale_order.order_line[2].sequence)
-        self.assertEqual(sequence_cp, self.sale_order.order_line[3].sequence)
-
-        self.assertEqual(self.sale_order.order_line[4].product_id, product_tp)
-        sequence_tp = self.sale_order.order_line[4].sequence
-        self.assertEqual(sequence_tp, self.sale_order.order_line[5].sequence)
-        self.assertEqual(sequence_tp, self.sale_order.order_line[6].sequence)
-        self.assertEqual(sequence_tp, self.sale_order.order_line[7].sequence)
+        self.assertEqual(
+            [10, 11, 12, 13, 14, 15, 16, 17],
+            lines.mapped("sequence"),
+        )
+        # La línea de product_cp tiene la secuencia 10
+        cp_line = lines.filtered(lambda x: x.product_id == product_cp)
+        self.assertEqual(cp_line.sequence, 10)
+        # La línea de product_tp tiene la secuencia cambiada a 14 (1+4)
+        tp_line = lines.filtered(lambda x: x.product_id == product_tp)
+        self.assertEqual(tp_line.sequence, 14)
