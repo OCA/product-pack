@@ -75,18 +75,22 @@ class SaleOrderLine(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        new_vals = []
-        res = self.browse()
-        for elem in vals_list:
-            product = self.env["product.product"].browse(elem.get("product_id"))
-            if product and product.pack_ok and product.pack_type != "non_detailed":
+        """Only when strictly necessary (a product is a pack) will be created line
+        by line, this is necessary to maintain the correct order.
+        """
+        product_ids = [elem.get("product_id") for elem in vals_list]
+        products = self.env["product.product"].browse(product_ids)
+        if any(p.pack_ok and p.pack_type != "non_detailed" for p in products):
+            res = self.browse()
+            for elem in vals_list:
                 line = super().create([elem])
-                line.expand_pack_line()
-                res |= line
-            else:
-                new_vals.append(elem)
-        res |= super().create(new_vals)
-        return res
+                product = line.product_id
+                res += line
+                if product and product.pack_ok and product.pack_type != "non_detailed":
+                    line.expand_pack_line()
+            return res
+        else:
+            return super().create(vals_list)
 
     def write(self, vals):
         res = super().write(vals)
