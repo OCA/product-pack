@@ -1,10 +1,10 @@
 # Copyright 2019 Tecnativa - Ernesto Tejeda
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests.common import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestSaleProductPack(TransactionCase):
+class TestSaleProductPack(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -238,7 +238,7 @@ class TestSaleProductPack(TransactionCase):
         pack_line_update = pack_line.with_context(update_pricelist=True)
         self.assertTrue(pack_line_update.do_no_expand_pack_lines)
 
-    def test_create_several_lines(self):
+    def test_create_several_lines_01(self):
         # Create two sale order lines with two pack products
         # Check 8 lines are created
         # Check lines sequences and order are respected
@@ -273,3 +273,65 @@ class TestSaleProductPack(TransactionCase):
         self.assertEqual(sequence_tp, self.sale_order.order_line[5].sequence)
         self.assertEqual(sequence_tp, self.sale_order.order_line[6].sequence)
         self.assertEqual(sequence_tp, self.sale_order.order_line[7].sequence)
+
+    def test_create_several_lines_02(self):
+        # Create two sale order lines with pack product
+        # Check 5 lines are created
+        # Check lines sequences and order are respected
+        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        product = self.env["product.product"].create({"name": "Test product"})
+        vals = [
+            {
+                "order_id": self.sale_order.id,
+                "name": product.name,
+                "product_id": product.id,
+                "product_uom_qty": 1,
+            },
+            {
+                "order_id": self.sale_order.id,
+                "name": product_cp.name,
+                "product_id": product_cp.id,
+                "product_uom_qty": 1,
+            },
+        ]
+        self.env["sale.order.line"].create(vals)
+        # After create, there will be eight lines (1 + 4)
+        self.assertEqual(len(self.sale_order.order_line), 5)
+        # Check if lines are well ordered
+        self.assertEqual(self.sale_order.order_line[0].product_id, product)
+        self.assertEqual(self.sale_order.order_line[1].product_id, product_cp)
+        sequence_tp = self.sale_order.order_line[1].sequence
+        self.assertEqual(sequence_tp, self.sale_order.order_line[2].sequence)
+        self.assertEqual(sequence_tp, self.sale_order.order_line[3].sequence)
+        self.assertEqual(sequence_tp, self.sale_order.order_line[4].sequence)
+
+    def test_create_several_lines_03(self):
+        # Create two sale order lines with pack product
+        # Check 5 lines are created
+        # Check lines sequences and order are respected
+        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        product = self.env["product.product"].create({"name": "Test product"})
+        vals = [
+            {
+                "order_id": self.sale_order.id,
+                "name": product_cp.name,
+                "product_id": product_cp.id,
+                "product_uom_qty": 1,
+            },
+            {
+                "order_id": self.sale_order.id,
+                "name": product.name,
+                "product_id": product.id,
+                "product_uom_qty": 1,
+            },
+        ]
+        self.env["sale.order.line"].create(vals)
+        # After create, there will be eight lines (4 + 1)
+        self.assertEqual(len(self.sale_order.order_line), 5)
+        # Check if lines are well ordered
+        self.assertEqual(self.sale_order.order_line[0].product_id, product_cp)
+        sequence_tp = self.sale_order.order_line[0].sequence
+        self.assertEqual(sequence_tp, self.sale_order.order_line[1].sequence)
+        self.assertEqual(sequence_tp, self.sale_order.order_line[2].sequence)
+        self.assertEqual(sequence_tp, self.sale_order.order_line[3].sequence)
+        self.assertEqual(self.sale_order.order_line[4].product_id, product)
