@@ -7,7 +7,7 @@
     "summary": "This module allows you to sell product packs",
     "website": "https://github.com/OCA/product-pack",
     "author": "NaN·tic, ADHOC SA, Tecnativa, Odoo Community Association (OCA)",
-    "maintainers": ["ernestotejeda"],
+    "maintainers": ["victoralmau"],
     "license": "AGPL-3",
     "depends": ["product_pack", "sale"],
     "data": ["security/ir.model.access.csv", "views/product_pack_line_views.xml"],
