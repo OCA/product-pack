@@ -37,6 +37,11 @@ msgid "Lines in pack"
 msgstr "Línies en pack"
 
 #. module: sale_product_pack
+#: model_terms:ir.ui.view,arch_db:sale_product_pack.view_order_form
+msgid "Locked"
+msgstr ""
+
+#. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_component_price
 msgid ""
 "On sale orders or purchase orders:\n"
@@ -84,11 +89,6 @@ msgstr "Tipus de pantalla de paquet"
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_modifiable
 msgid "Pack Modifiable"
 msgstr "Paquet modificable"
-
-#. module: sale_product_pack
-#: model_terms:ir.ui.view,arch_db:sale_product_pack.view_order_form
-msgid "Parent Pack is not modifiable"
-msgstr "El paquet de pares no es pot modificar"
 
 #. module: sale_product_pack
 #. odoo-python
@@ -153,6 +153,9 @@ msgid ""
 msgstr ""
 "No podeu suprimir aquesta línia perquè forma part d'un paquet d'aquesta "
 "comanda de venda. Per eliminar aquesta línia, heu d'esborrar el paquet en si"
+
+#~ msgid "Parent Pack is not modifiable"
+#~ msgstr "El paquet de pares no es pot modificar"
 
 #~ msgid "Display Name"
 #~ msgstr "Nom de visualització"
