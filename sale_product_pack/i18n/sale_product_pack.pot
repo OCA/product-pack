@@ -34,6 +34,11 @@ msgid "Lines in pack"
 msgstr ""
 
 #. module: sale_product_pack
+#: model_terms:ir.ui.view,arch_db:sale_product_pack.view_order_form
+msgid "Locked"
+msgstr ""
+
+#. module: sale_product_pack
 #: model:ir.model.fields,help:sale_product_pack.field_sale_order_line__pack_component_price
 msgid ""
 "On sale orders or purchase orders:\n"
@@ -68,11 +73,6 @@ msgstr ""
 #. module: sale_product_pack
 #: model:ir.model.fields,field_description:sale_product_pack.field_sale_order_line__pack_modifiable
 msgid "Pack Modifiable"
-msgstr ""
-
-#. module: sale_product_pack
-#: model_terms:ir.ui.view,arch_db:sale_product_pack.view_order_form
-msgid "Parent Pack is not modifiable"
 msgstr ""
 
 #. module: sale_product_pack
