@@ -75,7 +75,6 @@ class ProductPackLine(models.Model):
         # If the component is a pack
         for pack in packs:
             pack_prices[pack.id] = pack.lst_price
-
         # else
         no_pack_prices = no_packs._price_compute(
             price_type, uom, currency, company, date

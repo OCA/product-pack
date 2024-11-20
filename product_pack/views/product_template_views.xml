@@ -46,18 +46,13 @@
                     name="invisible"
                 >product_variant_count &gt; 1 or not pack_ok</attribute>
             </page>
-                <group name="group_pack">
-                    <group string="Pack Products" colspan="4">
-                        <field name="id" invisible="1" />
-                        <p invisible="id">You must save first to add pack lines</p>
-                    </group>
-                    <field
-                    name="pack_line_ids"
-                    nolabel="1"
-                    colspan="4"
-                    readonly="not id"
-                />
+            <group name="group_pack">
+                <group string="Pack Products" colspan="4">
+                    <field name="id" invisible="1" />
+                    <p invisible="id">You must save first to add pack lines</p>
                 </group>
+                <field name="pack_line_ids" nolabel="1" colspan="4" readonly="not id" />
+            </group>
         </field>
     </record>
 </odoo>
