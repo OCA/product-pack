@@ -19,7 +19,7 @@
     </record>
 
     <!-- Sale order lines -->
-        <!-- Product pack: DETAILED - COMPONENTS -->
+    <!-- Product pack: DETAILED - COMPONENTS -->
     <record id="portal_sale_order_line_section_1" model="sale.order.line">
         <field name="order_id" ref="portal_sale_order_3" />
         <field name="name">Detailed Displayed Components Price</field>
@@ -34,7 +34,7 @@
         />
         <field name="sequence">2</field>
     </record>
-        <!-- Product pack: DETAILED - TOTALIZED -->
+    <!-- Product pack: DETAILED - TOTALIZED -->
     <record id="portal_sale_order_line_section_2" model="sale.order.line">
         <field name="order_id" ref="portal_sale_order_3" />
         <field name="name">Detailed Totalized Components Price</field>
@@ -49,7 +49,7 @@
         />
         <field name="sequence">4</field>
     </record>
-        <!-- Product pack: DETAILED - IGNORED -->
+    <!-- Product pack: DETAILED - IGNORED -->
     <record id="portal_sale_order_line_section_3" model="sale.order.line">
         <field name="order_id" ref="portal_sale_order_3" />
         <field name="name">Detailed Ignored Components Price</field>
@@ -61,7 +61,7 @@
         <field name="product_id" ref="product_pack.product_pack_cpu_detailed_ignored" />
         <field name="sequence">6</field>
     </record>
-        <!-- Product pack: NON DETAILED -->
+    <!-- Product pack: NON DETAILED -->
     <record id="portal_sale_order_line_section_4" model="sale.order.line">
         <field name="order_id" ref="portal_sale_order_3" />
         <field name="name">Not Detailed - Totalized Components Price</field>
@@ -73,7 +73,7 @@
         <field name="product_id" ref="product_pack.product_pack_cpu_non_detailed" />
         <field name="sequence">8</field>
     </record>
-        <!-- Components -->
+    <!-- Components -->
     <record id="portal_sale_order_line_section_5" model="sale.order.line">
         <field name="order_id" ref="portal_sale_order_3" />
         <field name="name">COMPONENTS</field>
