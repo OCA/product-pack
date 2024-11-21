@@ -17,13 +17,13 @@ Sale Product Pack
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fproduct--pack-lightgray.png?logo=github
-    :target: https://github.com/OCA/product-pack/tree/17.0/sale_product_pack
+    :target: https://github.com/OCA/product-pack/tree/18.0/sale_product_pack
     :alt: OCA/product-pack
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/product-pack-17-0/product-pack-17-0-sale_product_pack
+    :target: https://translation.odoo-community.org/projects/product-pack-18-0/product-pack-18-0-sale_product_pack
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/product-pack&target_branch=17.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/product-pack&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -59,11 +59,11 @@ To use this module, you need to:
 Known issues / Roadmap
 ======================
 
--  If this module is installed and stock module is installed too, when
-   you create a Sale order for a *Non detailed* Pack and you confirm it,
-   a *Stock picking* is not created with the storable components of that
-   Pack. So, add a new module called *sale_stock_product_pack* that adds
-   that feature.
+- If this module is installed and stock module is installed too, when
+  you create a Sale order for a *Non detailed* Pack and you confirm it,
+  a *Stock picking* is not created with the storable components of that
+  Pack. So, add a new module called *sale_stock_product_pack* that adds
+  that feature.
 
 Bug Tracker
 ===========
@@ -71,7 +71,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/product-pack/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/product-pack/issues/new?body=module:%20sale_product_pack%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/product-pack/issues/new?body=module:%20sale_product_pack%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -88,28 +88,28 @@ Authors
 Contributors
 ------------
 
--  `Tecnativa <https://www.tecnativa.com>`__:
+- `Tecnativa <https://www.tecnativa.com>`__:
 
-   -  Ernesto Tejeda
-   -  Pedro M. Baeza
+  - Ernesto Tejeda
+  - Pedro M. Baeza
 
--  `Akretion <https://akretion.com>`__:
+- `Akretion <https://akretion.com>`__:
 
-   -  Raphaël Reverdy
+  - Raphaël Reverdy
 
--  `Open Source Integrators <https://opensourceintegrators.eu>`__:
+- `Open Source Integrators <https://opensourceintegrators.eu>`__:
 
-   -  Daniel Reis <dreis@opensourceintegrators.com>
+  - Daniel Reis <dreis@opensourceintegrators.com>
 
--  `Acsone <https://www.acsone.eu/>`__:
+- `Acsone <https://www.acsone.eu/>`__:
 
-   -  Maxime Franco
+  - Maxime Franco
 
--  `ADHOC SA <https://www.adhoc.com.ar>`__:
+- `ADHOC SA <https://www.adhoc.com.ar>`__:
 
-   -  Bruno Zanotti
-   -  Augusto Weiss
-   -  Nicolas Col
+  - Bruno Zanotti
+  - Augusto Weiss
+  - Nicolas Col
 
 Maintainers
 -----------
@@ -132,6 +132,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-victoralmau| 
 
-This module is part of the `OCA/product-pack <https://github.com/OCA/product-pack/tree/17.0/sale_product_pack>`_ project on GitHub.
+This module is part of the `OCA/product-pack <https://github.com/OCA/product-pack/tree/18.0/sale_product_pack>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
