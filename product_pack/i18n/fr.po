@@ -203,7 +203,6 @@ msgstr "Pack d'articles"
 #. module: product_pack
 #. odoo-python
 #: code:addons/product_pack/models/product_template.py:0
-#, python-format
 msgid ""
 "Pack lines products company must be the same as the parent product company"
 msgstr ""
@@ -274,7 +273,6 @@ msgstr "Totalisé dans l'article principal"
 #. module: product_pack
 #. odoo-python
 #: code:addons/product_pack/models/product_pack_line.py:0
-#, python-format
 msgid ""
 "You cannot set recursive packs.\n"
 "Product id: %s"
