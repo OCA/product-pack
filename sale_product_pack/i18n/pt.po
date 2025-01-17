@@ -91,7 +91,6 @@ msgstr ""
 #. module: sale_product_pack
 #. odoo-python
 #: code:addons/sale_product_pack/models/sale_order_line.py:0
-#, python-format
 msgid "Parent Product"
 msgstr ""
 
@@ -134,7 +133,6 @@ msgstr ""
 #. module: sale_product_pack
 #. odoo-python
 #: code:addons/sale_product_pack/models/sale_order_line.py:0
-#, python-format
 msgid ""
 "You can not change this line because is part of a pack included in this order"
 msgstr ""
@@ -144,7 +142,6 @@ msgstr ""
 #. module: sale_product_pack
 #. odoo-python
 #: code:addons/sale_product_pack/models/sale_order.py:0
-#, python-format
 msgid ""
 "You cannot delete this line because is part of a pack in this sale order. In "
 "order to delete this line you need to delete the pack itself"
