@@ -153,7 +153,11 @@ class SaleOrderLine(models.Model):
         if self.pack_parent_line_id.pack_component_price == "detailed":
             for pack_line in self.pack_parent_line_id.product_id.pack_line_ids:
                 if pack_line.product_id == self.product_id:
-                    discount = pack_line.sale_discount
+                    discount = 100.0 - (
+                        (100.0 - self.discount)
+                        * (100.0 - pack_line.sale_discount)
+                        / 100.0
+                    )
                     break
         return discount
 
