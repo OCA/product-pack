@@ -335,3 +335,37 @@ class TestSaleProductPack(BaseCommon):
         self.assertEqual(sequence_tp, self.sale_order.order_line[2].sequence)
         self.assertEqual(sequence_tp, self.sale_order.order_line[3].sequence)
         self.assertEqual(self.sale_order.order_line[4].product_id, product)
+
+    def test_compute_discount_for_detailed_packs(self):
+        group_discount = self.env.ref("sale.group_discount_per_so_line")
+        self.env.user.write({"groups_id": [(4, group_discount.id)]})
+        product_pack = self.env.ref("product_pack.product_pack_cpu_detailed_components")
+        sale_order = self.env["sale.order"].create(
+            {
+                "partner_id": self.env.ref("base.res_partner_12").id,
+                "pricelist_id": self.discount_pricelist.id,
+                "order_line": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": product_pack.id,
+                            "product_uom_qty": 1,
+                            "pack_component_price": "detailed",
+                        },
+                    )
+                ],
+            }
+        )
+        sale_order.action_update_prices()
+        pack_lines = sale_order.order_line.filtered(
+            lambda line: line.pack_parent_line_id
+        )
+        self.assertEqual(
+            len(pack_lines), 3, "Expected 3 lines for the components of the pack."
+        )
+        self.assertEqual(
+            pack_lines.mapped("discount"),
+            [19, 19, 10],
+            "Discounts for the pack lines are not calculated correctly.",
+        )
