@@ -33,16 +33,16 @@
                 position="attributes"
             >
                 <attribute
-                    name="attrs"
-                >{'invisible': ["|", ("pack_ok", "=", True), ("pack_parent_line_id",
-                    "!=", False), ("pack_modifiable","=", False)]}</attribute>
+                    name="invisible"
+                >pack_ok or not pack_parent_line_id</attribute>
             </xpath>
             <xpath
                 expr="//field[@name='order_line']/tree//field[@name='discount_fixed']"
                 position="attributes"
             >
-                <attribute name="attrs">{'readonly': ["|", ("pack_ok", "=", True),
-                    ("pack_parent_line_id", "!=", False), ("pack_modifiable","=", False)]}</attribute>
+                <attribute
+                    name="readonly"
+                >(pack_ok or not pack_parent_line_id) and not pack_modifiable</attribute>
             </xpath>
         </field>
     </record>
