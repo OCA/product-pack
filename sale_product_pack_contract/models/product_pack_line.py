@@ -26,13 +26,15 @@ class ProductPack(models.Model):
                 if component_contract_products.exists():
                     raise UserError(
                         _(
-                            "This pack '%s' contains components %r that are marked "
+                            "This pack '%(product_name)s' contains components %(components)r that are marked "
                             "to be contract products. At the moment contract component "
                             "support only on detailed pack type and detailed "
                             "component price pack."
                         )
-                        % (
-                            pack_product.name,
-                            component_contract_products.mapped("product_id.name"),
-                        )
+                        % {
+                            "product_name": pack_product.name,
+                            "components": component_contract_products.mapped(
+                                "product_id.name"
+                            ),
+                        }
                     )
