@@ -26,9 +26,9 @@ class ProductPack(models.Model):
                 if component_contract_products.exists():
                     raise UserError(
                         _(
-                            "This pack '%(product_name)s' contains components %(components)r that are marked "
-                            "to be contract products. At the moment contract component "
-                            "support only on detailed pack type and detailed "
+                            "This pack '%(product_name)s' contains components %(components)r "
+                            "that are marked to be contract products. At the moment contract "
+                            "component support only on detailed pack type and detailed "
                             "component price pack."
                         )
                         % {

@@ -3,10 +3,10 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import fields
 from odoo.exceptions import UserError
-from odoo.tests import Form, SavepointCase
+from odoo.tests import Form, TransactionCase
 
 
-class TestSaleProductPackContract(SavepointCase):
+class TestSaleProductPackContract(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

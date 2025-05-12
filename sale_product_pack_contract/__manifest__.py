@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Sale Product Pack Contract",
-    "version": "14.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Sales",
     "summary": "Glue module between sale product pack and product.",
     "website": "https://github.com/OCA/product-pack",
