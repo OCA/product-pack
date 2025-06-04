@@ -21,11 +21,11 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[product_pack](product_pack/) | 13.0.1.0.4 | [![ernestotejeda](https://github.com/ernestotejeda.png?size=30px)](https://github.com/ernestotejeda) | This module allows you to set a product as a Pack
-[product_pack_category_restriction](product_pack_category_restriction/) | 13.0.1.0.0 | [![JordiMForgeFlow](https://github.com/JordiMForgeFlow.png?size=30px)](https://github.com/JordiMForgeFlow) | This module allows you to restrict pack products to specific Product Categories.
-[sale_product_pack](sale_product_pack/) | 13.0.1.0.2 | [![ernestotejeda](https://github.com/ernestotejeda.png?size=30px)](https://github.com/ernestotejeda) | This module allows you to sale product packs
-[sale_stock_product_pack](sale_stock_product_pack/) | 13.0.1.0.2 | [![chienandalu](https://github.com/chienandalu.png?size=30px)](https://github.com/chienandalu) | Compatibility module for packs that are storable products
-[stock_product_pack](stock_product_pack/) | 13.0.1.2.3 | [![ernestotejeda](https://github.com/ernestotejeda.png?size=30px)](https://github.com/ernestotejeda) | This module allows you to get the right available quantities of the packs
+[product_pack](product_pack/) | 13.0.1.0.4 | <a href='https://github.com/ernestotejeda'><img src='https://github.com/ernestotejeda.png' width='32' height='32' style='border-radius:50%;' alt='ernestotejeda'/></a> | This module allows you to set a product as a Pack
+[product_pack_category_restriction](product_pack_category_restriction/) | 13.0.1.0.0 | <a href='https://github.com/JordiMForgeFlow'><img src='https://github.com/JordiMForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='JordiMForgeFlow'/></a> | This module allows you to restrict pack products to specific Product Categories.
+[sale_product_pack](sale_product_pack/) | 13.0.1.0.2 | <a href='https://github.com/ernestotejeda'><img src='https://github.com/ernestotejeda.png' width='32' height='32' style='border-radius:50%;' alt='ernestotejeda'/></a> | This module allows you to sale product packs
+[sale_stock_product_pack](sale_stock_product_pack/) | 13.0.1.0.2 | <a href='https://github.com/chienandalu'><img src='https://github.com/chienandalu.png' width='32' height='32' style='border-radius:50%;' alt='chienandalu'/></a> | Compatibility module for packs that are storable products
+[stock_product_pack](stock_product_pack/) | 13.0.1.2.3 | <a href='https://github.com/ernestotejeda'><img src='https://github.com/ernestotejeda.png' width='32' height='32' style='border-radius:50%;' alt='ernestotejeda'/></a> | This module allows you to get the right available quantities of the packs
 [website_sale_product_pack](website_sale_product_pack/) | 13.0.1.0.3 |  | Compatibility module of product pack with e-commerce
 
 [//]: # (end addons)
