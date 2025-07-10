@@ -25,7 +25,7 @@ class PurchaseOrder(models.Model):
 
     @api.onchange("order_line")
     def check_pack_line_unlink(self):
-        # At least on embeded tree editable view odoo returns a recordset on
+        # At least on embeded list editable view odoo returns a recordset on
         # origin.order_line only when lines are unlinked and this is exactly
         # what we need
         origin_line_ids = self._origin.order_line.ids
