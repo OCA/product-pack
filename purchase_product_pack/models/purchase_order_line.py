@@ -84,7 +84,7 @@ class PurchaseOrderLine(models.Model):
         res = self.browse()
         prod_ids = [vals["product_id"] for vals in vals_list]
         products = self.env["product.product"].browse(prod_ids)
-        for line_vals, product in zip(vals_list, products):
+        for line_vals, product in zip(vals_list, products, strict=False):
             if product and product.pack_ok and product.pack_type != "non_detailed":
                 line = super().create([line_vals])
                 line.expand_pack_line()
