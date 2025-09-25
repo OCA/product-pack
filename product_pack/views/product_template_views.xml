@@ -8,12 +8,10 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view" />
         <field name="arch" type="xml">
-            <div name="options" position="inside">
-                <div>
-                    <field name="pack_ok" />
-                    <label for="pack_ok" />
-                </div>
-            </div>
+            <!-- Add pack field in a more robust way for Odoo 19 compatibility -->
+            <field name="type" position="after">
+                <field name="pack_ok" />
+            </field>
             <notebook position="inside">
                 <page name="page_pack" string="Pack" invisible="not pack_ok">
                     <group name="group_pack">

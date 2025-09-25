@@ -3,7 +3,7 @@
 {
     "name": "Sale Stock Product Pack",
     "summary": "Compatibility module for packs that are storable products",
-    "version": "18.0.1.0.1",
+    "version": "19.0.1.0.1",
     "development_status": "Beta",
     "category": "Sale",
     "website": "https://github.com/OCA/product-pack",
