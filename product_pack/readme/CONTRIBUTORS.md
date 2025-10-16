@@ -13,3 +13,5 @@
   - Manuel Regidor
 - [Acsone](https://www.acsone.eu/):
   - Maxime Franco
+- [Apik](https://apik.cloud/):
+  - Michel Guiheneuf

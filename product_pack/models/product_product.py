@@ -37,7 +37,7 @@ class ProductProduct(models.Model):
     def _compute_product_lst_price(self):
         packs, no_packs = self.with_context(whole_pack_price=True).split_pack_products()
         ret_val = super(ProductProduct, no_packs)._compute_product_lst_price()
-        uom = self._context.get("uom", False)
+        uom = self.env.context.get("uom", False)
         if uom:
             uom = self.env["uom.uom"].browse([uom])
         for product in packs:

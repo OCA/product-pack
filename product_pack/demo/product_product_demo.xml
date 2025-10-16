@@ -4,7 +4,7 @@
 <odoo noupdate="1">
     <record id="product_pack_cpu_detailed_components" model="product.product">
         <field name="name">Pack CPU (Detailed - Displayed Components Price)</field>
-        <field name="categ_id" ref="product.product_category_4" />
+        <field name="categ_id" ref="product.product_category_services" />
         <field name="pack_ok" eval="True" />
         <field name="pack_type">detailed</field>
         <field name="pack_component_price">detailed</field>
@@ -14,7 +14,7 @@
     </record>
     <record id="product_pack_cpu_detailed_totalized" model="product.product">
         <field name="name">Pack CPU (Detailed - Totalized Components Price)</field>
-        <field name="categ_id" ref="product.product_category_4" />
+        <field name="categ_id" ref="product.product_category_services" />
         <field name="pack_ok" eval="True" />
         <field name="pack_type">detailed</field>
         <field name="pack_component_price">totalized</field>
@@ -24,7 +24,7 @@
     </record>
     <record id="product_pack_cpu_detailed_ignored" model="product.product">
         <field name="name">Pack CPU (Detailed - Ignored Components Price)</field>
-        <field name="categ_id" ref="product.product_category_4" />
+        <field name="categ_id" ref="product.product_category_services" />
         <field name="pack_ok" eval="True" />
         <field name="pack_type">detailed</field>
         <field name="pack_component_price">ignored</field>
@@ -34,7 +34,7 @@
     </record>
     <record id="product_pack_cpu_non_detailed" model="product.product">
         <field name="name">Pack CPU (Non Detailed - Totalized Components Price)</field>
-        <field name="categ_id" ref="product.product_category_4" />
+        <field name="categ_id" ref="product.product_category_services" />
         <field name="pack_ok" eval="True" />
         <field name="pack_type">non_detailed</field>
         <field name="standard_price">20.5</field>
@@ -43,7 +43,7 @@
     </record>
     <record id="product_pack_pc_detailed_components" model="product.product">
         <field name="name">Pack PC (Detailed - Displayed Components Price)</field>
-        <field name="categ_id" ref="product.product_category_4" />
+        <field name="categ_id" ref="product.product_category_services" />
         <field name="pack_ok" eval="True" />
         <field name="pack_type">detailed</field>
         <field name="pack_component_price">detailed</field>
@@ -53,7 +53,7 @@
     </record>
     <record id="product_pack_pc_detailed_totalized" model="product.product">
         <field name="name">Pack PC (Detailed - Totalized Components Price)</field>
-        <field name="categ_id" ref="product.product_category_4" />
+        <field name="categ_id" ref="product.product_category_services" />
         <field name="pack_ok" eval="True" />
         <field name="pack_type">detailed</field>
         <field name="pack_component_price">totalized</field>
@@ -63,7 +63,7 @@
     </record>
     <record id="product_pack_pc_detailed_ignored" model="product.product">
         <field name="name">Pack PC (Detailed - Ignored Components Price)</field>
-        <field name="categ_id" ref="product.product_category_4" />
+        <field name="categ_id" ref="product.product_category_services" />
         <field name="pack_ok" eval="True" />
         <field name="pack_type">detailed</field>
         <field name="pack_component_price">ignored</field>

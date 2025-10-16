@@ -20,3 +20,7 @@
 * `Acsone <https://www.acsone.eu/>`_:
 
   * Maxime Franco
+
+* `Apik <https://apik.cloud/>`_:
+
+  * Michel Guiheneuf
