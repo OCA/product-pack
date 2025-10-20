@@ -25,7 +25,6 @@ class ProductPack(models.Model):
             "product_uom_qty": quantity,
         }
         sol = line.new(line_vals)
-        sol._onchange_product_id_warning()
         vals = sol._convert_to_write(sol._cache)
         pack_price_types = {"totalized", "ignored"}
         if (

@@ -40,10 +40,21 @@ class TestSaleProductPackBase(ProductPackCommon):
                 ],
             }
         )
+        partner = cls.env["res.partner"].create(
+            {
+                "name": "Customer test",
+                "email": "test@test.example.com",
+                "phone": "+33 601 020 304",
+                "street": "Rue de la mairie",
+                "city": "New York",
+                "zip": "97648",
+                "website": "https://test.exemple.com",
+            }
+        )
         cls.sale_order = cls.env["sale.order"].create(
             {
                 "company_id": cls.env.company.id,
-                "partner_id": cls.env.ref("base.res_partner_12").id,
+                "partner_id": partner.id,
                 "pricelist_id": pricelist.id,
             }
         )

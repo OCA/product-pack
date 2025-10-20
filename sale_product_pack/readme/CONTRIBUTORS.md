@@ -11,3 +11,5 @@
   - Bruno Zanotti
   - Augusto Weiss
   - Nicolas Col
+- [Apik](https://apik.cloud/):
+  - Michel Guiheneuf
