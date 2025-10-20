@@ -1,6 +1,6 @@
 # Copyright 2019 Tecnativa - Ernesto Tejeda
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import _, api, models
+from odoo import api, models
 from odoo.exceptions import UserError
 
 
@@ -31,7 +31,7 @@ class SaleOrder(models.Model):
             and not x.pack_parent_line_id.product_id.pack_modifiable
         ):
             raise UserError(
-                _(
+                self.env._(
                     "You cannot delete this line because is part of a pack in"
                     " this sale order. In order to delete this line you need to"
                     " delete the pack itself"

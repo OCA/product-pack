@@ -1,8 +1,7 @@
 # Copyright 2019 Tecnativa - Ernesto Tejeda
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
-from odoo.fields import first
 
 
 class SaleOrderLine(models.Model):
@@ -56,11 +55,11 @@ class SaleOrderLine(models.Model):
             for subline in self.product_id.get_pack_lines():
                 vals = subline.get_sale_order_line_vals(self, self.order_id)
                 if write:
-                    existing_subline = first(
+                    existing_subline = (
                         self.pack_child_line_ids.filtered(
                             lambda child, s=subline: child.product_id == s.product_id
                         )
-                    )
+                    )[:1]
                     # if subline already exists we update, if not we create
                     if existing_subline:
                         if self.do_no_expand_pack_lines:
@@ -103,7 +102,7 @@ class SaleOrderLine(models.Model):
     @api.onchange(
         "product_id",
         "product_uom_qty",
-        "product_uom",
+        "product_uom_id",
         "price_unit",
         "discount",
         "name",
@@ -113,7 +112,7 @@ class SaleOrderLine(models.Model):
         """Do not let to edit a sale order line if this one belongs to pack"""
         if self._origin.pack_parent_line_id and not self._origin.pack_modifiable:
             raise UserError(
-                _(
+                self.env._(
                     "You can not change this line because is part of a pack"
                     " included in this order"
                 )
@@ -124,7 +123,7 @@ class SaleOrderLine(models.Model):
             ("id", "in", self.mapped("pack_parent_line_id").mapped("product_id").ids)
         ]
         return {
-            "name": _("Parent Product"),
+            "name": self.env._("Parent Product"),
             "type": "ir.actions.act_window",
             "res_model": "product.product",
             "view_type": "form",
@@ -161,7 +160,7 @@ class SaleOrderLine(models.Model):
                     break
         return discount
 
-    @api.depends("product_id", "product_uom", "product_uom_qty")
+    @api.depends("product_id", "product_uom_id", "product_uom_qty")
     def _compute_discount(self):
         res = super()._compute_discount()
         for pack_line in self.filtered("pack_parent_line_id"):

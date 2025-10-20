@@ -8,7 +8,7 @@ from .common import TestSaleProductPackBase
 class TestSaleProductPack(TestSaleProductPackBase):
     def test_create_components_price_order_line(self):
         group_discount = self.env.ref("sale.group_discount_per_so_line")
-        self.env.user.write({"groups_id": [(4, group_discount.id)]})
+        self.env.user.write({"group_ids": [(4, group_discount.id)]})
         self._add_so_line()
         # After create, there will be four lines
         self.assertEqual(len(self.sale_order.order_line), 3)
