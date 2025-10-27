@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="cart_lines_quantity" inherit_id="website_sale.cart_lines_quantity">
+        <!-- We don't want to allow to add extra components. It all must follow the main pack -->
+        <xpath expr="//div" position="attributes">
+            <attribute name="t-if">not line.pack_parent_line_id</attribute>
+        </xpath>
+        <xpath expr="//div" position="before">
+            <span
+                t-if="line.pack_parent_line_id"
+                class="js_quantity text-muted"
+                t-out="int(line.product_uom_qty)"
+            />
+        </xpath>
+    </template>
+    <template id="cart_lines" inherit_id="website_sale.cart_lines">
+        <!-- We don't want to allow to delete pack components -->
+        <xpath expr="//a[hasclass('js_delete_product')]" position="attributes">
+            <attribute name="t-if">not line.pack_parent_line_id</attribute>
+        </xpath>
+        <!-- We don't show the image of the components to have a clean summary -->
+        <xpath
+            expr="//img[@t-if='not line._is_sellable() and line.product_id.image_128']"
+            position="attributes"
+        >
+            <attribute
+                name="t-if"
+            >not line._is_sellable() and line.product_id.image_128 and not
+                line.pack_parent_line_id
+            </attribute>
+        </xpath>
+        <xpath expr="//div[@t-field='line.product_id.image_128']" position="attributes">
+            <attribute
+                name="t-if"
+            >line.product_id.image_128 and not line.pack_parent_line_id</attribute>
+        </xpath>
+        <xpath
+            expr="//t[@t-call='website_sale.cart_line_product_link']"
+            position="before"
+        >
+            <t t-if="line.pack_parent_line_id">
+                <span>
+                    &#8627;
+                </span>
+            </t>
+        </xpath>
+    </template>
+    <template id="cart_lines_price" inherit_id="website_sale.cart_lines_price">
+        <!-- We won't show discount price -->
+        <xpath expr="//del" position="attributes">
+            <attribute name="t-if">not line.pack_parent_line_id</attribute>
+        </xpath>
+        <xpath expr="//h6[@name='website_sale_cart_line_price']" position="attributes">
+            <attribute
+                name="t-if"
+            >not line.pack_parent_line_id or line.pack_parent_line_id.product_id.product_tmpl_id.pack_component_price == 'detailed'</attribute>
+        </xpath>
+        <xpath expr="//small" position="attributes">
+            <attribute
+                name="t-if"
+            >not line.pack_parent_line_id or line.pack_parent_line_id.product_id.product_tmpl_id.pack_component_price == 'detailed'</attribute>
+        </xpath>
+    </template>
+    <template id="cart_summary_content" inherit_id="website_sale.cart_summary_content">
+        <xpath expr="//div[hasclass('o_cart_product_image')]" position="attributes">
+            <attribute name="t-if">not line.pack_parent_line_id</attribute>
+        </xpath>
+        <xpath expr="//span[@t-out='line._get_line_header()']" position="before">
+            <span t-if="line.pack_parent_line_id">
+                <t t-if="line.pack_parent_line_id">
+                    <span>
+                        &#8627;
+                    </span>
+                </t>
+                <t t-out="int(line.product_uom_qty)" />
+                <span>x</span>
+            </span>
+        </xpath>
+        <xpath
+            expr="//td[@name='website_sale_cart_summary_line_price']"
+            position="attributes"
+        >
+            <attribute
+                name="t-if"
+            >not line.pack_parent_line_id or line.pack_parent_line_id.product_id.product_tmpl_id.pack_component_price == 'detailed'</attribute>
+        </xpath>
+    </template>
+    <template id="product_price" inherit_id="website_sale.product_price">
+        <xpath expr="//span[@name='product_list_price']" position="attributes">
+            <attribute name="t-if">not product.pack_ok</attribute>
+        </xpath>
+    </template>
+</odoo>
