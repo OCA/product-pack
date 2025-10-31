@@ -68,3 +68,44 @@ class SaleOrderLine(models.Model):
             "res_id": self.id,
             "context": dict(self.env.context, pricelist=self.order_id.pricelist_id.id),
         }
+
+    def action_transform_pack_to_lines(self):
+        """
+        Transform the assisted pack line into detailed lines:
+        1. Create a section line with the pack product name
+        2. Create individual lines for each component with their qty and discount
+        3. Delete the original pack line
+        """
+        self.ensure_one()
+
+        if self.product_id.pack_type != "non_detailed_assisted":
+            return
+        pack_name = self.product_id.display_name
+        pack_sequence = self.sequence
+        order = self.order_id
+
+        # Prepare values for section line
+        section_vals = {
+            "order_id": order.id,
+            "display_type": "line_section",
+            "name": pack_name,
+            "sequence": pack_sequence,
+            "collapse_composition": True,
+        }
+        self.env["sale.order.line"].create(section_vals)
+
+        # Create lines for each component from assisted_pack_line_ids
+        for idx, pack_line in enumerate(self.assisted_pack_line_ids, start=1):
+            component_vals = {
+                "order_id": order.id,
+                "product_id": pack_line.product_id.id,
+                "product_uom_qty": pack_line.product_uom_qty,
+                "price_unit": pack_line.price_unit,
+                "discount": pack_line.discount,
+                "sequence": pack_sequence + idx,
+            }
+            self.env["sale.order.line"].create(component_vals)
+
+        # Delete the original pack line
+        self.unlink()
+        return {"type": "ir.actions.act_window_close"}

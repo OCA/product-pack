@@ -32,15 +32,19 @@
                                 widget="monetary"
                                 options="{'currency_field': 'currency_id'}"
                             />
-                            <div class="oe_subtotal_footer_separator" colspan="2" />
-                            <field
-                                name="price_unit"
-                                widget="monetary"
-                                options="{'currency_field': 'currency_id'}"
-                            />
                         </group>
                     </div>
                 </sheet>
+                <footer>
+                    <button
+                        string="Transform to Detail Lines"
+                        name="action_transform_pack_to_lines"
+                        type="object"
+                        class="btn-primary"
+                        invisible="pack_type != 'non_detailed_assisted'"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
             </form>
         </field>
     </record>
