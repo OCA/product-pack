@@ -73,6 +73,52 @@ class SaleOrderLine(models.Model):
             if vals_list:
                 self.create(vals_list)
 
+    def action_transform_pack_to_lines(self):
+        """
+        Transform non_detailed pack with pack_modifiable into detailed lines:
+        1. Create a section line with the pack product name
+        2. Create individual editable lines for each component with their
+           qty and discount
+        3. Delete the original pack line
+        """
+        self.ensure_one()
+
+        if (
+            not self.product_id.pack_ok
+            or self.pack_type != "non_detailed"
+            or not self.product_id.pack_modifiable
+        ):
+            return self.env["sale.order.line"]
+
+        pack_name = self.product_id.display_name
+        pack_sequence = self.sequence
+        order = self.order_id
+
+        # Create section line for the pack
+        section_vals = {
+            "order_id": order.id,
+            "display_type": "line_section",
+            "name": pack_name,
+            "sequence": pack_sequence,
+            "collapse_composition": True,
+        }
+        section_line = self.env["sale.order.line"].create(section_vals)
+        created_lines = section_line
+
+        # Create editable component lines
+        for idx, pack_line in enumerate(self.product_id.get_pack_lines(), start=1):
+            component_vals = pack_line.get_sale_order_line_vals(self, order)
+            component_vals.update(
+                {
+                    "sequence": pack_sequence + idx,
+                }
+            )
+            created_lines += self.env["sale.order.line"].create(component_vals)
+
+        # Delete the original pack line
+        self.unlink()
+        return created_lines
+
     @api.model_create_multi
     def create(self, vals_list):
         """Only when strictly necessary (a product is a pack) will be created line
@@ -80,14 +126,28 @@ class SaleOrderLine(models.Model):
         """
         product_ids = [elem.get("product_id") for elem in vals_list]
         products = self.env["product.product"].browse(product_ids)
-        if any(p.pack_ok and p.pack_type != "non_detailed" for p in products):
+        if any(
+            p.pack_ok
+            and (
+                p.pack_type == "detailed"
+                or (p.pack_type == "non_detailed" and p.pack_modifiable)
+            )
+            for p in products
+        ):
             res = self.browse()
             for elem in vals_list:
                 line = super().create([elem])
                 product = line.product_id
-                res += line
-                if product and product.pack_ok and product.pack_type != "non_detailed":
-                    line.expand_pack_line()
+                if product and product.pack_ok:
+                    if product.pack_type == "detailed":
+                        res += line
+                        line.expand_pack_line()
+                    elif (
+                        product.pack_type == "non_detailed" and product.pack_modifiable
+                    ):
+                        res += line.action_transform_pack_to_lines()
+                else:
+                    res += line
             return res
         else:
             return super().create(vals_list)
@@ -97,6 +157,13 @@ class SaleOrderLine(models.Model):
         if "product_id" in vals or "product_uom_qty" in vals:
             for record in self:
                 record.expand_pack_line(write=True)
+                if (
+                    "product_id" in vals
+                    and record.product_id.pack_ok
+                    and record.pack_type == "non_detailed"
+                    and record.product_id.pack_modifiable
+                ):
+                    record.action_transform_pack_to_lines()
         return res
 
     @api.onchange(
