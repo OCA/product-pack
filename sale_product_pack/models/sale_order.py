@@ -79,3 +79,29 @@ class SaleOrder(models.Model):
             lambda line: not line.pack_parent_line_id
             or line.pack_parent_line_id.pack_component_price == "detailed"
         )
+
+    def _update_order_line_info(self, product_id, quantity, **kwargs):
+        """For non-detailed modifiable packs, skip the auto-transform during
+        create so core can safely call _get_discounted_price() on the singleton.
+        After getting the price, we trigger the transformation manually."""
+        product = self.env["product.product"].browse(product_id)
+        is_non_detailed_modifiable = (
+            product.pack_ok
+            and product.pack_type == "non_detailed"
+            and product.pack_modifiable
+        )
+        if not is_non_detailed_modifiable:
+            return super()._update_order_line_info(product_id, quantity, **kwargs)
+        price = super(
+            SaleOrder, self.with_context(skip_non_detailed_pack_transform=True)
+        )._update_order_line_info(product_id, quantity, **kwargs)
+        # Now transform any remaining non-detailed modifiable pack lines
+        pack_lines = self.order_line.filtered(
+            lambda l: l.product_id.id == product_id
+            and l.product_id.pack_ok
+            and l.pack_type == "non_detailed"
+            and l.product_id.pack_modifiable
+        )
+        for line in pack_lines:
+            line.action_transform_pack_to_lines()
+        return price
