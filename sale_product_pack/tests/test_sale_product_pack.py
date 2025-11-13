@@ -137,3 +137,29 @@ class TestSaleProductPack(TestSaleProductPackBase):
         self.assertEqual(self.sale_order.order_line[2].product_id, self.component1)
         self.assertEqual(self.sale_order.order_line[3].product_id, self.component2)
         self.assertEqual(self.sale_order.order_line[4].product_id, product)
+
+    def test_non_detailed_modifiable_pack(self):
+        """Test non_detailed pack with pack_modifiable auto-expands."""
+        # Configure pack as non_detailed with pack_modifiable
+        self.pack.pack_type = "non_detailed"
+        self.pack.pack_modifiable = True
+        self._add_so_line()
+        # After create, pack should be expanded into:
+        # 1 section line + 2 component lines
+        self.assertEqual(len(self.sale_order.order_line), 3)
+        # First line should be a section with pack name
+        section_line = self.sale_order.order_line[0]
+        self.assertEqual(section_line.display_type, "line_section")
+        self.assertEqual(section_line.name, self.pack.display_name)
+        self.assertTrue(section_line.collapse_composition)
+        # Next lines should be the components
+        self.assertEqual(self.sale_order.order_line[1].product_id, self.component1)
+        self.assertEqual(self.sale_order.order_line[2].product_id, self.component2)
+        # Component lines should have proper quantities and prices
+        self.assertEqual(self.sale_order.order_line[1].product_uom_qty, 2)
+        self.assertEqual(self.sale_order.order_line[2].product_uom_qty, 1)
+        self.assertAlmostEqual(self.sale_order.order_line[1].price_unit, 20)
+        self.assertAlmostEqual(self.sale_order.order_line[2].price_unit, 30)
+        # Lines should be editable (no pack_parent_line_id)
+        self.assertFalse(self.sale_order.order_line[1].pack_parent_line_id)
+        self.assertFalse(self.sale_order.order_line[2].pack_parent_line_id)
