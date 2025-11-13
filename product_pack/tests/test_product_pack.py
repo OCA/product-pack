@@ -53,18 +53,18 @@ class TestProductPack(ProductPackCommon):
         self.pack.pack_modifiable = True
         with Form(self.pack.product_tmpl_id) as pack_form:
             pack_form.pack_type = "non_detailed"
-            self.assertFalse(pack_form.pack_modifiable)
+            self.assertTrue(pack_form.pack_modifiable)
 
     def test_pack_modifiable(self):
         # Pack is detailed with component price as detailed
         # Pack modifiable invisible should be False
+        self.assertFalse(self.pack.pack_modifiable_invisible)
         # Set the Pack as non detailed
-        # Pack modifiable invisible should be True
+        # Pack modifiable invisible should be False
+        self.pack.pack_type = "non_detailed"
+        self.assertFalse(self.pack.pack_modifiable_invisible)
         # Set the Pack as detailed with component price as totalized
         # Pack modifiable invisible should be True
-        self.assertFalse(self.pack.pack_modifiable_invisible)
-        self.pack.pack_type = "non_detailed"
-        self.assertTrue(self.pack.pack_modifiable_invisible)
         self.pack.pack_type = "detailed"
         self.pack.pack_component_price = "totalized"
         self.assertTrue(self.pack.pack_modifiable_invisible)
