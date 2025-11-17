@@ -29,3 +29,23 @@ class SaleOrderLine(models.Model):
                 delivered_packs.append(pack_line.qty_delivered / qty_per_pack)
             line.qty_delivered = delivered_packs and min(delivered_packs) or 0.0
         return res
+
+    def _compute_qty_to_invoice(self):
+        res = super()._compute_qty_to_invoice()
+        pack_parent_lines = self.filtered(
+            lambda x: x.pack_child_line_ids
+            and x.product_id.pack_ok
+            and x.state in ["sale", "done"]
+        )
+        for line in pack_parent_lines:
+            child_qty_to_invoice = []
+            for pack_line in line.pack_child_line_ids.filtered("product_uom_qty"):
+                if line.product_uom_qty:
+                    qty_per_pack = pack_line.product_uom_qty / line.product_uom_qty
+                    if qty_per_pack:
+                        packs_to_invoice = pack_line.qty_to_invoice / qty_per_pack
+                        child_qty_to_invoice.append(packs_to_invoice)
+
+            if child_qty_to_invoice:
+                line.qty_to_invoice = min(child_qty_to_invoice)
+        return res
