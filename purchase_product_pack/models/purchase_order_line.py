@@ -34,7 +34,8 @@ class PurchaseOrderLine(models.Model):
 
     do_no_expand_pack_lines = fields.Boolean(
         compute="_compute_do_no_expand_pack_lines",
-        help="This is a technical field in order to check if pack lines has to be expanded",
+        help="This is a technical field in order to check "
+        "if pack lines has to be expanded",
     )
 
     @api.depends_context("update_prices", "update_pricelist")
@@ -63,7 +64,8 @@ class PurchaseOrderLine(models.Model):
                 if write:
                     existing_subline = first(
                         self.pack_child_line_ids.filtered(
-                            lambda child: child.product_id == subline.product_id
+                            lambda child, subline=subline: child.product_id
+                            == subline.product_id
                         )
                     )
                     # if subline already exists we update, if not we create
@@ -84,7 +86,7 @@ class PurchaseOrderLine(models.Model):
         res = self.browse()
         prod_ids = [vals["product_id"] for vals in vals_list]
         products = self.env["product.product"].browse(prod_ids)
-        for line_vals, product in zip(vals_list, products):
+        for line_vals, product in zip(vals_list, products, strict=False):
             if product and product.pack_ok and product.pack_type != "non_detailed":
                 line = super().create([line_vals])
                 line.expand_pack_line()
@@ -157,10 +159,11 @@ class PurchaseOrderLine(models.Model):
             if not prices:
                 continue
             cost = prices[line.product_id.id]
-            # If not seller, use the standard price. It needs a proper currency conversion.
+            # If not seller, use the standard price.
+            # It needs a proper currency conversion.
             if not seller:
                 unavailable_seller = line.product_id.seller_ids.filtered(
-                    lambda s: s.partner_id == line.order_id.partner_id
+                    lambda s, line=line: s.partner_id == line.order_id.partner_id
                 )
                 if (
                     not unavailable_seller
@@ -169,7 +172,8 @@ class PurchaseOrderLine(models.Model):
                 ):
                     # Avoid to modify the price unit if there is no price list
                     # for this partner and
-                    # the line has already one to avoid to override unit price set manually.
+                    # the line has already one
+                    # to avoid to override unit price set manually.
                     continue
                 po_line_uom = line.product_uom or line.product_id.uom_po_id
                 # Using new cost to compute the price_unit

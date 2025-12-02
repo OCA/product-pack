@@ -82,6 +82,10 @@ Contributors
 
   - Duong (Tran Quoc)
 
+- `Orbit Consulting Group SL <https://www.orbit.es>`__:
+
+  - Antony Herrera
+
 Other credits
 -------------
 

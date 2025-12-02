@@ -1,6 +1,5 @@
 # Copyright 2023 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-
 from odoo.tests.common import TransactionCase
 
 from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
@@ -290,3 +289,11 @@ class TestPurchaseProductPack(TransactionCase):
         self.assertAlmostEqual(
             (self.purchase_order.order_line - line).mapped("price_subtotal"), [0, 0, 0]
         )
+
+    def test_get_seller_cost_no_line(self):
+        product_tp = self.env.ref("product_pack.product_pack_cpu_detailed_totalized")
+        # Consult the price of the product without a purchase order line
+        prices = product_tp.pack_cost_compute(False)
+        cost = prices[product_tp.id]
+        self.assertEqual(cost, 2596.0)
+        # standard_price (20.5) * quantity (126.63414634146341463414634146341)

@@ -16,7 +16,7 @@
                     string="Parent Pack is not modifiable"
                     name="action_open_parent_pack_product_view"
                     type="object"
-                    attrs="{'invisible': ['|', ('pack_parent_line_id', '=', False), ('pack_modifiable', '=', True)]}"
+                    invisible="not pack_parent_line_id or pack_modifiable"
                     icon="fa-lock"
                 />
             </xpath>
