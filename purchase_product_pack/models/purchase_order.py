@@ -1,8 +1,9 @@
 # Copyright 2023 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 
-from odoo import _, api, models
+from odoo import api, models
 from odoo.exceptions import UserError
+from odoo.fields import Domain
 
 
 class PurchaseOrder(models.Model):
@@ -37,7 +38,7 @@ class PurchaseOrder(models.Model):
             and not x.pack_parent_line_id.product_id.pack_modifiable
         ):
             raise UserError(
-                _(
+                self.env._(
                     "You cannot delete this line because is part of a pack in"
                     " this purchase order. In order to delete this line you need to"
                     " delete the pack itself"
@@ -60,7 +61,8 @@ class PurchaseOrder(models.Model):
         subpacks_to_delete_ids = (
             self.env["purchase.order.line"]
             .search(
-                [("id", "child_of", to_delete_ids), ("id", "not in", to_delete_ids)]
+                Domain("id", "child_of", to_delete_ids)
+                & Domain("id", "not in", to_delete_ids)
             )
             .ids
         )

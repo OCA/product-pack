@@ -21,7 +21,6 @@ class ProductPackLine(models.Model):
             "product_qty": quantity,
         }
         pol = line.new(line_vals)
-        pol.onchange_product_id_warning()
         vals = pol._convert_to_write(pol._cache)
         pack_price_types = {"totalized", "ignored"}
         if (
@@ -47,7 +46,7 @@ class ProductPackLine(models.Model):
                 partner_id=line.partner_id,
                 quantity=self.quantity,
                 date=line.order_id.date_order and line.order_id.date_order.date(),
-                uom_id=line.product_uom,
+                uom_id=line.product_uom_id,
                 params=params,
             )
             return (

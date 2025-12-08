@@ -1,9 +1,9 @@
 # Copyright 2023 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
-from odoo.fields import first
+from odoo.fields import Domain
 from odoo.tools.float_utils import float_round
 
 
@@ -61,14 +61,12 @@ class PurchaseOrderLine(models.Model):
             for subline in self.product_id.get_pack_lines():
                 vals = subline.get_purchase_order_line_vals(self, self.order_id)
                 if write:
-                    existing_subline = first(
-                        self.pack_child_line_ids.filtered(
-                            lambda child, subline=subline: child.product_id
-                            == subline.product_id
-                        )
+                    pack_child_lines = self.pack_child_line_ids.filtered(
+                        lambda child, subline=subline: child.product_id
+                        == subline.product_id
                     )
                     # if subline already exists we update, if not we create
-                    if existing_subline:
+                    if existing_subline := pack_child_lines[:1]:
                         if self.do_no_expand_pack_lines:
                             vals.pop("product_uom_qty", None)
                         existing_subline.write(vals)
@@ -105,35 +103,34 @@ class PurchaseOrderLine(models.Model):
     @api.onchange(
         "product_id",
         "product_uom_qty",
-        "product_uom",
+        "product_uom_id",
         "price_unit",
         "name",
-        "taxes_id",
+        "tax_ids",
     )
     def check_pack_line_modify(self):
         """Do not let to edit a purchase order line if this one belongs to pack"""
         if self._origin.pack_parent_line_id and not self._origin.pack_modifiable:
             raise UserError(
-                _(
+                self.env._(
                     "You can not change this line because is part of a pack"
                     " included in this order"
                 )
             )
 
     def action_open_parent_pack_product_view(self):
-        domain = [
-            ("id", "in", self.mapped("pack_parent_line_id").mapped("product_id").ids)
-        ]
+        pack_parent_lines = self.mapped("pack_parent_line_id")
+        products = pack_parent_lines.mapped("product_id")
         return {
-            "name": _("Parent Product"),
+            "name": self.env._("Parent Product"),
             "type": "ir.actions.act_window",
             "res_model": "product.product",
             "view_type": "form",
             "view_mode": "list,form",
-            "domain": domain,
+            "domain": Domain("id", "in", products.ids),
         }
 
-    @api.depends("product_qty", "product_uom")
+    @api.depends("product_qty", "product_uom_id")
     def _compute_price_unit_and_date_planned_and_name(self):
         """
         This method extends the base '_compute_price_unit_and_date_planned_and_name'
@@ -149,7 +146,7 @@ class PurchaseOrderLine(models.Model):
                 partner_id=line.partner_id,
                 quantity=line.product_qty,
                 date=line.order_id.date_order and line.order_id.date_order.date(),
-                uom_id=line.product_uom,
+                uom_id=line.product_uom_id,
                 params=params,
             )
 
@@ -167,19 +164,19 @@ class PurchaseOrderLine(models.Model):
                 if (
                     not unavailable_seller
                     and line.price_unit
-                    and line.product_uom == line._origin.product_uom
+                    and line.product_uom_id == line._origin.product_uom_id
                 ):
                     # Avoid to modify the price unit if there is no price list
                     # for this partner and
                     # the line has already one to avoid to override
                     # unit price set manually.
                     continue
-                po_line_uom = line.product_uom or line.product_id.uom_po_id
+                po_line_uom = line.product_uom_id or line.product_id.uom_po_id
                 # Using new cost to compute the price_unit
                 price_unit = line.env["account.tax"]._fix_tax_included_price_company(
                     line.product_id.uom_id._compute_price(cost, po_line_uom),
                     line.product_id.supplier_taxes_id,
-                    line.taxes_id,
+                    line.tax_ids,
                     line.company_id,
                 )
                 price_unit = line.product_id.currency_id._convert(
@@ -202,7 +199,7 @@ class PurchaseOrderLine(models.Model):
                 line.env["account.tax"]._fix_tax_included_price_company(
                     cost,
                     line.product_id.supplier_taxes_id,
-                    line.taxes_id,
+                    line.tax_ids,
                     line.company_id,
                 )
                 if seller
@@ -218,7 +215,7 @@ class PurchaseOrderLine(models.Model):
                     self.env["decimal.precision"].precision_get("Product Price"),
                 ),
             )
-            line.price_unit = seller.product_uom._compute_price(
-                price_unit, line.product_uom
+            line.price_unit = seller.product_uom_id._compute_price(
+                price_unit, line.product_uom_id
             )
         return res
