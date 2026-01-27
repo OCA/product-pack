@@ -4,6 +4,16 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.fields import first
 
+IMMUTABLE_CHILD_FIELDS = [
+    "product_id",
+    "product_uom_qty",
+    "product_uom",
+    "price_unit",
+    "discount",
+    "name",
+    "tax_id",
+]
+
 
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
@@ -100,22 +110,37 @@ class SaleOrderLine(models.Model):
                 record.expand_pack_line(write=True)
         return res
 
-    @api.onchange(
-        "product_id",
-        "product_uom_qty",
-        "product_uom",
-        "price_unit",
-        "discount",
-        "name",
-        "tax_id",
-    )
+    def unlink(self):
+        # Avoid removing of a component line if the parent line is not also being
+        # removed and the pack is not modifiable
+        forcing_context = self.env.context.get("pack_children_force_unlink", False)
+        pack_parent_delete_ids = self.env.context.get("pack_parent_delete_ids", [])
+        if not forcing_context and self.filtered(
+            lambda x: x.pack_parent_line_id
+            and x.pack_parent_line_id.id not in pack_parent_delete_ids
+            and (
+                x.pack_parent_line_id not in self
+                or x.pack_parent_line_id in x.order_id.order_line
+            )
+            and not x.pack_parent_line_id.product_id.pack_modifiable
+        ):
+            raise UserError(
+                _(
+                    "You cannot delete this line because it is part of a pack in"
+                    " this sale order. In order to delete this line you need to"
+                    " delete the pack itself."
+                )
+            )
+        return super().unlink()
+
+    @api.onchange(*IMMUTABLE_CHILD_FIELDS)
     def check_pack_line_modify(self):
         """Do not let to edit a sale order line if this one belongs to pack"""
         if self._origin.pack_parent_line_id and not self._origin.pack_modifiable:
             raise UserError(
                 _(
-                    "You can not change this line because is part of a pack"
-                    " included in this order"
+                    "You can not change this line because it is part of a pack"
+                    " included in this order."
                 )
             )
 
