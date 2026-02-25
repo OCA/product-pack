@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_stock_return_picking_form" model="ir.ui.view">
+        <field name="model">stock.return.picking</field>
+        <field name="inherit_id" ref="stock.view_stock_return_picking_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_return_moves']" position="attributes">
+                <attribute
+                    name="domain"
+                >[('move_id.sale_line_id.pack_parent_line_id', '=', False)]</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
