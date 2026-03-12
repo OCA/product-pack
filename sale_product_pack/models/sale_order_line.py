@@ -166,3 +166,11 @@ class SaleOrderLine(models.Model):
         for pack_line in self.filtered("pack_parent_line_id"):
             pack_line.discount = pack_line._get_pack_line_discount()
         return res
+
+    def _compute_name(self):
+        res = super()._compute_name()
+        for line in self:
+            parent = line.pack_parent_line_id
+            if parent.product_id.pack_ok and parent.pack_type == "detailed":
+                line.name = f"{'> ' * (parent.pack_depth + 1)}{line.name}"
+        return res

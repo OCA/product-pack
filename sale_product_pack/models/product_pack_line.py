@@ -24,18 +24,13 @@ class ProductPack(models.Model):
             "pack_modifiable": line.product_id.pack_modifiable,
             "product_uom_qty": quantity,
         }
-        sol = line.new(line_vals)
-        vals = sol._convert_to_write(sol._cache)
         pack_price_types = {"totalized", "ignored"}
         if (
             line.product_id.pack_type == "detailed"
             and line.product_id.pack_component_price in pack_price_types
         ):
-            vals["price_unit"] = 0.0
-
-        vals["name"] = f"{'> ' * (line.pack_depth + 1)}{sol.name}"
-
-        return vals
+            line_vals["price_unit"] = 0.0
+        return line_vals
 
     def _get_pack_line_price(self, pricelist, quantity, uom=None, date=False, **kwargs):
         return super()._get_pack_line_price(

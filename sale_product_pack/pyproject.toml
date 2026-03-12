@@ -1,9 +1,3 @@
 [build-system]
 requires = ["whool"]
-
-[project]
-name = "odoo-addons-oca-product-pak"
-version = "19.0.20251027.0"
-dependencies = [
-    "odoo-addon-product_pack @ git+https://github.com/OCA/product-pack.git@refs/pull/223/head#subdirectory=product_pack",
-]
+build-backend = "whool.buildapi"
