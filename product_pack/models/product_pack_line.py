@@ -20,7 +20,7 @@ class ProductPackLine(models.Model):
     quantity = fields.Float(
         required=True,
         default=1.0,
-        digits="Product UoS",
+        digits="Product Unit",
     )
     product_id = fields.Many2one(
         "product.product",
