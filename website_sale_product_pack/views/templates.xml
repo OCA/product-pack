@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="cart_lines" inherit_id="website_sale.cart_lines">
         <xpath expr="//input[hasclass('js_quantity')]/.." position="attributes">
@@ -11,7 +11,7 @@
                 class="js_quantity text-muted"
                 t-att-data-line-id="line.id"
                 t-att-data-product-id="line.product_id.id"
-                t-esc="int(line.product_uom_qty)"
+                t-out="int(line.product_uom_qty)"
             />
         </xpath>
         <!-- We don't want to allow to delete pack components -->
