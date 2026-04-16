@@ -111,6 +111,8 @@ class SaleOrderLine(models.Model):
             component_vals.update(
                 {
                     "sequence": pack_sequence + idx,
+                    "pack_parent_line_id": False,
+                    "pack_depth": 0,
                 }
             )
             created_lines += self.env["sale.order.line"].create(component_vals)
@@ -145,7 +147,10 @@ class SaleOrderLine(models.Model):
                     elif (
                         product.pack_type == "non_detailed" and product.pack_modifiable
                     ):
-                        res += line.action_transform_pack_to_lines()
+                        if self.env.context.get("skip_non_detailed_pack_transform"):
+                            res += line
+                        else:
+                            res += line.action_transform_pack_to_lines()
                 else:
                     res += line
             return res
@@ -157,13 +162,6 @@ class SaleOrderLine(models.Model):
         if "product_id" in vals or "product_uom_qty" in vals:
             for record in self:
                 record.expand_pack_line(write=True)
-                if (
-                    "product_id" in vals
-                    and record.product_id.pack_ok
-                    and record.pack_type == "non_detailed"
-                    and record.product_id.pack_modifiable
-                ):
-                    record.action_transform_pack_to_lines()
         return res
 
     @api.onchange(

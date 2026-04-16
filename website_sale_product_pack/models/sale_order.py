@@ -6,6 +6,11 @@ from odoo import api, models
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
+    def _cart_add(self, product_id, quantity, **kwargs):
+        return super(
+            SaleOrder, self.with_context(skip_non_detailed_pack_transform=True)
+        )._cart_add(product_id, quantity, **kwargs)
+
     def _cart_update_line_quantity(
         self, line_id: int, quantity: float, **kwargs
     ) -> dict:
