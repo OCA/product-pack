@@ -2,6 +2,8 @@
 # Copyright 2025 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from odoo import Command
+
 from .common import TestSaleProductPackBase
 
 
@@ -144,14 +146,15 @@ class TestSaleProductPack(TestSaleProductPackBase):
         self.pack.pack_type = "non_detailed"
         self.pack.pack_modifiable = True
         self._add_so_line()
-        # After create, pack should be expanded into:
-        # 1 section line + 2 component lines
+        # After create, pack should be transformed into:
+        # 1 pack visual header + 2 component lines
         self.assertEqual(len(self.sale_order.order_line), 3)
-        # First line should be a section with pack name
-        section_line = self.sale_order.order_line[0]
-        self.assertEqual(section_line.display_type, "line_section")
-        self.assertEqual(section_line.name, self.pack.display_name)
-        self.assertTrue(section_line.collapse_composition)
+        # First line should keep the pack product and behave as visual header
+        header_line = self.sale_order.order_line[0]
+        self.assertEqual(header_line.product_id, self.pack)
+        self.assertTrue(header_line.pack_is_visual_header)
+        self.assertTrue(header_line.collapse_composition)
+        self.assertAlmostEqual(header_line.price_subtotal, 0)
         # Next lines should be the components
         self.assertEqual(self.sale_order.order_line[1].product_id, self.component1)
         self.assertEqual(self.sale_order.order_line[2].product_id, self.component2)
@@ -163,3 +166,38 @@ class TestSaleProductPack(TestSaleProductPackBase):
         # Lines should be editable (no pack_parent_line_id)
         self.assertFalse(self.sale_order.order_line[1].pack_parent_line_id)
         self.assertFalse(self.sale_order.order_line[2].pack_parent_line_id)
+
+        # Updating the pack quantity should update component quantities.
+        header_line.product_uom_qty = 2
+        self.assertEqual(self.sale_order.order_line[1].product_uom_qty, 4)
+        self.assertEqual(self.sale_order.order_line[2].product_uom_qty, 2)
+
+    def test_non_detailed_modifiable_pack_with_nested_pack_not_expanded(self):
+        nested_pack = self.env["product.product"].create(
+            {
+                "name": "Nested pack",
+                "company_id": self.env.company.id,
+                "type": "service",
+                "list_price": 5,
+                "pack_ok": True,
+                "pack_type": "non_detailed",
+                "pack_component_price": "detailed",
+                "pack_line_ids": [
+                    Command.create({"product_id": self.component1.id, "quantity": 1}),
+                ],
+            }
+        )
+        self.pack.pack_type = "non_detailed"
+        self.pack.pack_modifiable = True
+        self.pack.pack_line_ids = [
+            Command.clear(),
+            Command.create({"product_id": nested_pack.id, "quantity": 1}),
+            Command.create({"product_id": self.component2.id, "quantity": 1}),
+        ]
+
+        line = self._add_so_line()
+
+        # Must remain as a single non-expanded pack line.
+        self.assertEqual(len(self.sale_order.order_line), 1)
+        self.assertEqual(self.sale_order.order_line, line)
+        self.assertFalse(line.pack_is_visual_header)

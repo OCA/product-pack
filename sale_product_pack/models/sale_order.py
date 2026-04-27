@@ -77,6 +77,7 @@ class SaleOrder(models.Model):
         res = super()._get_update_prices_lines()
         return res.filtered(
             lambda line: not line.pack_parent_line_id
+            and not line.pack_is_visual_header
             or line.pack_parent_line_id.pack_component_price == "detailed"
         )
 
@@ -97,10 +98,11 @@ class SaleOrder(models.Model):
         )._update_order_line_info(product_id, quantity, **kwargs)
         # Now transform any remaining non-detailed modifiable pack lines
         pack_lines = self.order_line.filtered(
-            lambda l: l.product_id.id == product_id
-            and l.product_id.pack_ok
-            and l.pack_type == "non_detailed"
-            and l.product_id.pack_modifiable
+            lambda line: line.product_id.id == product_id
+            and line.product_id.pack_ok
+            and line.pack_type == "non_detailed"
+            and line.product_id.pack_modifiable
+            and not line.pack_is_visual_header
         )
         for line in pack_lines:
             line.action_transform_pack_to_lines()

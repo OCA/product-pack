@@ -36,7 +36,8 @@
                             invisible="not (pack_type == 'non_detailed' and pack_modifiable)"
                             colspan="4"
                         >
-                            <strong>Aviso:</strong> Los packs no detallados y modificables
+                            <strong
+                        >Aviso:</strong> Los packs no detallados y modificables
                             no son compatibles con eCommerce.
                         </div>
                     </group>
