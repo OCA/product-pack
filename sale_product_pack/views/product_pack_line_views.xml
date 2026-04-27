@@ -27,11 +27,34 @@
         <field name="inherit_id" ref="sale.view_order_form" />
         <field name="arch" type="xml">
             <xpath
+                expr="//field[@name='order_line']/form//field[@name='display_type']"
+                position="after"
+            >
+                <field name="pack_is_visual_header" invisible="1" />
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='collapse_composition']"
+                position="attributes"
+            >
+                <attribute name="invisible">
+                    display_type not in ['line_section', 'line_subsection'] and not pack_is_visual_header
+                </attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='order_line']/form//field[@name='collapse_prices']"
+                position="attributes"
+            >
+                <attribute name="invisible">
+                    display_type not in ['line_section', 'line_subsection'] and not pack_is_visual_header
+                </attribute>
+            </xpath>
+            <xpath
                 expr="//field[@name='order_line']/list//field[@name='price_subtotal']"
                 position="after"
             >
                 <field name="pack_modifiable" column_invisible="True" />
                 <field name="pack_parent_line_id" column_invisible="True" />
+                <field name="pack_is_visual_header" column_invisible="True" />
                 <button
                     string="Locked"
                     name="action_open_parent_pack_product_view"
