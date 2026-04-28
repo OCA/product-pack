@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class ProductPackType(models.Model):
-
     _name = "product.pack.type"
     _description = "Product Pack Type"
 
