@@ -60,7 +60,10 @@ Authors
 Contributors
 ------------
 
-- Denis Roussel <denis.roussel@acsone.eu>
+- `Acsone <https://www.acsone.eu/>`__:
+
+  - Denis Roussel <denis.roussel@acsone.eu>
+  - Raphaël Vicini <raphael.vicini@acsone.eu>
 
 Maintainers
 -----------
