@@ -20,8 +20,7 @@
         <field name="category_id" ref="product_pack.module_category_product_pack" />
         <field
             name="implied_ids"
-            eval="[(4, ref('product_pack.group_product_pack_user'))]"
+            eval="[Command.link(ref('product_pack.group_product_pack_user'))]"
         />
     </record>
-
 </odoo>

@@ -2,7 +2,6 @@
 <!-- Copyright 2021 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <menuitem
         id="menu_product_pack_root"
         name="Product Packs"
@@ -10,5 +9,4 @@
         web_icon="product_pack,static/description/icon.png"
         sequence="100"
     />
-
 </odoo>
