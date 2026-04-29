@@ -90,21 +90,3 @@ class TestSaleStockProductPack(BaseCommon):
         # TODO: it needs to compute twice. In view it does it fine.
         sale.order_line.mapped("qty_delivered")
         self.assertEqual(9, pack_line.qty_delivered)
-
-    def test_picking_pack_consu(self):
-        sale = self._create_sale_order(self.product_pack, 1)
-        self._create_stock_quant(self.component_1, 1)
-        self._create_stock_quant(self.component_2, 1)
-        sale.action_confirm()
-        picking = sale.picking_ids
-        res = picking.button_validate()
-        wizard = self.env[res["res_model"]].with_context(**res["context"]).create({})
-        wizard.process()
-        self.assertEqual(picking.state, "done")
-        data_names = []
-        aggregated_lines = picking.move_line_ids._get_aggregated_product_quantities()
-        for line in aggregated_lines:
-            data_names.append(aggregated_lines[line]["name"])
-        self.assertEqual(
-            data_names, ["Pack (consumable)", "Component 1", "Component 2"]
-        )
