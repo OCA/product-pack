@@ -7,20 +7,31 @@
         <field name="description">Helps you handle your product packs.</field>
         <field name="sequence">8</field>
     </record>
+
+    <record id="privilege_product_pack" model="res.groups.privilege">
+        <field name="name">Product Packs</field>
+        <field name="category_id" ref="product_pack.module_category_product_pack" />
+        <field name="sequence">8</field>
+    </record>
+
     <!-- Groups -->
     <record id="group_product_pack_user" model="res.groups">
         <field name="name">Product Pack User</field>
         <field name="comment">Allow to read Product Packs</field>
-        <field name="category_id" ref="product_pack.module_category_product_pack" />
+        <field name="privilege_id" ref="product_pack.privilege_product_pack" />
     </record>
 
     <record id="group_product_pack_manager" model="res.groups">
         <field name="name">Product Pack Manager</field>
         <field name="comment">Allow to manage Product Packs</field>
-        <field name="category_id" ref="product_pack.module_category_product_pack" />
+        <field name="privilege_id" ref="product_pack.privilege_product_pack" />
         <field
             name="implied_ids"
             eval="[Command.link(ref('product_pack.group_product_pack_user'))]"
+        />
+        <field
+            name="user_ids"
+            eval="[Command.link(ref('base.user_root')), Command.link(ref('base.user_admin'))]"
         />
     </record>
 </odoo>
