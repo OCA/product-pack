@@ -5,7 +5,6 @@ from odoo import _, api, fields, models
 
 
 class SaleProductPackLineModification(models.TransientModel):
-
     _name = "sale.product.pack.line.modification"
     _description = "Sale Product Pack Line Modification"
 
