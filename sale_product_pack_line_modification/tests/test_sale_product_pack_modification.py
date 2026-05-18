@@ -1,52 +1,22 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import SavepointCase
+from .common import SaleProductPackLineModificationCommon
 
 
-class TestSaleProductPack(SavepointCase):
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.modif_wizard_obj = cls.env["sale.product.pack.line.modification"]
-        cls.product_1 = cls.env.ref("product.product_product_1")
-        pricelist = cls.env["product.pricelist"].create(
-            {
-                "name": "Test",
-                "company_id": cls.env.company.id,
-                "item_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "applied_on": "3_global",
-                            "compute_price": "formula",
-                            "base": "list_price",
-                        },
-                    )
-                ],
-            }
-        )
-        cls.sale_order = cls.env["sale.order"].create(
-            {
-                "company_id": cls.env.company.id,
-                "partner_id": cls.env.ref("base.res_partner_12").id,
-                "pricelist_id": pricelist.id,
-            }
-        )
-
+class TestSaleProductPack(SaleProductPackLineModificationCommon):
     def test_change_product(self):
-        # Create a sale order line with ignored price configuration (modification restricted)
+        # Create a sale order line with ignored price configuration
+        # (modification restricted)
         # Change one sub line with wizard
         # Check new product is well set
         # Check the line is marked as modified
         # Check if new message is set
-        product_cp = self.env.ref("product_pack.product_pack_cpu_detailed_ignored")
         vals = [
             {
                 "order_id": self.sale_order.id,
-                "name": product_cp.name,
-                "product_id": product_cp.id,
+                "name": self.product_cp.name,
+                "product_id": self.product_cp.id,
                 "product_uom_qty": 1,
             },
         ]

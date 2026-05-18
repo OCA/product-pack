@@ -5,7 +5,7 @@
     "name": "Sale Product Pack Line Modification",
     "summary": """
         Allows to modify a product pack line on sale order line""",
-    "version": "14.0.1.0.0",
+    "version": "19.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/product-pack",
@@ -17,4 +17,5 @@
         "views/sale_order.xml",
         "wizards/sale_product_pack_line_modification.xml",
     ],
+    "installable": True,
 }

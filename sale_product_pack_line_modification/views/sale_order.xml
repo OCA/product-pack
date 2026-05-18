@@ -12,14 +12,15 @@
                     name="action_sale_product_pack_modified"
                     type="object"
                     help="The product has been modified for this line that belongs to a pack."
-                    attrs="{'invisible': [('pack_modified_line', '=', False)]}"
+                    invisible="not pack_modified_line"
+                    title="Recompute pack lines"
                     icon="fa-retweet"
                 />
                 <button
                     string="Modify"
                     name="action_sale_product_pack_modification"
                     type="object"
-                    attrs="{'invisible': ['|', ('pack_parent_line_id', '=', False), ('pack_modifiable', '=', True)]}"
+                    invisible="not pack_parent_line_id or pack_modifiable"
                     groups="sale_product_pack_line_modification.group_sale_product_pack_modification"
                     icon="fa-edit"
                 />

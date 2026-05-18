@@ -1,7 +1,7 @@
 # Copyright 2022 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import Command, api, fields, models
 
 
 class SaleProductPackLineModification(models.TransientModel):
@@ -26,7 +26,7 @@ class SaleProductPackLineModification(models.TransientModel):
         res = super().default_get(fields_list)
         active_ids = self.env.context.get("active_ids")
         if active_ids and self.env.context.get("active_model") == "sale.order.line":
-            res.update({"sale_order_line_ids": [(6, 0, active_ids)]})
+            res.update({"sale_order_line_ids": [Command.set(active_ids)]})
 
         return res
 
@@ -35,8 +35,12 @@ class SaleProductPackLineModification(models.TransientModel):
         Add a message on sale order with changes
         """
         line.order_id.message_post(
-            body=_("A line has been changed from product (%s) to product (%s)")
-            % (old_product.display_name, line.product_id.display_name)
+            body=self.env._(
+                "A line has been changed from product (%(name)s) to product "
+                "(%(product)s)",
+                name=old_product.display_name,
+                product=line.product_id.display_name,
+            )
         )
 
     def _prepare_order_line(self, line):

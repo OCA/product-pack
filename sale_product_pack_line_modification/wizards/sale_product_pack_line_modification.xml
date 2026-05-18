@@ -17,7 +17,13 @@
                     <field name="product_quantity" />
                 </group>
                 <group>
-                    <field name="sale_order_line_ids" readonly="1" />
+                    <field name="sale_order_line_ids" readonly="1">
+                        <list>
+                            <field name="product_id" />
+                            <field name="product_uom_qty" />
+                            <field name="pack_parent_line_id" />
+                        </list>
+                    </field>
                 </group>
                 <footer>
                     <button name="doit" string="OK" class="btn-primary" type="object" />
