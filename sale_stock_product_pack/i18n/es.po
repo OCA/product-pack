@@ -7,23 +7,24 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-11-13 14:07+0000\n"
-"PO-Revision-Date: 2025-11-13 14:07+0000\n"
+"PO-Revision-Date: 2025-11-13 15:47+0100\n"
 "Last-Translator: \n"
-"Language-Team: \n"
+"Language-Team: Trey\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #. module: sale_stock_product_pack
 #: model:ir.model,name:sale_stock_product_pack.model_stock_move_line
 msgid "Product Moves (Stock Move Line)"
-msgstr ""
+msgstr "Movimientos de producto (línea de movimiento de stock)"
 
 #. module: sale_stock_product_pack
 #: model:ir.model,name:sale_stock_product_pack.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Línea de pedido de venta"
 
 #. module: sale_stock_product_pack
 #. odoo-python
@@ -33,6 +34,8 @@ msgid ""
 "You can not change this line because is part of a pack included in this "
 "picking."
 msgstr ""
+"No se puede cambiar esta línea porque forma parte de un paquete incluido en "
+"este albarán."
 
 #. module: sale_stock_product_pack
 #. odoo-python
@@ -43,3 +46,9 @@ msgid ""
 "picking. Modify the quantity of the pack and its components will be updated "
 "automatically."
 msgstr ""
+"No puede cambiar esta línea porque forma parte de un pack incluido en "
+"este albarán. Modifique la cantidad del pack y sus componentes se "
+"actualizarán automáticamente."
+
+#~ msgid "Stock Move"
+#~ msgstr "Movimiento de stock"

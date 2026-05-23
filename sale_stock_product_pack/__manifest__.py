@@ -10,6 +10,9 @@
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "maintainers": ["chienandalu"],
     "license": "AGPL-3",
-    "depends": ["sale_product_pack", "stock_product_pack"],
+    "depends": ["stock", "sale_product_pack", "stock_product_pack"],
+    "data": [
+        "views/stock_picking_return_views.xml",
+    ],
     "installable": True,
 }

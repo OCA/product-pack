@@ -108,3 +108,83 @@ class TestSaleStockProductPack(BaseCommon):
         self.assertEqual(
             data_names, ["Pack (consumable)", "Component 1", "Component 2"]
         )
+
+    def test_picking_validate_partial_pack(self):
+        sale = self._create_sale_order(self.product_pack, 2)
+        self._create_stock_quant(self.component_1, 2)
+        self._create_stock_quant(self.component_2, 2)
+        sale.action_confirm()
+        picking = sale.picking_ids
+        picking_pack = picking.move_ids.filtered(
+            lambda m: m.product_id == self.product_pack
+        )
+        component_moves = picking.move_ids.filtered(
+            lambda m: m.product_id != self.product_pack
+        )
+        for component_move in component_moves:
+            self.assertEqual(component_move.quantity_done, 0)
+        picking_pack.quantity_done = 1
+        picking_pack._onchange_quantity_done()
+        for component_move in component_moves:
+            self.assertEqual(component_move.quantity_done, 1)
+        picking.with_context(skip_backorder=True).button_validate()
+        self.assertEqual(picking.state, "done")
+        for order_line in sale.order_line:
+            self.assertEqual(order_line.product_uom_qty, 2)
+            self.assertEqual(order_line.qty_delivered, 1)
+
+    def test_picking_validate_and_partial_return(self):
+        sale = self._create_sale_order(self.product_pack, 2)
+        self._create_stock_quant(self.component_1, 2)
+        self._create_stock_quant(self.component_2, 2)
+        sale.action_confirm()
+        picking = sale.picking_ids
+        picking_pack = picking.move_ids.filtered(
+            lambda m: m.product_id == self.product_pack
+        )
+        component_moves = picking.move_ids.filtered(
+            lambda m: m.product_id != self.product_pack
+        )
+        for component_move in component_moves:
+            self.assertEqual(component_move.quantity_done, 0)
+        picking_pack.quantity_done = 2
+        picking_pack._onchange_quantity_done()
+        for component_move in component_moves:
+            self.assertEqual(component_move.quantity_done, 2)
+        picking.button_validate()
+        self.assertEqual(picking.state, "done")
+        for order_line in sale.order_line:
+            self.assertEqual(order_line.product_uom_qty, 2)
+            self.assertEqual(order_line.qty_delivered, 2)
+        return_wizard = self.env["stock.return.picking"].create(
+            {
+                "picking_id": picking.id,
+            }
+        )
+        return_wizard._onchange_picking_id()
+        product_pack_return_move = return_wizard.product_return_moves.filtered(
+            lambda m: m.product_id == self.product_pack
+        )
+        components_return_moves = return_wizard.product_return_moves.filtered(
+            lambda m: m.product_id != self.product_pack
+        )
+        for components_return_move in components_return_moves:
+            self.assertEqual(components_return_move.quantity, 2)
+            components_return_move.write(
+                {
+                    "quantity": 99,
+                    "to_refund": True,
+                }
+            )
+            return_wizard._onchange_product_return_moves()
+            self.assertIsNot(product_pack_return_move.quantity, 99)
+        self.assertEqual(product_pack_return_move.quantity, 2)
+        product_pack_return_move.quantity = 1
+        return_wizard._onchange_product_return_moves()
+        for components_return_move in components_return_moves:
+            self.assertEqual(components_return_move.quantity, 1)
+        picking_id = return_wizard.create_returns()["res_id"]
+        picking_return_return = self.env["stock.picking"].browse(picking_id)
+        moves = picking_return_return.move_ids
+        for move in moves:
+            self.assertEqual(move.product_uom_qty, 1)
