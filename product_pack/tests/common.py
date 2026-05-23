@@ -14,3 +14,20 @@ class ProductPackCommon:
             "name": "Company Pack 2",
         }
         cls.company_2 = cls.env["res.company"].create(vals)
+        cls.discount_pricelist = cls.env["product.pricelist"].create(
+            {
+                "name": "Discount",
+                "company_id": cls.env.company.id,
+                "item_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "applied_on": "3_global",
+                            "compute_price": "percentage",
+                            "percent_price": 10,
+                        },
+                    )
+                ],
+            }
+        )

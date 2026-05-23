@@ -19,7 +19,7 @@ TODO: add repo description.
 
 Available addons
 ----------------
-addon | version | maintainers | summary
+addon | version | maintainers | summary.
 --- | --- | --- | ---
 [product_pack](product_pack/) | 16.0.1.1.0 | <a href='https://github.com/ernestotejeda'><img src='https://github.com/ernestotejeda.png' width='32' height='32' style='border-radius:50%;' alt='ernestotejeda'/></a> | This module allows you to set a product as a Pack
 [purchase_product_pack](purchase_product_pack/) | 16.0.1.0.0 |  | This module allows you to buy product packs

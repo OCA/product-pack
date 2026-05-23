@@ -102,6 +102,12 @@ Contributors
 
   * Maxime Franco
 
+* `ADHOC SA <https://www.adhoc.com.ar>`_:
+
+  * Bruno Zanotti
+  * Augusto Weiss
+  * Nicolas Col
+
 Maintainers
 ~~~~~~~~~~~
 

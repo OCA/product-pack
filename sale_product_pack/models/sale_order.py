@@ -60,12 +60,7 @@ class SaleOrder(models.Model):
 
     def _get_update_prices_lines(self):
         res = super()._get_update_prices_lines()
-        result = self.order_line.browse()
-        index = 0
-        while index < len(res):
-            line = res[index]
-            result |= line
-            index += 1
-            if line.product_id.pack_ok and line.pack_type == "detailed":
-                index += len(line.product_id.pack_line_ids)
-        return result
+        return res.filtered(
+            lambda line: not line.pack_parent_line_id
+            or line.pack_parent_line_id.pack_component_price == "detailed"
+        )
