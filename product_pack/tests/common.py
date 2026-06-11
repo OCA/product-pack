@@ -2,10 +2,11 @@
 # Copyright 2025 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import Command
-from odoo.tests import TransactionCase
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class ProductPackCommon(TransactionCase):
+class ProductPackCommon(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
