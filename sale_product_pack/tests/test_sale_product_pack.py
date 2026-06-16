@@ -2,6 +2,9 @@
 # Copyright 2025 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from odoo.exceptions import UserError
+from odoo.tests import Form
+
 from .common import TestSaleProductPackBase
 
 
@@ -137,3 +140,14 @@ class TestSaleProductPack(TestSaleProductPackBase):
         self.assertEqual(self.sale_order.order_line[2].product_id, self.component1)
         self.assertEqual(self.sale_order.order_line[3].product_id, self.component2)
         self.assertEqual(self.sale_order.order_line[4].product_id, product)
+
+    def test_message_assertions_for_quantity_change_on_child_order_line(self):
+        """At meats test one of the constraints that raises UserError when trying to
+        change the quantity of a component line directly."""
+        pack_line = self._add_so_line()
+        component_line = self.sale_order.order_line.filtered(
+            lambda line: line.pack_parent_line_id == pack_line
+        )[0]
+        with Form(component_line) as line:
+            with self.assertRaises(UserError):
+                line.product_uom_qty = 10
