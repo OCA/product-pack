@@ -22,9 +22,8 @@ odoo.define("pos_product_pack.models", function (require) {
             loaded: function (self, product_pack_line_ids) {
                 self.product_pack_line_by_id = {};
                 _.map(product_pack_line_ids, function (product_pack_line) {
-                    self.product_pack_line_by_id[
-                        product_pack_line.id
-                    ] = product_pack_line;
+                    self.product_pack_line_by_id[product_pack_line.id] =
+                        product_pack_line;
                 });
             },
         },
@@ -44,9 +43,8 @@ odoo.define("pos_product_pack.models", function (require) {
                         {pos: line.order.pos, order: line.order, product: product}
                     );
                     // Get an existing pack line with same id
-                    var to_merge_line = line.get_pack_line_can_be_merged_with(
-                        pack_line
-                    );
+                    var to_merge_line =
+                        line.get_pack_line_can_be_merged_with(pack_line);
                     if (to_merge_line) {
                         to_merge_line.merge(new_line);
                     } else {
