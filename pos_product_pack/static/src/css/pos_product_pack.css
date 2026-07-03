@@ -1,0 +1,9 @@
+.orderline.o_pack_child_line {
+    margin-left: 1.5rem;
+    background: rgba(108, 117, 125, 0.08);
+}
+
+.orderline.o_pack_child_line .product-name {
+    color: #6c757d;
+    font-style: italic;
+}

@@ -5,7 +5,7 @@
     "name": "Pos Product Pack",
     "summary": """
         Allows to sell product packs on POS sessions""",
-    "version": "14.0.1.0.0",
+    "version": "19.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "maintainers": ["rousseldenis"],
@@ -14,7 +14,12 @@
         "product_pack",
         "point_of_sale",
     ],
-    "data": [
-        "views/pos_product_pack.xml",
-    ],
+    "assets": {
+        "point_of_sale._assets_pos": [
+            "pos_product_pack/static/src/js/order.esm.js",
+            "pos_product_pack/static/src/js/order_line.esm.js",
+            "pos_product_pack/static/src/js/store.esm.js",
+            "pos_product_pack/static/src/css/pos_product_pack.css",
+        ],
+    },
 }
