@@ -95,3 +95,25 @@ class TestProductPack(ProductPackCommon):
             pricelist=self.discount_pricelist.id
         )._get_contextual_price()
         self.assertEqual(price, 63)  # 70 with 10% discount
+
+    def test_pack_line_active_matches_products(self):
+        """Pack line active state follows parent and component product states."""
+        self.assertTrue(self.pack_line1.active)
+
+        self.component1.active = False
+        self.assertFalse(self.pack_line1.active)
+
+        self.component1.active = True
+        self.assertTrue(self.pack_line1.active)
+
+        self.pack.active = False
+        self.assertFalse(self.pack_line1.active)
+
+        self.pack.active = True
+        self.assertTrue(self.pack_line1.active)
+
+    def test_archived_pack_line_excluded_from_pack_lines(self):
+        """Archived pack lines are not returned by default pack_line_ids."""
+        self.component2.active = False
+        self.assertNotIn(self.component2, self.pack.pack_line_ids.product_id)
+        self.assertIn(self.component1, self.pack.pack_line_ids.product_id)

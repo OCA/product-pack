@@ -29,6 +29,17 @@ class ProductPackLine(models.Model):
         index=True,
         required=True,
     )
+    active = fields.Boolean(
+        compute="_compute_active",
+        store=True,
+        readonly=True,
+        help="Inactive when the parent or component product is archived.",
+    )
+
+    @api.depends("parent_product_id.active", "product_id.active")
+    def _compute_active(self):
+        for line in self:
+            line.active = line.parent_product_id.active and line.product_id.active
 
     # because on expand_pack_line we are searching for existing product, we
     # need to enforce this condition
