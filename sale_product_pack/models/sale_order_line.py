@@ -24,6 +24,7 @@ class SaleOrderLine(models.Model):
         "sale.order.line",
         "Pack",
         help="The pack that contains this product.",
+        index=True,
     )
     pack_child_line_ids = fields.One2many(
         "sale.order.line", "pack_parent_line_id", "Lines in pack"
