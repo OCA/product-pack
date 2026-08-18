@@ -1,0 +1,3 @@
+- [Acsone](https://www.acsone.eu/):
+  - Denis Roussel \<denis.roussel@acsone.eu\>
+  - Raphaël Vicini \<raphael.vicini@acsone.eu\>
