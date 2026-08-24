@@ -11,7 +11,9 @@ class Pricelist(models.Model):
                   considering pricelist rules
         """
         self and self.ensure_one()
-        if product._is_pack_to_be_handled():
+        if product._is_pack_to_be_handled() and not self.env.context.get(
+            "pack_base_price_only"
+        ):
             # NOTE: This exception is to avoid adding the list price of the packs
             # "totalized" and "non detailed". Should be removed to solve the issue #169.
             if (
@@ -27,8 +29,7 @@ class Pricelist(models.Model):
             for line in product.sudo().pack_line_ids:
                 pack_price += line._get_pack_line_price(self, *args, **kwargs)
             return pack_price
-        else:
-            return super()._get_product_price(product, *args, **kwargs)
+        return super()._get_product_price(product, *args, **kwargs)
 
     def _get_products_price(self, products, *args, **kwargs):
         """Compute the pricelist price for the specified pack product, qty & uom.

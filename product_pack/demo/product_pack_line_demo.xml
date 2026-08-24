@@ -62,6 +62,30 @@
         <field name="product_id" ref="product.product_product_24" />
         <field name="quantity" eval="1.0" />
     </record>
+    <record id="pack_cpu_non_detailed_modifiable_1" model="product.pack.line">
+        <field
+            name="parent_product_id"
+            ref="product_pack_cpu_non_detailed_modifiable"
+        />
+        <field name="product_id" ref="product.product_product_20" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_cpu_non_detailed_modifiable_3" model="product.pack.line">
+        <field
+            name="parent_product_id"
+            ref="product_pack_cpu_non_detailed_modifiable"
+        />
+        <field name="product_id" ref="product.product_product_16" />
+        <field name="quantity" eval="1.0" />
+    </record>
+    <record id="pack_cpu_non_detailed_modifiable_4" model="product.pack.line">
+        <field
+            name="parent_product_id"
+            ref="product_pack_cpu_non_detailed_modifiable"
+        />
+        <field name="product_id" ref="product.product_product_24" />
+        <field name="quantity" eval="1.0" />
+    </record>
     <record id="pack_pc_detailed_components_1" model="product.pack.line">
         <field name="parent_product_id" ref="product_pack_pc_detailed_components" />
         <field name="product_id" ref="product.product_product_12" />

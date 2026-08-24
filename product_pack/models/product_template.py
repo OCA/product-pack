@@ -41,7 +41,9 @@ class ProductTemplate(models.Model):
     )
     pack_modifiable = fields.Boolean(
         help="If you check this field yo will be able to edit "
-        "sale/purchase order line relate to its component",
+        "sale/purchase order line relate to its component.\n"
+        "For 'Non Detailed' packs, this will automatically expand the pack "
+        "into editable detailed lines.",
     )
     pack_modifiable_invisible = fields.Boolean(
         compute="_compute_pack_modifiable_invisible",
@@ -55,22 +57,23 @@ class ProductTemplate(models.Model):
     @api.depends(lambda self: self._get_pack_modifiable_invisible_depends())
     def _compute_pack_modifiable_invisible(self):
         """
-        The pack modifiable field should be invisible when:
-            - pack details are not displayed or
-            - pack component prices are not detailed
-
+        The pack modifiable field is visible when:
+            - Pack Display Type is 'Detailed' and Pack Component Price is
+              'Detailed per component'
+            - Pack Display Type is 'Non Detailed'
         """
         for product in self:
             product.pack_modifiable_invisible = (
-                product.pack_type != "detailed"
-                or product.pack_component_price != "detailed"
+                product.pack_type == "detailed"
+                and product.pack_component_price != "detailed"
             )
 
     @api.onchange("pack_type", "pack_component_price")
     def onchange_pack_type(self):
         products = self.filtered(
             lambda x: x.pack_modifiable
-            and (x.pack_type != "detailed" or x.pack_component_price != "detailed")
+            and x.pack_type == "detailed"
+            and x.pack_component_price != "detailed"
         )
         for rec in products:
             rec.pack_modifiable = False
