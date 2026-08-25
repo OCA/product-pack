@@ -178,6 +178,37 @@ class TestStockProductPack(TransactionCase):
         self.assertEqual(self.pack_dc.virtual_available, 5)
         self.assertEqual(self.pack_dc.qty_available, 5)
 
+    def test_is_pack_dont_create_move(self):
+        procurement_group = self.env["procurement.group"]
+        category_all_id = self.env.ref("product.product_category_all").id
+
+        self.assertTrue(
+            procurement_group.is_pack_dont_create_move(self.pack_dc_with_dm)
+        )
+        self.assertFalse(procurement_group.is_pack_dont_create_move(self.pack_dc))
+
+        non_detailed_pack = self.product_obj.create(
+            {
+                "name": "Non-detailed pack with don't create move",
+                "detailed_type": "product",
+                "pack_ok": True,
+                "dont_create_move": True,
+                "pack_type": "non_detailed",
+                "categ_id": category_all_id,
+            }
+        )
+        self.assertFalse(procurement_group.is_pack_dont_create_move(non_detailed_pack))
+
+        not_a_pack = self.product_obj.create(
+            {
+                "name": "Not a pack with don't create move",
+                "detailed_type": "product",
+                "dont_create_move": True,
+                "categ_id": category_all_id,
+            }
+        )
+        self.assertFalse(procurement_group.is_pack_dont_create_move(not_a_pack))
+
     def test_pack_with_dont_move_the_parent(self):
         """Run a procurement for prod pack products when there are only 5 in stock then
         check that MTO is applied on the moves when the rule is set to 'mts_else_mto'
