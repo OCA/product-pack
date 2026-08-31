@@ -95,3 +95,57 @@ class TestProductPack(ProductPackCommon):
             pricelist=self.discount_pricelist.id
         )._get_contextual_price()
         self.assertEqual(price, 63)  # 70 with 10% discount
+
+    def test_pack_price_rule_totalized(self):
+        """`_get_product_price_rule` must totalize components, as the e-commerce
+        and the sales catalog build their prices with it."""
+        self.pack.pack_component_price = "totalized"
+        price, rule_id = self.discount_pricelist._get_product_price_rule(self.pack, 1.0)
+        self.assertEqual(price, 63)  # 70 with 10% discount
+        self.assertFalse(rule_id)  # no single rule explains a pack price
+
+    def test_pack_price_rule_detailed(self):
+        price, rule_id = self.discount_pricelist._get_product_price_rule(
+            self.pack.with_context(whole_pack_price=True), 1.0
+        )
+        self.assertEqual(price, 72)  # 80 (10 + 70) with 10% discount
+        self.assertFalse(rule_id)  # no single rule explains a pack price
+
+    def test_pack_price_rule_ignored(self):
+        """Not a pack to be handled: the pack's own price is used."""
+        self.pack.pack_component_price = "ignored"
+        price, rule_id = self.discount_pricelist._get_product_price_rule(self.pack, 1.0)
+        self.assertEqual(price, 9)  # 10 with 10% discount
+        self.assertEqual(rule_id, self.discount_pricelist.item_ids.id)
+
+    def test_price_rule_no_pack(self):
+        """Regular products must keep the standard behaviour."""
+        price, rule_id = self.discount_pricelist._get_product_price_rule(
+            self.component1, 1.0
+        )
+        self.assertEqual(price, 18)  # 20 with 10% discount
+        self.assertEqual(rule_id, self.discount_pricelist.item_ids.id)
+
+    def test_pack_price_rule_based_on_other_pricelist(self):
+        """A pricelist based on another one must not add the components twice."""
+        derived_pricelist = self.env["product.pricelist"].create(
+            {
+                "name": "Based on Discount",
+                "company_id": self.env.company.id,
+                "item_ids": [
+                    Command.create(
+                        {
+                            "applied_on": "3_global",
+                            "base": "pricelist",
+                            "base_pricelist_id": self.discount_pricelist.id,
+                            "compute_price": "formula",
+                            "price_discount": 0,
+                        },
+                    )
+                ],
+            }
+        )
+        price, __ = derived_pricelist._get_product_price_rule(
+            self.pack.with_context(whole_pack_price=True), 1.0
+        )
+        self.assertEqual(price, 72)  # 80 (10 + 70) with 10% discount, once
