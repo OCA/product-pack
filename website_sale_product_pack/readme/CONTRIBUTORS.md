@@ -1,0 +1,4 @@
+- [Tecnativa](https://www.tecnativa.com):
+  - David Vidal
+- [ADHOC SA](https://www.adhoc.com.ar):
+  - Nicolas Mac Rouillon
