@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pos_product_pack
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pos_product_pack
+#: model:ir.model.fields,field_description:pos_product_pack.field_pos_order_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: pos_product_pack
+#: model:ir.model.fields,field_description:pos_product_pack.field_pos_order_line__id
+msgid "ID"
+msgstr ""
+
+#. module: pos_product_pack
+#: model:ir.model.fields,field_description:pos_product_pack.field_pos_order_line____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: pos_product_pack
+#: model:ir.model.fields,field_description:pos_product_pack.field_pos_order_line__pack_line_id
+msgid "Pack Line"
+msgstr ""
+
+#. module: pos_product_pack
+#: model:ir.model,name:pos_product_pack.model_pos_order_line
+msgid "Point of Sale Order Lines"
+msgstr ""
