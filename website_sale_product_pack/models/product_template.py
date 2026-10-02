@@ -76,16 +76,16 @@ class ProductTemplate(models.Model):
         if product_or_template.pack_ok:
             pricelist = request.pricelist
             currency = website.currency_id
-            # Get the price with whole_pack_price context using _get_product_price_rule
-            # which includes pack components calculation
-            pricelist_price, _ = pricelist.with_context(
+            # _get_product_price is the one product_pack overrides to add up the
+            # components; _get_product_price_rule goes straight to the core.
+            pricelist_price = pricelist.with_context(
                 whole_pack_price=True
-            )._get_product_price_rule(
-                product=product_or_template,
-                quantity=quantity,
+            )._get_product_price(
+                product_or_template,
+                quantity,
                 uom=uom,
                 date=date,
-                target_currency=currency,
+                currency=currency,
             )
 
             # Apply taxes
@@ -121,16 +121,16 @@ class ProductTemplate(models.Model):
             date = fields.Date.context_today(self)
 
             for pack in packs:
-                # Get the price with whole_pack_price context using _get_product_price
-                # which includes pack components calculation
-                pricelist_price, _ = pricelist.with_context(
+                # _get_product_price is the one product_pack overrides to add up the
+                # components; _get_product_price_rule goes straight to the core.
+                pricelist_price = pricelist.with_context(
                     whole_pack_price=True
-                )._get_product_price_rule(
-                    product=pack,
-                    quantity=1.0,
+                )._get_product_price(
+                    pack,
+                    1.0,
                     uom=pack.uom_id,
                     date=date,
-                    target_currency=currency,
+                    currency=currency,
                 )
 
                 # Apply taxes

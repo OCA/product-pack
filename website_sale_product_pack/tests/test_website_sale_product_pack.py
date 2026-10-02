@@ -3,6 +3,8 @@
 from odoo.exceptions import ValidationError
 from odoo.tests.common import HttpCase, tagged
 
+from odoo.addons.website_sale.tests.common import MockRequest
+
 
 @tagged("post_install", "-at_install")
 class WebsiteSaleHttpCase(HttpCase):
@@ -288,6 +290,47 @@ class WebsiteSaleHttpCase(HttpCase):
         # Total: 1570.0
         self.assertEqual(line.price_subtotal, 1570.0)
         self.assertEqual(self._get_component_prices_sum(product_variant), 1570.0)
+
+    def test_shop_price_with_pricelist_without_rules(self):
+        """The shop price of a pack adds up its components even when the website
+        pricelist has no rules.
+
+        A totalized pack keeps a symbolic sale price, so falling back to it shows a
+        price that has nothing to do with what the customer pays.
+        """
+        component = self.env["product.product"].create(
+            {
+                "name": "Component without taxes",
+                "list_price": 250.0,
+                "is_published": True,
+                "taxes_id": False,
+            }
+        )
+        pack = self.env["product.template"].create(
+            {
+                "name": "Totalized pack with a symbolic sale price",
+                "list_price": 1.0,
+                "pack_ok": True,
+                "pack_type": "detailed",
+                "pack_component_price": "totalized",
+                "is_published": True,
+                "taxes_id": False,
+            }
+        )
+        self.env["product.pack.line"].create(
+            {
+                "parent_product_id": pack.product_variant_id.id,
+                "product_id": component.id,
+                "quantity": 2,
+            }
+        )
+        website = self.env["website"].get_current_website()
+        with MockRequest(self.env, website=website) as request:
+            self.assertFalse(request.pricelist.item_ids)
+            prices = pack._get_sales_prices(website)
+            combination_info = pack._get_combination_info(only_template=True)
+        self.assertEqual(prices[pack.id]["price_reduce"], 500.0)
+        self.assertEqual(combination_info["price"], 500.0)
 
     def test__check_to_add_pack_component_pusblished(self):
         """
