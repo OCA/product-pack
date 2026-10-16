@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Product Pack",
-    "version": "19.0.1.1.0",
+    "version": "20.0.1.0.0",
     "category": "Product",
     "summary": "This module allows you to set a product as a Pack",
     "website": "https://github.com/OCA/product-pack",
@@ -11,7 +11,7 @@
     "license": "AGPL-3",
     "depends": ["product"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/product_pack_line_views.xml",
         "views/product_template_views.xml",
         "views/product_product_views.xml",

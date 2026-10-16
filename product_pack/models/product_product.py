@@ -19,6 +19,8 @@ class ProductProduct(models.Model):
         "Found in packs",
         help="Packs where product is used.",
     )
+    # a pack can contain another pack, so its stored price depends on itself
+    lst_price = fields.Float(recursive=True)
 
     def get_pack_lines(self):
         """Returns the content (lines) of the packs.
@@ -29,17 +31,37 @@ class ProductProduct(models.Model):
     def _is_pack_to_be_handled(self):
         return self.product_tmpl_id._is_pack_to_be_handled()
 
+    def _get_attributes_extra_price(self):
+        """Keep the attribute extra out of the pack price.
+
+        Since 20.0 the core derives it from ``lst_price - list_price``, and on a
+        pack ``lst_price`` holds the whole pack price, so the components would be
+        added twice to any price computed from ``list_price``.
+        """
+        self.ensure_one()
+        if self.pack_ok:
+            return self.price_extra + self.env.context.get(
+                "no_variant_attributes_price_extra", 0
+            )
+        return super()._get_attributes_extra_price()
+
     def split_pack_products(self):
         packs = self.filtered(lambda p: p.product_tmpl_id._is_pack_to_be_handled())
         return packs, (self - packs)
 
-    @api.depends("list_price", "price_extra")
+    @api.depends(
+        "list_price",
+        "price_extra",
+        "pack_ok",
+        "pack_type",
+        "pack_component_price",
+        "pack_line_ids.quantity",
+        "pack_line_ids.product_id.list_price",
+        "pack_line_ids.product_id.lst_price",
+    )
     def _compute_product_lst_price(self):
         packs, no_packs = self.with_context(whole_pack_price=True).split_pack_products()
         ret_val = super(ProductProduct, no_packs)._compute_product_lst_price()
-        uom = self.env.context.get("uom", False)
-        if uom:
-            uom = self.env["uom.uom"].browse([uom])
         for product in packs:
             # NOTE: This exception is to avoid adding the list price of the packs
             # "totalized" and "non detailed". Should be removed to solve the issue #169.
@@ -49,13 +71,9 @@ class ProductProduct(models.Model):
             ):
                 list_price = 0
             else:
-                list_price = product._price_compute("list_price", uom=uom).get(
-                    product.id
-                )
+                list_price = product._price_compute("list_price").get(product.id)
             list_price += sum(
-                product.pack_line_ids._pack_line_price_compute(
-                    "list_price", uom=uom
-                ).values()
+                product.pack_line_ids._pack_line_price_compute("list_price").values()
             )
             product.lst_price = list_price + product.price_extra
         return ret_val

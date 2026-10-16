@@ -7,6 +7,9 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class ProductPackCommon(BaseCommon):
+    # Odoo 20 runs each test as _test_user: writing products needs this group
+    _test_user_groups = ("product.group_product_manager", "base.group_system")
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -44,8 +47,8 @@ class ProductPackCommon(BaseCommon):
                     Command.create(
                         {
                             "applied_on": "3_global",
-                            "compute_price": "percentage",
-                            "percent_price": 10,
+                            "compute_price": "discount",
+                            "price_discount": 10,
                         },
                     )
                 ],
