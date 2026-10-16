@@ -1,0 +1,287 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* product_pack
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-02-12 16:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_type__detailed
+msgid "Detailed"
+msgstr "Dettagliato"
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__detailed
+msgid "Detailed per component"
+msgstr "Detagliato per componente"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__used_in_pack_line_ids
+#: model:ir.model.fields,field_description:product_pack.field_product_template__used_in_pack_line_ids
+msgid "Found in packs"
+msgstr "Si trova nei colli"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__id
+msgid "ID"
+msgstr "ID"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_modifiable
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_modifiable
+msgid ""
+"If you check this field yo will be able to edit sale/purchase order line "
+"relate to its component"
+msgstr ""
+"Se si seleziona questo campo si potrà modificare la riga ordine vendita/"
+"acquisto relativa a questo componente"
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__ignored
+msgid "Ignored"
+msgstr "Ignorato"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_ok
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_ok
+msgid "Is Pack?"
+msgstr "È collo?"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_ok
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_ok
+msgid "Is a Product Pack?"
+msgstr "È un collo prodotto?"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_type__non_detailed
+msgid "Non Detailed"
+msgstr "Non dettagliato"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_component_price
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_component_price
+msgid ""
+"On sale orders or purchase orders:\n"
+"* Detailed per component: Detail lines with prices.\n"
+"* Totalized in main product: Detail lines merging lines prices on pack "
+"(don't show component prices).\n"
+"* Ignored: Use product pack price (ignore detail line prices)."
+msgstr ""
+"Negli ordini di vendita o di acquisto:\n"
+"* Dettagliato per componente: dettaglio righe con prezzi.\n"
+"* Totalizzate nel prodotto principale: dettaglio righe unendo i prezzi delle "
+"righe nel collo (non mostra i prezzi dei componenti).\n"
+"* Ignorate: usa il prezzo prodotto del collo (ignora il dettaglio prezzi "
+"riga)."
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_type
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_type
+msgid ""
+"On sale orders or purchase orders:\n"
+"* Detailed: Display components individually in the sale order.\n"
+"* Non Detailed: Do not display components individually in the sale order."
+msgstr ""
+"Negli ordini di ventita o di acquisto:\n"
+"* Dettagliati: visualizza i singoli componenti nell'ordine di vendita.\n"
+"* Non detagliati: non visualizza i singoli componenti nell'ordine di vendita."
+
+#. module: product_pack
+#: model_terms:ir.ui.view,arch_db:product_pack.product_template_form_view
+msgid "Pack"
+msgstr "Pacco"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_cpu_detailed_components_product_template
+msgid "Pack CPU (Detailed - Displayed Components Price)"
+msgstr "CPU collo (Dettagliato - prezzo componenti visualizzati)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_cpu_detailed_ignored_product_template
+msgid "Pack CPU (Detailed - Ignored Components Price)"
+msgstr "CPU collo (Dettagliato - prezzo componenti ignorati)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_cpu_detailed_totalized_product_template
+msgid "Pack CPU (Detailed - Totalized Components Price)"
+msgstr "CPU collo (Dettagliato - prezzo componenti totali)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_cpu_non_detailed_product_template
+msgid "Pack CPU (Non Detailed - Totalized Components Price)"
+msgstr "CPU collo (Non dettagliato - prezzo componenti totali)"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_component_price
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_component_price
+msgid "Pack Component Price"
+msgstr "Prezzo componente collo"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_type
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_type
+msgid "Pack Display Type"
+msgstr "Visualizza tipo collo"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_modifiable
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_modifiable
+msgid "Pack Modifiable"
+msgstr "Collo modificabile"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_modifiable_invisible
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_modifiable_invisible
+msgid "Pack Modifiable Invisible"
+msgstr "Collo modificabile invisibile"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_pc_detailed_components_product_template
+msgid "Pack PC (Detailed - Displayed Components Price)"
+msgstr "PC collo (Dettagliato - prezzo componenti visualizzati)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_pc_detailed_ignored_product_template
+msgid "Pack PC (Detailed - Ignored Components Price)"
+msgstr "PC collo (Dettagliato - prezzo componenti ignorati)"
+
+#. module: product_pack
+#: model:product.template,name:product_pack.product_pack_pc_detailed_totalized_product_template
+msgid "Pack PC (Detailed - Totalized Components Price)"
+msgstr "PC collo (Dettagliato - prezzo componenti totali)"
+
+#. module: product_pack
+#: model_terms:ir.ui.view,arch_db:product_pack.product_pack_line_form
+msgid "Pack Product Line"
+msgstr "Riga prdotto collo"
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_product__pack_line_ids
+#: model:ir.model.fields,field_description:product_pack.field_product_template__pack_line_ids
+#: model_terms:ir.ui.view,arch_db:product_pack.nan_product_pack_form
+#: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
+msgid "Pack Products"
+msgstr "Prodotti collo"
+
+#. module: product_pack
+#. odoo-python
+#: code:addons/product_pack/models/product_template.py:0
+msgid ""
+"Pack lines products company must be the same as the parent product company"
+msgstr ""
+"L'azienda dei prodotti delle righe collo deve essere la stessa del prodotto "
+"padre"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__used_in_pack_line_ids
+#: model:ir.model.fields,help:product_pack.field_product_template__used_in_pack_line_ids
+msgid "Packs where product is used."
+msgstr "Colli dove è usato il prdotto."
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__parent_product_id
+msgid "Parent Product"
+msgstr "Prodotto padre"
+
+#. module: product_pack
+#: model:ir.model,name:product_pack.model_product_pricelist
+msgid "Pricelist"
+msgstr "Listino prezzi"
+
+#. module: product_pack
+#: model:ir.model,name:product_pack.model_product_template
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__product_id
+msgid "Product"
+msgstr "Prodotto"
+
+#. module: product_pack
+#: model:ir.model,name:product_pack.model_product_product
+msgid "Product Variant"
+msgstr "Variante prodotto"
+
+#. module: product_pack
+#: model:ir.model.constraint,message:product_pack.constraint_product_pack_line_product_uniq
+msgid "Product must be only once on a pack!"
+msgstr "Il prdotto deve essere unico per collo!"
+
+#. module: product_pack
+#: model:ir.model,name:product_pack.model_product_pack_line
+msgid "Product pack line"
+msgstr "Riga collo prodotto"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_line_ids
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_line_ids
+msgid "Products that are part of this pack."
+msgstr "Prodotti che sono presenti in questo collo."
+
+#. module: product_pack
+#: model:ir.model.fields,field_description:product_pack.field_product_pack_line__quantity
+msgid "Quantity"
+msgstr "Quantità"
+
+#. module: product_pack
+#: model:ir.model.fields,help:product_pack.field_product_product__pack_modifiable_invisible
+#: model:ir.model.fields,help:product_pack.field_product_template__pack_modifiable_invisible
+msgid ""
+"Technical field in order to compute the availability of the Pack Modifiable "
+"field"
+msgstr ""
+"Campo tecnico per calcolare la disponibilità del campo collo modificabile"
+
+#. module: product_pack
+#: model:ir.model.fields.selection,name:product_pack.selection__product_template__pack_component_price__totalized
+msgid "Totalized in main product"
+msgstr "Totali nel prodotto padre"
+
+#. module: product_pack
+#. odoo-python
+#: code:addons/product_pack/models/product_pack_line.py:0
+msgid ""
+"You cannot set recursive packs.\n"
+"Product id: %s"
+msgstr ""
+"Non si possono impostare colli ricorsivi.\n"
+"ID prodotto: %s"
+
+#. module: product_pack
+#: model_terms:ir.ui.view,arch_db:product_pack.product_template_only_form_view
+msgid "You must save first to add pack lines"
+msgstr "Bisogna salvare prima di aggiungere righe collo"
