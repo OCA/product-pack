@@ -69,8 +69,10 @@ class ProductTemplate(models.Model):
     @api.onchange("pack_type", "pack_component_price")
     def onchange_pack_type(self):
         products = self.filtered(
-            lambda x: x.pack_modifiable
-            and (x.pack_type != "detailed" or x.pack_component_price != "detailed")
+            lambda x: (
+                x.pack_modifiable
+                and (x.pack_type != "detailed" or x.pack_component_price != "detailed")
+            )
         )
         for rec in products:
             rec.pack_modifiable = False
