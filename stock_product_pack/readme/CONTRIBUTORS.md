@@ -1,0 +1,7 @@
+- [Tecnativa](https://www.tecnativa.com):
+  - Ernesto Tejeda
+  - Pedro M. Baeza
+  - Sergio Teruel
+  - João Marques
+- [ADHOC SA](https://www.adhoc.com.ar):
+  - Bruno Zanotti
