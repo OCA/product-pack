@@ -1,0 +1,15 @@
+- [Tecnativa](https://www.tecnativa.com):
+  - Ernesto Tejeda
+  - Pedro M. Baeza
+- [Akretion](https://akretion.com):
+  - Raphaël Reverdy
+- [Open Source Integrators](https://opensourceintegrators.eu):
+  - Daniel Reis \<<dreis@opensourceintegrators.com>\>
+- [Acsone](https://www.acsone.eu/):
+  - Maxime Franco
+- [ADHOC SA](https://www.adhoc.com.ar):
+  - Bruno Zanotti
+  - Augusto Weiss
+  - Nicolas Col
+- [Apik](https://apik.cloud/):
+  - Michel Guiheneuf
