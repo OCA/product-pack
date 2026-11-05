@@ -61,41 +61,50 @@
         <field name="product_id" ref="product_pack.product_pack_cpu_detailed_ignored" />
         <field name="sequence">6</field>
     </record>
+    <!-- Keep modifiable non-detailed pack as a direct product line (no section). -->
+    <record id="portal_sale_order_line_10" model="sale.order.line">
+        <field name="order_id" ref="portal_sale_order_3" />
+        <field
+            name="product_id"
+            ref="product_pack.product_pack_cpu_non_detailed_modifiable"
+        />
+        <field name="sequence">7</field>
+    </record>
     <!-- Product pack: NON DETAILED -->
     <record id="portal_sale_order_line_section_4" model="sale.order.line">
         <field name="order_id" ref="portal_sale_order_3" />
         <field name="name">Not Detailed - Totalized Components Price</field>
         <field name="display_type">line_section</field>
-        <field name="sequence">7</field>
+        <field name="sequence">11</field>
     </record>
     <record id="portal_sale_order_line_9" model="sale.order.line">
         <field name="order_id" ref="portal_sale_order_3" />
         <field name="product_id" ref="product_pack.product_pack_cpu_non_detailed" />
-        <field name="sequence">8</field>
+        <field name="sequence">12</field>
     </record>
     <!-- Components -->
     <record id="portal_sale_order_line_section_5" model="sale.order.line">
         <field name="order_id" ref="portal_sale_order_3" />
         <field name="name">COMPONENTS</field>
         <field name="display_type">line_section</field>
-        <field name="sequence">9</field>
+        <field name="sequence">13</field>
     </record>
     <record id="portal_sale_order_line_components_1" model="sale.order.line">
         <field name="order_id" ref="portal_sale_order_3" />
         <field name="product_id" ref="product.product_product_20" />
-        <field name="sequence">10</field>
+        <field name="sequence">14</field>
     </record>
 
     <record id="portal_sale_order_line_components_2" model="sale.order.line">
         <field name="order_id" ref="portal_sale_order_3" />
         <field name="product_id" ref="product.product_product_16" />
-        <field name="sequence">11</field>
+        <field name="sequence">15</field>
     </record>
 
     <record id="portal_sale_order_components_3" model="sale.order.line">
         <field name="order_id" ref="portal_sale_order_3" />
         <field name="product_id" ref="product.product_product_24" />
-        <field name="sequence">12</field>
+        <field name="sequence">16</field>
     </record>
 
     <function

@@ -41,6 +41,18 @@
         <field name="list_price">30.75</field>
         <field name="type">service</field>
     </record>
+    <record id="product_pack_cpu_non_detailed_modifiable" model="product.product">
+        <field
+            name="name"
+        >Pack CPU (Non Detailed - Totalized Components Price - Modifiable)</field>
+        <field name="categ_id" ref="product.product_category_services" />
+        <field name="pack_ok" eval="True" />
+        <field name="pack_type">non_detailed</field>
+        <field name="pack_modifiable" eval="True" />
+        <field name="standard_price">20.5</field>
+        <field name="list_price">30.75</field>
+        <field name="type">service</field>
+    </record>
     <record id="product_pack_pc_detailed_components" model="product.product">
         <field name="name">Pack PC (Detailed - Displayed Components Price)</field>
         <field name="categ_id" ref="product.product_category_services" />
