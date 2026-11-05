@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [product_pack](product_pack/) | 19.0.1.1.0 | <a href='https://github.com/pedrobaeza'><img src='https://github.com/pedrobaeza.png' width='32' height='32' style='border-radius:50%;' alt='pedrobaeza'/></a> | This module allows you to set a product as a Pack
+[purchase_product_pack](purchase_product_pack/) | 19.0.1.0.0 |  | This module allows you to buy product packs
 [sale_product_pack](sale_product_pack/) | 19.0.1.0.3 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | This module allows you to sell product packs
 [sale_stock_product_pack](sale_stock_product_pack/) | 19.0.1.1.0 | <a href='https://github.com/pedrobaeza'><img src='https://github.com/pedrobaeza.png' width='32' height='32' style='border-radius:50%;' alt='pedrobaeza'/></a> | Compatibility module for packs that are storable products
 [stock_product_pack](stock_product_pack/) | 19.0.1.1.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | This module allows you to get the right available quantities of the packs
