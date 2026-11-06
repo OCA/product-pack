@@ -62,8 +62,9 @@ class PurchaseOrderLine(models.Model):
                 vals = subline.get_purchase_order_line_vals(self, self.order_id)
                 if write:
                     pack_child_lines = self.pack_child_line_ids.filtered(
-                        lambda child, subline=subline: child.product_id
-                        == subline.product_id
+                        lambda child, subline=subline: (
+                            child.product_id == subline.product_id
+                        )
                     )
                     # if subline already exists we update, if not we create
                     if existing_subline := pack_child_lines[:1]:

@@ -34,8 +34,10 @@ class PurchaseOrder(models.Model):
         removed_line_ids = set(origin_line_ids) - set(line_ids)
         removed_line = self.env["purchase.order.line"].browse(removed_line_ids)
         if removed_line.filtered(
-            lambda x: x.pack_parent_line_id
-            and not x.pack_parent_line_id.product_id.pack_modifiable
+            lambda x: (
+                x.pack_parent_line_id
+                and not x.pack_parent_line_id.product_id.pack_modifiable
+            )
         ):
             raise UserError(
                 self.env._(
