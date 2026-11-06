@@ -1,7 +1,7 @@
 # Copyright 2023 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 
-from odoo import api, models
+from odoo import Command, api, models
 from odoo.exceptions import UserError
 from odoo.fields import Domain
 
@@ -12,7 +12,7 @@ class PurchaseOrder(models.Model):
     def copy_data(self, default=None):
         data_list = super().copy_data(default=default)
         for data in data_list:
-            order_lines = data["order_line"]
+            order_lines = data.get("order_line", [])
             new_order_lines = []  # Create a new list for modified order_lines
             for order_line in order_lines:
                 pack_parent_id = order_line[2]["pack_parent_line_id"]
@@ -52,15 +52,18 @@ class PurchaseOrder(models.Model):
             self._check_deleted_line(vals)
         return super().write(vals)
 
-    def _check_deleted_line(self, vals):
+    def _check_deleted_line(self, vals: dict) -> bool:
         """
         When updating a purchase order, this method checks for deleted lines in
         the 'order_line' field. If any purchase order lines are marked for deletion,
         it also identifies and remove any subpack lines that are associated with
         these deleted lines but not marked for deletion.
         """
-        to_delete_ids = [e[1] for e in vals["order_line"] if e[0] == 2]
-        subpacks_to_delete_ids = (
+        order_lines = vals.get("order_line", [])
+        to_delete_ids = [e[1] for e in order_lines if e[0] == Command.DELETE]
+        if not to_delete_ids:
+            return True
+        subpacks_to_delete_ids: list = (
             self.env["purchase.order.line"]
             .search(
                 Domain("id", "child_of", to_delete_ids)
@@ -68,10 +71,11 @@ class PurchaseOrder(models.Model):
             )
             .ids
         )
-        if subpacks_to_delete_ids:
-            for cmd in vals["order_line"]:
-                if cmd[1] in subpacks_to_delete_ids:
-                    if cmd[0] != 2:
-                        cmd[0] = 2
-                    subpacks_to_delete_ids.remove(cmd[1])
+        if not subpacks_to_delete_ids:
+            return True
+        for cmd in order_lines:
+            if cmd[1] in subpacks_to_delete_ids:
+                if cmd[0] != Command.DELETE:
+                    cmd[0] = Command.DELETE
+                subpacks_to_delete_ids.remove(cmd[1])
         return True

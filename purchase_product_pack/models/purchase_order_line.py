@@ -104,7 +104,7 @@ class PurchaseOrderLine(models.Model):
     @api.onchange(
         "product_id",
         "product_uom_qty",
-        "product_uom_id",
+        "uom_id",
         "price_unit",
         "name",
         "tax_ids",
@@ -131,92 +131,77 @@ class PurchaseOrderLine(models.Model):
             "domain": Domain("id", "in", products.ids),
         }
 
-    @api.depends("product_qty", "product_uom_id")
+    @api.depends("product_qty", "uom_id")
     def _compute_price_unit_and_date_planned_and_name(self):
         """
         This method extends the base '_compute_price_unit_and_date_planned_and_name'
         to re-calculate the price unit following options on product-pack
         """
         res = super()._compute_price_unit_and_date_planned_and_name()
+        if self.env.context.get("skip_uom_conversion"):
+            return res
         for line in self:
-            if not line.product_id or line.invoice_lines:
+            if (
+                not line.product_id
+                or line.invoice_lines
+                or not line.company_id
+                # Price unit set manually: keep it as the standard does
+                or line.technical_price_unit != line.price_unit
+            ):
                 continue
-
-            params = {"order_id": line.order_id}
-            seller = line.product_id._select_seller(
-                partner_id=line.partner_id,
-                quantity=line.product_qty,
-                date=line.order_id.date_order and line.order_id.date_order.date(),
-                uom_id=line.product_uom_id,
-                params=params,
-            )
-
             prices = line.product_id.pack_cost_compute(line)
             # If not prices, no need to re-calculate the price units
             if not prices:
                 continue
             cost = prices[line.product_id.id]
-            # If not seller, use the standard price. It needs a proper
-            # currency conversion.
-            if not seller:
-                unavailable_seller = line.product_id.seller_ids.filtered(
-                    lambda s, line=line: s.partner_id == line.order_id.partner_id
-                )
-                if (
-                    not unavailable_seller
-                    and line.price_unit
-                    and line.product_uom_id == line._origin.product_uom_id
-                ):
-                    # Avoid to modify the price unit if there is no price list
-                    # for this partner and
-                    # the line has already one to avoid to override
-                    # unit price set manually.
-                    continue
-                po_line_uom = line.product_uom_id or line.product_id.uom_po_id
+            seller_info = line._get_seller_info()
+            supplier_taxes = line.product_id.supplier_taxes_id._filter_taxes_by_company(
+                line.company_id
+            )
+            date = line.date_order or fields.Date.context_today(line)
+            if not seller_info:
+                # If not seller, use the standard price. It needs a proper
+                # currency conversion.
+                po_line_uom = line.uom_id or line.product_id.uom_id
                 # Using new cost to compute the price_unit
                 price_unit = line.env["account.tax"]._fix_tax_included_price_company(
                     line.product_id.uom_id._compute_price(cost, po_line_uom),
-                    line.product_id.supplier_taxes_id,
+                    supplier_taxes,
                     line.tax_ids,
                     line.company_id,
+                    document_tax_mode=line.document_tax_mode,
                 )
-                price_unit = line.product_id.currency_id._convert(
-                    price_unit,
-                    line.currency_id,
+                price_unit = line.product_id.cost_currency_id._convert(
+                    price_unit, line.currency_id, line.company_id, date, False
+                )
+            else:
+                # Using new cost to compute the price unit
+                price_unit = line.env["account.tax"]._fix_tax_included_price_company(
+                    cost,
+                    supplier_taxes,
+                    line.tax_ids,
                     line.company_id,
-                    line.date_order,
-                    False,
+                    document_tax_mode=line.document_tax_mode,
                 )
-                line.price_unit = float_round(
+                price_unit = seller_info["currency_id"]._convert(
+                    price_unit, line.currency_id, line.company_id, date, False
+                )
+                price_unit = seller_info["uom_id"]._compute_price(
+                    price_unit, line.uom_id
+                )
+            price_unit = line.product_id._adapt_price_unit_to_document_tax_mode(
+                price_unit,
+                supplier_taxes,
+                line.uom_id,
+                line.document_tax_mode,
+            )
+            line._reset_price_unit(
+                float_round(
                     price_unit,
                     precision_digits=max(
                         line.currency_id.decimal_places,
                         self.env["decimal.precision"].precision_get("Product Price"),
                     ),
                 )
-                continue
-            # Using new cost to compute the price unit
-            price_unit = (
-                line.env["account.tax"]._fix_tax_included_price_company(
-                    cost,
-                    line.product_id.supplier_taxes_id,
-                    line.tax_ids,
-                    line.company_id,
-                )
-                if seller
-                else 0.0
-            )
-            price_unit = seller.currency_id._convert(
-                price_unit, line.currency_id, line.company_id, line.date_order, False
-            )
-            price_unit = float_round(
-                price_unit,
-                precision_digits=max(
-                    line.currency_id.decimal_places,
-                    self.env["decimal.precision"].precision_get("Product Price"),
-                ),
-            )
-            line.price_unit = seller.product_uom_id._compute_price(
-                price_unit, line.product_uom_id
             )
         return res

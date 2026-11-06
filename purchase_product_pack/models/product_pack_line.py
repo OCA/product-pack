@@ -1,7 +1,7 @@
 # Copyright 2023 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 
-from odoo import models
+from odoo import fields, models
 
 
 class ProductPackLine(models.Model):
@@ -41,17 +41,15 @@ class ProductPackLine(models.Model):
         """This function returns the cost of pack lines if they has seller or not"""
         self.ensure_one()
         if line:
-            params = {"order_id": line.order_id}
-            pack_line_seller = self.product_id._select_seller(
+            seller_info = self.product_id._select_seller(
                 partner_id=line.partner_id,
                 quantity=self.quantity,
-                date=line.order_id.date_order and line.order_id.date_order.date(),
-                uom_id=line.product_uom_id,
-                params=params,
+                date=fields.Date.context_today(
+                    line, timestamp=line.order_id.date_order
+                ),
+                uom_id=line.uom_id,
+                params=line._get_select_sellers_params(),
             )
-            return (
-                pack_line_seller.price * self.quantity
-                if pack_line_seller
-                else self.product_id.standard_price * self.quantity
-            )
+            if seller_info:
+                return seller_info["price"] * self.quantity
         return self.product_id.standard_price * self.quantity

@@ -5,6 +5,11 @@ from odoo.addons.product_pack.tests.common import ProductPackCommon
 
 
 class TestPurchaseProductPackBase(ProductPackCommon):
+    # Odoo 20 runs each test as _test_user: purchasing a pack needs the purchase side
+    _test_user_groups = ProductPackCommon._test_user_groups + (
+        "purchase.group_purchase_manager",
+    )
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

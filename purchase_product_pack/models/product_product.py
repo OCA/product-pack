@@ -6,11 +6,12 @@ class ProductProduct(models.Model):
 
     def pack_cost_compute(self, line):
         """This function computes the cost of a product based on the options on pack"""
-        packs, no_packs = self.split_pack_products()
+        packs, _no_packs = self.split_pack_products()
         prices = {}
         for product in packs.with_context(prefetch_fields=False):
-            pack_price = 0.0
-            for pack_line in product.sudo().pack_line_ids:
-                pack_price += pack_line.get_seller_cost(line)
+            pack_price = sum(
+                pack_line.get_seller_cost(line)
+                for pack_line in product.sudo().pack_line_ids
+            )
             prices[product.id] = pack_price
         return prices
