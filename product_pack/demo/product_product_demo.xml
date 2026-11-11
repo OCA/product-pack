@@ -49,8 +49,8 @@
         <field name="pack_ok" eval="True" />
         <field name="pack_type">non_detailed</field>
         <field name="pack_modifiable" eval="True" />
-        <field name="standard_price">20.5</field>
-        <field name="list_price">30.75</field>
+        <field name="standard_price" eval="20.5" />
+        <field name="list_price" eval="30.75" />
         <field name="type">service</field>
     </record>
     <record id="product_pack_pc_detailed_components" model="product.product">
